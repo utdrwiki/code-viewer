@@ -1,0 +1,146 @@
+0	(none)	Title Screen
+1	PLACE_CONTACT	Intro sequence (Goner Maker)
+2	room_krisroom	Toriel's House - Kris's Bedroom
+3	room_krishallway	Toriel's House - House Hallway
+4	room_torroom	Toriel's House - Toriel's Room (Empty)
+5	room_torhouse	Toriel's House - Living Room and kitchen
+6	room_torbathroom	Toriel's House - Bathroom
+7	room_town_krisyard	Toriel's House - Outside
+8	room_town_northwest	Light world - Northwest Town (Empty)
+9	room_town_north	Light world - North Town (w/ Catty and Bratty house)
+10	room_beach	Light world - Beach (with guards)
+11	room_town_mid	Light world - Middle of Town (w/ sans)
+12	room_town_apartments	Light world - Inside Apartments (Black Room)
+13	room_town_south	Light world - South Town (w/ Librarby)
+14	room_town_school	Light world - Town (School Entry)
+15	room_town_church	Light world - Town (w/ town hall, church)
+16	room_graveyard	Light world - Graveyard
+17	room_town_shelter	Light world - Shelter (mysterious door)
+18	room_hospital_lobby	Light world - Town (w/ hospital)
+19	room_hospital_hallway	Light world - Hospital Lobby
+20	room_hospital_rudy	Light world - Hospital Room 1
+21	room_hospital_room2	Light world - Hospital Room 2
+22	room_diner	Light world - QC's Diner Interior
+23	room_townhall	Light world -Town hall Interior
+24	room_flowershop_1f	Light world - Asgore's Flower Shop Ground Floor
+25	room_flowershop_2f	Light world - Asgore's Flower Shop Basement (crashes on warp)
+26	room_library	Light world - Librarby interior
+27	room_alphysalley	Light world - Alphys in Back Alley
+28	room_torielclass	Light world - Toriel's Classroom
+29	room_schoollobby	Light world - South School Halls
+30	room_alphysclass	Light world - Alphys' Classroom
+31	room_schooldoor	Light world - North School Halls
+32	room_insidecloset	Light world - School Closet
+33	room_school_unusedroom	Light world - "Unused" classroom; Dark World exit scene
+34	room_dark1	Cavern - First dark world room
+35	room_dark1a	Cavern - First SAVE point (???????? in save file)
+36	room_dark2	Cavern - First squeaking flower room
+37	room_dark3	Cavern - Branching room
+38	room_dark3a	Cavern - Glowshard room
+39	room_dark_wobbles	Cavern - First Overworld SOUL mechanics room
+40	room_dark_eyepuzzle	Cavern - Eye Puzzle (SAVE point)
+41	room_dark7	Cavern - First time encountering Susie in hero outfit
+42	room_dark_chase1	Cavern - First Lancer Encounter
+43	room_dark_chase2	Cavern - Long Slide Room
+44	room_castle_outskirts	Cavern - Slide Landing room
+45	room_castle_town	Cavern - Closed Shops (SAVE point)
+46	room_castle_front	Cavern - Dark Castle gate (Ralsei party-join scene, first Lancer fight)
+47	room_castle_tutorial	Cavern - Training dummy room
+48	room_castle_darkdoor	Cavern - Great Door
+49	room_field_start	Field - Great Door
+50	room_field_forest	Field - Connecting Corridor 1
+51	room_field1	Field - First encounter
+52	room_field2	Field - Lancer sending 3 Hathys at you
+53	room_field2A	Field - Dark Candy tree 1
+54	room_field_topchef	Field - Spin Pizzamaker
+55	room_field_puzzle1	Field - Timer Puzzle 1
+56	room_field_maze	Field - "Maze Of Death" (SAVE point)
+57	room_field_puzzle2	Field - Timer Puzzle 2
+58	room_field_getsusie	Field - Closed door / Checkers Pawn "fight"
+59	room_field_shop1	Field - In front of first open Shop
+60	room_field_puzzletutorial	Field - Tutorial Fedora-adorned Puzzle Pieces room
+61	room_field3	Field - Door room
+62	room_field_boxpuzzle	Field - Vandalised box-button puzzle
+63	room_field4	Field - Great board entrance (Broken Key Piece)
+64	room_field_secret1	Great Board - First Corridor
+65	room_field_checkers4	Great Board - Light Puzzle 1
+66	room_field_checkers2	Great Board - Bent Corridor 1
+67	room_field_checkers6	Great Board - Light Puzzle 2
+68	room_field_checkers3	Great Board - SAVE room 1
+69	room_field_checkers1	Great Board - Light Puzzle 3
+70	room_field_checkers5	Great Board - Bent Corridor 2
+71	room_field_checkers7	Great Board - SAVE room 2
+72	room_field_checkersboss	Great Board - First Checkers King Fight (Susie leaves party scene)
+73	room_forest_savepoint1	Forest - Entrance (door)
+74	room_forest_area0	Forest - First Dust Bunny bush
+75	room_forest_area1	Forest - Salsa Stump Room
+76	room_forest_area2	Forest - First circling bullet laser towers
+77	room_forest_area2A	Forest - Chest room (quiet ball monster)
+78	room_forest_puzzle1	Forest - First Suit puzzle
+79	room_forest_beforeclover	Forest - Bloxer room with ragger puzzle
+80	room_forest_area3A	Forest - Ragger chest
+81	room_forest_area3	Forest - Suit Puzzle w/ Clover boss fight
+82	room_forest_savepoint2	Forest - Bakesale
+83	room_forest_smith	Forest - Blacksmith
+84	room_forest_area4	Forest - 2 bloxers w/ hidden path
+85	room_forest_dancers1	Forest - Star dancers (Broken key piece)
+86	room_forest_secret1	Forest - Dust Bunny ambush room
+87	room_forest_thrashmaker	Forest - Thrasher designing room
+88	room_forest_starwalker	Forest - Starwalker and bell room
+89	room_forest_area5	Forest - Darkness Puzzle room
+90	room_forest_savepoint_relax	Forest - Before maze
+91	room_forest_maze1	Maze - Following only Lancer - Placeholder sprite is present.
+92	room_forest_maze_deadend	Maze - Lancer dead end
+93	room_forest_maze_susie	Maze - Intro
+94	room_forest_maze2	Maze - following both Susie and Lancer - Placeholder sprite is present.
+95	room_forest_maze_deadend2	Maze - Dead end room (seems to link to the room where you first find susie in the maze)
+96	room_forest_savepoint3	Maze - Exit (SAVE point)
+97	room_forest_fightsusie	Forest - Door room
+98	room_forest_afterthrash2	Forest - First room with lancer in team
+99	room_forest_afterthrash3	Forest - Dark candy tree 2
+100	room_forest_afterthrash4	Forest - Connecting Corridor 2
+101	room_forest_castleview	Forest - Lancer Fleeing Scene
+102	room_forest_chase1	Forest - Guard Dodge 1
+103	room_forest_chase2	Forest - Guard Dodge 2
+104	room_forest_castlefront	Forest - Before Castle (Capture Scene)
+105	room_cc_prison_cells	Castle - B1 - Prison (in wall)
+106	room_cc_prisonlancer	Castle - B1 - Corridor with puzzle
+107	room_cc_prison_to_elevator	Castle - B1 - Elevator room
+108	room_cc_prison2	Castle - B1 - Lion jail room with kings
+109	room_cc_prisonelevator	Castle - Top floor Elevator
+110	room_cc_elevator	Castle - Prison elevator
+111	room_cc_prison_prejoker	Castle - Room before Jevil fight. (SAVE point)
+112	room_cc_joker	Castle? - Jevil fight (only background if beaten already)
+113	room_cc_entrance	Castle - Entrance corridor
+114	room_cc_1f	Castle - 1F
+115	room_cc_rudinn	Castle - Diamond room - 1F
+116	room_cc_2f	Castle - 2F
+117	room_cc_rurus1	Castle - 2F - First puzzle
+118	room_cc_3f	Castle - 3F
+119	room_cc_hathy	Castle - 3F Heart room with 2 Hathys
+120	room_cc_4f	Castle - 4F
+121	room_cc_rurus2	Castle - 4F - Second puzzle
+122	room_cc_clover	Castle - Clover party room w/ stereo
+123	room_cc_5f	Castle - 5F (SAVE point)
+124	room_cc_lancer	Castle - 5F - Lancer's room
+125	room_cc_6f	Castle - Second Checkers King bossfight
+126	room_cc_throneroom	Castle - Throne room (SAVE point)
+127	room_cc_preroof	Castle - Connecting Corridor 3
+128	room_cc_kingbattle	Castle - King bossroom
+129	room_cc_prefountain	Castle - Room before the Fountain
+130	room_cc_fountain	Castle - Fountain (Final Room)
+131	PLACE_DOG	Dogcheck
+132	room_legend	Story sequence / post-ending intro
+133	room_shop1	Field - Seam's Shop
+134	room_shop2	Castle - Rouxls Kaard's Shop
+135	room_gameover	Game Over screen? (crashes)
+136	room_myroom_dark	Ending Cutscene
+137	PLACE_LOGO	"deltarune" logo
+138	PLACE_FAILURE	Game Over screen
+139	PLACE_MENU	Save listing (?)
+140	room_ed	Ending Credits
+141	room_empty	Empty room (room_empty)
+142	room_man	Forest - Egg Room (room_man)
+143	room_DARKempty	Empty room
+144	room_battletest	Battle Test Room (probably no longer functions)
+

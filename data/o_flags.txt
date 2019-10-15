@@ -1,0 +1,106 @@
+40	violences
+41	spares
+42	pacifies
+43	autosusie_violences
+
+50	monster_outcome?
+
+524	hathy_susie_whacks?
+521	hathy_total_kills?
+
+216	donated_tutorial_money
+106	ate_prison_moss
+105	took_prison_shackles
+270	talked_to_undyne
+
+273	talked_to_sans
+274	sans_prank_call
+275	idiot_baby_status
+
+33	decision_timer?
+
+276	talked_to_noelle
+
+241	JEVIL_shit
+
+262	asgore_flower_gift
+
+253	returned_topcake
+
+910	egg_secret
+
+100	got_glowshard
+101	dark_candy_taken
+102	dark_candy_taken2
+103	broken_cake_taken
+
+214	team_name_choice
+
+203	skipped_prophecy
+
+255	talked_to_rudolph
+
+257	beach_table_finger_poke
+
+258	onionsan (?? varies on answers)
+259	onionsan_your_name
+260	onionsan_given_name
+
+
+20	??? (used in choices)
+
+
+263	asgore_fridge_eggs
+
+265	talked_to_catty
+
+295	youre_clovers_mom
+
+244	talked_to_hathy
+
+501	hathy_battle_outcome
+
+251	something_with_warp_door
+
+233	talked_to_rack_about_chest
+108	got_chest_scarf
+
+254	talked_to_starwalker?
+
+261	talked_to_qc
+
+
+903	goner_fav_food
+904	goner_blood_type
+905	goner_fav_color
+906	goner_your_feeling
+907	goner_honest_answers
+908	goner_acknowledge_pain
+909	goner_gift
+
+
+6	???
+
+245	ccastle_bluh_chest
+
+269	talked_to_alphys
+
+
+912	language_flag?
+
+522	clover_violenced?
+
+10	skip_text_feature
+
+242	JEVIL_reward_chest
+200	ran_in_school
+12	disable_vfx
+15	config_unknown
+16	mus_volume
+17	config_unknown
+211	c_round_outcome?
+
+500	repeat_encounters?
+
+268	called_toriel_inside_house
+272	called_toriel_after

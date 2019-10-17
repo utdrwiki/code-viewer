@@ -17,201 +17,7 @@ there's one person:
 thanks for stopping by. <3
 
 -->
-<style>
-body { background: #111; padding: 1em 2em; }
-body, pre { font-family: Consolas, Ubuntu Mono, monospace; font-size: 12pt; color: #ccc; margin: 0; }
-#yrstruly { position: relative; right: -1em; float: right; background: #080808; padding: 1em 2em; border: 1px solid #666; }
-a { text-decoration: none; }
-a { color: #8ad; }
-a:hover { color: #adf; }
-a.label { color: #afa; font-weight: bold; }
-a.label:hover { color: #fff; }
-a.junk { color: #666; font-style: italic; }
-
-.langvar {
-	color: #c7d;
-	font-style: italic;
-	display: none;
-	position: absolute;
-	left: 2px;
-	top: -2em;
-	background: black;
-	padding: 0.2em 0.5em;
-	border: 1px solid #836;
-	}
-.langtext { display: inline-block; color: #fbe; padding: 0.0em 0.25em; background: black; position: relative; margin-bottom: 0.2em; border: 1px dotted #969; }
-.langtext > span { display: inline-block; vertical-align: top; }
-.langtext:hover .langvar { display: block;}
-
-
-.cc {
-	font-size:	100%;
-	width:		0.8em;
-	text-indent:	-9999px;
-	display:	inline-block;
-/*	overflow:	hidden;
-*/	padding:	0 0.2em;
-	margin:		0 0.2em;
-	position:	relative;
-	}
-
-.cc:hover {
-	width:		unset;
-	text-indent:	unset;
-	display:	inline-block;
-	overflow:	initial;
-}
-.cc-wait {
-	background: #555;
-	color:		#fff;
-}
-.cc-delay {
-	background: #111;
-	color:		#777;
-}
-.cc-close {
-	background: #844;
-	color:		#fff;
-}
-
-.cc-face {
-	background: #252;
-	font-style:	italic;
-	font-size:	80%;
-	color:		#8c8;
-	padding:	0 0.2em;
-}
-
-.cc-delay:before {
-	content: '\231b';
-}
-.cc-wait:before {
-	content: '\2398';
-}
-.cc-close:before {
-	content: '\239a';
-}
-
-.cc-color { color: white; }
-.cc-color:hover { color: black; }
-
-.cc-Y {	color: yellow;	}
-.cc-R {	color: red;	}
-.cc-B {	color: #8bf;	}
-.cc-W {	color: unset;	}
-.cc-G {	color: #7f7;	}
-
-.langtext > span span:before {
-	text-indent: 0;
-	right: 0.3em;
-	position: absolute;
-	overflow: show;
-}
-.langtext > span span:hover:before {
-	display: none;
-}
-
-
-.langtexterr { color: #f00; }
-.indent { display: inline-block; background: #181818; height: .5em; vertical-align: middle; margin: 0 4px 0 0; }
-.indent:hover { background: #666; }
-.indent-hyper { display: inline-block; background: #322; height: 1em; vertical-align: middle; margin: 0 4px 0 0; }
-.indent-hyper:hover { background: #966; }
-
-.flag { color: #ec6; }
-.flagn { color: #fd8; background: black; }
-.flagd { color: #ca4; font-style: italic; }
-
-.tempvar { background: black; }
-.with { position: relative; border: 1px dotted black; z-index: 1; }
-.with .with { margin: 0 1em; }
-.with .with div { position: relative; left: -1em; }
-.with:hover { /*border: 1px dotted white !important;*/ background: rgba(255, 255, 255, .05) !important; }
-
-.withkey { background: black; font-style: italic; }
-
-.kbd { color: #dd4; }
-.kbd span { color: #ff0; background: black; }
-
-
-.room { color: #8f8; background: #000; padding: 0 .5em; }
-.roomdesc { color: #494; font-style: italic; }
-
-.alarm {
-	color:	#faa;
-	text-decoration: underline dotted #a66;
-	position:	relative;
-}
-.alarm:hover { color: white; }
-.alarmT {
-	font-weight:	normal;
-	font-style:	normal;
-	position:	relative;
-	float:	right;
-	/*width:	300px;*/
-	max-width:	500px;
-	/*overflow-x:	auto;*/
-	margin:	0 1em 1em 1em;
-	padding:	0.5em 1em;
-	border:		1px solid #888;
-	box-shadow:	6px 6px 0px 2px black;
-	background:	#222;
-	color:		#ccc;
-	z-index:	10000;
-	top:		-1.8em;
-	box-sizing: border-box;
-	overflow-x:	auto;
-}
-.alarmU {
-	position:	relative;
-	display:	block;
-	float:		left;
-	margin-right:	.4em;
-}
-.alarmA {
-	display:	block;
-	position:	relative;
-	top:		0.5em;
-	margin:		0 100px 0 0;
-	height:		2px;
-	border-top: 1px dashed #444;
-	z-index:	10;
-	overflow:	hidden;
-}
-
-.alarmC:hover, .alarmC:hover .alarmU, .alarmC:hover .alarmA, .alarmC:hover .alarmT {
-	background: #400; border-color: #f88;
-}
-.c { clear: left; }
-input { background: #000; padding: 0.1em 0.5em; font-family: monospace; color: white; border: 1px solid #c9f; font-size: inherit; }
-
-.funcC { position: relative; }
-.func { color: #8f8; text-decoration: underline dotted #292; }
-.funcC .funcCode { display: none; }
-.funcC:hover .func { background: #272; color: white;}
-.funcC:hover .funcCode {
-	display:	block;
-	position:	absolute;
-	max-width:	1000px;
-	/*overflow-x:	auto;*/
-	margin:	0 1em 1em 1em;
-	padding:	0.5em 1em;
-	border:		1px solid #8f8;
-	box-shadow:	6px 6px 0px 2px black;
-	background:	rgba(30, 50, 30, .9);
-	color:		#ccc;
-	z-index:	1000000;
-	top:		1em;
-	left:		2em;
-	box-sizing: border-box;
-	overflow-x:	auto;
-}
-.debug { color: #fff; background: #f00; font-weight: bold; padding: 0 0.5em; }
-
-.sr { color: #8f8; background: #000; font-weight: bold; }
-
-hr { border-color: #666; }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="yrstruly"><pre><em>this is the <strong>deltarune script viewer</strong></em>
@@ -385,8 +191,10 @@ updates:
 
 		$file	= str_replace("\r\n", "\n", $file);
 		$file	= preg_replace('/^\s+$/m', '', $file);
+		$file	= preg_replace('/\n\s*{$/m', ' {', $file);
 
-		$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)("[@0-9A-F]+\))/mi', "textvar_to_text", $file);
+		//$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)("[@0-9A-F]+\))/mi', "textvar_to_text", $file);
+		$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)(")\)/mi', "textvar_to_text", $file);
 		$file	= preg_replace_callback('/(global\.flag\[)([0-9]+)(\])/mi', 'flagcolor', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()([0-9]+)(\))/im', 'keyboard', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()(\'.\'|[0-9]+|vk_[^)]+)(\))/im', 'keyboard', $file);
@@ -401,7 +209,7 @@ updates:
 
 		//$file	= preg_replace_callback('/^[ \t]+/m', "unindent", $file);
 		if (!v($_GET['x'])) {
-			$file	= withhandler($file);
+			//$file	= withhandler($file);
 		}
 
 		#if (!$secondLevel) {
@@ -502,7 +310,7 @@ updates:
 			$replace	= false;
 		}
 
-		$newtext		= preg_replace_callback('/^( *)(with\()([^\)]+)(\)\s+{)(.*?)(^\1})/mis', 'withhandler', $text);
+		$newtext		= preg_replace_callback('/^( *)(with \()([^\)]+)(\)\s+{)(.*?)(^\1})/mis', 'withhandler', $text);
 
 		if ($replace !== false) {
 			$colorv		= mt_rand(0, 359);
@@ -653,12 +461,15 @@ updates:
 
 		public static function parseText($text) {
 			$text	= preg_replace('#/#i', '<span class="cc cc-wait">Wait for input</span>', $text);
-			$text	= preg_replace('#\^([1-9])(.)#i', '\2<span class="cc cc-delay">Delay \1</span>', $text);
+			$text	= preg_replace('#\^([1-9])(.)#i', '\2<span class="cc cc-delay">Delay \1<span>\1</span></span>', $text);
 			$text	= preg_replace('#&#i', '<br>', $text);
 			$text	= preg_replace('#%#i', '<span class="cc cc-close">Close Message</span>', $text);
 			$text	= preg_replace('#\\\\E(.)#', '<span class="cc-face">Face \1</span>', $text);
 			#$text	= preg_replace('#\\\\c(.)#', '(color: \1)', $text);
 			$text	= preg_replace('#\\\\c(.)(.*?)(?=\\\\c|$)#', '<span class="cc-color cc-\1">\2</span>', $text);
+			$text	= preg_replace('#\\\\T(.)#', '<span class="cc-face">Sound \1</span>', $text);
+			$text	= preg_replace('#\\\\F(.)#', '<span class="cc-face">Char \1</span>', $text);
+			$text	= preg_replace('#\\\\C(.)#', '<span class="cc-face">Choice type \1</span>', $text);
 			return $text;
 		}
 

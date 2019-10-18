@@ -23,19 +23,7 @@ thanks for stopping by. <3
 <div id="yrstruly"><pre><em>this is the <strong>deltarune script viewer</strong></em>
 made (sort of) for <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>
 by <a href="https://twitter.com/xkeepah">xkeeper</a> (<a href="https://www.reddit.com/u/xkeeper/">reddit</a>)
-feedback: <a href="https://www.reddit.com/r/Underminers/comments/9x2x1l/online_deltarune_decompile_viewer_version_2_for/">this reddit thread</a>
-
-updated <?php echo date("y-m-d H:i:s", filemtime(__FILE__)); ?>
-
-other places: <a href="https://tcrf.net/Deltarune">tcrf.net/Deltarune</a>
-
-updates:
-- better search
-- inline function views/links
-- slightly less broken! nice
-- auto alarm links/display
-- with(...){...} collapsing
-</pre></div>
+source on <a href="https://github.com/Xkeeper0/deltarune-viewer">github</a></pre></div>
 <h1>decompiled deltarune script viewer</h1>
 <strong><a href="?">&larr; back to main script listing</a></strong> &bull; also: <a href="data/enemy.txt">enemy ids</a> &middot; <a href="data/rooms.txt">room list</a> &middot; <a href="data/flags.txt">unofficial flag names</a></small>
 <pre><?php

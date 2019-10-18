@@ -1,31 +1,20 @@
-<!doctype html>
-<head>
-<title>deltarune decompiled script thingy</title>
-<!--
-oh, hey.
+<?php
 
-... you're looking for secrets in a place designed to
-help people look for secrets?
+	require_once("includes.php");
+	print layout_header();
 
-ok, i guess. i don't really get why, but, cool!
-i bet nobody will see this message.
+?>
+<div id="yrstruly">
+	<em>this is the <strong>deltarune script viewer</strong></em>
+	<br>by <a href="https://twitter.com/xkeepah">xkeeper</a>
+	<br>source on <a href="https://github.com/Xkeeper0/deltarune-viewer">github</a>
+	<br>links: <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>, <a href="https://tcrf.net/Deltarune">tcrf</a>
+</div>
 
-though if you're reading this, that means
-there's one person:
-							 you.
-
-thanks for stopping by. <3
-
--->
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div id="yrstruly"><pre><em>this is the <strong>deltarune script viewer</strong></em>
-made (sort of) for <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>
-by <a href="https://twitter.com/xkeepah">xkeeper</a> (<a href="https://www.reddit.com/u/xkeeper/">reddit</a>)
-source on <a href="https://github.com/Xkeeper0/deltarune-viewer">github</a></pre></div>
 <h1>decompiled deltarune script viewer</h1>
-<strong><a href="?">&larr; back to main script listing</a></strong> &bull; also: <a href="data/enemy.txt">enemy ids</a> &middot; <a href="data/rooms.txt">room list</a> &middot; <a href="data/flags.txt">unofficial flag names</a></small>
+<strong>
+	<a href="?">&larr; back to main script listing</a></strong>
+	(etc: <a href="data/enemy.txt">enemy ids</a> - <a href="data/rooms.txt">room list</a> - <a href="data/flags.txt">flag names</a>)
 <pre><?php
 
 	error_reporting(E_ALL);
@@ -69,7 +58,7 @@ source on <a href="https://github.com/Xkeeper0/deltarune-viewer">github</a></pre
 	} elseif (!isset($_GET['f'])) {
 
 
-		print "<h2>script listing</h2><form action='' method='get'>search: <input type='text' name='s' size='20'> <input type='submit' value='go'></form>";
+		print "<h2>script listing</h2><form action='' method='get'>search: <input type='text' name='s' size='20'> <input type='submit' value='go'></form><br>";
 		$a = scandir("./decompiled/");
 		$lastseg	= "";
 		$junkfiles	= "";
@@ -591,6 +580,5 @@ source on <a href="https://github.com/Xkeeper0/deltarune-viewer">github</a></pre
 
 
 
-?></pre>
-</body>
-</html>
+	print "</pre>";
+	print layout_footer();

@@ -27,7 +27,10 @@ then
         ((i++))
         file=`echo "$file" | sed -e 's|^decompiled/\(.*\)[.]gml$|\1|'`
         php index.php "$file.gml" > "$output_dir/$file.html"
-        echo -ne "\r$i/$count"
+        if [ -z "$NO_PROGRESS" ]
+        then
+            echo -ne "\r$i/$count"
+        fi
     done
 else
     echo "Rebuilding $script_name.html"

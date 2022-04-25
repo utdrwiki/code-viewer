@@ -1,21 +1,39 @@
-<?php
+<!doctype html>
+<head>
+        <title>deltarune script viewer</title>
+        <!--
+        oh, hey.
 
-	require_once("includes.php");
-	print layout_header();
+        ... you're looking for secrets in a place designed to
+        help people look for secrets?
 
-?>
+        ok, i guess. i don't really get why, but, cool!
+        i bet nobody will see this message.
+
+        though if you're reading this, that means
+        there's one person:
+                                                                 you.
+
+        thanks for stopping by. <3
+
+        -->
+        <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 <div id="yrstruly">
-	<em>this is the <strong>deltarune script viewer</strong></em>
+	<em>this is the <strong><del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</strong></em>
 	<br>by <a href="https://twitter.com/xkeepah">xkeeper</a>
-	<br>source on <a href="https://github.com/Xkeeper0/deltarune-viewer">github</a>
+	<br>ported for personal use on Windows by Grossley
+	<br>made into a yet nonfunctional static website by Jacky720 and KockaAdmiralac.
+	<br>source on <a href="https://github.com/KockaAdmiralac/deltarune-viewer">github</a>
 	<br>links: <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>, <a href="https://tcrf.net/Deltarune">tcrf</a>
 </div>
 
-<h1>decompiled deltarune script viewer</h1>
+<h1>decompiled <del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</h1>
 <strong>
-	<a href="?">&larr; back to main script listing</a></strong>
-	(etc: <a href="data/enemy.txt">enemy ids</a> - <a href="data/rooms.txt">room list</a> - <a href="data/flags.txt">flag names</a>)
-<pre><?php
+	<a href="/">&larr; back to main script listing</a></strong>
+	<br>(etc: <a href="data/enemy.txt">enemy ids (deltarune)</a> - <a href="data/rooms.txt">room list (deltarune)</a> - <a href="data/flags.txt">flag names (deltarune)</a>)
+<?php
 
 	error_reporting(E_ALL);
 
@@ -25,81 +43,55 @@
 		$_GET['f']	= $argv[1];
 	}
 
-	if (isset($_GET['s'])) {
-		print "<h2>search results</h2><form action='' method='get'>search: <input type='text' name='s' value=\"". htmlentities($_GET['s']) ."\" size='20'> <input type='submit' value='go'></form>\n\nsearching for: <strong>". htmlentities($_GET['s']) ."</strong>\n\n";
-		if (strlen($_GET['s']) < 3) {
-			print "you should probably search for something longer than 2 letters";
-		} else {
-			$fname	= escapeshellarg($_GET['s']);
-			$r	= shell_exec($c = "grep -Fi ". $fname ." decompiled/*.gml");
-			$x	= explode("\n", $r);
-			if (($z = count($x)) > 1000) {
-				die("way too many results ($z)");
-			}
-
-			$oldFile	= "";
-			foreach ($x as $ff) {
-				if (!trim($ff)) continue;
-				$result	= explode(":", $ff, 2);
-				$file	= $result[0];
-				$text	= trim($result[1]);
-
-				$flink	= str_replace("decompiled/", "", $file);
-				if ($oldFile != $flink) {
-					printf("\n<em><a href='?f=%s'>%s</a></em>\n", $flink, $flink);
-				}
-				print "    ". str_replace($_GET['s'], "<strong class='sr'>". $_GET['s'] ."</strong>", $text) ."\n";
-				$oldFile	= $flink;
-			}
-
-			print "\nresults found: ". (count($x) - 1);
-		}
-
-	} elseif (!isset($_GET['f'])) {
+	if (!isset($_GET['f'])) {
 
 
-		print "<h2>script listing</h2><form action='' method='get'>search: <input type='text' name='s' size='20'> <input type='submit' value='go'></form><br>";
+		print "<h2>script listing</h2><form action='' method='get'>search (does not work): <input type='text' name='s' size='20'> <input type='submit' value='go'></form><br>";
 		$a = scandir("./decompiled/");
 		$lastseg	= "";
-		$junkfiles	= "";
-
-		$sums		= getSums();
+/* 		$junkfiles	= "";
+ 
+ 		$sums		= getSums();
 		$junksums	= getJunkSums();
-
+ */
 		foreach ($a as $file) {
 			if (substr($file, -4) === ".gml") {
 				$size	= filesize("decompiled/". $file);
 				$class	= "";
-				if (isset($junksums[$sums[$file]])) {
+/* 				if (isset($junksums[$sums[$file]])) {
 					$class	= " class='junk'";
 					$jsum	= $sums[$file];
 				}
+ */
+				$replaced = str_replace(".gml", ".html", $file);
+				$temp	= sprintf("<pre><a href='/%s'%s>%-60s</a>  %10d</pre>", $replaced, $class, $file, $size);
 
-				$temp	= sprintf("<a href='?f=%s'%s>%-60s</a>  %10d\n", $file, $class, $file, $size);
-
-				if ($class === "") {
+ 				if ($class === "") {
 					$segs	= explode("_", $file);
 					array_pop($segs);
 					array_pop($segs);
 					$seg	= implode("_", $segs);
-					if ($segs[1] === "Object" && $seg !== $lastseg) {
-						print "\n";
+//					if ($segs[1] === "Object" && $seg !== $lastseg) {
+					if ($seg !== $lastseg) {
+						print "<br>";
 						$lastseg	= $seg;
 					}
 					print $temp;
-				} else {
+				} 
+/*
+				else {
 					$junksums[$jsum][1][]	= $temp;
 				}
-			}
+ */			}
 		}
-
+/*
 		print "\n========================================================================\nduplicated or common scripts\n";
 
-		foreach ($junksums as $junko) {
+ 		foreach ($junksums as $junko) {
 			print "\n------------------------------------------------------------------------\n$junko[0]\n";;
 			print implode("", $junko[1]);
 		}
-
+ */
 	} else {
 
 
@@ -117,9 +109,16 @@
 
 
 			print "<h2>$f</h2><small>(<a href='decompiled/$f'>view raw script w/o annotations or w/e</a>)</small><hr>";
-			//print "option: <a href='?f=". $_GET['f'] ."&amp;x=1'>disable with(...){...} collapsing</a>\n-----------------------------------------\n\n";
+			//print "option: <a href='/". $_GET['f'] ."&amp;x=1'>disable with(...){...} collapsing</a>\n-----------------------------------------\n\n";
 
-			print $file;
+			$lines = explode("\n", $file);
+			$line_index = 1;
+			echo '<table class="code">';
+			foreach ($lines as $line) {
+				echo "\n<tr>\n\t<td id=\"L$line_index\"><a href=\"#L$line_index\">$line_index</a></td>\n\t<td><pre>$line</pre></td>\n</tr>";
+				$line_index++;
+			}
+			echo "</table><script src=\"script.js\"></script>";
 		}
 
 	}
@@ -160,7 +159,8 @@
 		$file	= file_get_contents($filename2);
 
 		if ($sizeLimit && strlen($file) > $sizeLimit) {
-			$file	= "too big to show inline, sorry\n\n<a href='?f=$filename'>view full file</a>";
+			$replaced = str_replace(".gml", ".html", $filename);
+			$file	= "too big to show inline, sorry\n\n<a href='/$replaced'>view full file</a>";
 			$mangled[$filename]	= $file;
 
 			return $file;
@@ -206,15 +206,15 @@
 
 	function functionlink($matches) {
 		global $secondLevelR;
-		$filename	= "gml_Script_". $matches[2] .".gml";
+		$filename	= "gml_GlobalScript_". $matches[2] .".gml";
 		$sc			= ($matches[2] == "scr_debug") ? " debug" : "";
 
+		$replaced = str_replace(".gml", ".html", $filename);
 		if ($secondLevelR) {
-			return "$matches[1]<span class='funcC'><a class='func$sc' href='?f=$filename'>$matches[2]</a></span>(";
+			return "$matches[1]<span class='funcC'><a class='func$sc' href='/$replaced'>$matches[2]</a></span>(";
 
 		} else {
-			return "$matches[1]<span class='funcC'><a class='func$sc' href='?f=$filename'>$matches[2]</a><div class='funcCode'><strong><a href='?f=$filename'>$matches[2]</a></strong>\n\n". mangleFile($filename, true, 3000) ."</div></span>(";
-
+			return "$matches[1]<span class='funcC'><a class='func$sc' href='/$replaced'>$matches[2]</a><div class='funcCode'><strong><a href='/$replaced'>$matches[2]</a></strong><br><br>". str_replace("\n", "<br>", mangleFile($filename, true, 3000)) ."</div></span>(";
 		}
 	}
 
@@ -255,7 +255,8 @@
 			$out	= "". mangleFile($objF, true, 3000) ."";
 		}
 
-		$out	= "<div class='alarmT'><strong><a href='?f=$objF'>". str_replace("gml_Object_", "", $objF) ."</a></strong>\n\n". $out ."</div>";
+		$replaced = str_replace(".gml", ".html", $objF);
+		$out	= "<div class='alarmT'><strong><a href='/$replaced'>". str_replace("gml_Object_", "", $objF) ."</a></strong>\n\n". $out ."</div>";
 
 		$override	= false;
 		if ($objF == $fullFile && $hackCount > 1) {
@@ -267,10 +268,10 @@
 		if (!$secondLevelR) $hackCount++;
 
 		if ($secondLevelR || $override) {
-			return $matches[1] . "" . $matches[2] ."<a class='alarm' href='?f=$objF' title='$objF'>". $matches[3] ."</a>". $matches[5] ."";
+			return $matches[1] . "" . $matches[2] ."<a class='alarm' href='/$replaced' title='$objF'>". $matches[3] ."</a>". $matches[5] ."";
 
 		} else {
-			return $matches[1] . "<span class='alarmC'><span class='alarmU'>" . $matches[2] ."<a href='?f=$objF' title='$objF' class='alarm'>". $matches[3] ."</a>". $matches[5] ."</span><span class='alarmA'></span>". $out ."</span><span class='c'></span>";
+			return $matches[1] . "<span class='alarmC'><span class='alarmU'>" . $matches[2] ."<a href='/$replaced' title='$objF' class='alarm'>". $matches[3] ."</a>". $matches[5] ."</span><span class='alarmA'></span>". $out ."</span><span class='c'></span>";
 		}
 
 	}
@@ -459,6 +460,7 @@
 			$roomA	= explode("\n", file_get_contents("data/rooms.txt"));
 			$rooms	= array('id' => array(), 'name' => array());
 			foreach ($roomA as $room) {
+				if (!trim($room)) continue;
 				$roomT	= explode("\t", $room);
 				$rooms['id'][$roomT[0]] = array('name' => $roomT[1], 'desc' => $roomT[2]);
 				$rooms['name'][$roomT[1]]	= array('id' => $roomT[0], 'desc' => $roomT[2]);
@@ -484,6 +486,7 @@
 			$enemiesA	= explode("\n", file_get_contents("data/enemy.txt"));
 			$enemies	= array();
 			foreach ($enemiesA as $enemy) {
+				if (!trim($enemy)) continue;
 				$enemy	= explode("\t", $enemy);
 				$enemies[$enemy[0]]	= $enemy[1];
 			}
@@ -507,7 +510,7 @@
 			foreach ($flagsA as $flag) {
 				if (!trim($flag)) continue;
 				$flagZ	= explode("\t", $flag);
-				$flags[$flagZ[0]]	= $flagZ[1];
+				$flags[$flagZ[0]]	= trim($flagZ[1]);
 			}
 			self::$flags	= $flags;
 
@@ -520,7 +523,7 @@
 	}
 
 
-	function getSums() {
+/* 	function getSums() {
 		// get file list
 		$sumA		= explode("\n", file_get_contents("data/sums.txt"));
 		$sums		= array();
@@ -571,7 +574,7 @@
 		return $junksums;
 
 	}
-
+ */
 
 
 	function v(&$var, $d = null) {
@@ -579,6 +582,6 @@
 	}
 
 
-
-	print "</pre>";
-	print layout_footer();
+?>
+</body>
+</html>

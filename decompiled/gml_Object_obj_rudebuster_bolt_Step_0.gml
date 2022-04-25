@@ -1,155 +1,194 @@
-if (self.image_alpha < 1)
-    self.image_alpha += 0.25
+if (image_alpha < 1)
+    image_alpha += 0.25
 else
-    self.image_alpha = 1
-if (self.t == 0)
+    image_alpha = 1
+if (t == 0)
 {
-    self.targetx = global.monsterx[self.target.myself]
-    self.targety = global.monstery[self.target.myself]
-    self.cx = self.targetx
-    self.cy = self.targety
-    self.direction = (point_direction(self.x, self.y, self.cx, self.cy) - 20)
-    self.speed = 24
-    self.friction = -1.5
-    self.image_angle = self.direction
-    if (self.red == 1)
+    if (battlemode == 1)
     {
-        self.sprite_index = spr_rudebuster_beam_red
-        self.image_xscale = 2.5
-        self.image_yscale = 2.5
-    }
-}
-if ((self.t >= 1) && (self.explode == 0))
-{
-    self.bolt_timer += 1
-    if (button1_p() && ((self.bolt_timer >= 4) && (self.chosen_bolt == 0)))
-        self.chosen_bolt = self.bolt_timer
-    self.dir = point_direction(self.x, self.y, self.cx, self.cy)
-    self.direction += (angle_difference(self.dir, self.direction) / 4)
-    self.image_angle = self.direction
-    if (point_distance(self.x, self.y, self.cx, self.cy) <= 40)
-    {
-        self.final_bolt = self.chosen_bolt
-        self.visible = 0
-        self.explode = 1
-        self.t = 1
-    }
-}
-if (self.explode == 1)
-{
-    if (self.t == 1)
-    {
-        self.bonus_anim = 0
-        if (self.chosen_bolt > 0)
+        if instance_exists(obj_queenshield_enemy)
         {
-            if (self.chosen_bolt == self.final_bolt)
-                self.damage += 30
-            if (self.chosen_bolt == (self.final_bolt - 1))
-                self.damage += 28
-            if (self.chosen_bolt == (self.final_bolt - 2))
-                self.damage += 22
-            if (self.chosen_bolt == (self.final_bolt - 3))
-                self.damage += 20
-            if (self.chosen_bolt == (self.final_bolt - 4))
-                self.damage += 13
-            if (self.chosen_bolt == (self.final_bolt - 5))
-                self.damage += 11
-            if (self.chosen_bolt == (self.final_bolt - 6))
-                self.damage += 10
-            if (abs((self.chosen_bolt - self.final_bolt)) <= 2)
+            depth = (obj_queenshield_enemy.depth - 1)
+            targetx = (obj_queenshield_enemy.x + 24)
+            targety = (obj_queenshield_enemy.y + 140)
+        }
+        else
+        {
+            targetx = global.monsterx[target.myself]
+            targety = global.monstery[target.myself]
+        }
+    }
+    else if i_ex(target)
+    {
+        targetx = (target.x + (target.sprite_width / 2))
+        targety = (target.y + (target.sprite_height / 2))
+    }
+    cx = targetx
+    cy = targety
+    direction = (point_direction(x, y, cx, cy) - 20)
+    speed = 24
+    friction = -1.5
+    image_angle = direction
+    if (red == 1)
+    {
+        sprite_index = spr_rudebuster_beam_red
+        image_xscale = 2.5
+        image_yscale = 2.5
+    }
+}
+if (t >= 1 && explode == 0)
+{
+    bolt_timer += 1
+    if (button1_p() && bolt_timer >= 4 && chosen_bolt == 0)
+        chosen_bolt = bolt_timer
+    dir = point_direction(x, y, cx, cy)
+    direction += (angle_difference(dir, direction) / 4)
+    image_angle = direction
+    if (point_distance(x, y, cx, cy) <= 40)
+    {
+        final_bolt = chosen_bolt
+        visible = false
+        explode = 1
+        t = 1
+    }
+}
+if (explode == 1)
+{
+    if (t == 1)
+    {
+        bonus_anim = 0
+        if (chosen_bolt > 0)
+        {
+            if (chosen_bolt == final_bolt)
+                damage += 30
+            if (chosen_bolt == (final_bolt - 1))
+                damage += 28
+            if (chosen_bolt == (final_bolt - 2))
+                damage += 22
+            if (chosen_bolt == (final_bolt - 3))
+                damage += 20
+            if (chosen_bolt == (final_bolt - 4))
+                damage += 13
+            if (chosen_bolt == (final_bolt - 5))
+                damage += 11
+            if (chosen_bolt == (final_bolt - 6))
+                damage += 10
+            if (abs((chosen_bolt - final_bolt)) <= 2)
             {
-                self.bonus_anim = 1
+                bonus_anim = 1
                 snd_play(snd_scytheburst)
             }
         }
-        if (self.red == 1)
-            self.damage += 90
-        global.hittarget[self.star] = 0
-        scr_damage_enemy(self.star, self.damage)
-        if (global.monstertype[0] != 20)
+        if (red == 1)
+            damage += 90
+        if (battlemode == 1)
         {
-            with (self.target)
-                self.__of = scr_oflash()
-            if (self.red == 1)
+            global.hittarget[star] = 0
+            if instance_exists(obj_queenshield_enemy)
             {
-                with (self.target)
-                    self.__of.flashcolor = 255
+                obj_queen_enemy.shieldhp -= damage
+                with (obj_queenshield_enemy)
+                    con = 1
+                with (obj_queenshield_enemy)
+                    event_user(0)
+            }
+            else
+                scr_damage_enemy(star, damage)
+            if (global.monstertype[0] != 20)
+            {
+                with (target)
+                    __of = scr_oflash()
+                if (red == 1)
+                {
+                    with (target)
+                        __of.flashcolor = c_red
+                }
+            }
+        }
+        else
+        {
+            with (target)
+                __of = scr_oflash()
+            if (red == 1)
+            {
+                with (target)
+                    __of.flashcolor = c_red
             }
         }
         snd_play(snd_rudebuster_hit)
-        for (self.i = 0; self.i < 4; self.i += 1)
+        for (i = 0; i < 4; i += 1)
         {
-            self.burst[self.i] = scr_afterimage()
-            self.burst[self.i].image_speed = 0.5
-            self.burst[self.i].x = self.cx
-            self.burst[self.i].y = self.cy
-            self.burst[self.i].image_angle = (45 + (self.i * 90))
-            self.burst[self.i].direction = self.burst[self.i].image_angle
-            self.burst[self.i].speed = 25
-            self.burst[self.i].depth = (self.depth - 10)
+            burst[i] = scr_afterimage()
+            burst[i].image_speed = 0.5
+            burst[i].x = cx
+            burst[i].y = cy
+            burst[i].image_angle = (45 + (i * 90))
+            burst[i].direction = burst[i].image_angle
+            burst[i].speed = 25
+            burst[i].depth = (depth - 10)
         }
-        for (self.i = 4; self.i < 8; self.i += 1)
+        for (i = 4; i < 8; i += 1)
         {
-            self.burst[self.i] = scr_afterimage()
-            self.burst[self.i].image_speed = 0.5
-            self.burst[self.i].x = self.cx
-            self.burst[self.i].y = self.cy
-            self.burst[self.i].image_angle = (45 + (self.i * 90))
-            self.burst[self.i].direction = self.burst[self.i].image_angle
-            self.burst[self.i].speed = 25
-            self.burst[self.i].depth = (self.depth - 10)
+            burst[i] = scr_afterimage()
+            burst[i].image_speed = 0.5
+            burst[i].x = cx
+            burst[i].y = cy
+            burst[i].image_angle = (45 + (i * 90))
+            burst[i].direction = burst[i].image_angle
+            burst[i].speed = 25
+            burst[i].depth = (depth - 10)
         }
     }
-    if (self.t >= 2)
+    if (t >= 2)
     {
-        for (self.i = 0; self.i < 4; self.i += 1)
+        for (i = 0; i < 4; i += 1)
         {
-            with (self.burst[self.i])
+            with (burst[i])
             {
-                self.speed *= 0.75
-                self.image_xscale *= 0.8
+                speed *= 0.75
+                image_xscale *= 0.8
             }
         }
-        for (self.i = 4; self.i < 8; self.i += 1)
+        for (i = 4; i < 8; i += 1)
         {
-            with (self.burst[self.i])
+            with (burst[i])
             {
-                self.speed *= 0.8
-                self.image_xscale *= 0.8
+                speed *= 0.8
+                image_xscale *= 0.8
             }
         }
     }
-    if (self.t >= 18)
+    if (t >= 18)
         instance_destroy()
 }
-if (self.explode == 0)
+if (explode == 0)
 {
-    self.aft[self.maxaft] = scr_afterimage()
-    self.aft[self.maxaft].image_yscale = 1.8
-    self.aft[self.maxaft].image_angle = self.image_angle
-    self.aft[self.maxaft].image_index = 4
-    self.aft[self.maxaft].image_speed = 0.5
-    self.aft[self.maxaft].image_alpha = (self.image_alpha - 0.2)
-    self.maxaft += 1
+    aft[maxaft] = scr_afterimage()
+    aft[maxaft].image_yscale = 1.8
+    aft[maxaft].image_angle = image_angle
+    aft[maxaft].image_index = 4
+    aft[maxaft].image_speed = 0.5
+    aft[maxaft].image_alpha = (image_alpha - 0.2)
+    maxaft += 1
 }
-for (self.i = 0; self.i < self.maxaft; self.i += 1)
+for (i = 0; i < maxaft; i += 1)
 {
-    with (self.aft[self.i])
+    with (aft[i])
     {
-        self.image_yscale -= 0.1
-        if (self.image_yscale <= 0.1)
+        image_yscale -= 0.1
+        if (image_yscale <= 0.1)
             instance_destroy()
     }
-    if (self.explode == 1)
+    if (explode == 1)
     {
-        with (self.aft[self.i])
+        with (aft[i])
         {
-            self.image_alpha -= 0.07
-            self.image_yscale *= 0.9
-            if (self.image_yscale <= 0.1)
+            image_alpha -= 0.07
+            image_yscale *= 0.9
+            if (image_yscale <= 0.1)
                 instance_destroy()
         }
     }
 }
-self.a += 1
-self.t += 1
+a += 1
+t += 1

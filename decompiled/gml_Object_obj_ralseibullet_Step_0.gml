@@ -1,9 +1,9 @@
-if (self.image_xscale <= 1)
+if (image_xscale <= 1)
 {
-    self.image_yscale += 0.2
-    self.image_xscale += 0.2
-    self.image_alpha += 0.2
-    if (self.image_xscale >= 1)
-        self.active = 1
+    image_yscale += 0.2
+    image_xscale += 0.2
+    image_alpha += 0.2
+    if (image_xscale >= 1)
+        active = true
 }
 scr_destroyoutside()

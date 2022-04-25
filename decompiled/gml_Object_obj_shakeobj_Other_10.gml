@@ -1,8 +1,8 @@
-if instance_exists(self.target)
+if i_ex(target)
 {
-    self.active = 1
-    self.nowx = self.target.x
-    self.nowy = self.target.y
+    active = true
+    nowx = target.x
+    nowy = target.y
 }
 else
     instance_destroy()

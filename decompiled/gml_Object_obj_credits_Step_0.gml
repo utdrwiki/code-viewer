@@ -1,191 +1,169 @@
-self.timer += 1
-if (self.timer == 1)
+timer += 1
+if (timer == 1)
 {
-    self.song0 = snd_init("dontforget.ogg")
-    self.song1 = mus_play(self.song0)
+    snd_free_all()
+    song0 = snd_init("ch2_credits.ogg")
+    song1 = mus_play(song0)
+    line[0] = stringsetloc("DELTARUNE", "obj_credits_slash_Step_0_gml_21_0")
+    line[1] = stringsetloc("Chapter 2", "obj_credits_slash_Step_0_gml_22_0")
+    line[2] = stringset(" ")
+    line[3] = stringsetloc("by Toby Fox", "obj_credits_slash_Step_0_gml_24_0")
 }
-if (self.timer == 60)
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_13_0")
-if (self.timer == 108)
+if (timer == 100)
 {
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_19_0")
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_21_0")
-    self.line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_22_0")
-    self.line[2] = " "
-    self.line[3] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_24_0")
+    line[0] = stringsetloc("Main Artist, Animator, & Cleanup", "obj_credits_slash_Step_0_gml_38_0")
+    line[1] = stringsetloc("(BG, Overworld, Battle)", "obj_credits_slash_Step_0_gml_39_0")
+    line[2] = stringsetloc("(Sepia and Menu Art)", "obj_credits_slash_Step_0_gml_40_0")
+    line[3] = stringset(" ")
+    line[4] = stringset("Temmie Chang")
+    linecolor[0] = c_silver
+    linecolor[1] = c_silver
+    linecolor[2] = c_silver
+    linecolor[4] = c_white
 }
-if (self.timer == 180)
+if (timer == 200)
 {
-    if (global.lang == "en")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_33_0")
+    line[0] = stringsetloc("Main Team", "obj_credits_slash_Step_0_gml_52_0")
+    line[1] = stringset("Sarah O'Donnell")
+    line[2] = stringset("Juju (taxiderby)")
+    line[3] = stringset("Fred Wood")
+    line[4] = stringset("Jean Canellas")
+    linecolor[0] = c_silver
+    linecolor[1] = c_white
+    linecolor[2] = c_white
+    linecolor[3] = c_white
+    linecolor[4] = c_white
 }
-if (self.timer == 201)
+if (timer == 300)
 {
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_38_0")
-    self.line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_39_0")
-    self.line[2] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_40_0")
-    self.line[3] = " "
-    self.line[4] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_42_0")
-    self.linecolor[0] = 12632256
-    self.linecolor[1] = 12632256
-    self.linecolor[2] = 12632256
-    self.linecolor[4] = 16777215
-    if (global.lang == "ja")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_33_0")
+    line[0] = stringsetloc("Lancer, Rudinn, Hathy", "obj_credits_slash_Step_0_gml_59_0")
+    line[1] = stringsetloc("Clover, King, Jevil", "obj_credits_slash_Step_0_gml_60_0")
+    line[2] = stringsetloc("Original Character Designs", "obj_credits_slash_Step_0_gml_61_0")
+    linecolor[2] = c_silver
+    line[3] = stringset(" ")
+    line[4] = stringset("Kanotynes")
 }
-if (self.timer == 278)
+if (timer == 400)
 {
-    if (global.lang == "en")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_54_0")
+    line[0] = stringsetloc("Area Concept Art", "obj_credits_slash_Step_0_gml_80_0")
+    line[1] = stringsetloc("Dark World Costume Design", "obj_credits_slash_Step_0_gml_81_0")
+    line[2] = stringset(" ")
+    line[3] = stringset("Gigi DG")
+    linecolor[0] = c_silver
+    linecolor[1] = c_silver
+    linecolor[3] = c_white
 }
-if (self.timer == 298)
+if (timer == 500)
 {
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_59_0")
-    self.line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_60_0")
-    self.line[2] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_61_0")
-    self.linecolor[2] = 12632256
-    self.line[3] = " "
-    self.line[4] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_64_0")
-    if (global.lang == "ja")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_54_0")
+    textalpha = 1
+    line[0] = stringsetloc("Programming Help", "obj_credits_slash_Step_0_gml_103_0")
+    line[1] = stringset("Shaun Spalding")
+    line[2] = stringset(" ")
+    line[3] = stringsetloc("Character Design Assistance", "obj_credits_slash_Step_0_gml_106_0")
+    line[4] = stringset("Samanthuel Gillson (splendidland)")
+    linecolor[0] = c_silver
+    linecolor[1] = c_white
+    linecolor[3] = c_silver
+    linecolor[4] = c_white
 }
-if (self.timer == 366)
+if (timer == 600)
 {
-    if (global.lang == "en")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_70_0")
+    creditalpha = 1
+    line[0] = stringsetloc("Cutscene Assistance", "obj_credits_slash_Step_0_gml_119_0_b")
+    line[1] = stringset("Chess")
+    line[2] = stringset("PixelatedCrown")
+    line[3] = stringset(" ")
+    line[4] = stringsetloc("Shop and BG Pixel Assistance", "obj_credits_slash_Step_0_gml_123_0_b")
+    line[5] = stringset("Shawn (puppiesandanime)")
+    line[6] = stringset("Kenju")
+    linecolor[0] = c_silver
+    linecolor[1] = c_white
+    linecolor[2] = c_white
+    linecolor[4] = c_silver
+    linecolor[5] = c_white
+    linecolor[6] = c_white
 }
-if (self.timer == 390)
+if (timer == 700)
 {
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_95_0")
-    self.line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_96_0")
-    self.line[2] = " "
-    self.line[3] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_98_0")
-    self.line[4] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_99_0")
-    self.linecolor[0] = 12632256
-    self.linecolor[1] = 16777215
-    self.linecolor[3] = 12632256
-    self.linecolor[4] = 16777215
-    if (global.lang == "ja")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_70_0")
+    line[0] = stringsetloc("Music Assistance", "obj_credits_slash_Step_0_gml_142_0")
+    line[1] = stringset("Lena Raine")
+    line[2] = stringset("Marcy Nabors")
+    line[3] = stringset(" ")
+    line[4] = stringsetloc("Fireworks Effect", "obj_credits_slash_Step_0_gml_146_0")
+    line[5] = stringset("Lars Korendijk")
+    line[6] = stringset(" ")
+    linecolor[0] = c_silver
+    linecolor[1] = c_white
+    linecolor[2] = c_white
+    linecolor[4] = c_silver
+    linecolor[5] = c_white
 }
-if ((self.timer >= 480) && (self.timer <= 520))
+if (timer == 800)
 {
-    self.creditalpha -= 0.025
-    self.textalpha -= 0.025
+    line[0] = stringsetloc("Japanese Localization", "obj_credits_slash_Step_0_gml_95_0")
+    line[1] = stringsetloc("8-4 Ltd.", "obj_credits_slash_Step_0_gml_96_0")
+    line[2] = stringset(" ")
+    line[3] = stringsetloc("Translator", "obj_credits_slash_Step_0_gml_98_0")
+    line[4] = stringsetloc("Keiko Fukuichi", "obj_credits_slash_Step_0_gml_99_0")
+    line[5] = stringset(" ")
+    linecolor[0] = c_silver
+    linecolor[1] = c_white
+    linecolor[3] = c_silver
+    linecolor[4] = c_white
 }
-if (self.timer == 526)
+if (timer == 900)
 {
-    self.textalpha = 1
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_89_0")
+    line[0] = stringsetloc("Testers", "obj_credits_slash_Step_0_gml_177_0")
+    line[1] = stringset("Tester A")
+    line[2] = stringset("Tester B")
+    line[3] = stringset(" ")
+    line[4] = stringset(" ")
+    line[5] = stringset(" ")
+    linecolor[0] = c_silver
+    linecolor[1] = c_white
+    linecolor[2] = c_white
 }
-if (self.timer == 573)
+if (timer == 1000)
 {
-    self.creditalpha = 1
-    self.line[0] = "Localization Producers"
-    self.line[1] = "John Ricciardi"
-    self.line[2] = "Graeme Howard"
-    self.linecolor[0] = 12632256
-    self.linecolor[1] = 16777215
-    self.linecolor[2] = 16777215
-    self.linecolor[3] = 12632256
-    self.linecolor[4] = 16777215
-    self.line[3] = "Localization Programming"
-    self.line[4] = "Gregg Tavares"
-    if (global.lang == "ja")
-    {
-        self.line[0] = "ローカライズプロデューサー"
-        self.line[3] = "ローカライズプログラミング"
-    }
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_108_0")
+    line[0] = stringsetloc("Website", "obj_credits_slash_Step_0_gml_192_0_b")
+    line[1] = stringset("Ryan")
+    line[2] = stringset("Brian")
+    linecolor[0] = c_silver
+    linecolor[1] = c_white
+    linecolor[2] = c_white
 }
-if (self.timer == 645)
+if (timer == 1100)
 {
-    if (global.lang == "en")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_113_0")
+    line[0] = stringsetloc("Special Thanks", "obj_credits_slash_Step_0_gml_152_0")
+    line[1] = stringsetloc("Fangamer", "obj_credits_slash_Step_0_gml_153_0")
+    line[2] = stringset(" ")
+    line[3] = stringsetloc("\"Temmie\" Character Design", "obj_credits_slash_Step_0_gml_155_0")
+    line[4] = stringsetloc("Betty Kwong", "obj_credits_slash_Step_0_gml_156_0")
+    linecolor[1] = c_white
+    linecolor[3] = c_silver
+    linecolor[4] = c_white
 }
-if (self.timer == 668)
+if (timer >= 1150 && timer <= 1200)
 {
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_119_0")
-    self.line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_120_0")
-    self.line[2] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_121_0")
-    self.line[3] = "Snowdrake & Monster Kid Design"
-    self.line[4] = "Magnolia Porter"
-    self.linecolor[0] = 12632256
-    self.linecolor[1] = 12632256
-    self.linecolor[2] = 16777215
-    self.linecolor[3] = 12632256
-    self.linecolor[4] = 16777215
-    if (global.lang == "ja")
-        self.line[3] = "ライちゃん／モンスターの子　デザイン"
-    if (global.lang == "ja")
-        self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_113_0")
+    creditalpha -= 0.02
+    textalpha -= 0.02
 }
-if (self.timer == 735)
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_131_0")
-if (self.timer == 765)
+if (timer >= 1400)
 {
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_152_0")
-    self.line[1] = "Gigi DG (Outfit & Color Assist)"
-    self.line[2] = "Betty Kwong (Temmie Design)"
-    self.line[3] = "256graph (JP Graphics)"
-    self.line[4] = "Ryan Alyea (Website)"
-    self.line[5] = "Brian Coia (Website)"
-    self.linecolor[0] = 12632256
-    self.linecolor[1] = 16777215
-    self.linecolor[2] = 16777215
-    self.linecolor[3] = 16777215
-    self.linecolor[4] = 16777215
-    self.linecolor[5] = 16777215
-    if (global.lang == "ja")
-    {
-        self.line[1] = "Gigi DG (カラーアシタンス)"
-        self.line[2] = "Betty Kwong (テミー・デザイン)"
-        self.line[3] = "256graph (日本語グラフィック)"
-        self.line[4] = "Ryan Alyea (ウェブサイト)"
-        self.line[5] = "Brian Coia (ウェブサイト)"
-    }
+    if (timer <= 1560 && creditalpha < 1)
+        creditalpha += 0.01
+    if (timer >= 1560 && creditalpha > 0)
+        creditalpha -= 0.01
+    line[0] = stringsetloc("To be continued", "obj_credits_slash_Step_0_gml_191_0")
+    line[1] = stringsetloc("in Chapter 3", "obj_credits_slash_Step_0_gml_192_0")
+    linecolor[0] = c_white
+    linecolor[1] = c_white
+    line[2] = stringset(" ")
+    line[3] = stringset(" ")
+    line[4] = stringset(" ")
+    textalpha -= 0.01
 }
-if (self.timer == 798)
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_147_0")
-if (self.timer == 870)
-{
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_152_0")
-    self.line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_153_0")
-    self.line[2] = "Fontworks Inc."
-    self.line[3] = "Yutaka Sato (Happy Ruika)"
-    self.line[4] = "Hiroko Minamoto"
-    self.line[5] = "All 8-4 & Fangamer Staff"
-    self.linecolor[1] = 16777215
-}
-if ((self.timer >= 960) && (self.timer <= 1030))
-{
-    self.creditalpha -= 0.02
-    self.textalpha -= 0.02
-}
-if (self.timer == 1033)
-{
-    self.textalpha = 1
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_174_0")
-}
-if (self.timer == 1086)
-    self.lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_180_0")
-if (self.timer >= 1300)
-{
-    if ((self.timer <= 1560) && (self.creditalpha < 1))
-        self.creditalpha += 0.01
-    if ((self.timer >= 1560) && (self.creditalpha > 0))
-        self.creditalpha -= 0.01
-    self.line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_187_0")
-    self.line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_188_0")
-    self.linecolor[0] = 16777215
-    self.linecolor[1] = 16777215
-    self.line[2] = " "
-    self.line[3] = " "
-    self.line[4] = " "
-    self.line[5] = " "
-    self.textalpha -= 0.01
-}
-if (self.timer == 1660)
-    snd_free(self.song0)
-if (self.timer == 1680)
-    game_end()
+if (timer == 1860)
+    snd_free(song0)
+if (timer == 1880)
+    game_restart_true()

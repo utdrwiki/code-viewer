@@ -1,22 +1,44 @@
-if instance_exists(self.target)
+if i_ex(target)
 {
-    if (self.moved == 0)
+    if (moved == 0)
     {
-        self.x = self.target.x
-        self.y = self.target.y
-        self.dist = distance_to_point(self.movex, self.movey)
-        self.dir = point_direction(self.x, self.y, self.movex, self.movey)
-        self.amt = (self.dist / self.movemax)
-        self.xadd = lengthdir_x(self.amt, self.dir)
-        self.yadd = lengthdir_y(self.amt, self.dir)
-        self.moved = 1
+        x = target.x
+        y = target.y
+        dist = distance_to_point(movex, movey)
+        dir = point_direction(x, y, movex, movey)
+        amt = (dist / movemax)
+        xadd = lengthdir_x(amt, dir)
+        yadd = lengthdir_y(amt, dir)
+        moved = 1
     }
-    self.target.x += self.xadd
-    self.target.y += self.yadd
-    self.movetimer += 1
-    if (self.movetimer >= self.movemax)
+    target.x += xadd
+    target.y += yadd
+    if (target.object_index == obj_actor)
+    {
+        target.fake_speed = amt
+        target.fake_direction = dir
+    }
+    movetimer += 1
+    target.x = lerp(x, movex, (movetimer / movemax))
+    target.y = lerp(y, movey, (movetimer / movemax))
+    if (movetimer >= movemax)
+    {
+        if (target.object_index == obj_actor)
+            target.fake_speed = 0
+        if (charmarker == 1)
+            target.fun = false
+        if (charmarker == 2)
+        {
+            with (target)
+            {
+                follow = 1
+                fun = false
+                scr_caterpillar_interpolate()
+            }
+        }
         instance_destroy()
-    if (self.target == 321)
+    }
+    if (target == obj_move_to_point)
         instance_destroy()
 }
 else

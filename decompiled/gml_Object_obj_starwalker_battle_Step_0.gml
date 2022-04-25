@@ -1,47 +1,47 @@
-if (self.walkcon == 1)
+if (walkcon == 1)
 {
-    self.visible = 0
-    self.wings = scr_dark_marker((self.x + 92), (self.y + 74), spr_starwalker_wings)
-    self.wings.image_index = self.image_index
-    with (self.wings)
+    visible = false
+    wings = scr_dark_marker((x + 92), (y + 74), spr_starwalker_wings)
+    wings.image_index = image_index
+    with (wings)
     {
-        self.image_speed = 0.2
-        self.depth = 1010
-        self.hspeed = 5
-        self.vspeed = -1
-        self.gravity_direction = 90
-        self.gravity = 0.2
+        image_speed = 0.2
+        depth = 1010
+        hspeed = 5
+        vspeed = -1
+        gravity_direction = 90
+        gravity = 0.2
     }
-    self.body = scr_dark_marker((self.x + 70), (self.y + 52), spr_starwalker_walk)
-    with (self.body)
+    body = scr_dark_marker((x + 70), (y + 52), spr_starwalker_walk)
+    with (body)
     {
-        self.depth = 1000
-        self.image_speed = 0
-        self.vspeed = 8
-        self.image_speed = 0
+        depth = 1000
+        image_speed = 0
+        vspeed = 8
+        image_speed = 0
     }
-    self.walkcon = 2
+    walkcon = 2
 }
-if (self.walkcon == 2)
+if (walkcon == 2)
 {
-    with (self.body)
+    with (body)
         scr_depth()
-    self.walktimer += 1
-    if (self.walktimer >= 20)
+    walktimer += 1
+    if (walktimer >= 20)
     {
-        self.hspeed = 7
-        with (self.body)
+        hspeed = 7
+        with (body)
         {
-            self.vspeed = 0
-            self.hspeed = 7
-            self.image_speed = 0.25
+            vspeed = 0
+            hspeed = 7
+            image_speed = 0.25
         }
-        self.bodycheck = instance_create(self.body.x, (self.body.y + 20), obj_readable_room1)
-        self.bodycheck.image_xscale = 2
-        self.bodycheck.image_yscale = 2
-        with (self.bodycheck)
-            self.hspeed = 7
-        self.walkcon = 3
-        self.walktimer = 0
+        bodycheck = instance_create(body.x, (body.y + 20), obj_readable_room1)
+        bodycheck.image_xscale = 2
+        bodycheck.image_yscale = 2
+        with (bodycheck)
+            hspeed = 7
+        walkcon = 3
+        walktimer = 0
     }
 }

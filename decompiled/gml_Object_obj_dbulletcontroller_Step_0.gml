@@ -1,1369 +1,1453 @@
-self.btimer += 1
-if (self.type == 0)
+if (init == false)
 {
-    if (self.btimer >= (self.timermax * self.ratio))
+    sameattack = scr_monsterattacknamecount(global.monsterattackname[creator])
+    if (sameattack > true)
     {
-        self.btimer = 0
-        self.dir = (30 + random(120))
-        self.radius = (140 + random(80))
-        self.xx = lengthdir_x(self.radius, self.dir)
-        self.yy = lengthdir_y(self.radius, self.dir)
-        self.bm = instance_create(((obj_heart.x + 8) + self.xx), ((obj_heart.y + 8) + self.yy), obj_dbullet_maker)
-        if (self.bm.y < (__view_get(1, 0) + 40))
-            self.bm.y = (__view_get(1, 0) + 40)
-        self.bm.damage = self.damage
-        self.bm.target = self.target
+        if (creator == obj_84_lang_helper)
+            sameattacker = (sameattack - 1)
+        else if (creator == obj_pipis_bullet_cone)
+            sameattacker = (sameattack == 3 ? creator : global.monsterattackname[0] == global.monsterattackname[1])
+    }
+    if instance_exists(obj_growtangle)
+    {
+        miny = (obj_growtangle.y - (obj_growtangle.sprite_height / 2))
+        maxy = (obj_growtangle.y + (obj_growtangle.sprite_height / 2))
+        minx = (obj_growtangle.x - (obj_growtangle.sprite_width / 2))
+        maxx = (obj_growtangle.x + (obj_growtangle.sprite_width / 2))
+    }
+    init = true
+}
+btimer += 1
+if (type == 0)
+{
+    if (btimer >= (timermax * ratio))
+    {
+        btimer = 0
+        dir = (30 + random(120))
+        radius = (140 + random(80))
+        var xx = lengthdir_x(radius, dir)
+        var yy = lengthdir_y(radius, dir)
+        bm = instance_create(((obj_heart.x + 8) + xx), ((obj_heart.y + 8) + yy), obj_dbullet_maker)
+        bm.grazepoints = grazepoints
+        if (bm.y < (__view_get((1 << 0), 0) + 40))
+            bm.y = (__view_get((1 << 0), 0) + 40)
+        bm.damage = damage
+        bm.target = target
     }
 }
-if (self.type == 1)
+if (type == 1)
 {
-    if (self.btimer >= (9 * self.ratio))
+    if (btimer >= (9 * ratio))
     {
-        self.btimer = 0
-        self.radius = (140 + random(40))
-        self.yy = (self.radius * self.side)
-        self.xx = (-100 + random(200))
-        self.num = choose(0, 1, 2, 3)
-        if (self.num == 3)
-            self.xx = (-10 + random(20))
-        self.d = instance_create(((obj_heart.x + 8) + self.xx), ((obj_heart.y + 8) + self.yy), obj_dbullet_vert)
-        self.d.damage = self.damage
-        self.d.target = self.target
+        btimer = 0
+        radius = (140 + random(40))
+        yy = (radius * side)
+        xx = (-100 + random(200))
+        num = choose(0, 1, 2, 3)
+        if (num == 3)
+            xx = (-10 + random(20))
+        d = instance_create(((obj_heart.x + 8) + xx), ((obj_heart.y + 8) + yy), obj_dbullet_vert)
+        d.damage = damage
+        d.target = target
     }
 }
-if (self.type == 2)
+else if (type == 2)
 {
-    if (self.btimer >= (20 * self.ratio))
+    if (btimer >= (10 * ratio))
     {
-        self.xx = (__view_get(0, 0) - 20)
-        if (self.side == 1)
-            self.xx = (__view_get(0, 0) + 660)
-        self.yy = (self.miny + random((self.maxy - self.miny)))
-        self.bul = instance_create(self.xx, self.yy, obj_clubsbullet)
-        self.bul.speed = 12
-        self.bul.damage = self.damage
-        self.bul.target = self.target
-        if (self.side == 1)
-        {
-            self.bul.direction = 180
-            self.bul.image_angle = 180
-        }
-        self.btimer = 0
-    }
-}
-if (self.type == 3)
-{
-    if (self.btimer >= (20 * self.ratio))
-    {
-        self.btimer = 0
-        if (self.side == 1)
-            self.dir = choose(225, 315)
-        if (self.side == -1)
-            self.dir = choose(45, 135)
-        self.radius = 400
-        self.xx = lengthdir_x(self.radius, self.dir)
-        self.yy = lengthdir_y(self.radius, self.dir)
-        self.d = instance_create(((obj_heart.x + 8) + self.xx), ((obj_heart.y + 8) + self.yy), obj_clubsbullet_dark)
-        self.d.direction = (self.dir + 180)
-        self.d.speed = 20
-        self.d.friction = 1
-        self.d.damage = self.damage
-        self.d.target = self.target
-        with (self.d)
-            self.image_angle = self.direction
-        if (self.side == 1)
-            self.side = -1
+        btimer = 0
+        radius = (120 + random(80))
+        bm = instance_create(x, y, obj_yarnmaker)
+        scr_bullet_inherit(bm)
+        var childgravity = 0.5
+        var launchspeed = scr_remapvalue(40, 200, (y - cameray()), 8, 16)
+        if ((made % 3) == 2)
+            bm.direction = (180 - scr_getlaunchdirection(launchspeed, ((x - obj_heart.x) + 4), childgravity, 1))
         else
-            self.side = 1
+            bm.direction = (180 - scr_getlaunchdirection(launchspeed, (random(250) + (x - maxx)), childgravity, 1))
+        bm.damage = damage
+        bm.target = target
+        bm.childgravity = 0.6
+        bm.childspeed = launchspeed
+        bm.grazepoints = 7
+        bm.image_angle = direction
+        made++
     }
 }
-if (self.type == 4)
+else if (type == 3)
 {
-    if (self.btimer >= (30 * self.ratio))
+    if (init == true)
     {
-        self.btimer = 0
-        if (self.side == -1)
-            self.dir = 225
-        if (self.side == 1)
-            self.dir = 315
-        self.radius = 400
-        self.xx = lengthdir_x(self.radius, self.dir)
-        self.yy = lengthdir_y(self.radius, self.dir)
-        self.d = instance_create(((obj_heart.x + 8) + self.xx), ((obj_heart.y + 8) + self.yy), obj_clubsbullet_dark)
-        self.d.damage = self.damage
-        self.d.target = self.target
-        self.d.direction = (self.dir + 180)
-        self.d.speed = 20
-        self.d.friction = 1
-        with (self.d)
-            self.image_angle = self.direction
-        if (self.side == 1)
-            self.side = -1
+        init = 2
+        special = instance_create(x, y, obj_tasque_meowing)
+        special.loop = false
+        special.image_speed = 0
+        special.creator = creator
+        special.depth = global.monsterinstance[creator].depth
+        global.monsterinstance[creator].visible = false
+        if (sameattacker >= true)
+            btimer = ((random_range(6, 18) * ratio) * (1 + difficulty))
+    }
+    if (btimer >= (((difficulty >= 2 ? 40 : 24) * ratio) * (1 + difficulty)))
+    {
+        btimer = 0
+        d = instance_create((x + 28), (y + 34), obj_chainbullet)
+        d.childBullet = obj_tasque_soundwave
+        snd_play_x(snd_electric_meow, 0.8, random_range(0.8, 1.2))
+        d.element = 6
+        d.damage = damage
+        d.grazepoints = 1.4
+        d.direction = point_direction((x + 28), (y + 34), (obj_heart.x + 8), (obj_heart.y + 8))
+        d.childSpeed = (difficulty == true ? 4 : 7)
+        d.firingSpeed = 2
+        d.target = target
+        d.sprite_index = spr_meow
+        special.image_speed = 0.5
+        special.image_index = 0
+    }
+}
+else if (type == 4 && (sameattack < 3 || creator < obj_84_lang_helper))
+{
+    if (btimer > 7)
+    {
+        btimer = 0
+        xx = (x - (made * 30))
+        yy = maxy
+        d = instance_create(xx, yy, obj_chainbullet)
+        d.damage = damage
+        d.grazepoints = 4
+        d.direction = 90
+        d.childSpeed = 7
+        d.childgravity = 0.25
+        d.firingSpeed = 2
+        d.target = target
+        d.sprite_index = spr_diamondbullet_vert
+        made++
+    }
+}
+else if (type == 5)
+{
+    if (init == true)
+    {
+        btimer = (12 * ratio)
+        made = sameattacker
+        init = 2
+        if (obj_swatchling_battle_controller.yellow_count > 0)
+        {
+            var _birdcount = obj_swatchling_battle_controller.bird_count
+            obj_swatchling_battle_controller.bird_color[_birdcount] = (special == true ? c_orange : c_red)
+            obj_swatchling_battle_controller.red_target[_birdcount] = target
+            obj_swatchling_battle_controller.red_damage[_birdcount] = damage
+            obj_swatchling_battle_controller.bird_count++
+            init = 3
+        }
         else
-            self.side = 1
+            btimer -= ((sameattacker * 4) * ratio)
+    }
+    if (btimer >= (12 * ratio) && init <= 2)
+    {
+        xx = (choose((minx - 35), (maxx + 35)) + random_range(-15, 15))
+        yy = random_range((miny - 20), (maxy + 20))
+        d = scr_bullet_create(xx, yy, obj_swatchling_bird)
+        d.image_blend = (special == true ? c_orange : c_red)
+        d.grazepoints = 4
+        d.depth -= 11
+        btimer = 0
     }
 }
-if (self.type == 6)
+else if (type == 6)
 {
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if (self.made == 0)
+    if (init == true)
     {
-        self.d = instance_create((300 + self.xx), (-20 + self.yy), obj_dicebul)
-        self.e = instance_create((360 + self.xx), (-60 + self.yy), obj_dicebul)
-        self.d.target = self.target
-        self.d.damage = self.damage
-        self.e.target = self.target
-        self.e.damage = self.damage
-        self.made = 1
-    }
-}
-if (self.type == 7)
-{
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if ((self.made < 3) && (self.btimer >= 15))
-    {
-        self.btimer = 0
-        self.mine = instance_create((300 + self.xx), (-20 + self.yy), obj_dicebul)
-        self.mine.damage = self.damage
-        self.mine.target = self.target
-        with (obj_dicebul)
+        ratio = 1
+        if (scr_monsterpop() == 2)
         {
-            self.gravity = (0.15 + self.gravbonus)
-            self.image_xscale = 1
-            self.image_yscale = 1
-        }
-        self.made += 1
-    }
-}
-if (self.type == 8)
-{
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if ((self.made < 4) && (self.btimer >= 15))
-    {
-        self.btimer = 0
-        self.mine = instance_create((300 + self.xx), (self.yy - 40), obj_dicebul)
-        self.mine.damage = self.damage
-        self.mine.target = self.target
-        with (self.mine)
-        {
-            self.hspeed = (1.2 + random(1.2))
-            self.hspeed *= choose(-1, 1)
-            self.gravbonus = random(0.1)
-            self.gravity = (0.15 + self.gravbonus)
-            self.image_xscale = 0.7
-            self.image_yscale = 0.7
-        }
-        self.made += 1
-    }
-}
-if (self.type == 10)
-{
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if (self.btimer >= 15)
-    {
-        self.btimer = 0
-        self.dicecomet = instance_create(choose((self.xx + 680), (self.xx - 100)), (0 - random(100)), self.obj_dicebul_comet)
-        self.dicecomet.damage = self.damage
-        self.dicecomet.target = self.target
-        with (self.dicecomet)
-        {
-            self.image_xscale = 2
-            self.image_yscale = 2
-            if (self.x > (__view_get(0, 0) + 320))
-                self.hspeed = (-6 - random(1))
+            if (sameattack == 2)
+                ratio = 1.2
             else
-                self.hspeed = (6 + random(1))
-            self.vspeed = (2 + random(2))
+                ratio = 1
         }
-    }
-}
-if (self.type == 11)
-{
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if ((self.made < 4) && (self.btimer >= 15))
-    {
-        self.btimer = 0
-        self.bb = instance_create((300 + self.xx), (-20 + self.yy), obj_dicebul)
-        self.bb.damage = self.damage
-        self.bb.target = self.target
-        with (obj_dicebul)
+        if (scr_monsterpop() == 3)
         {
-            self.gravity = (0.15 + self.gravbonus)
-            self.image_xscale = 1
-            self.image_yscale = 1
-        }
-        if (self.made == 3)
-        {
-            with (self.bb)
-            {
-                self.green = 1
-                self.image_blend = 0x0000FF00
-            }
-        }
-        self.made += 1
-    }
-}
-if (self.type == 12)
-{
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if (self.made == 0)
-    {
-        self.db = instance_create((320 + self.xx), (-20 + self.yy), obj_dicebul)
-        self.db.image_xscale = 1
-        self.db.image_yscale = 1
-        self.db.damage = self.damage
-        self.db.target = self.target
-        self.made = 1
-    }
-}
-if (self.type == 13)
-{
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if ((self.made < 2) && (self.btimer >= 20))
-    {
-        self.db[self.made] = instance_create((320 + self.xx), (-20 + self.yy), obj_dicebul)
-        self.db[self.made].image_xscale = 1
-        self.db[self.made].image_yscale = 1
-        self.db[self.made].damage = self.damage
-        self.db[self.made].target = self.target
-        if (self.made == 1)
-        {
-            with (self.db[1])
-            {
-                self.green = 1
-                self.image_blend = 0x0000FF00
-            }
-            self.db[1].hspeed = (-self.db[0].hspeed)
-        }
-        self.made += 1
-    }
-}
-if (self.type == 14)
-{
-    if (self.btimer >= 10)
-    {
-        self.xx = (__view_get(0, 0) - 20)
-        if (self.side == 1)
-            self.xx = (__view_get(0, 0) + 660)
-        self.yy = (self.miny + random((self.maxy - self.miny)))
-        self.bul = instance_create(self.xx, self.yy, obj_regularbullet)
-        self.bul.sprite_index = spr_smallbullet
-        self.bul.hspeed = -8
-        self.bul.damage = self.damage
-        self.bul.target = self.target
-        if (self.side == 1)
-        {
-            self.bul.direction = 180
-            self.bul.image_angle = 180
-        }
-        self.btimer = 0
-    }
-}
-if ((self.type == 20) || (self.type == 22))
-{
-    if instance_exists(obj_lancerboss3)
-    {
-        if (self.made == 0)
-        {
-            snd_play(snd_lancerwhistle)
-            self.whistletimer = 0
-            self.made = 1
-            with (obj_lancerboss3)
-                self.idlesprite = 429
-        }
-        if (self.made == 1)
-        {
-            self.whistletimer += 1
-            if (self.whistletimer >= 30)
-            {
-                with (obj_lancerboss3)
-                    self.idlesprite = 426
-                self.made = 2
-            }
-        }
-    }
-    if (self.type == 20)
-        self.bmax = 8
-    if (self.type == 22)
-        self.bmax = 6
-    if (self.btimer >= self.bmax)
-    {
-        self.radius = ((-80 + random(160)) + 8)
-        self.fallspade = instance_create((obj_heart.x + self.radius), (__view_get(1, 0) - 20), obj_regularbullet)
-        self.fallspade.damage = self.damage
-        self.fallspade.target = self.target
-        with (self.fallspade)
-        {
-            self.sprite_index = spr_spadebullet
-            self.image_angle = 270
-            self.gravity = 0.3
-            self.speed = 0
-            self.vspeed = 3
-            self.hspeed = (-0.6 + random(1.2))
-        }
-        if (self.side == 1)
-            self.side = -1
-        else
-            self.side = 1
-        self.btimer = 0
-    }
-}
-if ((self.type == 21) || ((self.type == 23) || (self.type == 25)))
-{
-    if (self.type == 21)
-        self.bmax = 9
-    if (self.type == 23)
-        self.bmax = 7
-    if (self.type == 25)
-        self.bmax = 4
-    with (obj_regularbullet)
-        self.image_alpha += 0.2
-    if (self.btimer >= self.bmax)
-    {
-        if (self.side == 0)
-            self.radius = 80
-        else
-            self.radius = 560
-        self.sidespade[self.side] = instance_create((__view_get(0, 0) + self.radius), ((obj_growtangle.y - (obj_growtangle.sprite_height / 2)) + random(obj_growtangle.sprite_height)), obj_regularbullet)
-        if (self.side == 0)
-            self.sidespade[self.side].direction = 0
-        if (self.side == 1)
-            self.sidespade[self.side].direction = 180
-        self.sidespade[self.side].image_alpha = 0
-        self.sidespade[self.side].damage = self.damage
-        self.sidespade[self.side].target = self.target
-        with (self.sidespade[self.side])
-        {
-            self.sprite_index = spr_spadebullet
-            self.speed = 5
-            self.friction = -0.1
-            self.image_angle = self.direction
-        }
-        if (self.side == 1)
-            self.side = 0
-        else
-            self.side = 1
-        self.btimer = 0
-    }
-}
-if (self.type == 24)
-{
-    self.bmax = (self.difficulty + 5)
-    with (obj_regularbullet)
-    {
-        if instance_exists(obj_heart)
-        {
-            self.xdiff = (self.x - (obj_heart.x + 8))
-            if ((self.y >= (obj_heart.y - 240)) && (abs(self.xdiff) <= 30))
-            {
-                if ((self.xdiff >= 0) && (self.hspeed < 5))
-                    self.hspeed += 0.4
-                if ((self.xdiff < 0) && (self.hspeed > -5))
-                    self.hspeed -= 0.4
-            }
-            if (self.y >= (obj_heart.y - 100))
-            {
-                if (abs(self.xdiff) <= 60)
-                {
-                    if (self.xdiff >= 0)
-                    {
-                        if (self.hspeed < 2)
-                            self.hspeed += 0.25
-                        if (self.xdiff < 10)
-                            self.x += 3
-                        if (self.xdiff < 20)
-                            self.x += 3
-                        if (self.xdiff < 30)
-                            self.x += 3
-                        if (self.xdiff < 40)
-                            self.x += 2
-                        if (self.xdiff < 60)
-                            self.x += 1
-                    }
-                    else
-                    {
-                        if (self.hspeed > -2)
-                            self.hspeed -= 0.25
-                        if (self.xdiff > -10)
-                            self.x -= 3
-                        if (self.xdiff > -20)
-                            self.x -= 3
-                        if (self.xdiff > -30)
-                            self.x -= 3
-                        if (self.xdiff > -40)
-                            self.x -= 2
-                        if (self.xdiff > -60)
-                            self.x -= 1
-                    }
-                }
-            }
-        }
-    }
-    if (self.btimer >= self.bmax)
-    {
-        self.radius = ((-80 + random(160)) + 8)
-        self.fallspade = instance_create((obj_heart.x + self.radius), -20, obj_regularbullet)
-        self.fallspade.damage = self.damage
-        self.fallspade.target = self.target
-        with (self.fallspade)
-        {
-            self.sprite_index = spr_spadebullet
-            self.image_angle = 270
-            self.gravity = 0.3
-            self.speed = 0
-            self.vspeed = 3
-            self.hspeed = (-0.6 + random(1.2))
-        }
-        if (self.side == 1)
-            self.side = -1
-        else
-            self.side = 1
-        self.btimer = 0
-    }
-}
-if (self.type == 26)
-{
-    with (obj_regularbullet)
-    {
-        if (self.sprite_index == spr_blockbullet)
-            self.image_alpha += 0.1
-    }
-    self.timer = 35
-    if (scr_monsterpop() == 2)
-        self.timer = 52.5
-    if (scr_monsterpop() == 3)
-        self.timer = 77
-    if (self.btimer >= self.timer)
-    {
-        self.x_c = (__view_get(0, 0) + 300)
-        self.y_c = (__view_get(1, 0) + 140)
-        self.x_o = 200
-        self.y_o = -60
-        self.y_o_o = (-80 + random(160))
-        self.y_o += self.y_o_o
-        self.v_s = ((-self.y_o_o) / 160)
-        self.h_s = -2
-        for (self.i = 0; self.i < 2; self.i += 1)
-        {
-            self.upallow = choose(0, 1, 2)
-            self.rightallow = choose(0, 1, 2)
-            for (self.j = 0; self.j < 2; self.j += 1)
-            {
-                self.bul[self.i, self.j] = instance_create(((self.x_c + self.x_o) + (self.i * 80)), ((self.y_c + self.y_o) + (self.j * 80)), obj_regularbullet)
-                scr_bullet_inherit(self.bul[self.i, self.j])
-                if (self.j == self.upallow)
-                    self.bul[self.i, self.j].y += choose(0, 40)
-                if ((self.i == 1) && (self.j == 1))
-                {
-                    self.bul[self.i, self.j].x += choose(0, -40)
-                    self.bul[self.i, self.j].y = (((self.y_c + self.y_o) + choose(0, 40)) + (self.j * 80))
-                }
-                self.bul[self.i, self.j].hspeed = self.h_s
-                self.bul[self.i, self.j].vspeed = self.v_s
-                self.bul[self.i, self.j].friction = -0.07
-                if (scr_monsterpop() >= 2)
-                    self.bul[self.i, self.j].friction = -0.1
-                self.bul[self.i, self.j].sprite_index = spr_blockbullet
-                self.bul[self.i, self.j].image_alpha = 0
-            }
-        }
-        self.btimer = 0
-    }
-}
-if (self.type == 27)
-{
-    self.timer = 15
-    if (scr_monsterpop() == 2)
-        self.timer = 25.5
-    if (scr_monsterpop() == 3)
-        self.timer = 34.5
-    self.lx = ((obj_battlesolid.x - (obj_battlesolid.sprite_width / 2)) + 8)
-    self.ly = ((obj_battlesolid.y + (obj_battlesolid.sprite_height / 2)) - 15)
-    if (self.btimer >= self.timer)
-    {
-        self.prevmade = self.made
-        self.made = choose(0, 1, 2, 3)
-        if (self.made == self.prevmade)
-            self.made = choose(0, 1, 2, 3)
-        self.btimer = 0
-        self.block = instance_create(100, 100, obj_blockbullet_fall)
-        self.block.xpos = self.made
-        scr_bullet_inherit(self.block)
-        self.testblock = collision_point(((self.lx + (self.made * self.block.sprite_width)) + 8), ((self.ly - (self.block.sprite_height * 3)) - 10), obj_blockbullet_fall, 0, 1)
-        if (self.testblock > obj_choicer_neo)
-        {
-            if (self.testblock.halt == 1)
-            {
-                with (self.block)
-                    instance_destroy()
-            }
-        }
-    }
-    self.legoa = collision_point((self.lx + 15), self.ly, obj_blockbullet_fall, 0, 1)
-    self.legob = collision_point(((self.lx + 15) + 34), self.ly, obj_blockbullet_fall, 0, 1)
-    self.legoc = collision_point(((self.lx + 15) + 68), self.ly, obj_blockbullet_fall, 0, 1)
-    self.legod = collision_point(((self.lx + 15) + 102), self.ly, obj_blockbullet_fall, 0, 1)
-    if ((self.legoa > obj_choicer_neo) && ((self.legob > obj_choicer_neo) && ((self.legoc > obj_choicer_neo) && (self.legod > obj_choicer_neo))))
-    {
-        with (self.legoa)
-            self.con = 3
-        with (self.legob)
-            self.con = 3
-        with (self.legoc)
-            self.con = 3
-        with (self.legod)
-            self.con = 3
-    }
-}
-if (self.type == 30)
-{
-    self.bmax = 34
-    if (scr_monsterpop() == 2)
-        self.bmax = 46
-    if (scr_monsterpop() == 3)
-        self.bmax = 60
-    if (self.btimer >= self.bmax)
-    {
-        self.rab = instance_create((obj_battlesolid.x + obj_battlesolid.sprite_width), obj_battlesolid.y, obj_rabbitbullet)
-        scr_bullet_inherit(self.rab)
-        self.btimer = 0
-    }
-}
-if (self.type == 32)
-{
-    self.skiprab = 0
-    if instance_exists(obj_carrotthrower)
-    {
-        self.skiprab = 1
-        self.type = 30
-    }
-    if ((self.made == 0) && (self.skiprab == 0))
-    {
-        self.made = 1
-        self.rab = instance_create(obj_battlesolid.x, obj_battlesolid.y, obj_carrotthrower)
-        scr_bullet_inherit(self.rab)
-        instance_destroy()
-    }
-}
-if (self.type == 33)
-{
-    if (self.btimer >= (26 * self.ratio))
-    {
-        self.hs = instance_create(obj_battlesolid.x, obj_battlesolid.y, obj_heartshaper)
-        self.hs.maxradius = 50
-        self.hs.type = 1
-        self.btimer = 0
-        self.hs.thisx = ((obj_battlesolid.x - 50) + random(100))
-        self.hs.thisy = ((obj_battlesolid.y - 50) + random(100))
-        scr_bullet_inherit(self.hs)
-    }
-}
-if (self.type == 34)
-{
-    if (self.btimer >= 28)
-    {
-        self.typechoice = choose(0, 1, 2, 3)
-        self.xx = 0
-        self.yy = 0
-        if ((self.typechoice == 0) || (self.typechoice == 3))
-        {
-            self.xx = (((__view_get(0, 0) + 320) + random(300)) - random(300))
-            self.yy = -60
-        }
-        if (self.typechoice == 1)
-        {
-            self.xx = (__view_get(0, 0) - 60)
-            self.yy = random(320)
-        }
-        if (self.typechoice == 2)
-        {
-            self.xx = (__view_get(0, 0) + 700)
-            self.yy = random(320)
-        }
-        self.chain = instance_create(self.xx, self.yy, obj_skychain)
-        scr_bullet_inherit(obj_skychain)
-        self.btimer = 0
-    }
-}
-if (self.type == 35)
-{
-    if (self.btimer >= 22)
-    {
-        self.typechoice = choose(0, 1, 2, 3)
-        self.xx = 0
-        self.yy = 0
-        if ((self.typechoice == 0) || (self.typechoice == 3))
-        {
-            self.xx = (((__view_get(0, 0) + 320) + random(300)) - random(300))
-            self.yy = -60
-        }
-        if (self.typechoice == 1)
-        {
-            self.xx = (__view_get(0, 0) - 60)
-            self.yy = random(320)
-        }
-        if (self.typechoice == 2)
-        {
-            self.xx = (__view_get(0, 0) + 700)
-            self.yy = random(320)
-        }
-        self.chain = instance_create(self.xx, self.yy, obj_skychain)
-        scr_bullet_inherit(self.chain)
-        self.btimer = 0
-    }
-}
-if (self.type == 36)
-{
-    if (self.btimer >= 16)
-    {
-        self.typechoice = choose(0, 1, 2, 3)
-        self.xx = 0
-        self.yy = 0
-        if ((self.typechoice == 0) || (self.typechoice == 3))
-        {
-            self.xx = (((__view_get(0, 0) + 320) + random(300)) - random(300))
-            self.yy = -60
-        }
-        if (self.typechoice == 1)
-        {
-            self.xx = (__view_get(0, 0) - 60)
-            self.yy = random(320)
-        }
-        if (self.typechoice == 2)
-        {
-            self.xx = (__view_get(0, 0) + 700)
-            self.yy = random(320)
-        }
-        self.chain = instance_create(self.xx, self.yy, obj_skychain)
-        scr_bullet_inherit(self.chain)
-        self.btimer = 0
-    }
-}
-if ((self.type >= 80) && (self.type <= 84))
-{
-    self.maxtimer = 40
-    if (self.type == 81)
-        self.maxtimer = 30
-    if (self.type == 82)
-        self.maxtimer = 26
-    if (self.type == 83)
-        self.maxtimer = 19
-    if (self.type == 84)
-        self.maxtimer = 14
-    if (self.btimer >= self.maxtimer)
-    {
-        self.btimer = 0
-        self.lx = obj_battlesolid.x
-        self.ly = obj_battlesolid.y
-        self.side = choose(0, 1)
-        if ((self.type == 81) || (self.type == 84))
-        {
-            self.side = self.made
-            if (self.made == 0)
-                self.made = 1
+            if (sameattack == 3)
+                ratio = 1.5
+            else if (sameattack == 2)
+                ratio = 1.7
             else
-                self.made = 0
+                ratio = 1.2
         }
-        if (self.side == 0)
-        {
-            self.puzz1 = instance_create((obj_heart.x + 8), (self.ly - 150), obj_jigsawbullet)
-            self.puzz1.side = 3
-            self.puzz2 = instance_create((obj_heart.x + 8), (self.ly + 150), obj_jigsawbullet)
-            self.puzz2.side = 1
-            if (self.type == 82)
-                self.puzz1.timer = 10
-            if (self.type == 82)
-                self.puzz2.timer = 10
-            if ((self.type == 83) || (self.type == 84))
-                self.puzz1.timer = 15
-            if ((self.type == 83) || (self.type == 84))
-                self.puzz2.timer = 15
-            scr_bullet_inherit(self.puzz1)
-            scr_bullet_inherit(self.puzz2)
-        }
-        if (self.side == 1)
-        {
-            self.puzz1 = instance_create((self.lx + 150), (obj_heart.y + 8), obj_jigsawbullet)
-            self.puzz1.side = 2
-            self.puzz2 = instance_create((self.lx - 150), (obj_heart.y + 8), obj_jigsawbullet)
-            self.puzz2.side = 0
-            if (self.type == 82)
-                self.puzz1.timer = 10
-            if (self.type == 82)
-                self.puzz2.timer = 10
-            if (self.type == 83)
-                self.puzz1.timer = 15
-            if (self.type == 83)
-                self.puzz2.timer = 15
-            scr_bullet_inherit(self.puzz1)
-            scr_bullet_inherit(self.puzz2)
-        }
-        if (self.type == 83)
-        {
-            with (obj_jigsawbullet)
-                self.joker = 1
-        }
+        init = 2
+        candyindex = irandom(6)
+        if (sameattacker > false)
+            btimer = ((30 * ratio) * (1 - (sameattacker / sameattack)))
+    }
+    if (btimer > (30 * ratio))
+    {
+        var _sbw = obj_swatchling_battle_controller
+        side = _sbw.platter_side
+        _sbw.platter_side *= -1
+        btimer = 0
+        var _bounce = _sbw.blue_count > 0
+        var _birds = _sbw.red_count
+        yy = (miny - 30)
+        xx = (obj_growtangle.x + (((obj_growtangle.sprite_width / 2) + 10) * side))
+        d = instance_create(xx, yy, obj_swatchling_platter)
+        d.speed = ((sameattack || _combo == 3) ? 3 : 4)
+        d.direction = 270
+        side *= -1
+        d.grazepoints = 4
+        if special
+            d.hasCandy = irandom(6) == 6
+        else if (made == candyindex)
+            d.hasCandy = true
+        d.birds = _birds
+        d.timer = (-1 - _sbw.platter_offset)
+        _sbw.platter_offset = ((_sbw.platter_offset + 5) % 30)
+        d.damage = damage
+        d.target = target
+        d.startColor = (special ? c_green : c_yellow)
+        d.platterPlate.image_blend = image_blend == d.startColor
+        d.platterLid.image_blend = image_blend == d.startColor
+        made++
     }
 }
-if (self.type == 85)
+else if (type == 7)
 {
-    if (self.made == 0)
+    if (special == false)
     {
-        self.cheer = 0
-        self.cheertimer = 0
-        self.remhp[0] = global.hp[global.char[0]]
-        self.remhp[1] = global.hp[global.char[1]]
-        with (obj_susieenemy)
-            self.visible = 0
-        with (obj_lancerboss3)
-            self.visible = 0
-        self.fakelan = instance_create((__view_get(0, 0) + 580), (obj_battlesolid.y + 160), obj_bulletparent)
-        with (self.fakelan)
-        {
-            self.depth += 1
-            self.image_xscale = 2
-            self.image_yscale = 2
-            self.visible = 1
-            self.sprite_index = spr_lancerbike
-            self.active = 0
-            self.image_speed = 0.2
-        }
-        self.fakesus = instance_create((__view_get(0, 0) + 530), (obj_battlesolid.y - 40), obj_bulletparent)
-        with (self.fakesus)
-        {
-            self.image_xscale = 2
-            self.image_yscale = 2
-            self.visible = 1
-            self.sprite_index = spr_susie_enemy_attack
-            self.active = 0
-            self.image_speed = 0
-        }
-        self.made = 1
-    }
-    if (self.made == 1)
-    {
-        if instance_exists(self.fakelan)
-        {
-            if (self.cheer == 0)
-            {
-                if (global.inv > 10)
-                {
-                    self.cheer = 1
-                    snd_play(snd_lancerwhistle)
-                    with (self.fakelan)
-                        self.sprite_index = spr_lancerbike_l
-                }
-            }
-            if (self.cheer == 1)
-            {
-                self.cheertimer += 1
-                if (self.cheertimer >= 30)
-                {
-                    self.cheertimer = 0
-                    with (self.fakelan)
-                        self.sprite_index = spr_lancerbike
-                    self.cheer = 0
-                }
-            }
-        }
-        if instance_exists(self.fakesus)
-        {
-            with (self.fakesus)
-            {
-                if (self.image_index < 5)
-                    self.image_index += 0.334
-            }
-        }
-    }
-    if ((self.made == 1) && (global.turntimer <= 10))
-    {
-        with (self.fakesus)
-            self.visible = 0
-        with (self.fakelan)
-            self.visible = 0
-        with (obj_susieenemy)
-            self.visible = 1
-        with (obj_lancerboss3)
-            self.visible = 1
-    }
-    if ((self.btimer >= 27) && (instance_exists(obj_battlesolid) && (global.turntimer > 10)))
-    {
-        with (self.fakesus)
-        {
-            self.image_index = 0
-            snd_play(snd_laz_c)
-        }
-        for (self.i = 0; self.i < 1; self.i += 1)
-        {
-            self.axe[self.i] = instance_create((__view_get(0, 0) + 540), obj_battlesolid.y, obj_axebullet)
-            scr_bullet_inherit(self.axe[self.i])
-        }
-        self.btimer = 0
+        special = true
+        d = instance_create((x + 82), (y + 68), obj_swatchling_cannonball)
+        d.creator = creator
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+        d.childgraze = 4
+        global.monsterinstance[creator].visible = false
+        if (sameattack > true)
+            d.trackplayer = -1
+        if (sameattack > 2)
+            d.spawnbullets = 0
     }
 }
-if (self.joker == 1)
+else if (type == 8)
 {
-    if (self.type == 45)
+    if (init == true && difficulty == true)
     {
-        if (self.btimer >= 18)
-        {
-            self.xx = choose(0, 1)
-            self.basex = (__view_get(0, 0) + 320)
-            if instance_exists(obj_growtangle)
-                self.basex = obj_growtangle.x
-            if (self.xx == 0)
-                self.idealx = ((self.basex - 180) - random(100))
-            if (self.xx == 1)
-                self.idealx = ((self.basex + 180) + random(100))
-            self.bomb = instance_create(self.idealx, -20, obj_suitbomb)
-            scr_bullet_inherit(self.bomb)
-            if (self.bomb.type == 2)
-                self.bomb.type = choose(0, 1, 2, 3)
-            self.btimer = 0
-        }
+        special = true
+        init = 2
+        global.turntimer = 200
     }
-    if (self.type == 46)
+    if (btimer > ((difficulty == false ? 45 : 45) * ratio))
     {
-        if (self.btimer >= 12)
+        pattern = irandom(1)
+        startDelay = -10
+        if (difficulty == false)
         {
-            self.xx = choose(0, 1)
-            self.basex = (__view_get(0, 0) + 320)
-            if instance_exists(obj_growtangle)
-                self.basex = obj_growtangle.x
-            if (self.xx == 0)
-                self.idealx = ((self.basex - 180) - random(100))
-            if (self.xx == 1)
-                self.idealx = ((self.basex + 180) + random(100))
-            self.bomb = instance_create(self.idealx, -20, obj_suitbomb)
-            scr_bullet_inherit(self.bomb)
-            if (self.bomb.type == 2)
-                self.bomb.type = choose(0, 1, 2, 3)
-            self.btimer = 0
-        }
-    }
-    if (self.type == 47)
-    {
-        if (self.btimer >= 12)
-        {
-            self.xx = choose(0, 1)
-            self.basex = (__view_get(0, 0) + 320)
-            if instance_exists(obj_growtangle)
-                self.basex = obj_growtangle.x
-            if (self.xx == 0)
-                self.idealx = ((self.basex - 180) - random(100))
-            if (self.xx == 1)
-                self.idealx = ((self.basex + 180) + random(100))
-            self.bomb = instance_create(self.idealx, -20, obj_suitbomb)
-            scr_bullet_inherit(self.bomb)
-            self.bomb.type = 1
-            self.btimer = 0
-        }
-    }
-    if (self.type == 48)
-    {
-        if (self.btimer >= 12)
-        {
-            self.xx = choose(0, 1)
-            self.basex = (__view_get(0, 0) + 320)
-            if instance_exists(obj_growtangle)
-                self.basex = obj_growtangle.x
-            if (self.xx == 0)
-                self.idealx = ((self.basex - 180) - random(100))
-            if (self.xx == 1)
-                self.idealx = ((self.basex + 180) + random(100))
-            self.bomb = instance_create(self.idealx, -20, obj_suitbomb)
-            scr_bullet_inherit(self.bomb)
-            self.bomb.type = 0
-            self.btimer = 0
-        }
-    }
-    if (self.type == 49)
-    {
-        if (self.btimer >= 20)
-        {
-            self.xx = choose(0, 1)
-            self.basex = (__view_get(0, 0) + 320)
-            if instance_exists(obj_growtangle)
-                self.basex = obj_growtangle.x
-            if (self.xx == 0)
-                self.idealx = ((self.basex - 180) - random(100))
-            if (self.xx == 1)
-                self.idealx = ((self.basex + 180) + random(100))
-            self.bomb = instance_create(self.idealx, -20, obj_suitbomb)
-            scr_bullet_inherit(self.bomb)
-            self.bomb.type = 2
-            self.btimer = 0
-        }
-    }
-    if (self.type == 50)
-    {
-        if (self.btimer >= 12)
-        {
-            self.xx = choose(0, 1)
-            self.basex = (__view_get(0, 0) + 320)
-            if instance_exists(obj_growtangle)
-                self.basex = obj_growtangle.x
-            if (self.xx == 0)
-                self.idealx = ((self.basex - 180) - random(100))
-            if (self.xx == 1)
-                self.idealx = ((self.basex + 180) + random(100))
-            self.bomb = instance_create(self.idealx, -20, obj_suitbomb)
-            scr_bullet_inherit(self.bomb)
-            self.bomb.type = 3
-            self.btimer = 0
-        }
-    }
-    if (self.type == 55)
-    {
-        if ((self.btimer >= 40) && (self.made == 0))
-        {
-            self.btimer = 0
-            self.made = 1
-            self.scythe = instance_create((obj_battlesolid.x - 200), obj_battlesolid.y, obj_bigscythe)
-            scr_bullet_inherit(self.scythe)
-            self.scythe.image_angle = (270 + random(120))
-        }
-    }
-    if (self.type == 56)
-    {
-        if ((self.btimer >= 29) && (self.made == 0))
-        {
-            self.btimer = 0
-            self.xchoose = choose(-250)
-            self.scythe = instance_create((obj_battlesolid.x + self.xchoose), obj_battlesolid.y, obj_bigscythe)
-            scr_bullet_inherit(self.scythe)
-            self.scythe.image_angle = random(90)
-            self.scythe.type = 3
-            self.scythe.friction = -0.25
-            if (self.xchoose > 0)
-                self.scythe.hspeed = -1
-            if (self.xchoose < 0)
-                self.scythe.hspeed = 1
-        }
-    }
-    if (self.type == 57)
-    {
-        if ((self.btimer >= 40) && (self.made == 0))
-        {
-            self.btimer = 0
-            self.made = 1
-            self.scythe = instance_create((obj_battlesolid.x - 140), obj_battlesolid.y, obj_bigscythe)
-            scr_bullet_inherit(self.scythe)
-            self.scythe.anglespeed = -12
-            self.scythe.image_angle = (270 + random(120))
-        }
-    }
-    if (self.type == 58)
-    {
-        if ((self.btimer >= 40) && (self.made == 0))
-        {
-            self.btimer = 0
-            self.made = 1
-            self.scythe = instance_create((obj_battlesolid.x - 150), obj_battlesolid.y, obj_bigscythe)
-            self.scythe.anglespeed = -17
-            self.scythe.image_angle = (270 + random(120))
-        }
-    }
-    if (self.type == 60)
-    {
-        if ((self.btimer >= 40) && (self.made == 0))
-        {
-            self.btimer = 0
-            self.made = 1
-            for (self.i = 0; self.i < 3; self.i += 1)
+            xx = (maxx + 30)
+            yy = 0
+            yshift = ((obj_growtangle.sprite_height / 3) - 14)
+            if (irandom(1) == 0)
+                yy = (miny + 22)
+            else
             {
-                for (self.j = 0; self.j < 7; self.j += 1)
-                {
-                    self.horse1 = instance_create((obj_battlesolid.x + 150), ((obj_battlesolid.y - 80) + (self.i * 80)), obj_carouselbullet)
-                    self.horse1.siner = (self.j * 18)
-                    self.horse1.vsin = (self.j * 9)
-                    scr_bullet_inherit(self.horse1)
-                }
+                yy = (maxy - 22)
+                yshift = (-yshift)
             }
-        }
-    }
-    if (self.type == 61)
-    {
-        if ((self.btimer >= 40) && (self.made == 0))
-        {
-            self.btimer = 0
-            self.made = 1
-            self.horse = 0
-            self.vseed = random(300)
-            for (self.j = 0; self.j < 3; self.j += 1)
+            for (var i = 0; i < 4; i++)
             {
-                for (self.i = 0; self.i < 3; self.i += 1)
-                {
-                    self.horse1 = instance_create((obj_battlesolid.x + 150), ((obj_battlesolid.y - 80) + (self.i * 80)), obj_carouselbullet)
-                    self.horse1.siner = (self.j * 42)
-                    self.horse1.vsin = (0 + self.vseed)
-                    self.horse1.image_index = 0
-                    self.horse1.altmode = 2
-                    self.horse1.sinspeed = 1.1
-                    scr_bullet_inherit(self.horse1)
-                    self.horse1 = instance_create((obj_battlesolid.x + 150), ((obj_battlesolid.y - 80) + (self.i * 80)), obj_carouselbullet)
-                    self.horse1.siner = ((self.j * 42) + 21)
-                    self.horse1.vsin = (0 + self.vseed)
-                    self.horse1.image_index = 1
-                    self.horse1.altmode = 1
-                    self.horse1.sinspeed = 1.1
-                    scr_bullet_inherit(self.horse1)
-                    self.chance = floor(random(50))
-                    if (self.chance == 1)
-                        self.horse1.image_index = 2
-                }
-                if (self.horse == 0)
-                    self.horse = 1
+                d = scr_bullet_create(xx, yy, obj_berdlyb_tornado)
+                yy += yshift
+                d.maxSpeed = 6
+                d.timer = startDelay
+                d.grazepoints = 5
+                d.direction = 180
+                d.image_alpha = 0
+                if (pattern && (i % 2) == 1)
+                    startDelay += 10
                 else
-                    self.horse = 0
+                    startDelay -= 10
+                d.image_alpha = (0 - (i * 0.1))
+                d.flipTimer = (i - 4)
             }
         }
-    }
-    if (self.type == 62)
-    {
-        if ((self.btimer >= 40) && (self.made == 0))
+        else if (difficulty == true)
         {
-            self.btimer = 0
-            self.made = 1
-            for (self.i = 0; self.i < 3; self.i += 1)
-            {
-                for (self.j = 0; self.j < 7; self.j += 1)
-                {
-                    self.horse1 = instance_create((obj_battlesolid.x + 150), ((obj_battlesolid.y - 80) + (self.i * 80)), obj_carouselbullet)
-                    self.horse1.siner = (self.j * 18)
-                    self.horse1.vsin = (self.j * 9)
-                    self.horse1.sinspeed = 1.15
-                    self.horse1.altmode = 3
-                    scr_bullet_inherit(self.horse1)
-                }
-            }
-        }
-    }
-    if (self.type == 65)
-    {
-        if (self.btimer >= 60)
-        {
-            self.ring = instance_create(obj_battlesolid.x, obj_battlesolid.y, obj_spadering)
-            self.ring.maxspade = 10
-            self.ring.grav = 0.4
-            scr_bullet_inherit(self.ring)
-            self.btimer = 0
-        }
-    }
-    if (self.type == 66)
-    {
-        if (self.btimer >= 30)
-        {
-            self.ring = instance_create(obj_battlesolid.x, obj_battlesolid.y, obj_spadering)
-            self.ring.maxspade = 6
-            self.ring.grav = 3
-            self.ring.size = 1.5
-            scr_bullet_inherit(self.ring)
-            self.btimer = 0
-        }
-    }
-    if (self.type == 67)
-    {
-        if (self.btimer >= 20)
-        {
-            self.ring = instance_create(obj_battlesolid.x, obj_battlesolid.y, obj_spadering)
-            self.ring.grav = 0.2
-            self.ring.maxspade = 4
-            self.ring.special = 1
-            scr_bullet_inherit(self.ring)
-            self.btimer = 0
-        }
-    }
-    if (self.type == 68)
-    {
-        with (obj_heart)
-            self.wspeed = 5
-        if (self.btimer >= 54)
-        {
-            self.ring = instance_create(obj_battlesolid.x, obj_battlesolid.y, obj_spadering)
-            self.ring.side = choose(0, 1)
-            self.ring.grav = 0.45
-            self.ring.maxspade = 10
-            scr_bullet_inherit(self.ring)
-            self.btimer = 0
-        }
-    }
-    if (self.type == 70)
-    {
-        if ((self.btimer >= 20) && (global.turntimer >= 30))
-        {
-            self.jokerx = choose(((obj_battlesolid.x - 100) - random(100)), ((obj_battlesolid.x + 100) + random(100)))
-            self.jokery = choose((obj_battlesolid.y - random(100)), (obj_battlesolid.y + random(100)))
-            self.jokern = instance_create(self.jokerx, self.jokery, obj_joker_teleport)
-            self.jokern.type = 1
-            scr_bullet_inherit(self.jokern)
-            self.jokern.active = 0
-            self.btimer = 0
-        }
-    }
-    if (self.type == 71)
-    {
-        if ((self.btimer >= 9) && (global.turntimer >= 20))
-        {
-            self.jokerx = choose(((obj_battlesolid.x - 100) - random(100)), ((obj_battlesolid.x + 100) + random(100)))
-            self.jokery = choose((obj_battlesolid.y - random(100)), (obj_battlesolid.y + random(100)))
-            self.jokern = instance_create(self.jokerx, self.jokery, obj_joker_teleport)
-            scr_bullet_inherit(self.jokern)
-            self.jokern.active = 0
-            self.btimer = 0
-        }
-    }
-    if (self.type == 72)
-    {
-        if (self.btimer >= 18)
-        {
-            self.btimer = 0
-            if (self.side == 1)
-                self.dir = choose(225, 315)
-            if (self.side == -1)
-                self.dir = choose(45, 135)
-            self.radius = 360
-            self.xx = lengthdir_x(self.radius, self.dir)
-            self.yy = lengthdir_y(self.radius, self.dir)
-            self.d = instance_create(((obj_heart.x + 8) + self.xx), ((obj_heart.y + 8) + self.yy), obj_clubsbullet_dark)
-            self.d.direction = (self.dir + 180)
-            self.d.speed = 20
-            self.d.friction = 1
-            self.d.type = 2
-            self.d.damage = self.damage
-            self.d.target = self.target
-            with (self.d)
-                self.image_angle = self.direction
-            if (self.side == 1)
-                self.side = -1
+            var startDir = irandom(360)
+            var spawnDir = 45
+            xx = (maxx + 30)
+            yy = 0
+            yshift = ((obj_growtangle.sprite_height / 3) - 14)
+            if (irandom(1) == 0)
+                yy = (miny + 22)
             else
-                self.side = 1
-        }
-    }
-    if (self.type == 73)
-    {
-        if (self.btimer >= 4)
-        {
-            self.btimer = 0
-            self.radius = (140 + random(40))
-            self.yy = (self.radius * self.side)
-            self.xx = (-100 + random(200))
-            self.num = choose(0, 1, 2, 3)
-            if (self.num == 3)
-                self.xx = (-10 + random(20))
-            if instance_exists(obj_battlesolid)
             {
-                self.db = instance_create(((obj_heart.x + 8) + self.xx), (obj_battlesolid.y + 100), obj_dbullet_vert)
-                with (self.db)
-                    self.type = 1
-                self.db.damage = self.damage
-                self.db.target = self.target
-                self.db.timepoints = 2
+                yy = (maxy - 22)
+                yshift = (-yshift)
+            }
+            var _spindir = choose(-1, 1)
+            for (i = 0; i < 8; i++)
+            {
+                pattern = 1
+                xx = (obj_growtangle.x + lengthdir_x(240, startDir))
+                yy = (obj_growtangle.y + lengthdir_y(240, startDir))
+                d = scr_bullet_create(xx, yy, obj_berdlyb_tornado)
+                d.direction = (startDir + 180)
+                d.maxSpeed = 6
+                d.grazepoints = 5
+                d.timer = startDelay
+                d.maxdistance = 240
+                d.image_alpha = 0
+                d.spindir = _spindir
+                if pattern
+                {
+                    if ((i % 2) == 1)
+                        startDelay += 15
+                    else
+                        startDelay -= 15
+                }
+                else
+                    startDelay -= 5
+                if (special == true)
+                    d.firstwave = 1
+                else if (special == 2)
+                    startDelay += 12.831853071795862
+                d.image_alpha = (0 - (i * 0.1))
+                d.flipTimer = (i - 4)
+                d.middespawn = 1
+                startDir += spawnDir
+            }
+            side = (1 - side)
+        }
+        if (special == true)
+            special = false
+        else if (special == 2)
+        {
+            special = false
+            btimer = 0
+        }
+        else
+            btimer = ((pattern && difficulty == false) ? 10 : 0)
+    }
+}
+else if (type == 9)
+{
+    if (init == true)
+    {
+        berdly = instance_create((x - 18), (y - 114), obj_berdlyb_spearblaster)
+        global.monsterinstance[creator].visible = false
+        berdly.creator = creator
+        init = 2
+        special = choose(0, 1)
+    }
+    if (btimer > ((difficulty >= true ? 50 : 30) * ratio) && made < 6)
+    {
+        d = instance_create((x + 24), (y + 30), obj_berdlyb_spearblast)
+        d.grazepoints = 2
+        d.childgraze = 1
+        btimer = 10
+        d.timepoints = 0.5
+        d.damage = damage
+        d.target = target
+        d.pathLifetime = 2
+        if (difficulty == 2 || (made % 2) == special)
+            d.aim_at_player = 1
+        d.special = difficulty
+        made++
+    }
+}
+else if (type == 10)
+{
+    if (init == true)
+    {
+        if (difficulty == 0)
+            difficulty = choose(-1, 0)
+        init = 2
+        maxmake = (difficulty == 1 ? 3 : 2)
+    }
+    if (btimer >= (50 * ratio) && made < maxmake)
+    {
+        d = instance_create((x + 46), (y + 40), obj_berdlyb_chirashistorm)
+        d.target = target
+        d.damage = damage
+        d.difficulty = difficulty
+        d.grazepoints = 4
+        if (made > 0 && scr_monsterpop() == 1)
+            d.first_set = 0
+        made++
+        btimer = 0
+        if (difficulty < 1)
+            difficulty = (-1 - difficulty)
+    }
+}
+else if (type == 11)
+{
+    if (init == true)
+    {
+        if (sameattacker == true)
+        {
+            btimer = irandom((20 * ratio))
+            made = irandom(1)
+        }
+        init = 2
+    }
+    var _btimeSpeed = (sameattack == true ? 12 : 15)
+    if special
+        _btimeSpeed += 5
+    if (btimer >= (_btimeSpeed * ratio))
+    {
+        dir = random(360)
+        radius = (140 + random(40))
+        xx = (lengthdir_x(radius, dir) + obj_growtangle.x)
+        yy = (lengthdir_y(radius, dir) + obj_growtangle.y)
+        d = instance_create(xx, yy, obj_poppup_bird)
+        d.speed = (special ? 3 : 5)
+        if special
+        {
+            d.slow = 0.6
+            d.image_speed = 0.6
+        }
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+        btimer = 0
+        if (made == 1)
+            d.targetplayer = (special ? 2 : 1)
+        made = (1 - made)
+    }
+}
+else if (type == 12 && sameattacker == false)
+{
+    if (init == true)
+    {
+        instance_create(mouse_x, mouse_y, obj_poppup_mouse)
+        d = instance_create(obj_heart.x, obj_heart.y, obj_hiddenheart)
+        d.depth -= 20
+        init = 2
+    }
+    var _btime = (sameattack == 2 ? 15 : 20)
+    if special
+        _btime += 5
+    if (btimer >= (sameattack == 2 ? 15 : 20))
+    {
+        with (obj_poppup_ad)
+            depth++
+        if (made >= (sameattack == 2 ? 5 : 3))
+        {
+            var popup = instance_find(obj_poppup_ad, 0)
+            if (popup != noone)
+                popup.state = 2
+        }
+        xx = ((obj_growtangle.x + (irandom(60) * 2)) - 60)
+        yy = ((obj_growtangle.y + (irandom(60) * 2)) - 60)
+        d = instance_create(xx, yy, obj_poppup_ad)
+        d.depth -= 15
+        if special
+        {
+            d.slow = 1
+            d.scalespeed = 0.75
+        }
+        if (made < (sameattack == 2 ? 5 : 3))
+            made++
+        btimer = 0
+    }
+}
+else if (type == 13)
+{
+    if (made > 0)
+        return;
+    if (sameattacker == false)
+    {
+        side = irandom(2)
+        monstercount = scr_monsterpop()
+        yoffset = 5
+        if (monstercount != sameattack)
+            yoffset += 20
+        made = 1
+        sidedirection = ((irandom(1) * 2) - 1)
+        cars = (scr_monsterattacknamecount("CarChase") > 0 || scr_monsterattackidcount(16) > false)
+        for (i = 0; i < (monstercount == 1 ? 2 : 3); i++)
+        {
+            xx = obj_growtangle.x
+            if (sameattack == true)
+                xx = (xx + (70 * (-sidedirection)))
+            d = instance_create(xx, (miny - yoffset), obj_viro_invaderfleet)
+            d.lborder = (minx + 10)
+            d.rborder = (maxx - 10)
+            d.fleetsize = sameattack
+            d.fleetspeed = monstercount
+            d.grazepoints = 5
+            d.caralert = cars
+            d.movedirection *= sidedirection
+            yoffset += (monstercount == true ? 40 : 20)
+            sidedirection *= -1
+            d.damage = damage
+            d.target = target
+            if (i == side)
+                d.shottimer = (sameattack == monstercount ? 15 : 5)
+            if (sameattack == monstercount)
+            {
+                d.bigshot = 1
+                d.grazepoints = 4
             }
         }
     }
-    if (self.type == 74)
+    else if (sameattacker == true && instance_exists(obj_viro_invaderfleet))
     {
-        if (self.btimer >= 9)
+        obj_viro_invaderfleet.targetB = target
+        made = 1
+    }
+}
+else if (type == 14)
+{
+    if (btimer >= (ratio == 1 ? 6 : (10 * ratio)))
+    {
+        xx = ((maxx + 40) + random(140))
+        if (sameattacker == true)
+            xx = ((minx - 40) - random(140))
+        yy = (miny + random(obj_growtangle.sprite_height))
+        if (scr_monsterpop() == 1)
         {
-            self.btimer = 0
-            self.radius = (140 + random(40))
-            self.yy = (self.radius * self.side)
-            self.xx = (-100 + random(200))
-            self.num = choose(0, 1, 2, 3)
-            if (self.num == 3)
-                self.xx = (-10 + random(20))
-            self.d = instance_create(((obj_heart.x + 8) + self.xx), ((obj_heart.y + 8) + self.yy), obj_dbullet_vert)
-            self.d.grazepoints = 12
-            self.d.timepoints = 2
-            self.d.damage = self.damage
-            self.d.target = self.target
+            special--
+            if (special == false)
+                yy = (obj_heart.y + 10)
+            if (special <= false)
+                special = (irandom(5) + 5)
+        }
+        d = instance_create(xx, yy, obj_viro_needle)
+        btimer = 0
+        d.direction = (sameattacker == false ? 180 : 0)
+        d.image_angle = direction
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 5
+        d.speed = 1
+        if (scr_monsterpop() == 1)
+            d.friction = -0.2
+        else
+            d.friction = -0.15
+    }
+}
+else if (type == 15)
+{
+    if (init == true)
+    {
+        if (scr_monsterpop() == sameattack || scr_monsterattacknamecount("Viruses") == 1 || scr_monsterattackidcount(14) == 1)
+            ratio *= 0.75
+        init = 2
+    }
+    if (btimer >= (10 * ratio))
+    {
+        xx = (sameattacker == false ? ((minx - 40) - random(140)) : ((maxx + 40) + random(140)))
+        yy = (miny + random(obj_growtangle.sprite_height))
+        d = instance_create(xx, yy, obj_omawaroid_vaccine)
+        d.grazepoints = 4
+        d.direction = (sameattacker == false ? 0 : 180)
+        d.damage = damage
+        d.target = target
+        d.speed = (scr_monsterpop() == 1 ? 7 : 5)
+        btimer = 0
+    }
+}
+else if (type == 16)
+{
+    if (init == true)
+    {
+        if (!instance_exists(obj_omawaroid_street))
+        {
+            street = instance_create(obj_growtangle.x, obj_growtangle.y, obj_omawaroid_street)
+            if (special != false)
+                street.hitcheck = special
+            street.boxLeft = minx
+            street.boxTop = miny
+            street.driveSpeed = 6
+            street.depth += 2
+            street.init = 2
+        }
+        else
+        {
+            street = obj_omawaroid_street
+            if (special != false)
+                street.hitcheck = special
+            btimer = 0
+            init = 3
+        }
+        carside = ((irandom(1) * 2) - 1)
+        lastside = 0
+        if (sameattack > true)
+        {
+            side = ((sameattacker * 2) - 1)
+            if (sameattacker == true)
+                btimer = 20
+        }
+        else
+            side = ((irandom(1) * 2) - 1)
+        made = 1
+    }
+    if (btimer >= (20 * sameattack))
+    {
+        d = instance_create((obj_growtangle.x + ((40 + random(20)) * side)), (miny - 30), obj_omawaroid_cactus)
+        if (sameattack == true)
+            side *= -1
+        d.direction = 270
+        d.speed = 6
+        d.grazepoints = 4
+        d.damage = damage
+        d.target = target
+        d.destroyonhit = false
+        made++
+        if (made == 2)
+        {
+            var lastTimeSpeed = (carside == 1 ? street.lastRightCarSpeed : street.lastLeftCarSpeed)
+            var xoffset = (init < 3 ? 15 : (irandom(10) + 10))
+            street.lastside = carside
+            if (street.anti_cheese == 2)
+                carside = street.lastside
+            else
+                carside = ((irandom(1) * 2) - 1)
+            lastTimeSpeed = (carside == 1 ? street.lastRightCarSpeed : street.lastLeftCarSpeed)
+            if (street.lastside == carside && sameattack == 2 && lastTimeSpeed == 2)
+                carside = (-carside)
+            if (street.lastside == carside)
+            {
+                if (carside == 1)
+                    street.lastLeftCarSpeed = 99
+                else
+                    street.lastRightCarSpeed = 99
+            }
+            d = instance_create((obj_growtangle.x + (xoffset * carside)), (maxy + 26), obj_omawaroid_policecar)
+            d.direction = 90
+            d.speed = (irandom(2) + 2)
+            if (street.anti_cheese == 1)
+                d.speed = (sameattack == 2 ? 3 : 2)
+            else if (sameattack == 2 || scr_monsterpop() == 1)
+            {
+                var laneswitchSpeed = ((sameattack == 2 && carside == street.lastside) ? 3 : 2)
+                if ((lastTimeSpeed == laneswitchSpeed && carside == street.lastside) || street.anti_cheese == 2)
+                    d.speed = 4
+            }
+            if (street.anti_cheese == 1)
+                street.anti_cheese = 2
+            else if (street.anti_cheese == 2)
+                street.anti_cheese = -2
+            if (carside == 1)
+                street.lastRightCarSpeed = d.speed
+            else
+                street.lastLeftCarSpeed = d.speed
+            d.damage = damage
+            d.target = target
+            d.destroyonhit = false
+            d.grazepoints = 4
+            made = 0
+            init = 3
+        }
+        btimer = 0
+    }
+}
+else if (type == 17)
+{
+    if (init == true)
+    {
+        if (scr_monsterpop() == 1)
+            ratio = 0.5
+        else if (sameattack == true)
+            ratio = 0.75
+        if (sameattacker <= true)
+        {
+            d = instance_create((obj_growtangle.x + 1), (obj_growtangle.y + 1), obj_maus_holes)
+            d.damage = damage
+            d.grazepoints = 4
+            d.target = target
+        }
+        init = 2
+    }
+    else if (btimer >= (20 * ratio))
+    {
+        obj_maus_holes.mausqueue++
+        if (scr_monsterpop() == 1)
+        {
+            obj_maus_holes.bigmaus++
+            obj_maus_holes.alarm[0] = 21
+        }
+        btimer = 0
+    }
+}
+else if (type == 18)
+{
+}
+else if (type == 19)
+{
+    if (init == true)
+    {
+        if instance_exists(obj_mauswheel_enemy)
+        {
+            if (obj_mauswheel_enemy.firstturn == 1)
+                global.turntimer = 120
+            else
+                global.turntimer = 250
+            obj_mauswheel_enemy.firstturn = 0
+        }
+        d = instance_create(x, y, obj_maus_cursor_follow)
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+        d = instance_create(x, y, obj_player_trail)
+        d.depth = (obj_heart.depth + 1)
+        init = 2
+        d.damage = damage
+        d.target = target
+    }
+    if (btimer == 140 && instance_exists(obj_mauswheel_enemy) && obj_mauswheel_enemy.cursor_count > 1)
+    {
+        d = instance_create((obj_mauswheel_enemy.x + 62), (obj_mauswheel_enemy.y + 70), obj_maushwheel_lightning_orb)
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+    }
+    if (btimer == 200 && instance_exists(obj_mauswheel_enemy) && obj_mauswheel_enemy.cursor_count > 1)
+    {
+        d = instance_create((obj_mauswheel_enemy.x + 62), (obj_mauswheel_enemy.y + 70), obj_maushwheel_lightning_orb)
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+    }
+    if (btimer == 270 && instance_exists(obj_mauswheel_enemy) && obj_mauswheel_enemy.cursor_count > 1)
+    {
+        d = instance_create((obj_mauswheel_enemy.x + 62), (obj_mauswheel_enemy.y + 70), obj_maushwheel_lightning_orb)
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+    }
+}
+else if (type == 20)
+{
+    if (init == true)
+    {
+        d = instance_create((x - 22), (y - 6), obj_tm_whip_attack)
+        d.depth = global.monsterinstance[creator].depth
+        global.monsterinstance[creator].visible = false
+        d.creator = creator
+        d.damage = damage
+        d.target = target
+        d.element = 6
+        d.grazepoints = 4
+        d.difficulty = scr_monsterpop() == 1
+        d.animSpeed = 1
+        init = 2
+    }
+}
+else if (type == 21)
+{
+    if (init == true)
+    {
+        init = 2
+        scr_debug_print("Transmitting VERY EVIL computer virus to dataminer's house and room...")
+    }
+}
+else if (type == 22)
+{
+    if (init == true)
+    {
+        btimer = 115
+        init = 2
+        side = irandom(3)
+    }
+    if (btimer >= 120)
+    {
+        var distance = ((obj_growtangle.sprite_height / 2) + 30)
+        var offset = -40
+        xx = obj_growtangle.x
+        yy = obj_growtangle.y
+        if (side >= 2)
+            distance *= -1
+        if (side == 0 || side == 2)
+        {
+            xx -= distance
+            yy += offset
+        }
+        else
+        {
+            yy += distance
+            xx += offset
+        }
+        for (i = 0; i < 2; i++)
+        {
+            d = instance_create(xx, yy, obj_musicalfight_speakers)
+            d.direction = (side * 90)
+            d.damage = damage
+            d.target = target
+            d.grazepoints = 4
+            if (side == 0 || side == 2)
+                yy += 80
+            else
+                xx += 80
+        }
+        btimer = 0
+        side = ((side + 1) % 4)
+    }
+}
+else if (type >= 23 && type <= 25)
+{
+    if (init == true)
+    {
+        global.monsterinstance[creator].visible = false
+        d = instance_create(x, y, obj_spamton_attack_mode)
+        d.creator = creator
+        d.attack = (type - 23)
+        d.depth++
+        init = 2
+        btimer = -10
+        if (type == 25)
+            instance_create(obj_growtangle.x, obj_growtangle.y, obj_spamton_warped_box)
+        if (type == 23)
+        {
+            d.bullettype = 583
+            d.firingspeed = 10
+        }
+        else if (type == 24)
+        {
+            d.bullettype = 584
+            d.firingspeed = 28
+            btimer = 10
+        }
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+    }
+    else if (type == 25 && btimer >= 8 && global.turntimer > 50)
+    {
+        xx = ((minx - random(30)) - 20)
+        yy = ((obj_growtangle.y - random(200)) + 100)
+        d = instance_create(xx, yy, obj_spamton_dollar)
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+        d.speed = 0.1
+        btimer = 0
+    }
+}
+else if (type == 26 && init == true)
+{
+    var _thrash = obj_rouxls_enemy.thrash
+    obj_rouxls_enemy.head_difficulty = 1
+    var headattack = _thrash.part[1]
+    obj_rouxls_enemy.headattack = 1
+    if (headattack != 3)
+        obj_rouxls_enemy.thrashmode = 1
+    switch headattack
+    {
+        case 0:
+            d = instance_create(0, 0, obj_thrash_laserattack)
+            d.grazepoints = 8
+            d.thrash = _thrash
+            d.damage = damage
+            break
+        case 1:
+            d = instance_create(0, 0, obj_thrash_swordattack)
+            d.grazepoints = 8
+            d.thrash = _thrash
+            d.damage = damage
+            break
+        case 2:
+            d = instance_create(0, 0, obj_thrash_flameattack)
+            d.grazepoints = 8
+            d.thrash = _thrash
+            d.damage = damage
+            break
+        case 3:
+            d = instance_create(0, 0, obj_thrash_duck_attack)
+            d.grazepoints = 24
+            d.thrash = _thrash
+            d.damage = 1
+            break
+    }
+
+    d.difficulty = difficulty
+    d.target = target
+    init = 2
+}
+else if (type == 27)
+{
+    x = obj_rouxls_enemy.x
+    y = obj_rouxls_enemy.y
+    _thrash = obj_rouxls_enemy.thrash
+    var legattack = _thrash.part[2]
+    var thrashcon = obj_rouxls_enemy.thrashcon
+    obj_rouxls_enemy.headattack = 0
+    if (init == true)
+    {
+        obj_rouxls_enemy.wheel_difficulty = 1
+        obj_rouxls_enemy.thrashmode = 1
+        init = 2
+        d = instance_create(x, y, obj_thrash_bodyhitbox)
+        d.thrash = _thrash
+        d.grazepoints = 15
+        d.damage = damage
+        d.target = target
+        if (_thrash.part[0] == 3)
+        {
+            d.damage = 1
+            if (_thrash.part[1] == 3)
+                d.duckmode = true
         }
     }
-    if ((self.type == 75) || (self.type == 76))
+    if (thrashcon <= 2)
+        btimer = 10
+    switch legattack
     {
-        if ((self.btimer >= 0) && (self.special == 0))
+        case 0:
+            obj_rouxls_enemy.advancespeed = 7
+            obj_rouxls_enemy.returnspeed = 7
+            if ((thrashcon == 3 || thrashcon == 5) && _thrash.stomp != 0)
+            {
+                for (i = 0; i < 1; i++)
+                {
+                    if (i == 0)
+                    {
+                        d = instance_create((x + 30), (gt_maxy() - 36), obj_animation)
+                        d.sprite_index = spr_thrash_bash
+                        d.image_xscale = choose(3, -3)
+                        d.image_yscale = 3
+                    }
+                    d = instance_create((x + 30), (y + 190), obj_thrash_stomp_bullet)
+                    d.direction = (point_direction(d.x, d.y, obj_growtangle.x, (obj_growtangle.y - 600)) + random_range(-30, 30))
+                    d.spin = (sign((d.direction - 90)) * random_range(1, 10))
+                    d.speed = random_range(8, 10)
+                    d.sprite_index = spr_thrash_star
+                    d.gravity = 0.25
+                    d.depth = (obj_rouxls_enemy.depth - 1)
+                    d.grazepoints = 8
+                    d.imageonly = 1
+                    d.damage = damage
+                    d.target = target
+                }
+                _thrash.stomp = 0
+            }
+            break
+        case 1:
+            obj_rouxls_enemy.advancespeed = 12
+            obj_rouxls_enemy.returnspeed = 5
+            if (thrashcon == 4 && btimer >= 12 && obj_rouxls_enemy.thrashtimer <= 90)
+            {
+                d = instance_create((x + 30), (y + 190), obj_thrash_wheel_bullet)
+                d.direction = random_range(40, 88)
+                d.speed = (scr_remapvalue(40, 85, d.direction, 4, 8) + random(3))
+                d.bounce = 1
+                d.sprite_index = spr_thrash_wheel
+                d.image_yscale = 1.5
+                d.image_xscale = 1.5
+                d.gravity = 0.25
+                d.depth = (obj_rouxls_enemy.depth - 1)
+                d.grazepoints = 10
+                d.damage = damage
+                d.target = target
+                btimer = 0
+            }
+            break
+        case 2:
+            obj_rouxls_enemy.advancespeed = 4
+            obj_rouxls_enemy.returnspeed = 8
+            if (thrashcon == 3 && btimer >= 11)
+            {
+                d = instance_create(((x + 13) + (8 * made)), (y + 197), obj_thrash_missiles)
+                d.direction = 90
+                d.speed = 2
+                d.gravity = -0.2
+                d.depth = (_thrash.depth - 1)
+                d.grazepoints = 8
+                d.damage = damage
+                d.target = target
+                btimer = 0
+                made++
+            }
+            break
+        case 3:
+            obj_rouxls_enemy.advancespeed = 7
+            obj_rouxls_enemy.returnspeed = 7
+            break
+    }
+
+}
+else if (type == 28)
+{
+    if (btimer >= max(10, (15 - (made / 2))))
+    {
+        if (init == true)
         {
-            snd_play(snd_spearappear)
-            self.scythe = instance_create(0, 0, obj_centerscythe)
-            scr_bullet_inherit(obj_centerscythe)
-            self.special = 1
+            obj_rouxls_enemy.saberanim = 1
+            xoffset = irandom(3)
+            btimer = 10
+            special = -1
+            init = 2
+            return;
+        }
+        else
+            xoffset = irandom(2)
+        if (xoffset == special)
+            xoffset = 3
+        var leftx = (obj_growtangle.x - 53)
+        d = instance_create((leftx + (xoffset * 36)), (cameray() - 20), obj_rouxls_fallingblock)
+        d.gravity = 0.25
+        d.vspeed = 3.5
+        d.damage = damage
+        d.grazepoints = 8
+        d.target = target
+        special = xoffset
+        btimer = 0
+        made++
+    }
+}
+else if (type == 29)
+{
+    if (init == true)
+    {
+        special = irandom(2)
+        init = 2
+    }
+    xx = x
+    yy = y
+    d = instance_create(xx, yy, obj_thrash_laserbullet)
+    d.direction = 0
+    d.damage = damage
+    d.target = target
+    d.grazepoints = 4
+    d.attackdirection = special
+    special = ((special + irandom(1)) % 3)
+}
+else if (type == 30)
+{
+    if (btimer >= (20 * ratio))
+    {
+        xx = (__view_get((0 << 0), 0) - 20)
+        if (side == 1)
+            xx = (__view_get((0 << 0), 0) + 660)
+        yy = (miny + random((maxy - miny)))
+        bul = instance_create(xx, yy, obj_clubsbullet)
+        bul.speed = 12
+        bul.damage = damage
+        bul.target = target
+        bul.grazepoints = 4
+        if (side == 1)
+        {
+            bul.direction = 180
+            bul.image_angle = 180
+        }
+        btimer = 0
+    }
+}
+else if (type == 31)
+{
+    if (btimer >= (30 * ratio))
+    {
+        btimer = 0
+        if (side == -1)
+            dir = 225
+        if (side == 1)
+            dir = 315
+        radius = 400
+        xx = lengthdir_x(radius, dir)
+        yy = lengthdir_y(radius, dir)
+        d = instance_create(((obj_heart.x + 8) + xx), ((obj_heart.y + 8) + yy), obj_clubsbullet_dark)
+        d.damage = damage
+        d.target = target
+        d.grazepoints = 4
+        d.direction = (dir + 180)
+        d.speed = 20
+        d.friction = 1
+        with (d)
+            image_angle = direction
+        if (side == 1)
+            side = -1
+        else
+            side = 1
+    }
+}
+else if (type == 32)
+{
+    if (init == true)
+    {
+        dd = obj_sneo_friedpipis
+        dd2 = obj_sneo_friedpipis
+        phase = 0
+        strikes = 0
+        if (special == true)
+            global.turntimer = 5400
+        xx = obj_growtangle.x
+        yy = obj_growtangle.y
+        d = instance_create((xx + 1), yy, obj_bulletparent)
+        d.sprite_index = spr_tm_grid
+        d.image_angle = 45
+        d.image_blend = c_gray
+        d.element = 6
+        d.depth = (obj_growtangle.depth - 1)
+        for (i = 0; i < 4; i++)
+        {
+            xx = obj_growtangle.x
+            yy = obj_growtangle.y
+            if (i == 0 || i == 3)
+                yy += (i == 0 ? -50 : 50)
+            else
+                xx += (i == 1 ? -50 : 50)
+            d = instance_create(xx, yy, obj_bulletparent)
+            d.sprite_index = spr_tm_letters
+            d.image_speed = 0
+            d.image_index = i
+            d.element = 6
+            d.image_blend = c_gray
+            d.depth = (obj_growtangle.depth - 1)
+        }
+        obj_growtangle.target_angle = 45
+        obj_growtangle.image_angle = 45
+        d = scr_bullet_create((x - 22), (y - 6), obj_tm_quizzler)
+        made++
+        d.depth = global.monsterinstance[creator].depth
+        d.controller = self
+        d.element = 6
+        d.dojo = special < -2
+        d.creator = creator
+        global.monsterinstance[creator].lastQuizLetter = -1
+        d.difficulty = difficulty
+        init = 2
+        global.turntimer += 120
+        btimer = 0
+    }
+    var attacktimer = 90
+    if (difficulty > 0)
+        attacktimer = (difficulty == 3 ? 40 : 60)
+    var quizReady = (!instance_exists(obj_tm_quizzler))
+    if ((made == 4 || special < -2) && quizReady && btimer >= 0)
+    {
+        if (special == true)
+        {
+            special = -2
+            btimer = -20
+        }
+        else if (special == -2)
+        {
+            special = -1
+            difficulty++
+            dd = scr_dark_marker_animated((x + 80), (y + 4), spr_tm_pleased_effect, true)
+            dd2 = scr_dark_marker((x + 74), (y + 66), spr_cutscene_26_tasquemanager)
+            var _maru = instance_create((x + (phase * 40)), (y + 175), obj_bulletparent)
+            _maru.sprite_index = spr_tm_maru
+            _maru.image_xscale = 2
+            _maru.image_yscale = 2
+            _maru = instance_create(obj_growtangle.x, obj_growtangle.y, obj_tm_quiz_result)
+            _maru.sprite_index = spr_tm_maru_big
+            _maru.image_xscale = 3
+            _maru.image_yscale = 3
+            _maru.depth = (obj_heart.depth - 15)
+            _maru.max_time = 45
+            dd.depth = (dd2.depth - 1)
+            with (obj_tasque_manager_enemy)
+                visible = false
+            snd_play(snd_coin)
+            btimer = -45
+            phase++
+        }
+        else if (special == -1)
+        {
+            if i_ex(dd)
+                instance_destroy(dd)
+            if i_ex(dd2)
+                instance_destroy(dd2)
+            made = 0
+            with (obj_tasque_manager_enemy)
+                visible = true
+            if (strikes == 3)
+            {
+                global.flag[36] = 1
+                global.flag[39] = 1
+                global.turntimer = 10
+                btimer = -40
+                obj_tasque_manager_enemy.hspeed = 10
+                return;
+            }
+            if (phase == 3)
+            {
+                special = -5
+                global.flag[39] = 1
+                global.turntimer = 10
+                btimer = -40
+                obj_tasque_manager_enemy.hspeed = 10
+            }
+            else
+            {
+                special = true
+                btimer = (attacktimer - 10)
+            }
+        }
+        else if (special == -4 && global.encounterno == 89)
+        {
+            special = -3
+            btimer = -20
+        }
+        else if (special == -3)
+        {
+            special = -1
+            made = 4
+            dd2 = scr_dark_marker(x, y, spr_tm_hurt)
+            with (obj_tasque_manager_enemy)
+                visible = false
+            snd_play(snd_error)
+            if (global.encounterno == 89)
+            {
+                var _batsu = instance_create((x + (strikes * 40)), (y + 215), obj_bulletparent)
+                _batsu.sprite_index = spr_tm_batsu
+                _batsu.image_xscale = 2
+                _batsu.image_yscale = 2
+                _batsu.element = 6
+                strikes++
+                btimer = -45
+                _batsu = instance_create(obj_growtangle.x, obj_growtangle.y, obj_tm_quiz_result)
+                _batsu.sprite_index = spr_tm_batsu_big
+                _batsu.image_xscale = 3
+                _batsu.image_yscale = 3
+                _batsu.depth = (obj_heart.depth - 15)
+                _batsu.max_time = 45
+            }
         }
     }
-    if (self.type == 77)
+    else if (quizReady && btimer > attacktimer && special >= false && made < 4)
     {
-        global.sp = 10
+        if (special == true)
+            made++
+        d = scr_bullet_create((x - 22), (y - 6), obj_tm_quizzler)
+        d.element = 6
+        d.creator = creator
+        d.controller = self
+        d.difficulty = difficulty
+        d.turnlength = 90
+        btimer = 0
+        if (special == true)
+            d.dojo = 1
+    }
+}
+else if (type == 33)
+{
+    if (made == 0)
+    {
+        made = 1
+        tail = instance_create((obj_clubsenemy.x + 144), (obj_clubsenemy.y + 125), obj_clovertail_intro)
+        tail.damage = damage
+        tail.target = target
+    }
+}
+else if (type == 34)
+{
+    if (btimer >= (14 * (difficulty + 1)))
+    {
+        if (init == true || side == 1)
+        {
+            side = irandom(2)
+            init = 2
+        }
+        else
+            side = ((side + irandom(1)) % 3)
+        snd_play_x(snd_spearappear, 1, 1.2)
+        d = instance_create(x, y, obj_werewerewire_laserbullet)
+        d.grazepoints = 4
+        d.damage = damage
+        d.target = target
+        d.attackdirection = side
+        btimer = 0
+    }
+}
+else if (type == 35)
+{
+    if (init == true)
+    {
+        global.turntimer = 3600
+        difficulty = 0
+        xx = obj_growtangle.x
+        yy = obj_growtangle.y
+        d = instance_create((xx + 1), yy, obj_bulletparent)
+        d.sprite_index = spr_tm_grid
+        d.image_angle = 45
+        d.image_blend = c_gray
+        d.depth = (obj_growtangle.depth - 1)
+        for (i = 0; i < 4; i++)
+        {
+            xx = obj_growtangle.x
+            yy = obj_growtangle.y
+            if (i == 0 || i == 3)
+                yy += (i == 0 ? -50 : 50)
+            else
+                xx += (i == 1 ? -50 : 50)
+            d = instance_create(xx, yy, obj_bulletparent)
+            d.sprite_index = spr_tm_letters
+            d.image_speed = 0
+            d.image_index = i
+            d.image_blend = c_gray
+            d.depth = (obj_growtangle.depth - 1)
+        }
+        obj_growtangle.target_angle = 45
+        obj_growtangle.image_angle = 45
+        d = scr_bullet_create(x, y, obj_tm_quizzler)
+        d.depth = global.monsterinstance[creator].depth
+        d.creator = creator
+        d.difficulty = difficulty
+        d.dojo = 1
+        init = 2
+        global.turntimer += 120
+        btimer = 0
+    }
+}
+else if (type == 46)
+{
+    if (init == true)
+    {
+        init = 2
+        d = instance_create(obj_growtangle.x, (miny - 130), obj_bqueen_missle_controller)
+        d.damage = damage
+        d.target = target
+    }
+}
+else if (type == 47)
+{
+    if (init == true)
+    {
+        init = 2
+        d = instance_create(obj_growtangle.x, (miny - 130), obj_bqueen_breath_controller)
+        d.damage = damage
+        d.target = target
+    }
+}
+else if (type == 48)
+{
+    if (btimer >= 135 && (!i_ex(obj_ch2_dojo_puzzlebullet_maker)))
+    {
+        var xmod = 0
+        if (roundcount == 1)
+            xmod = (irandom(20) * choose(-1, 1))
+        if (roundcount == 2)
+            xmod = (irandom(30) * choose(-1, 1))
+        if (roundcount == 3)
+            xmod = (irandom(40) * choose(-1, 1))
+        if (roundcount == 4)
+            xmod = (irandom(60) * choose(-1, 1))
+        if (roundcount > 4)
+            xmod = (irandom(80) * choose(-1, 1))
+        bm = instance_create((320 + xmod), 40, obj_ch2_dojo_puzzlebullet_maker)
+        bm.grazepoints = grazepoints
+        bm.damage = 1
+        bm.target = target
+        switch roundcount
+        {
+            case 0:
+                bm.times = 7
+                bm.timetarg = 18
+                bm.bulletspeed = 6
+                break
+            case 1:
+                bm.times = 7
+                bm.timetarg = 15
+                bm.bulletspeed = 6
+                break
+            case 2:
+                bm.times = 7
+                bm.timetarg = 13
+                bm.bulletspeed = 6
+                break
+            case 3:
+                bm.times = 7
+                bm.timetarg = 11
+                bm.bulletspeed = 6
+                break
+            default:
+                bm.times = 7
+                bm.timetarg = 10
+                bm.bulletspeed = 6
+                break
+        }
+
+        btimer = 0
+        roundcount++
+    }
+}
+else if (type == 49)
+{
+    if (made == 0)
+    {
+        made = 1
         with (obj_heart)
-            self.wspeed = 10
-        if (self.special == 0)
+            color = 0x000001
+        instance_create((camerax() + 424), (cameray() + 100), obj_sneo_faceattack)
+        with (obj_battlesolid)
+            x = (camerax() + 260)
+    }
+}
+else if (type == 50)
+{
+    if (btimer >= 45 && made == 0)
+    {
+        made = 1
+        snd_play(snd_explosion_8bit)
+        var initangle = random(80)
+        var initspeed = 4
+        bulcount = 9
+        repeat (2)
         {
-            snd_play(snd_joker_byebye)
-            self.prevmake = 0
-            self.special = 1
-            self.rank = 16
-            self.realtimer = 0
-            self.chase = 0
-            self.made = 0
-            self.amount = 0
-            self.jokertimer = 0
-            self.darkfader = scr_dark_marker((__view_get(0, 0) + 320), (__view_get(1, 0) - 10), spr_tallpx)
-            with (self.darkfader)
+            i = 0
+            if (i < bulcount)
             {
-                self.depth = 2
-                self.image_alpha = 0
-                self.image_blend = 0x00000000
-                self.image_xscale = 200
-                self.image_yscale = 2
-            }
-        }
-        if ((self.realtimer >= 0) && (self.realtimer < 10))
-        {
-            with (self.darkfader)
-                self.image_alpha += 0.1
-            with (obj_battlesolid)
-                self.image_alpha -= 0.1
-            with (obj_heart)
-            {
-                self.y += 16
-                self.boundaryup = 160
-            }
-        }
-        if (self.realtimer == 10)
-        {
-            with (obj_battlesolid)
-                instance_destroy()
-        }
-        if (self.realtimer == 20)
-            instance_create((__view_get(0, 0) + 40), -60, obj_laserscythe)
-        if (self.realtimer == 40)
-            instance_create((__view_get(0, 0) + 570), -60, obj_laserscythe)
-        if ((self.realtimer >= 60) && (self.amount < 30))
-        {
-            if (self.btimer >= self.rank)
-            {
-                if (self.rank > 7)
-                    self.rank -= 1
-                self.which = floor(random(5))
-                if (self.which == self.prevmake)
-                    self.which = floor(random(5))
-                if (self.chase == 3)
+                bullet = instance_create(x, y, obj_regularbullet)
+                bullet.sprite_index = spr_spamtonhead
+                bullet.image_index = choose(0, 1, 2, 3)
+                bullet.image_speed = 0.25
+                bullet.direction = initangle
+                bullet.speed = (2 + initspeed)
+                bullet.depth -= made
+                initangle += (360 / bulcount)
+                scr_bullet_inherit(bullet)
+                for (i++; i < bulcount; i++)
                 {
-                    self.which = floor(((obj_heart.x + 8) / 90))
-                    self.chase = 0
+                    bullet = instance_create(x, y, obj_regularbullet)
+                    bullet.sprite_index = spr_spamtonhead
+                    bullet.image_index = choose(0, 1, 2, 3)
+                    bullet.image_speed = 0.25
+                    bullet.direction = initangle
+                    bullet.speed = (2 + initspeed)
+                    bullet.depth -= made
+                    initangle += (360 / bulcount)
+                    scr_bullet_inherit(bullet)
                 }
-                self.scythe = instance_create(((__view_get(0, 0) + 40) + (90 * self.which)), -60, obj_laserscythe)
-                if (self.which == 1)
-                    self.scythe2 = instance_create(((__view_get(0, 0) + 40) + 450), -60, obj_laserscythe)
-                if (self.which == 0)
-                    self.scythe2 = instance_create(((__view_get(0, 0) + 40) + 540), -60, obj_laserscythe)
-                self.prevmake = self.which
-                self.btimer = 0
-                self.chase += 1
-                self.amount += 1
             }
+            initspeed += 4
+            initangle = random(50)
         }
-        if ((self.amount >= (29 - self.made)) && (self.special == 1))
+        with (creatorid)
         {
-            self.jokertimer = 0
-            self.jokerin = instance_create((__view_get(0, 0) + 320), (__view_get(1, 0) + 100), obj_joker_teleport)
-            with (self.jokerin)
-            {
-                self.type = 66
-                self.depth = -30
-            }
-            self.special = 2
-            self.which2 = 0
+            global.monster[myself] = false
+            visible = false
         }
-        if (self.special == 2)
-        {
-            self.jokertimer += 1
-            if (self.jokertimer == 10)
-                snd_play(scr_84_get_sound("snd_joker_neochaos"))
-            if ((self.jokertimer == 40) || (self.jokertimer == 98))
-            {
-                self.scythe = instance_create((__view_get(0, 0) + 40), -60, obj_laserscythe)
-                self.scythe = instance_create((__view_get(0, 0) + 580), -60, obj_laserscythe)
-            }
-            if ((self.jokertimer == 46) || (self.jokertimer == 86))
-            {
-                self.scythe = instance_create((__view_get(0, 0) + 130), -60, obj_laserscythe)
-                self.scythe = instance_create((__view_get(0, 0) + 490), -60, obj_laserscythe)
-            }
-            if ((self.jokertimer == 52) || (self.jokertimer == 80))
-            {
-                self.scythe = instance_create((__view_get(0, 0) + 220), -60, obj_laserscythe)
-                self.scythe = instance_create((__view_get(0, 0) + 400), -60, obj_laserscythe)
-            }
-            if ((self.jokertimer == 66) || (self.jokertimer == 98))
-                self.scythe = instance_create((__view_get(0, 0) + 310), -60, obj_laserscythe)
-            if (self.jokertimer == 130)
-            {
-                self.lastscythe = instance_create((__view_get(0, 0) + 320), -320, obj_laserscythe)
-                self.p = 0
-                self.vol = 0
-                self.vol2 = 1
-                self.rumnoise = audio_play_sound(snd_rumble, 50, true)
-                with (self.lastscythe)
-                {
-                    self.vspeed = 1
-                    self.gravity = 0.02
-                    self.image_xscale = 16
-                    self.image_yscale = 16
-                    self.scale = 16
-                    self.rotspeed = 0
-                    self.remrot = 160
-                    self.image_angle = 160
-                }
-                self.fadewhite = instance_create((__view_get(0, 0) + 320), (__view_get(1, 0) - 40), obj_marker)
-                self.fadewhite.sprite_index = spr_tallpx
-                self.fadewhite.image_xscale = 400
-                self.fadewhite.image_yscale = 2
-                self.fadewhite.depth = -100
-                self.fadewhite.image_alpha = -0.3
-            }
-            if (self.jokertimer >= 131)
-            {
-                with (self.lastscythe)
-                    self.x = (self.xstart + random(8))
-                with (self.fadewhite)
-                    self.image_alpha += 0.01
-                self.vol += 0.01
-                if (self.fadewhite.image_alpha >= 1)
-                {
-                    with (self.darkfader)
-                        instance_destroy()
-                    with (self.lastscythe)
-                        instance_destroy()
-                }
-                if (self.fadewhite.image_alpha >= 1.3)
-                    self.special = 3
-            }
-        }
-        if (self.special == 3)
-        {
-            with (obj_heart)
-            {
-                self.x = (__view_get(0, 0) + 320)
-                self.y = (__view_get(1, 0) + 120)
-            }
-            self.vol -= 0.1
-            audio_sound_gain(self.rumnoise, self.vol, 0)
-            with (self.fadewhite)
-                self.image_alpha -= 0.1
-            if (self.fadewhite.image_alpha <= 0)
-            {
-                audio_stop_sound(self.rumnoise)
-                global.turntimer = 11
-                self.special = 4
-            }
-        }
-        self.realtimer += 1
+    }
+}
+else if (type == 51)
+{
+    if (btimer >= 1 && made == 0)
+    {
+        made = 1
+        pip = instance_create((camerax() + 530), (cameray() + 100), obj_sneo_weird_end_pipis)
+        pip.damage = damage
+        pip.target = target
+        pip = instance_create((camerax() + 448), (cameray() + 168), obj_sneo_weird_end_pipis)
+        pip.damage = damage
+        pip.target = target
+        pip = instance_create((camerax() + 510), (cameray() + 250), obj_sneo_weird_end_pipis)
+        pip.damage = damage
+        pip.target = target
+    }
+    if (btimer >= 45 && btimer < 46)
+    {
+        snd_play(snd_explosion_8bit)
+        with (obj_sneo_weird_end_pipis)
+            event_user(0)
+    }
+    if (btimer >= 100 && btimer < 110)
+    {
+        btimer = 120
+        with (obj_spamton_neo_enemy)
+            scr_move_to_rememberxy(4)
+        global.turntimer = 1
     }
 }

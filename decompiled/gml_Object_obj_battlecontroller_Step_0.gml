@@ -1,72 +1,96 @@
-if ((self.victory == 1) && (self.victoried == 0))
+if (global.chapter == 2)
+{
+    if (gigaqueencon != 0)
+        return;
+    if ((instance_exists(o_boxingcontroller) && o_boxingcontroller.dead == true && global.turntimer < 0) || instance_exists(obj_boxing_loss_controller) || instance_exists(o_bq_whitefade_persistent))
+        return;
+}
+if (global.chapter == 2 && instance_exists(obj_queen_enemy) && obj_queen_enemy.intro > 0)
+    return;
+if (victory == true && victoried == 0)
 {
     global.faceaction[0] = 0
     global.faceaction[1] = 0
     global.faceaction[2] = 0
-    global.battleend = 1
+    global.battleend = true
     global.mnfight = -1
     global.myfight = 7
-    with (self.battlewriter)
+    with (battlewriter)
         instance_destroy()
     with (obj_face)
         instance_destroy()
     with (obj_smallface)
         instance_destroy()
-    for (self.i = 0; self.i < 4; self.i += 1)
+    for (i = 0; i < 5; i += 1)
     {
-        if (global.hp[self.i] < 1)
-            global.hp[self.i] = round((global.maxhp[self.i] / 8))
+        if (global.hp[i] < 1)
+            global.hp[i] = round((global.maxhp[i] / 8))
     }
-    self.lastbattlewriter = 32482473284732
-    if (self.skipvictory == 0)
+    lastbattlewriter = 32482473284732
+    if (skipvictory == false)
     {
-        global.monstergold[3] += floor((global.tension / 10))
+        global.monstergold[3] += (floor((global.tension / 10)) * global.chapter)
         if (global.charweapon[1] == 8)
             global.monstergold[3] += floor((global.monstergold[3] / 20))
+        global.monstergold[3] *= (1 + (scr_armorcheck_equipped_party(8) * 0.05))
+        global.monstergold[3] *= (1 + (scr_armorcheck_equipped_party(21) * 0.3))
+        global.monstergold[3] = floor(global.monstergold[3])
+        if (global.flag[37] == 1)
+            global.monstergold[3] = 0
         global.gold += global.monstergold[3]
         global.xp += global.monsterexp[3]
+        if (global.gold < 0)
+            global.gold = 0
         global.fc = 0
         global.fe = 0
-        global.battlemsg[0] = scr_84_get_subst_string(scr_84_get_lang_string("obj_battlecontroller_slash_Step_0_gml_40_0"), string(global.monsterexp[3]), string(global.monstergold[3]))
+        global.battlemsg[0] = stringsetsubloc("* You won^1!&* Got ~1 EXP and ~2 D$./%", string(global.monsterexp[3]), string(global.monstergold[3]), "obj_battlecontroller_slash_Step_0_gml_42_0")
+        if (global.flag[37] == 1)
+            global.battlemsg[0] = stringsetloc("* You won the battle!/%", "obj_battlecontroller_slash_Step_0_gml_43_0")
+        if (global.flag[63] == 1)
+        {
+            global.battlemsg[0] = stringsetsubloc("* You won^1!&* Got ~1 D$^1.&* You became stronger./%", string(global.monstergold[3]), "obj_battlecontroller_slash_Step_0_gml_46_0")
+            if scr_havechar(4)
+                global.battlemsg[0] = stringsetsubloc("* You won^1!&* Got ~1 D$^1.&* Noelle became stronger./%", string(global.monstergold[3]), "obj_battlecontroller_slash_Step_0_gml_69_0")
+            var lvsnd = snd_play_pitch(snd_dtrans_lw, 2)
+            snd_volume(lvsnd, 0.7, 0)
+            scr_levelup()
+        }
         global.msg[0] = global.battlemsg[0]
         global.typer = global.battletyper
-        self.lastbattlewriter = scr_battletext()
-        for (self.i = 0; self.i < 3; self.i += 1)
+        lastbattlewriter = scr_battletext()
+        if (global.flag[38] == 1)
         {
-            with (global.charinstance[self.i])
+            with (lastbattlewriter)
+                instance_destroy()
+        }
+        for (i = 0; i < 3; i += 1)
+        {
+            with (global.charinstance[i])
             {
-                self.state = 7
-                self.hurt = 0
-                self.hurttimer = 0
+                state = 7
+                hurt = false
+                hurttimer = 0
             }
         }
     }
-    self.victoried = 1
-    self.victortimer = 0
-    if (self.skipvictory == 1)
-        self.victortimer = -20
+    victoried = 1
+    victortimer = 0
+    if (skipvictory == true)
+        victortimer = -20
     with (obj_tensionbar)
     {
-        self.alarm[5] = 15
-        self.hspeed = -10
-        self.friction = -0.4
-    }
-    if instance_exists(obj_hathyfightevent)
-    {
-        with (obj_hathyfightevent)
-            self.con = 30
-        self.victoried = 2
-        with (self.lastbattlewriter)
-            instance_destroy()
+        alarm[5] = 15
+        hspeed = -10
+        friction = -0.4
     }
 }
-if (self.victoried == 1)
+if (victoried == 1)
 {
-    self.victortimer += 1
-    if ((instance_exists(self.lastbattlewriter) == 0) && (self.victortimer >= 10))
+    victortimer += 1
+    if (i_ex(lastbattlewriter) == 0 && victortimer >= 10)
     {
-        self.intro = 2
-        if (self.bp <= 0)
+        intro = 2
+        if (bp <= 0)
             scr_endcombat()
     }
 }
@@ -74,627 +98,899 @@ if (global.myfight == 0)
 {
     if (global.bmenuno == 0)
     {
-        if (!instance_exists(self.battlewriter))
+        if ((!i_ex(battlewriter)) || (global.chapter == 2 && (!i_ex(battlewriter)) && gigaqueencon == 0))
         {
             global.msg[0] = global.battlemsg[0]
             global.typer = global.battletyper
             scr_battletext()
         }
-        if ((left_p() == 1) && (self.lbuffer < 0))
+        if (left_p() == 1 && lbuffer < 0)
         {
-            if (global.bmenucoord[0, global.charturn] == 0)
-                global.bmenucoord[0, global.charturn] = 4
+            if (global.bmenucoord[0][global.charturn] == false)
+                global.bmenucoord[0][global.charturn] = 4
             else
-                global.bmenucoord[0, global.charturn] -= 1
-            self.movenoise = 1
-            self.rbuffer = 1
+                global.bmenucoord[0][global.charturn] -= 1
+            movenoise = true
+            rbuffer = 1
         }
-        if ((right_p() == 1) && (self.rbuffer < 0))
+        if (right_p() == 1 && rbuffer < 0)
         {
-            if (global.bmenucoord[0, global.charturn] == 4)
-                global.bmenucoord[0, global.charturn] = 0
+            if (global.bmenucoord[0][global.charturn] == 4)
+                global.bmenucoord[0][global.charturn] = false
             else
-                global.bmenucoord[0, global.charturn] += 1
-            self.movenoise = 1
-            self.lbuffer = 1
+                global.bmenucoord[0][global.charturn] += 1
+            movenoise = true
+            lbuffer = 1
         }
-        if ((button1_p() == 1) && (self.twobuffer < 0))
+        if (button1_p() == 1 && twobuffer < 0)
         {
-            self.onebuffer = 1
-            self.selnoise = 1
-            if (global.bmenucoord[0, global.charturn] == 0)
+            onebuffer = 1
+            selnoise = true
+            if (global.bmenucoord[0][global.charturn] == false)
                 global.bmenuno = 1
-            if ((global.bmenucoord[0, global.charturn] == 1) && (global.char[global.charturn] != 1))
+            if (global.bmenucoord[0][global.charturn] == true && global.char[global.charturn] != 1)
             {
-                self.onebuffer = 1
+                onebuffer = 1
                 global.bmenuno = 2
             }
-            if ((global.bmenucoord[0, global.charturn] == 1) && (global.char[global.charturn] == 1))
+            else if (global.bmenucoord[0][global.charturn] == true)
             {
-                self.onebuffer = 1
+                onebuffer = 1
                 global.bmenuno = 11
             }
-            if ((global.bmenucoord[0, global.charturn] == 2) && (self.tempitem[0] != 0))
+            if (global.bmenucoord[0][global.charturn] == 2 && tempitem[0][global.charturn] != 0)
             {
-                self.onebuffer = 1
+                onebuffer = 1
                 global.bmenuno = 4
                 scr_iteminfo_temp(global.charturn)
-                for (self.i = 0; self.i < 12; self.i += 1)
+                for (i = 0; i < 12; i += 1)
                 {
-                    if ((self.tempitem[global.bmenucoord[4, global.charturn], global.charturn] == 0) && (global.bmenucoord[4, global.charturn] > 0))
-                        global.bmenucoord[4, global.charturn] -= 1
+                    if (tempitem[global.bmenucoord[4][global.charturn]][global.charturn] == 0 && global.bmenucoord[4][global.charturn] > false)
+                        global.bmenucoord[4][global.charturn] -= 1
                 }
             }
-            if (global.bmenucoord[0, global.charturn] == 3)
+            if (global.bmenucoord[0][global.charturn] == 3)
             {
-                self.onebuffer = 1
+                onebuffer = 1
                 global.bmenuno = 12
             }
-            if (global.bmenucoord[0, global.charturn] == 4)
+            if (global.bmenucoord[0][global.charturn] == 4)
             {
                 scr_tensionheal(40)
                 global.faceaction[global.charturn] = 4
                 global.charaction[global.charturn] = 10
                 scr_nexthero()
+                if (global.chapter == 2 && instance_exists(o_boxingcontroller))
+                {
+                    o_boxingcontroller.defend = 1
+                    o_boxingcontroller.specialcon = 8
+                }
             }
         }
-        if ((button2_p() == 1) && ((self.onebuffer < 0) && (global.charturn > 0)))
+        if (button2_p() == 1 && onebuffer < 0 && global.charturn > 0)
         {
-            self.twobuffer = 1
-            self.movenoise = 1
+            twobuffer = 1
+            movenoise = true
             scr_prevhero()
         }
-        with (self.battlewriter)
-            self.depth = 3
+        with (battlewriter)
+            depth = 3
         with (obj_face_parent)
-            self.depth = 3
+            depth = 3
         with (obj_smallface)
-            self.depth = 3
+            depth = 3
     }
-    if (global.bmenuno == 2)
+    if (global.bmenuno == 2 && global.flag[34] == 1)
     {
-        with (self.battlewriter)
-            self.skipme = 1
-        with (self.battlewriter)
-            self.depth = 10
+        with (battlewriter)
+            skipme = true
+        with (battlewriter)
+            depth = 10
         with (obj_face_parent)
-            self.depth = 10
+            depth = 10
         with (obj_smallface)
-            self.depth = 10
-        self.thischar = global.char[global.charturn]
-        if right_p()
+            depth = 10
+        thischar = global.char[global.charturn]
+        if (right_p() || left_p())
         {
-            self.cango = 1
-            self.spellcoord = global.bmenucoord[2, global.charturn]
-            if (self.spellcoord < 11)
+            cango = true
+            spellcoord = global.bmenucoord[2][global.charturn]
+            if (spellcoord < 11)
             {
-                if (global.spell[self.thischar, (global.bmenucoord[2, global.charturn] + 1)] == 0)
+                if (global.spell[thischar][(global.bmenucoord[2][global.charturn] + 1)] == 0)
                 {
-                    self.cango = 0
-                    if (((self.spellcoord % 2) == 1) && (self.spellcoord > 0))
-                        global.bmenucoord[2, global.charturn] -= 1
+                    cango = false
+                    if ((spellcoord % 2) == 1 && spellcoord > 0)
+                        global.bmenucoord[2][global.charturn] -= 1
                 }
             }
             else
             {
-                global.bmenucoord[2, global.charturn] -= 1
-                self.cango = 0
+                global.bmenucoord[2][global.charturn] -= 1
+                cango = false
             }
-            if (self.cango == 1)
+            if (cango == true)
             {
-                if ((self.spellcoord % 2) == 0)
-                    global.bmenucoord[2, global.charturn] += 1
+                if ((spellcoord % 2) == 0)
+                    global.bmenucoord[2][global.charturn] += 1
                 else
-                    global.bmenucoord[2, global.charturn] -= 1
-            }
-        }
-        if left_p()
-        {
-            self.cango = 1
-            self.spellcoord = global.bmenucoord[2, global.charturn]
-            if (global.spell[self.thischar, 1] != 0)
-            {
-                if ((self.spellcoord % 2) == 0)
-                    global.bmenucoord[2, global.charturn] += 1
-                else
-                    global.bmenucoord[2, global.charturn] -= 1
+                    global.bmenucoord[2][global.charturn] -= 1
             }
         }
         if down_p()
         {
-            self.spellcoord = global.bmenucoord[2, global.charturn]
-            self.cango = 1
-            if (self.spellcoord >= 10)
-                self.cango = 0
+            spellcoord = global.bmenucoord[2][global.charturn]
+            cango = true
+            if (spellcoord >= 10)
+                cango = false
             else
             {
-                if (global.spell[self.thischar, (self.spellcoord + 2)] == 0)
-                    self.cango = 0
-                if ((self.spellcoord == 5) && ((global.spell[self.thischar, 6] != 0) && (global.spell[self.thischar, 7] == 0)))
-                    self.cango = 2
+                if (global.spell[thischar][(spellcoord + 2)] == 0)
+                    cango = false
+                if (spellcoord == 5 && global.spell[thischar][6] != 0 && global.spell[thischar][7] == 0)
+                    cango = 2
             }
-            if (self.cango != 0)
+            if (cango != false)
             {
-                if (self.cango == 1)
-                    global.bmenucoord[2, global.charturn] += 2
-                if (self.cango == 2)
-                    global.bmenucoord[2, global.charturn] = 6
+                if (cango == true)
+                    global.bmenucoord[2][global.charturn] += 2
+                if (cango == 2)
+                    global.bmenucoord[2][global.charturn] = 6
             }
         }
         if up_p()
         {
-            self.spellcoord = global.bmenucoord[2, global.charturn]
-            self.cango = 1
-            if (self.spellcoord <= 1)
-                self.cango = 0
-            if (self.cango == 1)
-                global.bmenucoord[2, global.charturn] -= 2
+            spellcoord = global.bmenucoord[2][global.charturn]
+            cango = true
+            if (spellcoord <= 1)
+                cango = false
+            if (cango == true)
+                global.bmenucoord[2][global.charturn] -= 2
         }
-        global.tensionselect = global.spellcost[self.thischar, global.bmenucoord[2, global.charturn]]
-        if (button1_p() && ((global.spell[self.thischar, global.bmenucoord[2, global.charturn]] != 0) && (self.onebuffer < 0)))
+        global.tensionselect = global.spellcost[thischar][global.bmenucoord[2][global.charturn]]
+        if (button1_p() && global.spell[thischar][global.bmenucoord[2][global.charturn]] != 0 && onebuffer < 0)
         {
-            if (global.spellcost[self.thischar, global.bmenucoord[2, global.charturn]] <= global.tension)
+            if (global.spellcost[thischar][global.bmenucoord[2][global.charturn]] <= global.tension)
             {
-                self.onebuffer = 2
+                onebuffer = 2
                 global.bmenuno = 0
-                self.selnoise = 1
-                scr_spellinfo(global.spell[self.thischar, global.bmenucoord[2, global.charturn]])
-                if (self.spelltarget == 0)
+                selnoise = true
+                scr_spellinfo(global.spell[thischar][global.bmenucoord[2][global.charturn]])
+                if (spelltarget == 0)
                     scr_spellconsumeb()
-                if (self.spelltarget == 1)
+                if (spelltarget == 1)
                     global.bmenuno = 8
-                if (self.spelltarget == 2)
+                if (spelltarget == 2)
                     global.bmenuno = 3
             }
         }
-        if (button2_p() && (self.onebuffer < 0))
+        if (button2_p() && onebuffer < 0)
         {
             global.tensionselect = 0
-            self.twobuffer = 1
+            twobuffer = 1
             global.bmenuno = 0
-            self.movenoise = 1
+            movenoise = true
+        }
+    }
+    if (global.bmenuno == 2 && global.flag[34] == 0)
+    {
+        with (battlewriter)
+            skipme = true
+        with (battlewriter)
+            depth = 10
+        with (obj_face_parent)
+            depth = 10
+        with (obj_smallface)
+            depth = 10
+        thischar = global.charturn
+        if right_p()
+        {
+            cango = true
+            spellcoord = global.bmenucoord[2][global.charturn]
+            if (spellcoord < 11)
+            {
+                if (global.battlespell[thischar][(global.bmenucoord[2][global.charturn] + 1)] == 0)
+                {
+                    cango = false
+                    if ((spellcoord % 2) == 1 && spellcoord > 0)
+                        global.bmenucoord[2][global.charturn] -= 1
+                }
+            }
+            else
+            {
+                global.bmenucoord[2][global.charturn] -= 1
+                cango = false
+            }
+            if (cango == true)
+            {
+                if ((spellcoord % 2) == 0)
+                    global.bmenucoord[2][global.charturn] += 1
+                else
+                    global.bmenucoord[2][global.charturn] -= 1
+            }
+        }
+        if left_p()
+        {
+            cango = true
+            spellcoord = global.bmenucoord[2][global.charturn]
+            if (global.battlespell[thischar][1] != 0)
+            {
+                if ((spellcoord % 2) == 0)
+                    global.bmenucoord[2][global.charturn] += 1
+                else
+                    global.bmenucoord[2][global.charturn] -= 1
+            }
+        }
+        if down_p()
+        {
+            spellcoord = global.bmenucoord[2][global.charturn]
+            cango = true
+            if (spellcoord >= 10)
+                cango = false
+            else
+            {
+                if (global.battlespell[thischar][(spellcoord + 2)] == 0)
+                    cango = false
+                if (spellcoord == 5 && global.battlespell[thischar][6] != 0 && global.battlespell[thischar][7] == 0)
+                    cango = 2
+            }
+            if (cango != false)
+            {
+                if (cango == true)
+                    global.bmenucoord[2][global.charturn] += 2
+                if (cango == 2)
+                    global.bmenucoord[2][global.charturn] = 6
+            }
+        }
+        if up_p()
+        {
+            spellcoord = global.bmenucoord[2][global.charturn]
+            cango = true
+            if (spellcoord <= 1)
+                cango = false
+            if (cango == true)
+                global.bmenucoord[2][global.charturn] -= 2
+        }
+        global.tensionselect = global.battlespellcost[thischar][global.bmenucoord[2][global.charturn]]
+        if (button1_p() && global.battlespell[thischar][global.bmenucoord[2][global.charturn]] != 0 && onebuffer < 0)
+        {
+            if (global.battlespellcost[thischar][global.bmenucoord[2][global.charturn]] <= global.tension)
+            {
+                onebuffer = 2
+                global.bmenuno = 0
+                selnoise = true
+                if (global.battlespell[thischar][global.bmenucoord[2][global.charturn]] != -1)
+                {
+                    scr_spellinfo(global.battlespell[thischar][global.bmenucoord[2][global.charturn]])
+                    if (spelltarget == 0)
+                        scr_spellconsumeb()
+                    if (spelltarget == 1)
+                        global.bmenuno = 8
+                    if (spelltarget == 2)
+                        global.bmenuno = 3
+                    if (spelltarget == 3)
+                        global.bmenuno = 99
+                }
+                else
+                    global.bmenuno = 13
+            }
+        }
+        if (button2_p() && onebuffer < 0)
+        {
+            global.tensionselect = 0
+            twobuffer = 1
+            global.bmenuno = 0
+            movenoise = true
         }
     }
     if (global.bmenuno == 4)
     {
-        with (self.battlewriter)
-            self.skipme = 1
-        with (self.battlewriter)
-            self.depth = 10
+        with (battlewriter)
+            skipme = true
+        with (battlewriter)
+            depth = 10
         with (obj_face_parent)
-            self.depth = 10
+            depth = 10
         with (obj_smallface)
-            self.depth = 10
-        if (self.tempitem[global.bmenucoord[4, global.charturn], global.charturn] == 0)
-            global.bmenucoord[4, global.charturn] -= 1
+            depth = 10
+        if (tempitem[global.bmenucoord[4][global.charturn]][global.charturn] == 0)
+            global.bmenucoord[4][global.charturn] -= 1
         if right_p()
         {
-            self.cango = 1
-            self.itemcoord = global.bmenucoord[4, global.charturn]
-            if (self.itemcoord < 11)
+            cango = true
+            itemcoord = global.bmenucoord[4][global.charturn]
+            if (itemcoord < 11)
             {
-                if (self.tempitem[(global.bmenucoord[4, global.charturn] + 1), global.charturn] == 0)
+                if (tempitem[(global.bmenucoord[4][global.charturn] + 1)][global.charturn] == 0)
                 {
-                    self.cango = 0
-                    if (((self.itemcoord % 2) == 1) && (self.itemcoord > 0))
-                        global.bmenucoord[4, global.charturn] -= 1
+                    cango = false
+                    if ((itemcoord % 2) == 1 && itemcoord > 0)
+                        global.bmenucoord[4][global.charturn] -= 1
                 }
             }
             else
             {
-                global.bmenucoord[4, global.charturn] -= 1
-                self.cango = 0
+                global.bmenucoord[4][global.charturn] -= 1
+                cango = false
             }
-            if (self.cango == 1)
+            if (cango == true)
             {
-                if ((self.itemcoord % 2) == 0)
-                    global.bmenucoord[4, global.charturn] += 1
+                if ((itemcoord % 2) == 0)
+                    global.bmenucoord[4][global.charturn] += 1
                 else
-                    global.bmenucoord[4, global.charturn] -= 1
+                    global.bmenucoord[4][global.charturn] -= 1
             }
         }
         if left_p()
         {
-            self.cango = 1
-            self.itemcoord = global.bmenucoord[4, global.charturn]
-            if (self.tempitem[1, global.charturn] != 0)
+            cango = true
+            itemcoord = global.bmenucoord[4][global.charturn]
+            if (tempitem[1][global.charturn] != 0)
             {
-                if ((self.itemcoord % 2) == 0)
-                    global.bmenucoord[4, global.charturn] += 1
+                if ((itemcoord % 2) == 0)
+                    global.bmenucoord[4][global.charturn] += 1
                 else
-                    global.bmenucoord[4, global.charturn] -= 1
+                    global.bmenucoord[4][global.charturn] -= 1
             }
         }
         if down_p()
         {
-            self.itemcoord = global.bmenucoord[4, global.charturn]
-            self.cango = 1
-            if (self.itemcoord >= 10)
-                self.cango = 0
+            itemcoord = global.bmenucoord[4][global.charturn]
+            cango = true
+            if (itemcoord >= 10)
+                cango = false
             else
             {
-                if (self.tempitem[(self.itemcoord + 2), global.charturn] == 0)
-                    self.cango = 0
-                if ((self.itemcoord == 5) && ((self.tempitem[6, global.charturn] != 0) && (self.tempitem[7, global.charturn] == 0)))
-                    self.cango = 2
+                if (tempitem[(itemcoord + 2)][global.charturn] == 0)
+                    cango = false
+                if (itemcoord == 5 && tempitem[6][global.charturn] != 0 && tempitem[7][global.charturn] == 0)
+                    cango = 2
             }
-            if (self.cango != 0)
+            if (cango != false)
             {
-                if (self.cango == 1)
-                    global.bmenucoord[4, global.charturn] += 2
-                if (self.cango == 2)
-                    global.bmenucoord[4, global.charturn] = 6
+                if (cango == true)
+                    global.bmenucoord[4][global.charturn] += 2
+                if (cango == 2)
+                    global.bmenucoord[4][global.charturn] = 6
             }
         }
         if up_p()
         {
-            self.itemcoord = global.bmenucoord[4, global.charturn]
-            self.cango = 1
-            if (self.itemcoord <= 1)
-                self.cango = 0
-            if (self.cango == 1)
-                global.bmenucoord[4, global.charturn] -= 2
+            itemcoord = global.bmenucoord[4][global.charturn]
+            cango = true
+            if (itemcoord <= 1)
+                cango = false
+            if (cango == true)
+                global.bmenucoord[4][global.charturn] -= 2
         }
-        if (self.tempitem[global.bmenucoord[4, global.charturn], global.charturn] == 0)
-            global.bmenucoord[4, global.charturn] -= 1
-        if (button1_p() && ((self.tempitem[global.bmenucoord[4, global.charturn], global.charturn] != 0) && (self.onebuffer < 0)))
+        if (tempitem[global.bmenucoord[4][global.charturn]][global.charturn] == 0)
+            global.bmenucoord[4][global.charturn] -= 1
+        if (button1_p() && tempitem[global.bmenucoord[4][global.charturn]][global.charturn] != 0 && onebuffer < 0)
         {
-            self.onebuffer = 2
+            onebuffer = 2
             global.bmenuno = 0
-            self.selnoise = 1
-            scr_iteminfo(self.tempitem[global.bmenucoord[4, global.charturn], global.charturn])
-            if ((self.itemtarget == 0) || (self.itemtarget == 2))
-                scr_itemconsumeb()
-            if (self.itemtarget == 1)
+            selnoise = true
+            scr_iteminfo(tempitem[global.bmenucoord[4][global.charturn]][global.charturn])
+            if (itemtarget == 0 || itemtarget == 2)
+            {
+                var _tensionhealed = 0
+                if (tempitem[global.bmenucoord[4][global.charturn]][global.charturn] == 27)
+                {
+                    scr_tensionheal(80)
+                    _tensionhealed = 1
+                }
+                if (tempitem[global.bmenucoord[4][global.charturn]][global.charturn] == 28)
+                {
+                    scr_tensionheal(ceil((global.maxtension / 2)))
+                    _tensionhealed = 1
+                }
+                if (tempitem[global.bmenucoord[4][global.charturn]][global.charturn] == 29)
+                {
+                    scr_tensionheal(ceil(global.maxtension))
+                    _tensionhealed = 1
+                }
+                if _tensionhealed
+                {
+                    var _drivenoise = snd_play(snd_cardrive)
+                    snd_pitch(_drivenoise, 1.4)
+                    snd_volume(_drivenoise, 0.8, 0)
+                    with (global.charinstance[global.charturn])
+                    {
+                        ha = instance_create(x, y, obj_healanim)
+                        ha.target = id
+                        ha.particlecolor = c_orange
+                    }
+                    scr_itemshift_temp(global.bmenucoord[4][global.charturn], global.charturn)
+                    scr_nexthero()
+                }
+                if (!_tensionhealed)
+                    scr_itemconsumeb()
+            }
+            if (itemtarget == 1)
                 global.bmenuno = 7
         }
-        if (button2_p() && (self.onebuffer < 0))
+        if (button2_p() && onebuffer < 0)
         {
-            self.twobuffer = 1
+            twobuffer = 1
             global.bmenuno = 0
-            self.movenoise = 1
+            movenoise = true
         }
     }
     if (global.bmenuno == 9)
     {
-        self.thisenemy = global.bmenucoord[11, global.charturn]
+        thisenemy = global.bmenucoord[11][global.charturn]
+        scr_actinfo_temp(thisenemy)
         if right_p()
         {
-            self.cango = 1
-            self.actcoord = global.bmenucoord[9, global.charturn]
-            if (self.actcoord < 5)
+            cango = true
+            actcoord = global.bmenucoord[9][global.charturn]
+            if (actcoord < 5)
             {
-                if (global.canact[self.thisenemy, (global.bmenucoord[9, global.charturn] + 1)] == 0)
+                if (canact[(global.bmenucoord[9][global.charturn] + 1)] == false)
                 {
-                    self.cango = 0
-                    if (((self.actcoord % 2) == 1) && (self.actcoord > 0))
-                        global.bmenucoord[9, global.charturn] -= 1
+                    cango = false
+                    if ((actcoord % 2) == 1 && actcoord > 0)
+                        global.bmenucoord[9][global.charturn] -= 1
                 }
             }
             else
             {
-                global.bmenucoord[9, global.charturn] -= 1
-                self.cango = 0
+                global.bmenucoord[9][global.charturn] -= 1
+                cango = false
             }
-            if (self.cango == 1)
+            if (cango == true)
             {
-                if ((self.actcoord % 2) == 0)
-                    global.bmenucoord[9, global.charturn] += 1
+                if ((actcoord % 2) == 0)
+                    global.bmenucoord[9][global.charturn] += 1
                 else
-                    global.bmenucoord[9, global.charturn] -= 1
+                    global.bmenucoord[9][global.charturn] -= 1
             }
         }
         if left_p()
         {
-            self.cango = 1
-            self.actcoord = global.bmenucoord[9, global.charturn]
-            if ((self.actcoord % 2) == 0)
+            cango = true
+            actcoord = global.bmenucoord[9][global.charturn]
+            if ((actcoord % 2) == 0)
             {
-                if (global.canact[self.thisenemy, (self.actcoord + 1)] != 0)
-                    global.bmenucoord[9, global.charturn] += 1
+                if (canact[(actcoord + 1)] != false)
+                    global.bmenucoord[9][global.charturn] += 1
             }
             else
-                global.bmenucoord[9, global.charturn] -= 1
+                global.bmenucoord[9][global.charturn] -= 1
         }
         if down_p()
         {
-            self.actcoord = global.bmenucoord[9, global.charturn]
-            self.cango = 1
-            if (self.actcoord >= 4)
-                self.cango = 0
-            else if (global.canact[self.thisenemy, (self.actcoord + 2)] == 0)
-                self.cango = 0
-            if (self.cango != 0)
+            actcoord = global.bmenucoord[9][global.charturn]
+            cango = true
+            if (actcoord >= 4)
+                cango = false
+            else if (canact[(actcoord + 2)] == false)
+                cango = false
+            if (cango != false)
             {
-                if (self.cango == 1)
-                    global.bmenucoord[9, global.charturn] += 2
+                if (cango == true)
+                    global.bmenucoord[9][global.charturn] += 2
             }
         }
         if up_p()
         {
-            self.actcoord = global.bmenucoord[9, global.charturn]
-            self.cango = 1
-            if (self.actcoord <= 1)
-                self.cango = 0
-            if (self.cango == 1)
-                global.bmenucoord[9, global.charturn] -= 2
+            actcoord = global.bmenucoord[9][global.charturn]
+            cango = true
+            if (actcoord <= 1)
+                cango = false
+            if (cango == true)
+                global.bmenucoord[9][global.charturn] -= 2
         }
-        global.tensionselect = global.actcost[self.thisenemy, global.bmenucoord[9, global.charturn]]
-        self.canpress = 1
-        if ((global.actactor[global.bmenucoord[11, global.charturn], global.bmenucoord[9, global.charturn]] == 2) || (global.actactor[global.bmenucoord[11, global.charturn], global.bmenucoord[9, global.charturn]] == 4))
+        global.tensionselect = acttpcost[global.bmenucoord[9][global.charturn]]
+        canpress = true
+        if (global.char[global.charturn] == 1)
         {
-            if ((self.havechar[1] == 0) || (global.hp[2] <= 0))
-                self.canpress = 0
-        }
-        if ((global.actactor[global.bmenucoord[11, global.charturn], global.bmenucoord[9, global.charturn]] == 3) || (global.actactor[global.bmenucoord[11, global.charturn], global.bmenucoord[9, global.charturn]] == 4))
-        {
-            if ((self.havechar[2] == 0) || (global.hp[3] <= 0))
-                self.canpress = 0
-        }
-        if (self.canpress == 1)
-        {
-            if (button1_p() && ((global.canact[self.thisenemy, global.bmenucoord[9, global.charturn]] == 1) && ((global.tension >= global.tensionselect) && (self.onebuffer < 0))))
+            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 2 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
             {
-                self.onebuffer = 2
+                if (havechar[1] == false || global.hp[2] <= 0)
+                    canpress = false
+            }
+            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 3 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+            {
+                if (havechar[2] == false || global.hp[3] <= 0)
+                    canpress = false
+            }
+            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
+            {
+                if (havechar[3] == false || global.hp[4] <= 0)
+                    canpress = false
+            }
+        }
+        if (canpress == true)
+        {
+            if (button1_p() && global.canact[thisenemy][global.bmenucoord[9][global.charturn]] == true && global.tension >= global.tensionselect && onebuffer < 0)
+            {
+                onebuffer = 2
                 global.bmenuno = 0
-                self.selnoise = 1
-                global.tension -= global.actcost[self.thisenemy, global.bmenucoord[9, global.charturn]]
+                selnoise = true
+                global.actingchoice[global.charturn] = global.bmenucoord[9][global.charturn]
+                global.tension -= acttpcost[global.bmenucoord[9][global.charturn]]
                 global.tensionselect = 0
-                if instance_exists(global.monsterinstance[self.thisenemy])
-                    global.monsterinstance[self.thisenemy].acting = (global.bmenucoord[9, global.charturn] + 1)
-                global.acting[0] = 1
-                if (global.actactor[global.bmenucoord[11, global.charturn], global.bmenucoord[9, global.charturn]] == 2)
-                    global.acting[self.charpos[1]] = 1
-                if (global.actactor[global.bmenucoord[11, global.charturn], global.bmenucoord[9, global.charturn]] == 3)
-                    global.acting[self.charpos[2]] = 1
-                if (global.actactor[global.bmenucoord[11, global.charturn], global.bmenucoord[9, global.charturn]] == 4)
-                {
-                    global.acting[2] = 1
-                    global.acting[1] = 1
-                }
-                for (self.i = 0; self.i < 3; self.i += 1)
-                {
-                    if (global.acting[self.i] == 1)
-                    {
-                        global.faceaction[self.i] = 6
-                        global.charaction[self.i] = 9
-                    }
-                }
+                scr_actselect(thisenemy, global.bmenucoord[9][global.charturn])
+                global.bmenucoord[9][global.charturn] = false
                 scr_nexthero()
             }
         }
-        if (button2_p() && (self.onebuffer < 0))
+        if (button2_p() && onebuffer < 0)
         {
+            global.bmenucoord[9][global.charturn] = false
             global.tensionselect = 0
-            self.twobuffer = 1
+            twobuffer = 1
             global.bmenuno = 11
-            self.movenoise = 1
+            movenoise = true
         }
     }
-    if ((global.bmenuno == 7) || ((global.bmenuno == 1) || ((global.bmenuno == 8) || ((global.bmenuno == 3) || ((global.bmenuno == 11) || (global.bmenuno == 12))))))
+    if (global.bmenuno == 7 || global.bmenuno == 1 || global.bmenuno == 8 || global.bmenuno == 3 || global.bmenuno == 11 || global.bmenuno == 12 || global.bmenuno == 13)
     {
-        with (self.battlewriter)
-            self.skipme = 1
-        with (self.battlewriter)
-            self.depth = 10
+        with (battlewriter)
+            skipme = true
+        with (battlewriter)
+            depth = 10
         with (obj_face_parent)
-            self.depth = 10
+            depth = 10
         with (obj_smallface)
-            self.depth = 10
-        if (button2_p() && (self.onebuffer < 0))
+            depth = 10
+        if (button2_p() && onebuffer < 0)
         {
-            self.twobuffer = 1
-            if ((global.bmenuno == 1) || ((global.bmenuno == 11) || (global.bmenuno == 12)))
+            twobuffer = 1
+            if (global.bmenuno == 1 || global.bmenuno == 11 || global.bmenuno == 12)
                 global.bmenuno = 0
             if (global.bmenuno == 7)
                 global.bmenuno = 4
-            if ((global.bmenuno == 8) || (global.bmenuno == 3))
+            if (global.bmenuno == 8 || global.bmenuno == 3 || global.bmenuno == 13)
                 global.bmenuno = 2
-            self.movenoise = 1
+            movenoise = true
         }
-        if ((global.bmenuno == 7) || ((global.bmenuno == 1) || ((global.bmenuno == 8) || ((global.bmenuno == 3) || ((global.bmenuno == 11) || (global.bmenuno == 12))))))
+        if (global.bmenuno == 7 || global.bmenuno == 1 || global.bmenuno == 8 || global.bmenuno == 3 || global.bmenuno == 11 || global.bmenuno == 12 || global.bmenuno == 13)
         {
-            if ((global.bmenuno == 7) || (global.bmenuno == 8))
+            if (global.bmenuno == 7 || global.bmenuno == 8)
             {
-                for (self.i = 0; self.i < 3; self.i += 1)
+                for (i = 0; i < 3; i += 1)
                 {
-                    self.ht[self.i] = 0
-                    if (global.char[self.i] > 0)
-                        self.ht[self.i] = 1
+                    ht[i] = 0
+                    if (global.char[i] > 0)
+                        ht[i] = 1
                 }
             }
-            if ((global.bmenuno == 1) || ((global.bmenuno == 3) || ((global.bmenuno == 11) || (global.bmenuno == 12))))
+            if (global.bmenuno == 1 || global.bmenuno == 3 || global.bmenuno == 11 || global.bmenuno == 12 || global.bmenuno == 13)
             {
-                for (self.i = 0; self.i < 3; self.i += 1)
-                    self.ht[self.i] = global.monster[self.i]
+                for (i = 0; i < 3; i += 1)
+                    ht[i] = global.monster[i]
             }
-            if ((global.bmenucoord[global.bmenuno, global.charturn] == 2) && (self.ht[2] == 0))
-                global.bmenucoord[global.bmenuno, global.charturn] = 0
-            if ((global.bmenucoord[global.bmenuno, global.charturn] == 0) && (self.ht[0] == 0))
-                global.bmenucoord[global.bmenuno, global.charturn] = 1
-            if ((global.bmenucoord[global.bmenuno, global.charturn] == 1) && (self.ht[1] == 0))
-                global.bmenucoord[global.bmenuno, global.charturn] = 0
-            if ((global.bmenucoord[global.bmenuno, global.charturn] == 0) && (self.ht[0] == 0))
-                global.bmenucoord[global.bmenuno, global.charturn] = 2
+            if (global.bmenucoord[global.bmenuno][global.charturn] == 2 && ht[2] == 0)
+                global.bmenucoord[global.bmenuno][global.charturn] = false
+            if (global.bmenucoord[global.bmenuno][global.charturn] == false && ht[0] == 0)
+                global.bmenucoord[global.bmenuno][global.charturn] = true
+            if (global.bmenucoord[global.bmenuno][global.charturn] == true && ht[1] == 0)
+                global.bmenucoord[global.bmenuno][global.charturn] = false
+            if (global.bmenucoord[global.bmenuno][global.charturn] == false && ht[0] == 0)
+                global.bmenucoord[global.bmenuno][global.charturn] = 2
             if (down_p() == 1)
             {
-                if (global.bmenucoord[global.bmenuno, global.charturn] == 0)
+                if (global.bmenucoord[global.bmenuno][global.charturn] == false)
                 {
-                    if (self.ht[1] == 1)
+                    if (ht[1] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 1
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = true
                     }
-                    else if (self.ht[2] == 1)
+                    else if (ht[2] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 2
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = 2
                     }
                 }
-                else if (global.bmenucoord[global.bmenuno, global.charturn] == 1)
+                else if (global.bmenucoord[global.bmenuno][global.charturn] == true)
                 {
-                    if (self.ht[2] == 1)
+                    if (ht[2] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 2
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = 2
                     }
-                    else if (self.ht[0] == 1)
+                    else if (ht[0] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 0
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = false
                     }
                 }
-                else if (global.bmenucoord[global.bmenuno, global.charturn] == 2)
+                else if (global.bmenucoord[global.bmenuno][global.charturn] == 2)
                 {
-                    if (self.ht[0] == 1)
+                    if (ht[0] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 0
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = false
                     }
-                    else if (self.ht[1] == 1)
+                    else if (ht[1] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 1
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = true
                     }
                 }
             }
             if (up_p() == 1)
             {
-                if (global.bmenucoord[global.bmenuno, global.charturn] == 0)
+                if (global.bmenucoord[global.bmenuno][global.charturn] == false)
                 {
-                    if (self.ht[2] == 1)
+                    if (ht[2] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 2
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = 2
                     }
-                    else if (self.ht[1] == 1)
+                    else if (ht[1] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 1
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = true
                     }
                 }
-                else if (global.bmenucoord[global.bmenuno, global.charturn] == 1)
+                else if (global.bmenucoord[global.bmenuno][global.charturn] == true)
                 {
-                    if (self.ht[0] == 1)
+                    if (ht[0] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 0
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = false
                     }
-                    else if (self.ht[2] == 1)
+                    else if (ht[2] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 2
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = 2
                     }
                 }
-                else if (global.bmenucoord[global.bmenuno, global.charturn] == 2)
+                else if (global.bmenucoord[global.bmenuno][global.charturn] == 2)
                 {
-                    if (self.ht[1] == 1)
+                    if (ht[1] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 1
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = true
                     }
-                    else if (self.ht[0] == 1)
+                    else if (ht[0] == 1)
                     {
-                        self.movenoise = 1
-                        global.bmenucoord[global.bmenuno, global.charturn] = 0
+                        movenoise = true
+                        global.bmenucoord[global.bmenuno][global.charturn] = false
                     }
                 }
             }
-            if (button1_p() && (self.onebuffer < 0))
+            if (button1_p() && onebuffer < 0)
             {
-                self.onebuffer = 1
-                self.selnoise = 1
+                onebuffer = 1
+                selnoise = true
                 if (global.bmenuno == 1)
                 {
-                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno, global.charturn]
+                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno][global.charturn]
                     global.faceaction[global.charturn] = 1
                     global.charaction[global.charturn] = 1
                     scr_nexthero()
                 }
                 if (global.bmenuno == 7)
                 {
-                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno, global.charturn]
+                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno][global.charturn]
                     scr_itemconsumeb()
+                    if (global.chapter == 2 && instance_exists(o_boxingcontroller))
+                        o_boxingcontroller.specialcon = 7
                 }
-                if ((global.bmenuno == 8) || (global.bmenuno == 3))
+                if (global.bmenuno == 8 || global.bmenuno == 3)
                 {
-                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno, global.charturn]
+                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno][global.charturn]
                     scr_spellconsumeb()
                 }
                 if (global.bmenuno == 11)
                 {
                     global.bmenuno = 9
-                    self.actcoord = global.bmenucoord[9, global.charturn]
-                    self.thisenemy = global.bmenucoord[11, global.charturn]
-                    for (self.i = 0; self.i < 6; self.i += 1)
+                    actcoord = global.bmenucoord[9][global.charturn]
+                    thisenemy = global.bmenucoord[11][global.charturn]
+                    if (global.char[global.charturn] == 1)
                     {
-                        if (global.canact[self.thisenemy, self.actcoord] == 0)
+                        for (i = 0; i < 6; i += 1)
                         {
-                            if (self.actcoord > 0)
-                                global.bmenucoord[9, global.charturn] -= 1
+                            if (global.canact[thisenemy][actcoord] == false)
+                            {
+                                if (actcoord > 0)
+                                    global.bmenucoord[9][global.charturn] -= 1
+                            }
                         }
                     }
-                    self.onebuffer = 1
+                    if (global.char[global.charturn] == 2)
+                    {
+                        for (i = 0; i < 6; i += 1)
+                        {
+                            if (global.canactsus[thisenemy][actcoord] == false)
+                            {
+                                if (actcoord > 0)
+                                    global.bmenucoord[9][global.charturn] -= 1
+                            }
+                        }
+                    }
+                    if (global.char[global.charturn] == 3)
+                    {
+                        for (i = 0; i < 6; i += 1)
+                        {
+                            if (global.canactral[thisenemy][actcoord] == false)
+                            {
+                                if (actcoord > 0)
+                                    global.bmenucoord[9][global.charturn] -= 1
+                            }
+                        }
+                    }
+                    if (global.char[global.charturn] == 4)
+                    {
+                        for (i = 0; i < 6; i += 1)
+                        {
+                            if (global.canactnoe[thisenemy][actcoord] == false)
+                            {
+                                if (actcoord > 0)
+                                    global.bmenucoord[9][global.charturn] -= 1
+                            }
+                        }
+                    }
+                    onebuffer = 1
                 }
                 if (global.bmenuno == 12)
                 {
                     global.faceaction[global.charturn] = 10
-                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno, global.charturn]
+                    global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno][global.charturn]
                     global.charaction[global.charturn] = 2
                     global.charspecial[global.charturn] = 100
+                    scr_nexthero()
+                }
+                if (global.bmenuno == 13)
+                {
+                    onebuffer = 2
+                    global.bmenuno = 0
+                    selnoise = true
+                    global.actingchoice[global.charturn] = global.bmenucoord[2][global.charturn]
+                    global.tension -= global.battlespellcost[thischar][global.bmenucoord[2][global.charturn]]
+                    global.tensionselect = 0
+                    scr_actinfo_temp(global.bmenucoord[13][global.charturn])
+                    scr_actselect(global.bmenucoord[13][global.charturn], global.bmenucoord[2][global.charturn])
                     scr_nexthero()
                 }
             }
         }
     }
 }
-if (self.movenoise == 1)
+if (movenoise == true)
 {
     snd_play(snd_menumove)
-    self.movenoise = 0
+    movenoise = false
 }
-if (self.grazenoise == 1)
+if (grazenoise == true)
 {
     snd_play(snd_graze)
-    self.grazenoise = 0
+    grazenoise = false
 }
-if (self.selnoise == 1)
+if (selnoise == true)
 {
     snd_play(snd_select)
-    self.selnoise = 0
+    selnoise = false
 }
-if (self.damagenoise == 1)
+if (damagenoise == true)
 {
     snd_play(snd_damage)
-    self.damagenoise = 0
+    damagenoise = false
 }
-if (self.laznoise == 1)
+if (laznoise == true)
 {
     snd_play(snd_laz_c)
-    self.laznoise = 0
+    laznoise = false
 }
-self.onebuffer -= 1
-self.twobuffer -= 1
-self.lbuffer -= 1
-self.rbuffer -= 1
-if ((global.mnfight == 2) && (self.timeron == 1))
+onebuffer -= 1
+twobuffer -= 1
+lbuffer -= 1
+rbuffer -= 1
+if (global.mnfight == 2 && timeron == true)
 {
     global.turntimer -= 1
-    if ((global.turntimer <= 0) && (self.reset == 0))
+    if (global.turntimer <= 0 && reset == false)
     {
         with (obj_bulletparent)
             instance_destroy()
         with (obj_bulletgenparent)
             instance_destroy()
         with (obj_darkener)
-            self.darken = 0
+            darken = false
         with (obj_heart)
         {
-            instance_create(self.x, self.y, obj_returnheart)
+            instance_create(x, y, obj_returnheart)
             instance_destroy()
         }
-        self.reset = 1
-        if (self.noreturn == 0)
-            self.alarm[2] = 15
+        reset = true
+        if (noreturn == false)
+            alarm[2] = 15
+    }
+}
+if (global.myfight == 3)
+{
+    if (scr_monsterpop() == 0 && (!instance_exists(obj_writer)))
+    {
+        scr_wincombat()
+        if (global.myfight == 3)
+            scr_endturn()
+    }
+}
+if (global.myfight == 5)
+{
+    myfightreturntimer--
+    if (myfightreturntimer <= 0)
+    {
+        scr_mnendturn()
+        global.spelldelay = 10
+        with (obj_heroparent)
+        {
+            attacktimer = 0
+            image_index = 0
+            index = 0
+            itemed = false
+            acttimer = 0
+            defendtimer = 0
+            state = 0
+            flash = false
+            siner = 0
+            fsiner = 0
+            alarm[4] = -1
+        }
+        with (obj_spellphase)
+        {
+            with (spellwriter)
+                instance_destroy()
+            instance_destroy()
+        }
+    }
+}
+if (global.charweapon[4] == 13)
+{
+    if ((t_siner % 6) == 0)
+    {
+        if (global.hp[4] > round((global.maxhp[4] / 3)))
+            global.hp[4] = (global.hp[4] - 1)
+    }
+}
+t_siner++
+if scr_debug()
+{
+    scr_turn_skip()
+    if scr_debug_keycheck(vk_f2)
+        scr_debug_fullheal()
+    if scr_debug_keycheck(vk_f3)
+        scr_raise_party()
+    if scr_debug_keycheck(vk_f5)
+    {
+        if (global.chapter == 2 && instance_exists(o_boxingqueen))
+        {
+            with (o_boxingqueen)
+                health_count = 10
+            with (o_boxinghud)
+                sub_healthbar_count = 0
+            scr_debug_print("GIGA QUEEN AT 1 HP")
+        }
+        else
+            scr_wincombat()
+    }
+    if scr_debug_keycheck(vk_f6)
+        scr_weaken_enemies()
+    if scr_debug_keycheck(vk_f8)
+        scr_weaken_party(1)
+    if scr_debug_keycheck(vk_f9)
+    {
+        global.tension = 0
+        scr_debug_print("TP set to 0%")
+    }
+    if scr_debug_keycheck(vk_f10)
+    {
+        global.tension = 250
+        scr_debug_print("TP maxed out!!")
+    }
+    if (scr_debug_keycheck(ord("M")) && (!instance_exists(obj_queen_enemy)) && (!instance_exists(obj_spamton_neo_enemy)))
+    {
+        if audio_is_playing(global.batmusic[1])
+        {
+            if (!audio_is_paused(global.batmusic[1]))
+                audio_pause_sound(global.batmusic[1])
+            else
+                audio_resume_sound(global.batmusic[1])
+        }
     }
 }

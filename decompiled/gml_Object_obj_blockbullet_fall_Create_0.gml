@@ -1,9 +1,0 @@
-self.active = 0
-self.visible = 0
-self.image_alpha = 0
-self.con = 0
-self.xpos = choose(0, 1, 2, 3)
-self.ypos = -8
-self.fallspeed = 5
-self.falltimer = 0
-self.halt = 0

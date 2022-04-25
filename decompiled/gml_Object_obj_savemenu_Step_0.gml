@@ -1,54 +1,104 @@
-self.buffer -= 1
-if ((self.coord == 2) && (self.buffer < 0))
+buffer -= 1
+if (menuno == 0)
 {
-    if button1_p()
+    if (xcoord == 2 && buffer < 0)
     {
-        self.coord = 99
-        self.endme = 1
-    }
-}
-if (self.coord < 2)
-{
-    if (left_p() || right_p())
-    {
-        if (self.coord == 1)
-            self.coord = 0
-        else
-            self.coord = 1
-    }
-}
-if ((self.coord == 0) && (self.buffer < 0))
-{
-    if button1_p()
-    {
-        snd_play(snd_save)
-        script_execute(scr_save)
-        self.coord = 2
-        self.buffer = 3
-        if (self.d == 2)
+        if button1_p()
         {
-            self.name = global.truename
-            self.love = global.llv
+            xcoord = 99
+            endme = 1
         }
-        scr_roomname(self.room)
-        self.level = global.lv
-        self.time = global.time
-        self.minutes = floor((self.time / 1800))
-        self.seconds = round((((self.time / 1800) - self.minutes) * 60))
-        if (self.seconds == 60)
-            self.seconds = 59
-        if (self.seconds < 10)
-            self.seconds = ("0" + string(self.seconds))
+    }
+    if (xcoord < 2)
+    {
+        if (left_p() || right_p())
+        {
+            if (xcoord == 1)
+                xcoord = 0
+            else
+                xcoord = 1
+        }
+    }
+    if (type == 1)
+    {
+        if (up_p() || down_p())
+        {
+            if (ycoord == 1)
+                ycoord = 0
+            else
+                ycoord = 1
+        }
+    }
+    if (xcoord == 0 && ycoord == 0 && buffer < 0)
+    {
+        if button1_p()
+        {
+            if (type == 0)
+            {
+                snd_play(snd_save)
+                scr_save()
+                saved = 1
+                xcoord = 2
+                buffer = 3
+                if (d == 2)
+                {
+                    name = global.truename
+                    love = global.llv
+                }
+                scr_roomname(room)
+                level = global.lv
+                time = global.time
+                minutes = floor((time / 1800))
+                seconds = round((((time / 1800) - minutes) * 60))
+                if (seconds == 60)
+                    seconds = 59
+                if (seconds < 10)
+                    seconds = ("0" + string(seconds))
+            }
+            else
+            {
+                menuno = 1
+                buffer = 3
+                snd_play(snd_select)
+            }
+        }
+    }
+    if (button1_p() && xcoord == 1 && ycoord == 0 && buffer < 0)
+        endme = 1
+    if (button1_p() && xcoord == 0 && ycoord == 1 && buffer < 0)
+    {
+        global.interact = 1
+        menu = instance_create(0, 0, obj_fusionmenu)
+        menu.type = 4
+        endme = 2
+    }
+    if (button1_p() && xcoord == 1 && ycoord == 1 && buffer < 0 && haverecruited)
+    {
+        global.interact = 1
+        menu = instance_create(0, 0, obj_fusionmenu)
+        menu.type = 3
+        menu.subtype = recruitsubtype
+        endme = 2
+    }
+    if (button2_p() && buffer < 0 && endme == 0)
+        endme = 1
+    if (endme == 1)
+    {
+        global.interact = 0
+        with (obj_mainchara)
+            onebuffer = 3
+        instance_destroy()
+    }
+    if (endme == 2)
+    {
+        with (obj_mainchara)
+            onebuffer = 3
+        instance_destroy()
     }
 }
-if (button1_p() && ((self.coord == 1) && (self.buffer < 0)))
-    self.endme = 1
-if (button2_p() && (self.buffer < 0))
-    self.endme = 1
-if (self.endme == 1)
+if (menuno == 1)
 {
-    global.interact = 0
-    with (obj_mainchara)
-        self.onebuffer = 3
-    instance_destroy()
+    var menuwidth = 60
+    var menuheight = 80
+    scr_darkbox_black((camerax() + 120), (cameray() + 110), ((camerax() + 120) + menuwidth), ((cameray() + 110) + menuheight))
 }

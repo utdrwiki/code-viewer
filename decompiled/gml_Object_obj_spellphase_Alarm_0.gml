@@ -1,44 +1,44 @@
-for (self.xyz = 0; self.xyz < 3; self.xyz += 1)
+for (xyz = 0; xyz < 3; xyz += 1)
 {
-    self.using[self.xyz] = 0
-    self.gotspell[self.xyz] = 0
-    self.gotitem[self.xyz] = 0
-    if (global.charaction[self.xyz] == 2)
+    using[xyz] = 0
+    gotspell[xyz] = 0
+    gotitem[xyz] = 0
+    if (global.charaction[xyz] == 2)
     {
-        self.spelltotal += 1
-        self.using[self.xyz] = 1
-        self.gotspell[self.xyz] = 1
-        if (self.castyet == 0)
+        spelltotal += 1
+        using[xyz] = 1
+        gotspell[xyz] = 1
+        if (castyet == 0)
         {
-            with (global.charinstance[self.xyz])
+            with (global.charinstance[xyz])
             {
-                self.state = 2
-                self.attacktimer = 0
+                state = 2
+                attacktimer = 0
             }
-            self.castyet = 1
-            self.char = (self.xyz + 1)
-            scr_spelltext(global.charspecial[self.xyz], self.xyz)
-            self.spellwriter = scr_battletext_default()
+            castyet = 1
+            char = (xyz + 1)
+            scr_spelltext(global.charspecial[xyz], xyz)
+            spellwriter = scr_battletext_default()
         }
     }
-    if (global.charaction[self.xyz] == 4)
+    if (global.charaction[xyz] == 4)
     {
-        self.spelltotal += 1
-        self.using[self.xyz] = 1
-        self.gotitem[self.xyz] = 1
-        if (self.castyet == 0)
+        spelltotal += 1
+        using[xyz] = 1
+        gotitem[xyz] = 1
+        if (castyet == 0)
         {
-            with (global.charinstance[self.xyz])
+            with (global.charinstance[xyz])
             {
-                self.state = 4
-                self.attacktimer = 0
+                state = 4
+                attacktimer = 0
             }
-            self.castyet = 1
-            self.char = (self.xyz + 1)
-            scr_spelltext(global.charspecial[self.xyz], self.xyz)
-            self.spellwriter = scr_battletext_default()
+            castyet = 1
+            char = (xyz + 1)
+            scr_spelltext(global.charspecial[xyz], xyz)
+            spellwriter = scr_battletext_default()
         }
     }
 }
-self.active = 1
+active = true
 global.spelldelay = 90

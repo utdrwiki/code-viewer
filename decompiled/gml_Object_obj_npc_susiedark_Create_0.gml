@@ -1,19 +1,19 @@
-self.dtsprite = spr_susied_dark
-self.rtsprite = spr_susier_dark
-self.ltsprite = spr_susiel_dark
-self.utsprite = spr_susieu_dark
-self.myinteract = 0
-self.facing = 2
-self.dfacing = 2
-self.image_speed = 0
-self.talked = 0
-self.image_xscale = 2
-self.image_yscale = 2
+dtsprite = spr_susied_dark
+rtsprite = spr_susier_dark
+ltsprite = spr_susiel_dark
+utsprite = spr_susieu_dark
+myinteract = 0
+facing = 2
+dfacing = 2
+image_speed = 0
+talked = false
+image_xscale = 2
+image_yscale = 2
 scr_depth()
-if (global.plot >= 30)
+if (global.plot >= 30 || global.chapter != 1)
     instance_destroy()
 else
 {
-    self.s = instance_create(450, 950, obj_soliddark)
-    self.s.image_yscale = 8
+    s = instance_create(450, 950, obj_soliddark)
+    s.image_yscale = 8
 }

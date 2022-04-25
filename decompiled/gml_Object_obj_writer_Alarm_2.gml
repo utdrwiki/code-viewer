@@ -1,5 +1,5 @@
-if (self.firstnoise == 0)
+if (firstnoise == false)
 {
-    self.firstnoise = 1
+    firstnoise = true
     scr_textsound()
 }

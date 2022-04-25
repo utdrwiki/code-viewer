@@ -1,0 +1,10 @@
+active = true
+timer = 0
+bdir = random(360)
+inv = 60
+timepoints = 0
+grazepoints = 3
+target = 0
+damage = 50
+grazed = false
+grazetimer = 0

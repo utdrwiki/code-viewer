@@ -1,6 +1,6 @@
-self.burst += 1
-draw_sprite_ext(spr_heartoutline2, 0, (self.xstart + 9), (self.ystart + 9), (0.25 + self.burst), (0.25 + (self.burst / 2)), 0, 0x00FFFFFF, (0.8 - (self.burst / 6)))
-draw_sprite_ext(spr_heartoutline, 0, (self.xstart + 9), (self.ystart + 9), (0.25 + (self.burst / 1.5)), (0.25 + (self.burst / 3)), 0, 0x00FFFFFF, (1 - (self.burst / 6)))
-draw_sprite_ext(spr_heartoutline, 0, (self.xstart + 9), (self.ystart + 9), (0.2 + (self.burst / 2.5)), (0.2 + (self.burst / 5)), 0, 0x00FFFFFF, (1.2 - (self.burst / 6)))
-if (self.burst > 10)
+burst += 1
+draw_sprite_ext(spr_heartoutline2, 0, (xstart + 9), (ystart + 9), (0.25 + burst), (0.25 + (burst / 2)), 0, c_white, (0.8 - (burst / 6)))
+draw_sprite_ext(spr_heartoutline, 0, (xstart + 9), (ystart + 9), (0.25 + (burst / 1.5)), (0.25 + (burst / 3)), 0, c_white, (1 - (burst / 6)))
+draw_sprite_ext(spr_heartoutline, 0, (xstart + 9), (ystart + 9), (0.2 + (burst / 2.5)), (0.2 + (burst / 5)), 0, c_white, (1.2 - (burst / 6)))
+if (burst > 10)
     instance_destroy()

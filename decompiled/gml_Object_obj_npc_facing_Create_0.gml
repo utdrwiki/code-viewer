@@ -1,300 +1,225 @@
-self.dtsprite = spr_toriel_dt
-self.rtsprite = spr_toriel_rt
-self.ltsprite = spr_toriel_lt
-self.utsprite = spr_toriel_ut
-self.myinteract = 0
-self.facing = 0
-self.dfacing = 0
-self.image_speed = 0
-self.talked = 0
-self.ourcase = 0
-if (global.darkzone == 1)
+sprite_height_adjusted = 0
+dtsprite = spr_toriel_dt
+rtsprite = spr_toriel_rt
+ltsprite = spr_toriel_lt
+utsprite = spr_toriel_ut
+myinteract = 0
+facing = 0
+dfacing = 0
+image_speed = 0
+talked = false
+ourcase = 0
+if (global.darkzone == true)
 {
-    self.image_xscale = 2
-    self.image_yscale = 2
+    image_xscale = 2
+    image_yscale = 2
 }
-self.normalanim = 1
-self.remanimspeed = 0
-self.depthbonus = 0
-self.depthcancel = 0
-if (self.room == room_alphysclass)
+normalanim = 1
+remanimspeed = 0
+depthbonus = 0
+depthcancel = false
+lifetimer = 0
+fun = false
+extflag = 0
+if (room == room_alphysclass)
 {
-    self.facing = 2
-    self.dfacing = 2
-    self.ourcase = 1
-    if (self.y < 172)
+    facing = 2
+    dfacing = 2
+    ourcase = 1
+    if (y < 172)
     {
-        self.dtsprite = spr_noelle_dt
-        self.rtsprite = spr_noelle_ut_r
-        self.utsprite = spr_noelle_ut
-        self.ltsprite = spr_noelle_ut_l
-        if (self.x > 120)
+        dtsprite = spr_noelle_walk_down_lw
+        rtsprite = spr_noelle_walk_right_lw
+        utsprite = spr_noelle_walk_up_lw
+        ltsprite = spr_noelle_walk_left_lw
+        if (x > 120)
         {
-            self.utsprite = spr_berdly_ut
-            self.rtsprite = spr_berdly_ut_r
-            self.ltsprite = spr_berdly_ut_l
-            self.dtsprite = spr_berdly_ut
+            utsprite = spr_berdly_ut
+            rtsprite = spr_berdly_ut_r
+            ltsprite = spr_berdly_ut_l
+            dtsprite = spr_berdly_ut
         }
     }
-    if (self.y > 172)
+    if (y > 172)
     {
-        self.dtsprite = spr_catti_ut
-        self.utsprite = spr_catti_ut
-        self.rtsprite = spr_catti_ut
-        self.ltsprite = spr_catti_ut
-        if (self.x > 120)
+        dtsprite = spr_catti_ut
+        utsprite = spr_catti_ut
+        rtsprite = spr_catti_ut
+        ltsprite = spr_catti_ut
+        if (x > 120)
         {
-            self.dtsprite = spr_mkid_ut
-            self.rtsprite = spr_mkid_ut_r
-            self.ltsprite = spr_mkid_ut_l
-            self.utsprite = spr_mkid_ut
+            dtsprite = spr_mkid_ut
+            rtsprite = spr_mkid_ut_r
+            ltsprite = spr_mkid_ut_l
+            utsprite = spr_mkid_ut
         }
     }
-    if (self.y > 212)
+    if (y > 212)
     {
-        self.dtsprite = spr_jockington_ut
-        self.utsprite = spr_jockington_ut
-        self.rtsprite = spr_jockington_rt
-        self.ltsprite = spr_jockington_lt
-        if (self.x > 120)
+        dtsprite = spr_jockington_ut
+        utsprite = spr_jockington_ut
+        rtsprite = spr_jockington_rt
+        ltsprite = spr_jockington_lt
+        if (x > 120)
         {
-            self.utsprite = spr_snowy_ut
-            self.ltsprite = spr_snowy_ut_l
-            self.rtsprite = spr_snowy_ut_r
-            self.dtsprite = spr_snowy_ut
+            utsprite = spr_snowy_ut
+            ltsprite = spr_snowy_ut_l
+            rtsprite = spr_snowy_ut_r
+            dtsprite = spr_snowy_ut
         }
     }
-    if (self.y < 100)
+    if (y < 100)
     {
-        self.facing = 0
-        self.dfacing = 0
-        self.dtsprite = spr_alphysd
-        self.ltsprite = spr_alphysl
-        self.rtsprite = spr_alphysr
-        self.utsprite = spr_alphysu
+        facing = 0
+        dfacing = 0
+        dtsprite = spr_alphysd
+        ltsprite = spr_alphysl
+        rtsprite = spr_alphysr
+        utsprite = spr_alphysu
     }
 }
-if (self.room == room_field2)
+if (room == room_flowershop_1f)
 {
-    self.facing = 0
-    self.dfacing = 0
-    self.dtsprite = spr_lancer_dt
-    self.utsprite = spr_lancer_dt
-    self.rtsprite = spr_lancer_rt
-    self.ltsprite = spr_lancer_lt
-    if (self.room == room_field2)
+    facing = 0
+    dfacing = 0
+    dtsprite = spr_asgored
+    utsprite = spr_asgoreu
+    rtsprite = spr_asgorer
+    ltsprite = spr_asgorel
+}
+if (room == room_flowershop_2f)
+{
+    facing = 2
+    dfacing = 2
+    dtsprite = spr_asgored
+    utsprite = spr_asgoreu
+    rtsprite = spr_asgorer
+    ltsprite = spr_asgorel
+}
+if (room == room_alphysalley)
+{
+    facing = 3
+    dfacing = 3
+    dtsprite = spr_alphysd
+    utsprite = spr_alphysu
+    rtsprite = spr_alphysr
+    ltsprite = spr_alphysl
+}
+if (room == room_town_south)
+{
+    if (global.chapter == 1)
     {
-        if (global.plot >= 35)
-            instance_destroy()
+        facing = 0
+        dfacing = 0
+        dtsprite = spr_undyne_dt
+        utsprite = spr_undyne_ut
+        rtsprite = spr_undyne_rt
+        ltsprite = spr_undyne_lt
     }
 }
-if (self.room == room_forest_maze_deadend)
+if (room == room_town_mid)
 {
-    self.facing = 0
-    self.dfacing = 0
-    if (global.plot < 95)
-        global.plot = 95
-    global.flag[293] += 1
-    self.dtsprite = spr_lancer_dt
-    self.utsprite = spr_lancer_dt
-    self.rtsprite = spr_lancer_rt
-    self.ltsprite = spr_lancer_lt
-    if (global.plot >= 120)
+    facing = 0
+    dfacing = 0
+    dtsprite = spr_sans_d
+    ltsprite = spr_sans_l
+    utsprite = spr_sans_u
+    rtsprite = spr_sans_r
+}
+if (room == room_town_north)
+{
+    facing = 3
+    dfacing = 3
+    dtsprite = spr_noelle_walk_down_lw
+    ltsprite = spr_noelle_walk_left_lw
+    utsprite = spr_noelle_walk_up_lw
+    rtsprite = spr_noelle_walk_right_lw
+    if (global.flag[255] < 1 || global.chapter == 2)
         instance_destroy()
 }
-if (self.room == room_forest_maze_deadend2)
+if (room == room_dw_castle_area_2)
 {
-    self.facing = 2
-    self.dfacing = 2
-    global.flag[294] += 1
-    self.dtsprite = spr_susied_dark
-    self.utsprite = spr_susieu_dark
-    self.rtsprite = spr_susier_dark
-    self.ltsprite = spr_susiel_dark
-    if (global.plot >= 120)
+    facing = 0
+    dfacing = 0
+    dtsprite = spr_ralsei_down
+    ltsprite = spr_ralsei_left
+    utsprite = spr_ralsei_up
+    rtsprite = spr_ralsei_right
+    if (room == room_dw_castle_area_2 && global.chapter == 1)
         instance_destroy()
 }
-if (self.room == room_field_boxpuzzle)
+if (room == room_dw_cyber_queen_boxing)
 {
-    self.type = 0
-    if (self.x < (self.room_width / 2))
+    if (x < 310)
     {
-        self.sprite_index = spr_ralseid
-        self.dtsprite = spr_ralseid
-        self.utsprite = spr_ralseiu
-        self.rtsprite = spr_ralseir
-        self.ltsprite = spr_ralseil
-        self.y += self.sprite_height
+        facing = 2
+        dfacing = 2
+        dtsprite = spr_ralsei_down
+        ltsprite = spr_ralsei_left
+        utsprite = spr_ralsei_up
+        rtsprite = spr_ralsei_right
     }
-    else
+    if (x > 310 && x < 438)
     {
-        self.type = 1
-        self.sprite_index = spr_susied
-        self.dtsprite = spr_susied_dark
-        self.utsprite = spr_susieu_dark
-        self.rtsprite = spr_susier_dark
-        self.ltsprite = spr_susiel_dark
-        self.y += self.sprite_height
+        facing = 2
+        dfacing = 2
+        dtsprite = spr_susie_down_dw
+        ltsprite = spr_susie_left_dw
+        utsprite = spr_susie_up_dw
+        rtsprite = spr_susie_right_dw
     }
-}
-if (self.room == room_cc_kingbattle)
-{
-    if (global.plot < 240)
-        instance_destroy()
-    self.sprite_index = spr_ralseid
-    self.dtsprite = spr_ralseid
-    self.utsprite = spr_ralseiu
-    self.rtsprite = spr_ralseir
-    self.ltsprite = spr_ralseil
-    self.y += self.sprite_height
-}
-if (self.room == room_cc_throneroom)
-{
-    if (global.plot < 240)
-        instance_destroy()
-    self.sprite_index = spr_lancer_dt
-    self.dtsprite = spr_lancer_dt
-    self.utsprite = spr_lancer_ut
-    self.rtsprite = spr_lancer_rt
-    self.ltsprite = spr_lancer_lt
-    self.y += self.sprite_height
-    self.depthbonus = -250
-}
-if (self.room == room_forest_area1)
-{
-    self.sprite_index = spr_susier_dark
-    self.rtsprite = spr_susier_dark
-    self.dtsprite = spr_susied_dark
-    self.utsprite = spr_susieu_dark
-    self.ltsprite = spr_susiel_dark
-    self.facing = 1
-    self.dfacing = 1
-    if (self.x >= 1160)
+    if (x > 438)
     {
-        self.facing = 3
-        self.dfacing = 3
-        self.sprite_index = spr_lancer_lt
-        self.dtsprite = spr_lancer_dt
-        self.utsprite = spr_lancer_dt
-        self.rtsprite = spr_lancer_rt
-        self.ltsprite = spr_lancer_lt
-    }
-    if (global.plot > 70)
-        instance_destroy()
-}
-if (self.room == room_forest_area3)
-{
-    if (self.x >= 600)
-    {
-        self.facing = 2
-        self.dfacing = 2
-        self.sprite_index = spr_lancer_ut
-        self.dtsprite = spr_lancer_dt
-        self.utsprite = spr_lancer_ut
-        self.rtsprite = spr_lancer_rt
-        self.ltsprite = spr_lancer_lt
-    }
-    else
-    {
-        self.facing = 2
-        self.dfacing = 2
-        self.sprite_index = spr_susieut_dark
-        self.dtsprite = spr_susiedt_dark
-        self.utsprite = spr_susieut_dark
-        self.rtsprite = spr_susiert_dark
-        self.ltsprite = spr_susielt_dark
+        facing = 3
+        dfacing = 3
+        dtsprite = spr_queen_down
+        ltsprite = spr_queen_left
+        utsprite = spr_queen_up
+        rtsprite = spr_queen_right
     }
 }
-if (self.room == room_library)
+if (room == room_dw_ralsei_castle_2f)
 {
-    if (self.x < 120)
-    {
-        self.facing = 1
-        self.dfacing = 1
-        self.dtsprite = spr_berdly_library_r
-        self.utsprite = spr_berdly_library_u
-        self.rtsprite = spr_berdly_library_r
-        self.ltsprite = spr_berdly_library_u
-        self.depthcancel = 1
-        self.depth = 4000
-    }
-    if (self.x > 150)
-    {
-        self.facing = 1
-        self.dfacing = 1
-        self.dtsprite = spr_jockington_ut
-        self.utsprite = spr_jockington_ut
-        self.rtsprite = spr_jockington_rt
-        self.ltsprite = spr_jockington_lt
-    }
-    if (self.x > 220)
-    {
-        self.facing = 3
-        self.dfacing = 3
-        self.dtsprite = spr_tem_sit_l
-        self.rtsprite = spr_tem_sit_r
-        self.utsprite = spr_tem_sit
-        self.ltsprite = spr_tem_sit_l
-    }
+    facing = 2
+    dfacing = 2
+    dtsprite = spr_queen_down
+    ltsprite = spr_queen_left
+    utsprite = spr_queen_up
+    rtsprite = spr_queen_right
 }
-if (self.room == room_flowershop_1f)
+if (extflag == "ralsei_dw")
 {
-    self.facing = 0
-    self.dfacing = 0
-    self.dtsprite = spr_asgored
-    self.utsprite = spr_asgoreu
-    self.rtsprite = spr_asgorer
-    self.ltsprite = spr_asgorel
+    facing = 2
+    dfacing = 2
+    dtsprite = spr_ralsei_down
+    ltsprite = spr_ralsei_left
+    utsprite = spr_ralsei_up
+    rtsprite = spr_ralsei_right
 }
-if (self.room == room_flowershop_2f)
+if (extflag == "susie_dw")
 {
-    self.facing = 2
-    self.dfacing = 2
-    self.dtsprite = spr_asgored
-    self.utsprite = spr_asgoreu
-    self.rtsprite = spr_asgorer
-    self.ltsprite = spr_asgorel
-}
-if (self.room == room_alphysalley)
-{
-    self.facing = 3
-    self.dfacing = 3
-    self.dtsprite = spr_alphysd
-    self.utsprite = spr_alphysu
-    self.rtsprite = spr_alphysr
-    self.ltsprite = spr_alphysl
-}
-if (self.room == room_town_south)
-{
-    self.facing = 0
-    self.dfacing = 0
-    self.dtsprite = spr_undyne_dt
-    self.utsprite = spr_undyne_ut
-    self.rtsprite = spr_undyne_rt
-    self.ltsprite = spr_undyne_lt
-}
-if (self.room == room_town_mid)
-{
-    self.facing = 0
-    self.dfacing = 0
-    self.dtsprite = spr_sans_d
-    self.ltsprite = spr_sans_l
-    self.utsprite = spr_sans_u
-    self.rtsprite = spr_sans_r
-}
-if (self.room == room_town_north)
-{
-    self.facing = 3
-    self.dfacing = 3
-    self.dtsprite = spr_noelle_dt
-    self.ltsprite = spr_noelle_lt
-    self.utsprite = spr_noelle_ut
-    self.rtsprite = spr_noelle_rt
-    if (global.flag[255] < 1)
-        instance_destroy()
+    facing = 2
+    dfacing = 2
+    dtsprite = spr_susie_down_dw
+    ltsprite = spr_susie_left_dw
+    utsprite = spr_susie_up_dw
+    rtsprite = spr_susie_right_dw
 }
 scr_npcdir()
-self.y -= self.sprite_height
-if (self.depthcancel == 0)
+if (sprite_height_adjusted == 0)
+{
+    if (global.chapter == 1)
+    {
+        y -= sprite_height
+        sprite_height_adjusted = 1
+    }
+    if (global.chapter == 2 && global.plot <= 12)
+    {
+        y -= sprite_height
+        sprite_height_adjusted = 1
+    }
+    sprite_height_adjusted = 1
+}
+if (depthcancel == false)
     scr_depth()
-self.depth += self.depthbonus
+depth += depthbonus

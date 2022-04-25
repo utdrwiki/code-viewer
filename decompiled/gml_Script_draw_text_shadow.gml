@@ -1,5 +1,0 @@
-self.__txtcolor__ = draw_get_color()
-draw_set_color(0x00000000)
-draw_text((self.argument0 + 1), (self.argument1 + 1), string_hash_to_newline(self.argument2))
-draw_set_color(self.__txtcolor__)
-draw_text(self.argument0, self.argument1, string_hash_to_newline(self.argument2))

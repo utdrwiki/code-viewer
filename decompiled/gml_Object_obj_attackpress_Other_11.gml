@@ -1,16 +1,26 @@
 if (scr_monsterpop() > 0)
 {
-    for (self.i = 0; self.i < 3; self.i += 1)
+    for (i = 0; i < 3; i += 1)
     {
-        if (self.target == self.i)
+        if (target == i)
         {
-            if instance_exists(global.charinstance[self.i])
+            if (global.chapter == 2 && instance_exists(o_boxingcontroller))
             {
-                global.charinstance[self.i].points = self.points[self.i]
-                with (global.charinstance[self.i])
+                o_boxingcontroller.punchcon = 1
+                o_boxingcontroller.damageoverride = round(((global.battleat[0] * points[0]) / 10))
+                o_boxingcontroller.acttoenemytalktransition = true
+                if (points[0] == 150 || points[0] == 300)
+                    o_boxingcontroller.tpoverride = 5
+                if (points[0] == 0)
+                    o_boxingcontroller.damageoverride = 1
+            }
+            else if i_ex(global.charinstance[i])
+            {
+                global.charinstance[i].points = points[i]
+                with (global.charinstance[i])
                 {
-                    self.state = 1
-                    self.attacktimer = 0
+                    state = 1
+                    attacktimer = 0
                 }
             }
         }

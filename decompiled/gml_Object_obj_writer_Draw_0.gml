@@ -1,661 +1,766 @@
-self.button1 = 0
-self.button2 = 0
-self.button3 = 0
-if (button1_p() == 1)
-    self.button1 = 1
-if (button2_h() == 1)
-    self.button2 = 1
-if ((global.flag[10] == 1) || scr_debug())
+button1 = 0
+button2 = 0
+button3 = 0
+miniface_drawn = -1
+if (button1_p() == 1 && prevent_mash_buffer <= 0)
+    button1 = 1
+if (button2_h() == 1 && prevent_mash_buffer <= 0)
+    button2 = 1
+if (global.flag[10] == 1 || scr_debug())
 {
     if (button3_h() == 1)
     {
-        if (self.automash_timer == 0)
-            self.automash_timer = 1
+        prevent_mash_buffer = 3
+        if (automash_timer == 0)
+            automash_timer = 1
         else
-            self.automash_timer = 0
-        if (self.automash_timer == 0)
-            self.button1 = 1
-        if (self.automash_timer == 1)
-            self.button2 = 1
+            automash_timer = 0
+        if (automash_timer == 0)
+            button1 = 1
+        if (automash_timer == 1)
+            button2 = 1
     }
 }
-if ((self.dialoguer == 1) && (self.formatted == 0))
+if forcebutton1
+    button1 = 1
+prevent_mash_buffer--
+if (dialoguer == 1 && formatted == false)
 {
     if (global.fc == 0)
     {
-        self.charline = self.originalcharline
-        self.writingx = self.x
+        charline = originalcharline
+        writingx = x
     }
     else
     {
-        self.charline = 26
-        self.writingx = (self.x + (58 * self.f))
-        if (global.lang == "ja")
-            self.writingx -= 8
+        charline = 26
+        writingx = (x + (58 * f))
+    }
+    if instance_exists(obj_dialoguer)
+    {
+        if (obj_dialoguer.zurasucon == 2)
+        {
+            writingx = (camerax() + obj_dialoguer.remwriterx)
+            if (global.fc > 0)
+                writingx = ((camerax() + obj_dialoguer.remwriterx) + (58 * f))
+        }
     }
 }
-if (self.formatted == 0)
+if (formatted == false)
 {
-    self.length = string_length(self.mystring)
-    self.charpos = -1
-    self.remspace = -1
-    self.remchar = -1
-    self.linecount = 0
-    self.stringmax = 0
-    self.aster = 0
-    self.textalignment = ""
-    for (self.i = 0; self.i < (self.length + 1); self.i += 1)
+    length = string_length(mystring)
+    charpos = -1
+    remspace = -1
+    remchar = -1
+    linecount = 0
+    stringmax = 0
+    aster = false
+    for (i = 0; i < (length + 1); i += 1)
     {
-        self.skip = 0
-        self.thischar = string_char_at(self.mystring, self.i)
-        if ((self.thischar == "/") || (self.thischar == "%"))
+        skip = false
+        thischar = string_char_at(mystring, i)
+        if (thischar == "`")
+            i++
+        else if (thischar == "/" || thischar == "%")
         {
-            if (self.charpos > -1)
-                self.charpos -= 1
+            if (charpos > -1)
+                charpos -= 1
         }
-        if (self.thischar == "^")
+        else if (thischar == "^")
         {
-            if (self.charpos > -1)
-                self.charpos -= 2
+            if (charpos > -1)
+                charpos -= 2
         }
-        if (self.thischar == "\\")
+        else if (thischar == "\\")
         {
-            if (self.charpos > -1)
-                self.charpos -= 3
-            self.nextchar = string_char_at(self.mystring, (self.i + 1))
-            self.nextchar2 = string_char_at(self.mystring, (self.i + 2))
-            if (self.dialoguer == 1)
+            if (charpos > -1)
+                charpos -= 3
+            if (dialoguer == 1)
             {
-                if (self.nextchar == "E")
+                nextchar = string_char_at(mystring, (i + 1))
+                nextchar2 = string_char_at(mystring, (i + 2))
+                if (nextchar == "E")
                 {
-                    if (self.nextchar2 == "0")
-                        global.fe = 0
-                    if (self.nextchar2 == "1")
-                        global.fe = 1
-                    if (self.nextchar2 == "2")
-                        global.fe = 2
-                    if (self.nextchar2 == "3")
-                        global.fe = 3
-                    if (self.nextchar2 == "4")
-                        global.fe = 4
-                    if (self.nextchar2 == "5")
-                        global.fe = 5
-                    if (self.nextchar2 == "6")
-                        global.fe = 6
-                    if (self.nextchar2 == "7")
-                        global.fe = 7
-                    if (self.nextchar2 == "8")
-                        global.fe = 8
-                    if (self.nextchar2 == "9")
-                        global.fe = 9
-                    if (self.nextchar2 == "A")
-                        global.fe = 10
-                    if (self.nextchar2 == "B")
-                        global.fe = 11
-                    if (self.nextchar2 == "C")
-                        global.fe = 12
-                    if (self.nextchar2 == "D")
-                        global.fe = 13
-                    if (self.nextchar2 == "E")
-                        global.fe = 14
+                    __nextface = ord(nextchar2)
+                    if (__nextface >= 48 && __nextface <= 57)
+                        global.fe = real(nextchar2)
+                    else if (__nextface >= 65 && __nextface <= 90)
+                        global.fe = (__nextface - 55)
+                    else if (__nextface >= 97 && __nextface <= 122)
+                        global.fe = (__nextface - 61)
                 }
-                if (self.nextchar == "F")
+                if (nextchar == "F")
                 {
-                    if (self.nextchar2 == "0")
+                    if (nextchar2 == "0")
                         global.fc = 0
-                    if (self.nextchar2 == "S")
+                    if (nextchar2 == "S")
                         global.fc = 1
-                    if (self.nextchar2 == "R")
+                    if (nextchar2 == "R")
                         global.fc = 2
-                    if (self.nextchar2 == "N")
+                    if (nextchar2 == "N")
                         global.fc = 3
-                    if (self.nextchar2 == "T")
+                    if (nextchar2 == "T")
                         global.fc = 4
-                    if (self.nextchar2 == "L")
+                    if (nextchar2 == "L")
                         global.fc = 5
-                    if (self.nextchar2 == "A")
+                    if (nextchar2 == "s")
+                        global.fc = 6
+                    if (nextchar2 == "U")
+                        global.fc = 9
+                    if (nextchar2 == "A")
                         global.fc = 10
-                    if (self.nextchar2 == "a")
+                    if (nextchar2 == "a")
                         global.fc = 11
-                    if (self.nextchar2 == "B")
+                    if (nextchar2 == "B")
                         global.fc = 12
-                    if (self.nextchar2 == "r")
+                    if (nextchar2 == "r")
                         global.fc = 15
-                    if (self.nextchar2 == "u")
+                    if (nextchar2 == "u")
                         global.fc = 18
-                    if (self.nextchar2 == "K")
+                    if (nextchar2 == "K")
                         global.fc = 20
+                    if (nextchar2 == "Q")
+                        global.fc = 21
                     if (global.fc == 0)
                     {
-                        self.charline = self.originalcharline
-                        self.writingx = self.x
+                        charline = originalcharline
+                        writingx = x
                     }
                     else
                     {
-                        self.charline = 26
-                        self.writingx = (self.x + (58 * self.f))
+                        charline = 26
+                        writingx = (x + (58 * f))
                         if (global.lang == "ja")
-                            self.writingx -= 8
+                            writingx -= 8
                     }
                 }
-            }
-            if (self.nextchar == "a")
-                self.textalignment = self.nextchar2
-        }
-        if (self.thischar == "&")
-        {
-            if (self.charpos > self.stringmax)
-                self.stringmax = self.charpos
-            self.remspace = -1
-            self.charpos = 0
-            self.linecount += 1
-            self.skip = 1
-            self.nextchar = string_char_at(self.mystring, (self.i + 1))
-            if ((self.aster == 1) && ((self.autoaster == 1) && (self.nextchar != "*")))
-            {
-                self.charpos = 2
-                self.length += 2
-                self.mystring = string_insert(scr_84_get_lang_string("obj_writer_slash_Draw_0_gml_147_0"), self.mystring, (self.i + 1))
-                self.i += 2
-            }
-        }
-        if (self.skip == 0)
-        {
-            if (self.thischar == " ")
-            {
-                self.remspace = self.i
-                self.remchar = self.charpos
-            }
-            if (self.thischar == "*")
-                self.aster = 1
-            if (self.charpos >= self.charline)
-            {
-                if (self.remspace > 2)
+                if (nextchar == "m")
+                    drawaster = false
+                if (nextchar == "s")
                 {
-                    self.mystring = string_delete(self.mystring, self.remspace, 1)
-                    self.mystring = string_insert("&", self.mystring, self.remspace)
-                    self.i = (self.remspace + 1)
-                    if (self.remchar > self.stringmax)
-                        self.stringmax = self.remchar
-                    self.remspace = -1
-                    self.charpos = 1
-                    self.linecount += 1
+                    if (nextchar2 == "0")
+                        skippable = false
+                }
+            }
+        }
+        else if (thischar == "&" || thischar == "\n")
+        {
+            if (charpos > stringmax)
+                stringmax = charpos
+            remspace = -1
+            charpos = 0
+            linecount += 1
+            skip = true
+            nextchar = string_char_at(mystring, (i + 1))
+            if (aster == true && autoaster == true && nextchar != "*" && global.lang != "ja")
+            {
+                charpos = 2
+                length += 2
+                mystring = string_insert("||", mystring, (i + 1))
+                i += 2
+            }
+        }
+        if (skip == false)
+        {
+            if (thischar == " ")
+            {
+                remspace = i
+                remchar = charpos
+            }
+            if (thischar == "*")
+                aster = true
+            if (charpos >= charline)
+            {
+                if (remspace > 2)
+                {
+                    mystring = string_delete(mystring, remspace, 1)
+                    mystring = string_insert("&", mystring, remspace)
+                    i = (remspace + 1)
+                    if (remchar > stringmax)
+                        stringmax = remchar
+                    remspace = -1
+                    charpos = 1
+                    linecount += 1
                     scr_asterskip()
                 }
                 else
                 {
-                    if (self.charpos > self.stringmax)
-                        self.stringmax = self.charpos
-                    self.mystring = string_insert("&", self.mystring, self.i)
-                    self.length += 1
-                    self.charpos = 1
-                    self.remspace = -1
-                    self.linecount += 1
-                    self.i += 1
+                    if (charpos > stringmax)
+                        stringmax = charpos
+                    mystring = string_insert("&", mystring, i)
+                    length += 1
+                    charpos = 1
+                    remspace = -1
+                    linecount += 1
+                    i += 1
                     scr_asterskip()
                 }
             }
             else
-                self.charpos += 1
+                charpos += 1
         }
     }
-    if (self.charpos > self.stringmax)
-        self.stringmax = self.charpos
-    self.formatted = 1
-    if (self.textalignment == "c")
+    if (autocenter == 1)
     {
-        var xxx = __view_get(0, 0)
-        self.writingx = ((xxx + 320) - ((self.stringmax * self.hspace) / 2))
+        x = (((camerax() + (camerawidth() / 2)) - ((stringmax * hspace) / 2)) + 5)
+        y = (((cameray() + (cameraheight() / 2)) - ((writingy + ((linecount + 1) * vspace)) / 2)) - 10)
     }
+    if (charpos > stringmax)
+        stringmax = charpos
+    formatted = true
 }
-self.accept = 0
-self.wx = self.writingx
-self.wy = self.writingy
-self.colorchange = 0
-draw_set_font(self.myfont)
-draw_set_color(self.mycolor)
-if ((self.halt == 0) && ((self.button2 == 1) && ((self.pos < self.length) && (self.skippable == 1))))
-    self.skipme = 1
-if (self.skipme == 1)
+accept = false
+wx = writingx
+wy = writingy
+colorchange = false
+draw_set_font(myfont)
+draw_set_color(mycolor)
+if (halt == false && button2 == 1 && pos < length && skippable == true)
+    skipme = true
+if (skipme == true)
 {
-    self.pos = (string_length(self.mystring) + 1)
-    self.alarm[0] = -1
-    self.alarm[1] = -1
+    pos = (string_length(mystring) + 1)
+    reachedend = 1
+    alarm[0] = -1
+    alarm[1] = -1
 }
-for (self.n = 1; self.n < self.pos; self.n += 1)
+for (n = 1; n < pos; n += 1)
 {
-    self.accept = 1
-    self.mychar = string_char_at(self.mystring, self.n)
-    if (self.mychar == "&")
+    accept = true
+    mychar = string_char_at(mystring, n)
+    if (mychar == "`")
     {
-        self.accept = 0
-        self.wx = self.writingx
-        if (self.wxskip == 1)
-            self.wx = (self.writingx + 58)
-        self.wy += self.vspace
+        n++
+        mychar = string_char_at(mystring, n)
     }
-    if (self.mychar == "|")
+    else if (mychar == "&" || mychar == "\n")
     {
-        self.accept = 0
-        self.wx += self.hspace
+        accept = false
+        wx = writingx
+        if (wxskip == 1)
+            wx = (writingx + 58)
+        wy += vspace
     }
-    if (self.mychar == "^")
+    else if (mychar == "|")
     {
-        self.accept = 0
-        self.n += 1
+        accept = false
+        wx += hspace
     }
-    if (self.mychar == "/")
+    else if (mychar == "^")
     {
-        self.halt = 1
-        if (string_char_at(self.mystring, (self.n + 1)) == "%")
-            self.halt = 2
-        self.accept = 0
+        accept = false
+        n += 1
     }
-    if (self.mychar == "%")
+    else if (mychar == "/")
     {
-        self.accept = 0
-        if (string_char_at(self.mystring, (self.n - 1)) == "/")
-            self.halt = 2
-        if (string_char_at(self.mystring, (self.n + 1)) == "%")
+        halt = true
+        if (string_char_at(mystring, (n + 1)) == "%")
+            halt = 2
+        accept = false
+    }
+    else if (mychar == "%")
+    {
+        accept = false
+        if (string_char_at(mystring, (n - 1)) == "/")
+            halt = 2
+        if (string_char_at(mystring, (n + 1)) == "%")
             instance_destroy()
-        else if (self.halt != 2)
+        else if (halt != 2)
             scr_nextmsg()
     }
-    if (self.mychar == "\\")
+    else if (mychar == "\\")
     {
-        self.nextchar = string_char_at(self.mystring, (self.n + 1))
-        self.nextchar2 = string_char_at(self.mystring, (self.n + 2))
-        if (self.nextchar == "E")
+        nextchar = string_char_at(mystring, (n + 1))
+        nextchar2 = string_char_at(mystring, (n + 2))
+        if (nextchar == "E")
         {
-            if (self.nextchar2 == "0")
-                global.fe = 0
-            if (self.nextchar2 == "1")
-                global.fe = 1
-            if (self.nextchar2 == "2")
-                global.fe = 2
-            if (self.nextchar2 == "3")
-                global.fe = 3
-            if (self.nextchar2 == "4")
-                global.fe = 4
-            if (self.nextchar2 == "5")
-                global.fe = 5
-            if (self.nextchar2 == "6")
-                global.fe = 6
-            if (self.nextchar2 == "7")
-                global.fe = 7
-            if (self.nextchar2 == "8")
-                global.fe = 8
-            if (self.nextchar2 == "9")
-                global.fe = 9
-            if (self.nextchar2 == "A")
-                global.fe = 10
-            if (self.nextchar2 == "B")
-                global.fe = 11
-            if (self.nextchar2 == "C")
-                global.fe = 12
-            if (self.nextchar2 == "D")
-                global.fe = 13
-            if (self.nextchar2 == "E")
-                global.fe = 14
+            __nextface = ord(nextchar2)
+            if (__nextface >= 48 && __nextface <= 57)
+                global.fe = real(nextchar2)
+            else if (__nextface >= 65 && __nextface <= 90)
+                global.fe = (__nextface - 55)
+            else if (__nextface >= 97 && __nextface <= 122)
+                global.fe = (__nextface - 61)
         }
-        if (self.nextchar == "F")
+        if (nextchar == "F")
         {
-            if (self.nextchar2 == "0")
+            if (nextchar2 == "0")
                 global.fc = 0
-            if (self.nextchar2 == "S")
+            if (nextchar2 == "S")
                 global.fc = 1
-            if (self.nextchar2 == "R")
+            if (nextchar2 == "R")
                 global.fc = 2
-            if (self.nextchar2 == "N")
+            if (nextchar2 == "N")
                 global.fc = 3
-            if (self.nextchar2 == "T")
+            if (nextchar2 == "T")
                 global.fc = 4
-            if (self.nextchar2 == "L")
+            if (nextchar2 == "L")
                 global.fc = 5
-            if (self.nextchar2 == "A")
+            if (nextchar2 == "s")
+                global.fc = 6
+            if (nextchar2 == "A")
                 global.fc = 10
-            if (self.nextchar2 == "a")
+            if (nextchar2 == "a")
                 global.fc = 11
-            if (self.nextchar2 == "B")
+            if (nextchar2 == "B")
                 global.fc = 12
-            if (self.nextchar2 == "r")
+            if (nextchar2 == "b")
+                global.fc = 19
+            if (nextchar2 == "r")
                 global.fc = 15
-            if (self.nextchar2 == "u")
+            if (nextchar2 == "u")
                 global.fc = 18
-            if (self.nextchar2 == "K")
+            if (nextchar2 == "U")
+                global.fc = 9
+            if (nextchar2 == "K")
                 global.fc = 20
-            if (self.dialoguer == 1)
+            if (nextchar2 == "Q")
+                global.fc = 21
+            if (dialoguer == 1)
             {
                 if (global.fc == 0)
                 {
-                    self.charline = self.originalcharline
-                    self.wx = self.x
+                    charline = originalcharline
+                    wx = x
                 }
                 else
                 {
-                    self.charline = 26
-                    self.wx = (self.x + (58 * self.f))
+                    charline = 26
+                    wx = (x + (58 * f))
                 }
             }
         }
-        if ((self.nextchar == "f") && (self.faced == 0))
+        if (nextchar == "f" && faced == 0)
         {
-            self.fam = 0
-            self.fam = real(self.nextchar2)
-            self.faced = 1
-            self.smallface = instance_create(global.smxx[self.fam], global.smyy[self.fam], obj_smallface)
-            if instance_exists(self.smallface)
+            fam = 0
+            fam = real(nextchar2)
+            if (!i_ex(global.sminstance[fam]))
             {
-                self.smallface.x += self.x
-                self.smallface.y += self.y
-                self.smallface.speed = global.smspeed[self.fam]
-                self.smallface.direction = global.smdir[self.fam]
-                self.smallface.type = global.smtype[self.fam]
-                self.smallface.sprite_index = global.smsprite[self.fam]
-                self.smallface.alarm[0] = global.smalarm[self.fam]
-                self.smallface.mystring = global.smstring[self.fam]
-                self.smallface.mycolor = global.smcolor[self.fam]
-                self.smallface.writergod = self.id
+                global.sminstance[fam] = instance_create(global.smxx[fam], global.smyy[fam], obj_smallface)
+                smallface = global.sminstance[fam]
+                if i_ex(smallface)
+                {
+                    smallface.x += x
+                    smallface.y += y
+                    smallface.speed = global.smspeed[fam]
+                    smallface.direction = global.smdir[fam]
+                    smallface.type = global.smtype[fam]
+                    smallface.sprite_index = global.smsprite[fam]
+                    smallface.image_speed = global.smimagespeed[fam]
+                    smallface.image_index = global.smimage[fam]
+                    smallface.alarm[0] = global.smalarm[fam]
+                    smallface.mystring = global.smstring[fam]
+                    smallface.mycolor = global.smcolor[fam]
+                    smallface.writergod = id
+                }
             }
         }
-        if (self.nextchar == "T")
+        if (nextchar == "*")
         {
-            if (self.nextchar2 == "0")
+            wx = round(wx)
+            var _sprite = scr_getbuttonsprite(nextchar2, true)
+            var y_offset = 0
+            var x_offset = 0
+            if (global.typer == 50 || global.typer == 70 || global.typer == 71)
+            {
+                x_offset = -3
+                y_offset = -9
+            }
+            draw_sprite_ext(_sprite, 0, (wx + x_offset), ((wy + 2) + y_offset), 2, 2, 0, c_white, 1)
+            if (_sprite == button_ps4_options)
+                wx += 8
+            if (global.lang == "ja")
+            {
+                if (_sprite == button_ps4_dpad_up || _sprite == button_ps4_dpad_down || _sprite == button_ps4_dpad_left || _sprite == button_ps4_dpad_right)
+                    wx += 2
+            }
+        }
+        if (nextchar == "T")
+        {
+            if (nextchar2 == "0")
             {
                 global.typer = 5
-                if (global.darkzone == 1)
-                {
+                if (global.darkzone == true)
                     global.typer = 6
-                    if (global.fighting == 1)
-                        global.typer = 4
-                }
                 scr_texttype()
             }
-            if (self.nextchar2 == "1")
+            if (nextchar2 == "1")
             {
                 global.typer = 2
                 scr_texttype()
             }
-            if (self.nextchar2 == "A")
+            if (nextchar2 == "A")
             {
                 global.typer = 18
                 scr_texttype()
             }
-            if (self.nextchar2 == "a")
+            if (nextchar2 == "a")
             {
                 global.typer = 20
                 scr_texttype()
             }
-            if (self.nextchar2 == "N")
+            if (nextchar2 == "N")
             {
                 global.typer = 12
+                if (global.darkzone == true)
+                    global.typer = 56
+                if (global.fighting == true)
+                    global.typer = 59
                 scr_texttype()
             }
-            if (self.nextchar2 == "n")
+            if (nextchar2 == "n")
             {
                 global.typer = 23
                 scr_texttype()
             }
-            if (self.nextchar2 == "B")
+            if (nextchar2 == "B")
             {
                 global.typer = 13
+                if (global.darkzone == true)
+                    global.typer = 57
+                if (global.fighting == true)
+                    global.typer = 77
                 scr_texttype()
             }
-            if (self.nextchar2 == "S")
+            if (nextchar2 == "S")
             {
                 global.typer = 10
-                if (global.darkzone == 1)
+                if (global.darkzone == true)
                 {
                     global.typer = 30
-                    if (global.fighting == 1)
+                    if (global.fighting == true)
                         global.typer = 47
                 }
                 scr_texttype()
             }
-            if (self.nextchar2 == "R")
+            if (nextchar2 == "R")
             {
                 global.typer = 31
-                if (global.fighting == 1)
+                if (global.fighting == true)
                     global.typer = 45
                 if (global.flag[30] == 1)
                     global.typer = 6
                 scr_texttype()
             }
-            if (self.nextchar2 == "L")
+            if (nextchar2 == "L")
             {
                 global.typer = 32
-                if (global.fighting == 1)
+                if (global.fighting == true)
                     global.typer = 46
                 scr_texttype()
             }
-            if (self.nextchar2 == "X")
+            if (nextchar2 == "X")
             {
                 global.typer = 40
                 scr_texttype()
             }
-            if (self.nextchar2 == "r")
+            if (nextchar2 == "r")
             {
                 global.typer = 55
                 scr_texttype()
             }
-            if (self.nextchar2 == "T")
+            if (nextchar2 == "T")
             {
                 global.typer = 7
                 scr_texttype()
             }
-            if (self.nextchar2 == "J")
+            if (nextchar2 == "J")
             {
                 global.typer = 35
                 scr_texttype()
             }
-            if (self.nextchar2 == "K")
+            if (nextchar2 == "K")
             {
                 global.typer = 33
-                if (global.plot < 235)
-                    global.typer = 36
-                if (global.fighting == 1)
+                if (global.chapter == 1)
+                {
+                    if (global.plot < 235)
+                        global.typer = 36
+                }
+                if (global.fighting == true)
                     global.typer = 48
                 scr_texttype()
             }
-            if (self.dialoguer == 1)
+            if (nextchar2 == "q")
+            {
+                global.typer = 62
+                scr_texttype()
+            }
+            if (nextchar2 == "Q")
+            {
+                global.typer = 58
+                scr_texttype()
+            }
+            if (nextchar2 == "s")
+            {
+                global.typer = 14
+                scr_texttype()
+            }
+            if (nextchar2 == "U")
+            {
+                global.typer = 17
+                scr_texttype()
+            }
+            if (nextchar2 == "p")
+            {
+                global.typer = 67
+                scr_texttype()
+            }
+            if (dialoguer == 1)
             {
                 if (global.fc == 0)
                 {
-                    self.charline = self.originalcharline
-                    self.wx = self.x
+                    charline = originalcharline
+                    wx = x
                 }
                 else
-                    self.wxskip = 1
+                    wxskip = 1
             }
         }
-        if (self.nextchar == "s")
+        if (nextchar == "s")
         {
-            if (self.nextchar2 == "0")
-                self.skippable = 0
-            if (self.nextchar2 == "1")
-                self.skippable = 1
+            if (nextchar2 == "0")
+                skippable = false
+            if (nextchar2 == "1")
+                skippable = true
         }
-        if (self.nextchar == "c")
+        if (nextchar == "c")
         {
-            self.colorchange = 1
-            if (self.nextchar2 == "R")
-                self.xcolor = 0x000000FF
-            if (self.nextchar2 == "B")
-                self.xcolor = 0x00FF0000
-            if (self.nextchar2 == "Y")
-                self.xcolor = 0x0000FFFF
-            if (self.nextchar2 == "G")
-                self.xcolor = 0x0000FF00
-            if (self.nextchar2 == "W")
-                self.xcolor = 0x00FFFFFF
-            if (self.nextchar2 == "X")
-                self.xcolor = 0x00000000
-            if (self.nextchar2 == "0")
-                self.xcolor = self.mycolor
+            colorchange = true
+            if (nextchar2 == "R")
+                xcolor = c_red
+            if (nextchar2 == "B")
+                xcolor = c_blue
+            if (nextchar2 == "Y")
+                xcolor = c_yellow
+            if (nextchar2 == "G")
+                xcolor = c_lime
+            if (nextchar2 == "W")
+                xcolor = c_white
+            if (nextchar2 == "X")
+                xcolor = c_black
+            if (nextchar2 == "P")
+                xcolor = c_purple
+            if (nextchar2 == "M")
+                xcolor = c_maroon
+            if (nextchar2 == "S")
+                xcolor = hexcolor(16744703)
+            if (nextchar2 == "V")
+                xcolor = hexcolor(8454016)
+            if (nextchar2 == "0")
+                xcolor = mycolor
         }
-        if (self.nextchar == "C")
+        if (nextchar == "C")
         {
-            if (self.nextchar2 == "1")
+            if (nextchar2 == "1")
             {
                 if (instance_exists(obj_choicer_old) == 0)
-                    self.choicer = instance_create(0, 0, obj_choicer_old)
-                self.halt = 5
+                    choicer = instance_create(0, 0, obj_choicer_old)
+                halt = 5
             }
-            if ((self.nextchar2 == "2") || ((self.nextchar2 == "3") || (self.nextchar2 == "4")))
+            if (nextchar2 == "2" || nextchar2 == "3" || nextchar2 == "4")
             {
                 if (instance_exists(obj_choicer_neo) == 0)
                 {
-                    self.choicer = instance_create(0, 0, obj_choicer_neo)
-                    self.choicer.choicetotal = (real(self.nextchar2) - 1)
+                    choicer = instance_create(0, 0, obj_choicer_neo)
+                    choicer.choicetotal = (real(nextchar2) - 1)
                 }
-                self.halt = 5
+                halt = 5
             }
         }
-        if (self.nextchar == "M")
+        if (nextchar == "M")
         {
-            if (self.nextchar2 == "0")
+            if (nextchar2 == "0")
                 global.flag[20] = 0
-            if (self.nextchar2 == "1")
+            if (nextchar2 == "1")
                 global.flag[20] = 1
-            if (self.nextchar2 == "2")
+            if (nextchar2 == "2")
                 global.flag[20] = 2
-            if (self.nextchar2 == "3")
+            if (nextchar2 == "3")
                 global.flag[20] = 3
-            if (self.nextchar2 == "4")
+            if (nextchar2 == "4")
                 global.flag[20] = 4
-            if (self.nextchar2 == "5")
+            if (nextchar2 == "5")
                 global.flag[20] = 5
-            if (self.nextchar2 == "6")
+            if (nextchar2 == "6")
                 global.flag[20] = 6
-            if (self.nextchar2 == "7")
+            if (nextchar2 == "7")
                 global.flag[20] = 7
-            if (self.nextchar2 == "8")
+            if (nextchar2 == "8")
                 global.flag[20] = 8
-            if (self.nextchar2 == "9")
+            if (nextchar2 == "9")
                 global.flag[20] = 9
         }
-        if (self.nextchar == "S")
+        if (nextchar == "S")
         {
-            if (self.sound_played == 0)
+            if (sound_played == false)
             {
-                for (self.i = 0; self.i < 10; self.i += 1)
+                for (i = 0; i < 10; i += 1)
                 {
-                    if ((self.nextchar2 == string(self.i)) && (self.sound_played == 0))
+                    if (nextchar2 == string(i) && sound_played == false)
                     {
-                        snd_play(global.writersnd[self.i])
-                        self.sound_played = 1
+                        snd_play(global.writersnd[i])
+                        sound_played = true
                     }
                 }
             }
         }
-        if (self.nextchar == "I")
+        if (nextchar == "I")
         {
-            for (self.i = 0; self.i < 10; self.i += 1)
+            for (i = 0; i < 10; i += 1)
             {
-                if (self.nextchar2 == string(self.i))
-                    draw_sprite(global.writerimg[self.i], 0, self.wx, (self.wy + 4))
+                if (nextchar2 == string(i))
+                    draw_sprite(global.writerimg[i], 0, wx, (wy + 4))
             }
         }
-        self.accept = 0
-        self.n += 2
-    }
-    if (self.accept == 1)
-    {
-        if (self.colorchange == 1)
-            draw_set_color(self.xcolor)
-        if (self.special == 0)
-            draw_text_transformed((self.wx + random(self.shake)), (self.wy + random(self.shake)), string_hash_to_newline(self.mychar), self.textscale, self.textscale, 0)
-        if (self.special >= 1)
+        if (nextchar == "m")
         {
-            if (self.special == 1)
+            drawaster = false
+            for (i = 0; i < 10; i += 1)
             {
-                if ((draw_get_color() != 16777215) && (draw_get_color() != 0))
+                if (nextchar2 == string(i))
                 {
-                    draw_text_color(((self.wx + random(self.shake)) + 1), ((self.wy + random(self.shake)) + 1), string_hash_to_newline(self.mychar), self.xcolor, self.xcolor, self.xcolor, self.xcolor, 0.3)
-                    draw_text_color((self.wx + random(self.shake)), (self.wy + random(self.shake)), string_hash_to_newline(self.mychar), 0x00FFFFFF, 0x00FFFFFF, self.xcolor, self.xcolor, 1)
+                    if (n >= miniface_current_pos)
+                    {
+                        miniface_image = (miniface_pos / 4)
+                        miniface_current_pos = n
+                    }
+                    else
+                        miniface_image = 0
+                    draw_sprite_ext(global.writerimg[i], miniface_image, (writingx - 8), (wy - 4), 2, 2, 0, mycolor, 1)
+                    miniface_drawn = i
+                }
+            }
+        }
+        accept = false
+        n += 2
+    }
+    if (accept == true)
+    {
+        if (drawaster == false && mychar == "*")
+            mychar = " "
+        if (colorchange == true)
+            draw_set_color(xcolor)
+        if (mychar == "#")
+        {
+            if (string_char_at(mystring, (n - 1)) != "`")
+                mychar = string_hash_to_newline(mychar)
+        }
+        if (jpspecial == 1)
+        {
+            if scr_kana_check(mychar)
+            {
+                draw_set_font(fnt_ja_mainbig)
+                jpused = 1
+            }
+            if (!scr_kana_check(mychar))
+            {
+                draw_set_font(myfont)
+                jpused = 0
+            }
+        }
+        if (special == false)
+            draw_text_transformed((wx + random(shake)), (wy + random(shake)), mychar, textscale, textscale, 0)
+        if (special >= true)
+        {
+            if (special == true)
+            {
+                if (draw_get_color() != 16777215 && draw_get_color() != 0)
+                {
+                    draw_text_color(((wx + random(shake)) + 1), ((wy + random(shake)) + 1), mychar, xcolor, xcolor, xcolor, xcolor, 0.3)
+                    draw_text_color((wx + random(shake)), (wy + random(shake)), mychar, c_white, c_white, xcolor, xcolor, 1)
                 }
                 else
                 {
-                    draw_text_color(((self.wx + random(self.shake)) + 1), ((self.wy + random(self.shake)) + 1), string_hash_to_newline(self.mychar), 0x00404040, 0x00404040, 0x00800000, 0x00800000, 1)
-                    draw_text((self.wx + random(self.shake)), (self.wy + random(self.shake)), string_hash_to_newline(self.mychar))
+                    draw_text_color(((wx + random(shake)) + 1), ((wy + random(shake)) + 1), mychar, c_dkgray, c_dkgray, c_navy, c_navy, 1)
+                    draw_text((wx + random(shake)), (wy + random(shake)), mychar)
                 }
             }
-            if (self.special == 2)
+            if (special == 2)
             {
-                draw_set_alpha((1 * self.specfade))
-                draw_text(self.wx, self.wy, string_hash_to_newline(self.mychar))
-                draw_set_alpha(((0.3 + (sin((self.siner / 14)) * 0.1)) * self.specfade))
-                draw_text((self.wx + 1), self.wy, string_hash_to_newline(self.mychar))
-                draw_text((self.wx - 1), self.wy, string_hash_to_newline(self.mychar))
-                draw_text(self.wx, (self.wy + 1), string_hash_to_newline(self.mychar))
-                draw_text(self.wx, (self.wy - 1), string_hash_to_newline(self.mychar))
-                draw_set_alpha(((0.08 + (sin((self.siner / 14)) * 0.04)) * self.specfade))
-                draw_text((self.wx + 1), (self.wy + 1), string_hash_to_newline(self.mychar))
-                draw_text((self.wx - 1), (self.wy - 1), string_hash_to_newline(self.mychar))
-                draw_text((self.wx - 1), (self.wy + 1), string_hash_to_newline(self.mychar))
-                draw_text((self.wx + 1), (self.wy - 1), string_hash_to_newline(self.mychar))
+                draw_set_alpha((1 * specfade))
+                draw_text(wx, wy, mychar)
+                draw_set_alpha(((0.3 + (sin((siner / 14)) * 0.1)) * specfade))
+                draw_text((wx + 1), wy, mychar)
+                draw_text((wx - 1), wy, mychar)
+                draw_text(wx, (wy + 1), mychar)
+                draw_text(wx, (wy - 1), mychar)
+                draw_set_alpha(((0.08 + (sin((siner / 14)) * 0.04)) * specfade))
+                draw_text((wx + 1), (wy + 1), mychar)
+                draw_text((wx - 1), (wy - 1), mychar)
+                draw_text((wx - 1), (wy + 1), mychar)
+                draw_text((wx + 1), (wy - 1), mychar)
                 draw_set_alpha(1)
             }
-            if (self.special == 3)
+            if (special == 3)
             {
-                draw_set_color(0x00FFFFFF)
+                draw_set_color(c_white)
                 draw_set_alpha(1)
-                draw_text((self.wx + sin((self.siner / 4))), (self.wy + cos((self.siner / 4))), string_hash_to_newline(self.mychar))
+                draw_text((wx + sin((siner / 4))), (wy + cos((siner / 4))), mychar)
                 draw_set_alpha(0.5)
-                draw_text((self.wx + sin((self.siner / 5))), (self.wy + cos((self.siner / 5))), string_hash_to_newline(self.mychar))
-                draw_text((self.wx + sin((self.siner / 7))), (self.wy + cos((self.siner / 7))), string_hash_to_newline(self.mychar))
-                draw_text((self.wx + sin((self.siner / 9))), (self.wy + cos((self.siner / 9))), string_hash_to_newline(self.mychar))
-                for (self.i = 0; self.i < 7; self.i += 1)
+                draw_text((wx + sin((siner / 5))), (wy + cos((siner / 5))), mychar)
+                draw_text((wx + sin((siner / 7))), (wy + cos((siner / 7))), mychar)
+                draw_text((wx + sin((siner / 9))), (wy + cos((siner / 9))), mychar)
+                for (i = 0; i < 7; i += 1)
                 {
-                    self.ddir = (315 + random(15))
-                    if (self.n == 1)
+                    ddir = (315 + random(15))
+                    if (n == 1)
                     {
-                        self.specx[self.i] += lengthdir_x(2, self.ddir)
-                        self.specy[self.i] += lengthdir_y(2, self.ddir)
-                        if (self.specx[self.i] >= 40)
+                        specx[i] += lengthdir_x(2, ddir)
+                        specy[i] += lengthdir_y(2, ddir)
+                        if (specx[i] >= 40)
                         {
-                            self.specx[self.i] = 0
-                            self.specy[self.i] = 0
+                            specx[i] = 0
+                            specy[i] = 0
                         }
                     }
-                    draw_set_alpha((((40 - self.specx[self.i]) / 40) * 0.7))
-                    draw_text((self.wx + self.specx[self.i]), (self.wy + self.specy[self.i]), string_hash_to_newline(self.mychar))
+                    draw_set_alpha((((40 - specx[i]) / 40) * 0.7))
+                    draw_text((wx + specx[i]), (wy + specy[i]), mychar)
                 }
                 draw_set_alpha(1)
             }
         }
-        self.wx += self.hspace
+        wx += hspace
         if (global.lang == "ja")
         {
-            if ((ord(self.mychar) < 256) || ((ord(self.mychar) >= 65377) && (ord(self.mychar) <= 65439)))
-                self.wx -= (self.hspace / 2)
+            if (ord(mychar) < 256 || (ord(mychar) >= 65377 && ord(mychar) <= 65439))
+                wx -= (hspace / 2)
+        }
+        if (global.lang == "en")
+        {
+            if (myfont == fnt_comicsans)
+            {
+                if (mychar == "w")
+                    wx += 2
+                if (mychar == "m")
+                    wx += 3
+                if (mychar == "i")
+                    wx -= 2
+                if (mychar == "l")
+                    wx -= 2
+                if (mychar == "s")
+                    wx -= 1
+                if (mychar == "j")
+                    wx -= 1
+            }
+            if (jpused == 1)
+                wx += 16
         }
     }
 }
-if ((self.halt != 0) && ((self.button1 == 1) && (self.siner > 0)))
+if (halt != false && button1 == 1 && siner > 0)
 {
-    if (self.halt == 1)
+    if (halt == true)
     {
         scr_nextmsg()
-        if (self.faced == 1)
-        {
-            with (self.smallface)
-            {
-                if (self.getrid == 0)
-                    self.getrid = 1
-            }
-            self.faced = 0
-        }
+        with (obj_smallface)
+            instance_destroy()
     }
-    if (self.halt == 2)
+    if (halt == 2)
     {
-        if (self.faced == 1)
-        {
-            with (self.smallface)
-                instance_destroy()
-            self.faced = 0
-        }
-        if (self.facer == 1)
+        with (obj_smallface)
+            instance_destroy()
+        if (facer == 1)
         {
             with (obj_face)
                 instance_destroy()
@@ -663,5 +768,5 @@ if ((self.halt != 0) && ((self.button1 == 1) && (self.siner > 0)))
         instance_destroy()
     }
 }
-self.skipme = 0
-self.siner += 1
+skipme = false
+siner += 1

@@ -1,66 +1,66 @@
-if (self.state == 3)
+if (state == 3)
 {
-    if (global.monsterhp[self.myself] <= (global.monstermaxhp[self.myself] / 3))
+    if (global.monsterhp[myself] <= (global.monstermaxhp[myself] / 3))
     {
-        global.monsterstatus[self.myself] = 1
-        if (global.monstercomment[self.myself] == " ")
-            global.monstercomment[self.myself] = scr_84_get_lang_string("obj_ponman_enemy_slash_Draw_0_gml_6_0")
+        global.monsterstatus[myself] = true
+        if (global.monstercomment[myself] == " ")
+            global.monstercomment[myself] = "(Weak)"
     }
-    self.hurttimer -= 1
-    if (self.hurttimer < 0)
-        self.state = 0
+    hurttimer -= 1
+    if (hurttimer < 0)
+        state = 0
     else
     {
-        if (global.monster[self.myself] == 0)
+        if (global.monster[myself] == false)
         {
-            self.hspeed = 12
-            self.turnt -= 8
-            self.vspeed = -4
+            hspeed = 12
+            turnt -= 8
+            vspeed = -4
         }
-        self.hurtshake += 1
-        if (self.hurtshake > 1)
+        hurtshake += 1
+        if (hurtshake > 1)
         {
-            if (self.shakex > 0)
-                self.shakex -= 1
-            if (self.shakex < 0)
-                self.shakex += 1
-            self.shakex = (-self.shakex)
-            self.hurtshake = 0
+            if (shakex > 0)
+                shakex -= 1
+            if (shakex < 0)
+                shakex += 1
+            shakex = (-shakex)
+            hurtshake = 0
         }
-        draw_sprite_ext(spr_ponman_idle, 0, (self.x + self.shakex), self.y, 2, 2, 0, self.image_blend, 1)
-        if (self.sleeping == 0)
-            draw_sprite_ext(spr_ponman_eye, 0, ((self.x + 28) + self.eyex), ((self.y + 32) + self.eyey), 2, 2, 0, 0x00FFFFFF, 1)
-        if (self.sleeping == 1)
+        draw_sprite_ext(spr_ponman_idle, 0, (x + shakex), y, 2, 2, 0, image_blend, 1)
+        if (sleeping == false)
+            draw_sprite_ext(spr_ponman_eye, 0, ((x + 28) + eyex), ((y + 32) + eyey), 2, 2, 0, c_white, 1)
+        if (sleeping == true)
         {
-            scr_mercyadd(self.myself, -100)
-            self.sprite_index = spr_ponman_idle
-            self.image_index = 0
-            self.sleeping = 0
+            scr_mercyadd(myself, -100)
+            sprite_index = spr_ponman_idle
+            image_index = 0
+            sleeping = false
         }
     }
 }
-if (self.state == 0)
+if (state == 0)
 {
-    self.thissprite = spr_ponman_idle
-    self.this_index = self.image_index
-    if (self.sleeping == 1)
+    thissprite = spr_ponman_idle
+    this_index = image_index
+    if (sleeping == true)
     {
-        self.thissprite = spr_ponman_appear
-        self.this_index = self.sleep_index
-        if (self.sleep_index > 0.5)
-            self.sleep_index -= 0.25
+        thissprite = spr_ponman_appear
+        this_index = sleep_index
+        if (sleep_index > 0.5)
+            sleep_index -= 0.25
     }
-    draw_sprite_ext(self.thissprite, self.this_index, self.x, self.y, 2, 2, 0, self.image_blend, 1)
-    if (self.sleeping == 0)
-        draw_sprite_ext(spr_ponman_eye, 0, ((self.x + 28) + self.eyex), ((self.y + 32) + self.eyey), 2, 2, 0, 0x00FFFFFF, 1)
-    if (self.flash == 1)
+    draw_sprite_ext(thissprite, this_index, x, y, 2, 2, 0, image_blend, 1)
+    if (sleeping == false)
+        draw_sprite_ext(spr_ponman_eye, 0, ((x + 28) + eyex), ((y + 32) + eyey), 2, 2, 0, c_white, 1)
+    if (flash == true)
     {
-        self.fsiner += 1
-        d3d_set_fog(1, 16777215, 0, 1)
-        draw_sprite_ext(self.thissprite, self.this_index, self.x, self.y, 2, 2, 0, self.image_blend, (((-cos((self.fsiner / 5))) * 0.4) + 0.6))
-        d3d_set_fog(0, 0, 0, 0)
+        fsiner += 1
+        d3d_set_fog(true, c_white, 0, 1)
+        draw_sprite_ext(thissprite, this_index, x, y, 2, 2, 0, image_blend, (((-(cos((fsiner / 5)))) * 0.4) + 0.6))
+        d3d_set_fog(false, c_black, 0, 0)
     }
 }
-if (self.becomeflash == 0)
-    self.flash = 0
-self.becomeflash = 0
+if (becomeflash == false)
+    flash = false
+becomeflash = false

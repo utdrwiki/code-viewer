@@ -1,2 +1,3 @@
-self.mystream = 999
-self.bstream = 0
+mystream = 999
+bstream = 0
+songname = "nosong.ogg"

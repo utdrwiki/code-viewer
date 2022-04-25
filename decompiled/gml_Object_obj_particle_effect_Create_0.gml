@@ -1,0 +1,10 @@
+lifetime = 0
+fadeondeath = 0
+destroyoffscreen = true
+autodepth = 0
+rotation = 0
+image_speed = 1
+random_image = 0
+init = false
+height = 0
+psuedo_gravity = 0

@@ -1,191 +1,351 @@
-if (self.part[2] >= 0)
-    self.wsiner += 0.8
-if (self.animate == 0)
+dcolor[1] = make_color_hsv((global.flag[223] * 8), 255, (255 * value))
+dcolor[0] = make_color_hsv((global.flag[224] * 8), 255, (255 * value))
+dcolor[2] = make_color_hsv((global.flag[225] * 8), 255, (255 * value))
+basecolor = merge_color(c_black, c_white, value)
+wsinerrate = 0.8
+if (part[2] >= 0)
+    wsiner += wsinerrate
+if (animate == 0)
 {
-    self.siner = 0
-    self.wsiner = 0
+    siner = 0
+    wsiner = 0
 }
-self.walkc = cos((self.wsiner / 3))
-for (self.loop = 0; self.loop < 2; self.loop += 1)
+walkc = cos((wsiner / 3))
+if launch
 {
-    if (self.loop == 0)
+    image_angle -= 35
+    yy = y
+    if ((image_angle % 360) != 0)
+    {
+        var _xoff = (-3 * s)
+        var _yoff = (12 * s)
+        var _x2 = xx
+        var _y2 = yy
+        xx = (scr_orbitx(_x2, _y2, (_x2 - _xoff), (_y2 - _yoff), image_angle) + _xoff)
+        yy = (scr_orbity(_x2, _y2, (_x2 - _xoff), (_y2 - _yoff), image_angle) + _yoff)
+    }
+}
+var _flash = 0
+var _do_flash = (rim_flash > 0 || body_flash > 0)
+var _rim_color = merge_color(c_black, c_white, rim_flash)
+var _flash_color = merge_color(c_black, c_white, body_flash)
+for (loop = false; loop < 2; loop += 1)
+{
+    if (loop == false)
     {
         draw_set_blend_mode(0)
-        self.color[0] = self.basecolor
-        self.color[1] = self.basecolor
-        self.color[2] = self.basecolor
+        color[0] = basecolor
+        color[1] = basecolor
+        color[2] = basecolor
     }
-    if (self.loop == 1)
+    else if (loop == true)
     {
         draw_set_blend_mode(1)
-        self.color[0] = self.dcolor[0]
-        self.color[1] = self.dcolor[1]
-        self.color[2] = self.dcolor[2]
+        color[0] = dcolor[0]
+        color[1] = dcolor[1]
+        color[2] = dcolor[2]
     }
-    self.walka = (-sin((self.wsiner / 6)))
-    self.walkb = (-cos((self.wsiner / 6)))
-    if (self.bad == 0)
+    _flash = (loop == true && _do_flash)
+    walka = (-(sin((wsiner / 6))))
+    walkb = (-(cos((wsiner / 6))))
+    if (moving == true && part[2] == 0 && walkb <= 0)
+        walkb *= 3
+    var _pieceVector = Vector2(0, 0)
+    if drawfeet
     {
-        if (self.part[2] == 0)
-            draw_sprite_ext(spr_thrashfoot, 0, ((self.xx - (11 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (19 * self.s)) + ((self.s * self.walkb) * 1)), self.s, self.s, 0, self.color[2], self.a)
-        if (self.part[2] == 1)
-            draw_sprite_ext(spr_thrashfoot, 1, ((self.xx - (6 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (17 * self.s)) + ((self.s * self.walkb) * 1)), self.s, self.s, 0, self.color[2], self.a)
-        if (self.part[2] == 3)
-            draw_sprite_ext(spr_thrashfoot, 4, ((self.xx - (8 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (21 * self.s)) + ((self.s * self.walkb) * 1)), self.s, self.s, 0, self.color[2], self.a)
-    }
-    else
-    {
-        if (self.part[2] == 0)
-            draw_sprite_ext(scr_84_get_sprite("spr_thrashfoot_b"), 0, ((self.xx - (11 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (19 * self.s)) + ((self.s * self.walkb) * 1)), (self.s / 2), (self.s / 2), 0, self.color[2], self.a)
-        if (self.part[2] == 1)
-            draw_sprite_ext(scr_84_get_sprite("spr_thrashfoot_b"), 1, ((self.xx - (6 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (17 * self.s)) + ((self.s * self.walkb) * 1)), (self.s / 2), (self.s / 2), 0, self.color[2], self.a)
-        if (self.part[2] == 3)
-            draw_sprite_ext(scr_84_get_sprite("spr_thrashfoot_b"), 4, ((self.xx - (8 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (21 * self.s)) + ((self.s * self.walkb) * 1)), (self.s / 2), (self.s / 2), 0, self.color[2], self.a)
+        var _thrash_image = 0
+        if (bad == 0)
+        {
+            if (part[2] == 0)
+            {
+                _pieceVector = scr_rotatevector(((-11 * s) + ((s * walka) * 2)), ((19 * s) + ((s * walkb) * 1)), image_angle)
+                _thrash_image = 0
+            }
+            if (part[2] == 1)
+            {
+                _pieceVector = scr_rotatevector(((-6 * s) + ((s * walka) * 2)), ((17 * s) + ((s * walkb) * 1)), image_angle)
+                _thrash_image = 1
+            }
+            if (part[2] == 3)
+            {
+                _thrash_image = 4
+                _pieceVector = scr_rotatevector(((-8 * s) + ((s * walka) * 2)), ((21 * s) + ((s * walkb) * 1)), image_angle)
+            }
+            if (part[2] != 2)
+                draw_sprite_ext_glow(spr_thrashfoot, _thrash_image, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, color[2], a, override_color)
+            if _flash
+            {
+                draw_sprite_ext_glow(spr_thrashfoot, _thrash_image, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, c_white, a, _flash_color)
+                draw_sprite_ext_glow(spr_thrashfoot_flash, _thrash_image, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, _rim_color, a)
+            }
+        }
+        else
+        {
+            if (part[2] == 0)
+                draw_sprite_ext_glow(spr_thrashfoot_b, 0, ((xx - (11 * s)) + ((s * walka) * 2)), ((yy + (19 * s)) + ((s * walkb) * 1)), (s / 2), (s / 2), 0, color[2], a, override_color)
+            if (part[2] == 1)
+                draw_sprite_ext_glow(spr_thrashfoot_b, 1, ((xx - (6 * s)) + ((s * walka) * 2)), ((yy + (17 * s)) + ((s * walkb) * 1)), (s / 2), (s / 2), 0, color[2], a, override_color)
+            if (part[2] == 3)
+                draw_sprite_ext_glow(spr_thrashfoot_b, 4, ((xx - (8 * s)) + ((s * walka) * 2)), ((yy + (21 * s)) + ((s * walkb) * 1)), (s / 2), (s / 2), 0, color[2], a, override_color)
+        }
     }
 }
-if (self.part[0] >= 0)
+if (part[0] >= 0)
 {
-    for (self.loop = 0; self.loop < 2; self.loop += 1)
+    for (loop = false; loop < 2; loop += 1)
     {
-        if (self.loop == 0)
+        if (loop == false)
         {
             draw_set_blend_mode(0)
-            self.color[0] = self.basecolor
-            self.color[1] = self.basecolor
-            self.color[2] = self.basecolor
+            color[0] = basecolor
+            color[1] = basecolor
+            color[2] = basecolor
         }
-        if (self.loop == 1)
+        if (loop == true)
         {
             draw_set_blend_mode(1)
-            self.color[0] = self.dcolor[0]
-            self.color[1] = self.dcolor[1]
-            self.color[2] = self.dcolor[2]
+            color[0] = dcolor[0]
+            color[1] = dcolor[1]
+            color[2] = dcolor[2]
         }
-        if (self.bad == 0)
-            draw_sprite_ext(spr_thrashbody, self.part[0], self.xx, (self.yy + (self.s * self.walkc)), self.s, self.s, 0, self.color[0], self.a)
-        if (self.bad == 1)
-            draw_sprite_ext(scr_84_get_sprite("spr_thrashbody_b"), self.part[0], self.xx, (self.yy + (self.s * self.walkc)), (self.s / 2), (self.s / 2), 0, self.color[0], self.a)
+        _flash = (_do_flash && loop == true)
+        _pieceVector = scr_rotatevector(0, (s * walkc), image_angle)
+        if ((!_flash) && _do_flash)
+            scr_draw_outline_ext(spr_thrashbody, part[0], xx, (yy + _pieceVector.y), s, s, image_angle, c_white, rim_flash, 2)
+        if (bad == 0)
+            draw_sprite_ext_glow(spr_thrashbody, part[0], xx, (yy + _pieceVector.y), s, s, image_angle, color[0], a, override_color)
+        else if (bad == 1)
+            draw_sprite_ext_glow(spr_thrashbody_b, part[0], xx, (yy + _pieceVector.y), (s / 2), (s / 2), image_angle, color[0], a, override_color)
+        if _flash
+        {
+            draw_set_blend_mode(1)
+            draw_sprite_ext(spr_thrashbody_flash, part[0], xx, (yy + _pieceVector.y), s, s, image_angle, merge_color(color[0], c_white, 0.5), rim_flash)
+        }
     }
 }
-for (self.loop = 0; self.loop < 2; self.loop += 1)
+for (loop = false; loop < 2; loop += 1)
 {
-    if (self.loop == 0)
+    if (loop == false)
     {
         draw_set_blend_mode(0)
-        self.color[0] = self.basecolor
-        self.color[1] = self.basecolor
-        self.color[2] = self.basecolor
+        color[0] = basecolor
+        color[1] = basecolor
+        color[2] = basecolor
     }
-    if (self.loop == 1)
+    if (loop == true)
     {
         draw_set_blend_mode(1)
-        self.color[0] = self.dcolor[0]
-        self.color[1] = self.dcolor[1]
-        self.color[2] = self.dcolor[2]
+        color[0] = dcolor[0]
+        color[1] = dcolor[1]
+        color[2] = dcolor[2]
     }
-    if (self.bad == 0)
+    _flash = (_do_flash && loop == true)
+    if (bad == 0)
     {
-        if (self.part[1] == 0)
-            draw_sprite_ext(spr_thrashweapon_laser, 0, (self.xx - (8 * self.s)), ((self.yy + (6 * self.s)) + ((self.s * self.walkc) * 2)), self.s, self.s, 0, self.color[1], self.a)
-        if (self.part[1] == 1)
-            draw_sprite_ext(spr_thrashweapon_sword, 0, (self.xx - (10 * self.s)), ((self.yy + (6 * self.s)) + ((self.s * self.walkc) * 2)), self.s, self.s, 0, self.color[1], self.a)
-        if (self.part[1] == 2)
-            draw_sprite_ext(spr_thrashweapon_flame, 0, (self.xx - (self.s * 4)), ((self.yy + (5 * self.s)) + ((self.s * self.walkc) * 2)), self.s, self.s, 0, self.color[1], self.a)
-        if (self.part[1] == 3)
-            draw_sprite_ext(spr_thrashweapon_duck, 0, (self.xx - (8 * self.s)), ((self.yy + (3 * self.s)) + ((self.s * self.walkc) * 2)), self.s, self.s, 0, self.color[1], self.a)
+        if (part[1] == 0)
+        {
+            _pieceVector = scr_rotatevector((-8 * s), ((6 * s) + ((s * walkc) * 2)), image_angle)
+            headx = (xx + _pieceVector.x)
+            heady = (yy + _pieceVector.y)
+            var _headsprite = spr_thrashweapon_laser_flash
+            if ((!_flash) && _do_flash)
+                scr_draw_outline_ext(spr_thrashweapon_laser, 0, headx, heady, s, s, image_angle, c_white, rim_flash, 2)
+            draw_sprite_ext_glow(spr_thrashweapon_laser, 0, headx, heady, s, s, image_angle, color[1], a, override_color)
+        }
+        if (part[1] == 1)
+        {
+            _pieceVector = scr_rotatevector((-10 * s), ((6 * s) + ((s * walkc) * 2)), image_angle)
+            headx = (xx + _pieceVector.x)
+            heady = (yy + _pieceVector.y)
+            _headsprite = spr_thrashweapon_sword_flash
+            if ((!_flash) && _do_flash)
+                scr_draw_outline_ext(spr_thrashweapon_sword, 0, headx, heady, s, s, image_angle, c_white, rim_flash, 2)
+            draw_sprite_ext_glow(spr_thrashweapon_sword, 0, headx, heady, s, s, (headangle + image_angle), color[1], a, override_color)
+        }
+        if (part[1] == 2)
+        {
+            _pieceVector = scr_rotatevector(((-s) * 4), ((5 * s) + ((s * walkc) * 2)), image_angle)
+            headx = (xx + _pieceVector.x)
+            heady = (yy + _pieceVector.y)
+            _headsprite = spr_thrashweapon_flame_flash
+            if ((!_flash) && _do_flash)
+                scr_draw_outline_ext(spr_thrashweapon_flame, 0, headx, heady, s, s, image_angle, c_white, rim_flash, 2)
+            draw_sprite_ext_glow(spr_thrashweapon_flame, 0, headx, heady, s, s, (headangle + image_angle), color[1], a, override_color)
+        }
+        if (part[1] == 3)
+        {
+            _pieceVector = scr_rotatevector((-8 * s), ((3 * s) + ((s * walkc) * 2)), image_angle)
+            headx = (xx + _pieceVector.x)
+            heady = (yy + _pieceVector.y)
+            _headsprite = spr_thrashweapon_duck_flash
+            if ((!_flash) && _do_flash)
+                scr_draw_outline_ext(spr_thrashweapon_duck, 0, headx, heady, s, s, image_angle, c_white, rim_flash, 2)
+            draw_sprite_ext_glow(spr_thrashweapon_duck, 0, headx, heady, s, s, (headangle + image_angle), color[1], a, override_color)
+        }
+        if _flash
+        {
+            draw_set_blend_mode(1)
+            draw_sprite_ext_glow(_headsprite, 0, headx, heady, s, s, image_angle, merge_color(color[1], c_white, 0.5), rim_flash)
+        }
     }
     else
     {
-        if (self.part[1] == 0)
-            draw_sprite_ext(spr_thrashweapon_laser_b, 0, (self.xx - (8 * self.s)), ((self.yy + (6 * self.s)) + ((self.s * self.walkc) * 2)), (self.s / 2), (self.s / 2), 0, self.color[1], self.a)
-        if (self.part[1] == 1)
-            draw_sprite_ext(spr_thrashweapon_sword_b, 0, (self.xx - (10 * self.s)), ((self.yy + (6 * self.s)) + ((self.s * self.walkc) * 2)), (self.s / 2), (self.s / 2), 0, self.color[1], self.a)
-        if (self.part[1] == 2)
-            draw_sprite_ext(spr_thrashweapon_flame_b, 0, (self.xx - (self.s * 4)), ((self.yy + (5 * self.s)) + ((self.s * self.walkc) * 2)), (self.s / 2), (self.s / 2), 0, self.color[1], self.a)
-        if (self.part[1] == 3)
-            draw_sprite_ext(spr_thrashweapon_duck, 0, (self.xx - (8 * self.s)), ((self.yy + (3 * self.s)) + ((self.s * self.walkc) * 2)), self.s, self.s, 0, self.color[1], self.a)
+        if (part[1] == 0)
+        {
+            headx = (xx - (8 * s))
+            heady = ((yy + (6 * s)) + ((s * walkc) * 2))
+            draw_sprite_ext_glow(spr_thrashweapon_laser_b, 0, (xx - (8 * s)), ((yy + (6 * s)) + ((s * walkc) * 2)), (s / 2), (s / 2), headangle, color[1], a, override_color)
+        }
+        if (part[1] == 1)
+        {
+            headx = (xx - (10 * s))
+            heady = ((yy + (6 * s)) + ((s * walkc) * 2))
+            draw_sprite_ext_glow(spr_thrashweapon_sword_b, 0, (xx - (10 * s)), ((yy + (6 * s)) + ((s * walkc) * 2)), (s / 2), (s / 2), headangle, color[1], a, override_color)
+        }
+        if (part[1] == 2)
+        {
+            headx = (xx - (s * 4))
+            heady = ((yy + (5 * s)) + ((s * walkc) * 2))
+            draw_sprite_ext_glow(spr_thrashweapon_flame_b, 0, (xx - (s * 4)), ((yy + (5 * s)) + ((s * walkc) * 2)), (s / 2), (s / 2), headangle, color[1], a, override_color)
+        }
+        if (part[1] == 3)
+        {
+            headx = (xx - (8 * s))
+            heady = ((yy + (3 * s)) + ((s * walkc) * 2))
+            draw_sprite_ext_glow(spr_thrashweapon_duck, 0, (xx - (8 * s)), ((yy + (3 * s)) + ((s * walkc) * 2)), s, s, headangle, color[1], a, override_color)
+        }
     }
 }
-for (self.loop = 0; self.loop < 2; self.loop += 1)
+for (loop = false; loop < 2; loop += 1)
 {
-    if (self.loop == 0)
+    if (loop == false)
     {
         draw_set_blend_mode(0)
-        self.color[0] = self.basecolor
-        self.color[1] = self.basecolor
-        self.color[2] = self.basecolor
+        color[0] = basecolor
+        color[1] = basecolor
+        color[2] = basecolor
     }
-    if (self.loop == 1)
+    if (loop == true)
     {
         draw_set_blend_mode(1)
-        self.color[0] = self.dcolor[0]
-        self.color[1] = self.dcolor[1]
-        self.color[2] = self.dcolor[2]
+        color[0] = dcolor[0]
+        color[1] = dcolor[1]
+        color[2] = dcolor[2]
     }
-    self.walka = sin((self.wsiner / 6))
-    self.walkb = cos((self.wsiner / 6))
-    if (self.bad == 0)
+    _flash = (rim_flash > 0 && loop == true)
+    walka = sin((wsiner / 6))
+    walkb = cos((wsiner / 6))
+    if (walkb >= 0 && laststep < 0)
+        stomp = 1
+    else if (walkb <= 0 && laststep > 0)
+        stomp = -1
+    laststep = walkb
+    if (moving == true && part[2] == 0 && walkb <= 0)
+        walkb *= 3
+    if (bad == 0)
     {
-        if (self.part[2] == 0)
-            draw_sprite_ext(spr_thrashfoot, 0, ((self.xx - (5 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (20 * self.s)) + ((self.s * self.walkb) * 1)), self.s, self.s, 0, self.color[2], self.a)
-        if (self.part[2] == 1)
-            draw_sprite_ext(spr_thrashfoot, 1, (self.xx + ((self.s * self.walka) * 2)), ((self.yy + (18 * self.s)) + ((self.s * self.walkb) * 1)), self.s, self.s, 0, self.color[2], self.a)
-        if (self.part[2] == 2)
-            draw_sprite_ext(spr_thrashfoot, 2, (self.xx - (15 * self.s)), (self.yy + (18 * self.s)), self.s, self.s, 0, self.color[2], self.a)
-        if (self.part[2] == 3)
+        var _bottom = 6
+        if (part[2] == 0)
         {
-            self.walka = sin((self.wsiner / 6))
-            self.walkb = cos((self.wsiner / 6))
-            draw_sprite_ext(spr_thrashfoot, 3, (self.xx + ((self.s * self.walka) * 2)), ((self.yy + (22 * self.s)) + ((self.s * self.walkb) * 1)), self.s, self.s, 0, self.color[2], self.a)
+            _pieceVector = scr_rotatevector(((-5 * s) + ((s * walka) * 2)), ((20 * s) + ((s * walkb) * 1)), image_angle)
+            _thrash_image = 0
+            _bottom = 4
+            if (!drawfeet)
+                draw_sprite_part_ext_glow(spr_thrashfoot, 0, 0, 0, 34, 4, ((xx - (5 * s)) + ((s * walka) * 2)), ((yy + (20 * s)) + ((s * walkb) * 1)), s, s, color[2], a, override_color)
+            else
+                draw_sprite_ext_glow(spr_thrashfoot, 0, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, color[2], a, override_color)
+        }
+        if (part[2] == 1)
+        {
+            _pieceVector = scr_rotatevector(((s * walka) * 2), ((18 * s) + ((s * walkb) * 1)), image_angle)
+            _thrash_image = 1
+            if (!drawfeet)
+                draw_sprite_part_ext_glow(spr_thrashfoot, 1, 0, 0, 34, 6, (xx + ((s * walka) * 2)), ((yy + (18 * s)) + ((s * walkb) * 1)), s, s, color[2], a, override_color)
+            else
+                draw_sprite_ext_glow(spr_thrashfoot, 1, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, color[2], a, override_color)
+        }
+        if (part[2] == 2)
+        {
+            _pieceVector = scr_rotatevector((-15 * s), (18 * s), image_angle)
+            _thrash_image = 2
+            if (!drawfeet)
+                draw_sprite_part_ext_glow(spr_thrashfoot, 2, 0, 0, 34, 6, (xx - (15 * s)), (yy + (18 * s)), s, s, color[2], a, override_color)
+            else
+                draw_sprite_ext_glow(spr_thrashfoot, 2, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, color[2], a, override_color)
+        }
+        if (part[2] == 3)
+        {
+            walka = sin((wsiner / 6))
+            walkb = cos((wsiner / 6))
+            _pieceVector = scr_rotatevector(((s * walka) * 2), ((22 * s) + ((s * walkb) * 1)), image_angle)
+            _thrash_image = 3
+            _bottom = 2
+            if (!drawfeet)
+                draw_sprite_part_ext_glow(spr_thrashfoot, 3, 0, 0, 34, 2, (xx + ((s * walka) * 2)), ((yy + (22 * s)) + ((s * walkb) * 1)), s, s, color[2], a, override_color)
+            else
+                draw_sprite_ext_glow(spr_thrashfoot, 3, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, color[2], a, override_color)
+        }
+        if _flash
+        {
+            draw_set_blend_mode(1)
+            if (!drawfeet)
+                draw_sprite_part_ext(spr_thrashfoot_flash, _thrash_image, 0, 0, 34, _bottom, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, merge_color(color[2], c_white, 0.5), rim_flash)
+            else
+                draw_sprite_ext(spr_thrashfoot_flash, _thrash_image, (xx + _pieceVector.x), (yy + _pieceVector.y), s, s, image_angle, merge_color(color[2], c_white, 0.5), rim_flash)
         }
     }
     else
     {
-        if (self.part[2] == 0)
-            draw_sprite_ext(scr_84_get_sprite("spr_thrashfoot_b"), 0, ((self.xx - (5 * self.s)) + ((self.s * self.walka) * 2)), ((self.yy + (20 * self.s)) + ((self.s * self.walkb) * 1)), (self.s / 2), (self.s / 2), 0, self.color[2], self.a)
-        if (self.part[2] == 1)
-            draw_sprite_ext(scr_84_get_sprite("spr_thrashfoot_b"), 1, (self.xx + ((self.s * self.walka) * 2)), ((self.yy + (18 * self.s)) + ((self.s * self.walkb) * 1)), (self.s / 2), (self.s / 2), 0, self.color[2], self.a)
-        if (self.part[2] == 2)
-            draw_sprite_ext(scr_84_get_sprite("spr_thrashfoot_b"), 2, (self.xx - (15 * self.s)), (self.yy + (18 * self.s)), (self.s / 2), (self.s / 2), 0, self.color[2], self.a)
-        if (self.part[2] == 3)
+        if (part[2] == 0)
+            draw_sprite_ext_glow(spr_thrashfoot_b, 0, ((xx - (5 * s)) + ((s * walka) * 2)), ((yy + (20 * s)) + ((s * walkb) * 1)), (s / 2), (s / 2), 0, color[2], a, override_color)
+        if (part[2] == 1)
+            draw_sprite_ext_glow(spr_thrashfoot_b, 1, (xx + ((s * walka) * 2)), ((yy + (18 * s)) + ((s * walkb) * 1)), (s / 2), (s / 2), 0, color[2], a, override_color)
+        if (part[2] == 2)
+            draw_sprite_ext_glow(spr_thrashfoot_b, 2, (xx - (15 * s)), (yy + (18 * s)), (s / 2), (s / 2), 0, color[2], a, override_color)
+        if (part[2] == 3)
         {
-            self.walka = sin((self.wsiner / 6))
-            self.walkb = cos((self.wsiner / 6))
-            draw_sprite_ext(spr_thrashfoot, 3, (self.xx + ((self.s * self.walka) * 2)), ((self.yy + (22 * self.s)) + ((self.s * self.walkb) * 1)), self.s, self.s, 0, self.color[2], self.a)
+            walka = sin((wsiner / 6))
+            walkb = cos((wsiner / 6))
+            draw_sprite_ext_glow(spr_thrashfoot, 3, (xx + ((s * walka) * 2)), ((yy + (22 * s)) + ((s * walkb) * 1)), s, s, 0, color[2], a, override_color)
         }
     }
 }
 draw_set_blend_mode(0)
-if (self.dbselect == 1)
+if ((image_angle % 360) != 0)
+{
+    xx = _x2
+    yy = _y2
+}
+if (dbselect == true)
 {
     if keyboard_check_pressed(vk_right)
     {
-        self.part[0] += 1
-        if (self.part[0] >= 4)
-            self.part[0] = 0
+        part[0] += 1
+        if (part[0] >= 4)
+            part[0] = 0
     }
     if keyboard_check_pressed(vk_up)
     {
-        self.part[1] += 1
-        if (self.part[1] >= 4)
-            self.part[1] = 0
+        part[1] += 1
+        if (part[1] >= 4)
+            part[1] = 0
     }
     if keyboard_check_pressed(vk_shift)
     {
-        self.part[2] += 1
-        if (self.part[2] >= 4)
-            self.part[2] = 0
+        part[2] += 1
+        if (part[2] >= 4)
+            part[2] = 0
     }
     if keyboard_check(vk_space)
     {
-        self.dcolor[0] = make_color_hsv((self.wsiner * 2), 255, 255)
-        self.dcolor[1] = make_color_hsv(self.wsiner, 255, 255)
-        self.dcolor[2] = make_color_hsv((self.wsiner / 2), 255, 255)
+        dcolor[0] = make_color_hsv((wsiner * 2), 255, 255)
+        dcolor[1] = make_color_hsv(wsiner, 255, 255)
+        dcolor[2] = make_color_hsv((wsiner / 2), 255, 255)
     }
     if keyboard_check_pressed(vk_return)
     {
-        self.s += 1
-        if (self.s >= 5)
-            self.s = 1
+        s += 1
+        if (s >= 5)
+            s = 1
     }
 }

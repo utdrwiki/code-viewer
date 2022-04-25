@@ -1,2 +1,2 @@
-if (instance_exists(self.mywriter) == 0)
+if (i_ex(mywriter) == 0)
     instance_destroy()

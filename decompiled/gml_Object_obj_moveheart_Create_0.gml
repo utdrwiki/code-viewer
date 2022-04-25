@@ -1,19 +1,24 @@
-self.burst = 0
-self.shift = 1
-self.image_alpha = 0
-self.flytime = 8
+burst = 0
+shift = 1
+image_alpha = 0
+flytime = 8
 if instance_exists(obj_heartmarker)
 {
-    self.distx = obj_heartmarker.x
-    self.disty = obj_heartmarker.y
+    distx = obj_heartmarker.x
+    disty = obj_heartmarker.y
+}
+else if (!instance_exists(obj_growtangle))
+{
+    distx = (__view_get((0 << 0), 0) + 310)
+    disty = (__view_get((1 << 0), 0) + 160)
 }
 else
 {
-    self.distx = (__view_get(0, 0) + 310)
-    self.disty = (__view_get(1, 0) + 160)
+    distx = (obj_growtangle.x - 10)
+    disty = (obj_growtangle.y - 10)
 }
-self.dist = point_distance(self.x, self.y, self.distx, self.disty)
-move_towards_point(self.distx, self.disty, (self.dist / self.flytime))
-self.alarm[0] = self.flytime
-self.image_speed = 0
-instance_create(self.x, self.y, obj_heartburst)
+dist = point_distance(x, y, distx, disty)
+move_towards_point(distx, disty, (dist / flytime))
+alarm[0] = flytime
+image_speed = 0
+instance_create(x, y, obj_heartburst)

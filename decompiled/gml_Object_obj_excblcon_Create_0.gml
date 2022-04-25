@@ -1,6 +1,7 @@
-self.alarm[0] = 20
-if (global.darkzone == 1)
+alarm[0] = 20
+image_speed = 0.1
+if (global.darkzone == true)
 {
-    self.image_xscale = 2
-    self.image_yscale = 2
+    image_xscale = 2
+    image_yscale = 2
 }

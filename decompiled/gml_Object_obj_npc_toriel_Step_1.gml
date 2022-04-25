@@ -1,7 +1,7 @@
-if (self.myinteract == 0)
-    self.facing = self.dfacing
+if (myinteract == 0)
+    facing = dfacing
 scr_npcdir()
-if (instance_exists(obj_face) && (global.fc == 1))
-    self.image_index = obj_face.face_index
+if (instance_exists(obj_face) && global.fc == 1)
+    image_index = obj_face.face_index
 else
-    self.image_index = 0
+    image_index = 0

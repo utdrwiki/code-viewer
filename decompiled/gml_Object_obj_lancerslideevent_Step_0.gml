@@ -1,156 +1,156 @@
-if (self.con == 1)
+if (con == 1)
 {
     with (obj_mainchara)
-        self.visible = 0
-    self.k = scr_dark_marker(0, obj_mainchara.y, spr_krisr_dark)
-    with (self.k)
+        visible = false
+    k = scr_dark_marker(0, obj_mainchara.y, spr_krisr_dark)
+    with (k)
     {
-        self.hspeed = 12
-        self.image_speed = 0.334
+        hspeed = 12
+        image_speed = 0.334
     }
-    self.s = scr_dark_marker(340, (obj_mainchara.y - 10), spr_susied_dark_unhappy)
-    self.con = 2
-    self.alarm[4] = 22
+    s = scr_dark_marker(340, (obj_mainchara.y - 10), spr_susied_dark_unhappy)
+    con = 2
+    alarm[4] = 22
 }
-if (self.con == 3)
+if (con == 3)
 {
     global.interact = 1
-    with (self.k)
+    with (k)
         scr_halt()
-    with (self.s)
-        self.sprite_index = spr_susiel_dark_unhappy
+    with (s)
+        sprite_index = spr_susiel_dark_unhappy
     global.typer = 30
     global.fc = 1
     global.fe = 9
-    global.msg[0] = scr_84_get_lang_string("obj_lancerslideevent_slash_Step_0_gml_34_0")
+    global.msg[0] = stringsetloc("* Kris^1, down here!/%", "obj_lancerslideevent_slash_Step_0_gml_34_0")
     instance_create(0, 0, obj_dialoguer)
-    self.con = 4
+    con = 4
 }
-if ((self.con == 4) && (d_ex() == 0))
+if (con == 4 && d_ex() == 0)
 {
     snd_play(snd_noise)
-    with (self.s)
+    with (s)
     {
-        self.sprite_index = spr_susied_dark_unhappy
-        self.image_speed = 0.334
-        self.vspeed = 20
+        sprite_index = spr_susied_dark_unhappy
+        image_speed = 0.334
+        vspeed = 20
     }
-    with (self.k)
-        self.sprite_index = spr_krisd_dark
-    self.con = 5
-    self.alarm[4] = 30
+    with (k)
+        sprite_index = spr_krisd_dark
+    con = 5
+    alarm[4] = 30
 }
-if (self.con == 6)
+if (con == 6)
 {
-    with (self.k)
+    with (k)
     {
-        self.vspeed = 4
-        self.image_speed = 0.2
+        vspeed = 4
+        image_speed = 0.2
     }
-    self.con = 7
-    self.alarm[4] = 10
+    con = 7
+    alarm[4] = 10
 }
-if (self.con == 8)
+if (con == 8)
 {
     snd_play(snd_noise)
-    obj_mainchara.x = self.k.x
-    obj_mainchara.y = self.k.y
-    self.alarm[1] = 1
-    self.slidesfx = snd_loop(snd_paper_surf)
+    obj_mainchara.x = k.x
+    obj_mainchara.y = k.y
+    alarm[1] = 1
+    slidesfx = snd_loop(snd_paper_surf)
     with (obj_mainchara)
     {
-        self.cutscene = 1
-        self.visible = 1
-        self.vspeed = 20
-        self.fun = 1
-        self.sprite_index = spr_krisd_slide
-        self.autorun = 2
+        cutscene = true
+        visible = true
+        vspeed = 20
+        fun = true
+        sprite_index = spr_krisd_slide
+        autorun = 2
     }
-    if (self.seiz == 1)
+    if (seiz == 1)
     {
         with (obj_mainchara)
-            self.vspeed = 10
+            vspeed = 10
     }
-    with (self.k)
+    with (k)
         instance_destroy()
-    self.cameracon = 1
-    self.con = 9
+    cameracon = 1
+    con = 9
 }
-if (self.cameracon == 1)
+if (cameracon == 1)
 {
-    if (__view_get(1, 0) < 880)
+    if (__view_get((1 << 0), 0) < 880)
     {
-        if (self.seiz == 0)
-            __view_set(1, 0, (__view_get(1, 0) + 20))
+        if (seiz == 0)
+            __view_set((1 << 0), 0, (__view_get((1 << 0), 0) + 20))
         else
-            __view_set(1, 0, (__view_get(1, 0) + 10))
+            __view_set((1 << 0), 0, (__view_get((1 << 0), 0) + 10))
     }
     else
     {
         with (obj_mainchara)
-            self.vspeed = 0
+            vspeed = 0
         global.interact = 0
         instance_create(0, 0, obj_overworld_spademaker)
-        self.block1 = instance_create(0, (__view_get(1, 0) + 40), obj_soliddark)
-        with (self.block1)
-            self.image_xscale = 40
-        self.block2 = instance_create(0, (__view_get(1, 0) + 440), obj_soliddark)
-        with (self.block2)
-            self.image_xscale = 40
-        self.w[0] = instance_create(70, 2280, obj_wobblything_slide)
-        self.w[1] = instance_create(550, 1560, obj_wobblything_slide)
-        self.w[2] = instance_create(70, 1800, obj_wobblything_slide)
-        self.w[3] = instance_create(550, 2040, obj_wobblything_slide)
-        if self.seiz
+        block1 = instance_create(0, (__view_get((1 << 0), 0) + 40), obj_soliddark)
+        with (block1)
+            image_xscale = 40
+        block2 = instance_create(0, (__view_get((1 << 0), 0) + 440), obj_soliddark)
+        with (block2)
+            image_xscale = 40
+        w[0] = instance_create(70, 2280, obj_wobblything_slide)
+        w[1] = instance_create(550, 1560, obj_wobblything_slide)
+        w[2] = instance_create(70, 1800, obj_wobblything_slide)
+        w[3] = instance_create(550, 2040, obj_wobblything_slide)
+        if seiz
         {
             with (obj_wobblything_slide)
-                self.vspeed = -10
+                vspeed = -10
         }
-        self.cameracon = 2
-        self.shifted = 0
+        cameracon = 2
+        shifted = 0
     }
 }
-if (self.cameracon == 2)
+if (cameracon == 2)
 {
-    self.slidetimer += 1
-    if (self.seiz == 0)
+    slidetimer += 1
+    if (seiz == 0)
     {
         tile_layer_shift(1000000, 0, -20)
-        self.shifted -= 20
+        shifted -= 20
     }
     else
     {
         tile_layer_shift(1000000, 0, -10)
-        self.shifted -= 10
+        shifted -= 10
     }
-    if (self.shifted <= -480)
+    if (shifted <= -480)
     {
         tile_layer_shift(1000000, 0, 480)
-        self.shifted += 480
+        shifted += 480
     }
-    if ((global.inv == 1) && (self.slidetimer <= 390))
-        self.slidetimer -= 10
-    if (self.slidetimer == 390)
+    if (global.inv == 1 && slidetimer <= 390)
+        slidetimer -= 10
+    if (slidetimer == 390)
     {
         snd_volume(global.currentsong[1], 0, 120)
-        snd_volume(self.slidesfx, 0, 120)
+        snd_volume(slidesfx, 0, 120)
         with (obj_overworld_spademaker)
-            self.alarm[0] = -40
+            alarm[0] = -40
         with (obj_overworld_spade)
         {
-            self.gravity = -0.4
-            self.active = 0
+            gravity = -0.4
+            active = false
         }
-        self.fo = instance_create(0, 0, obj_fadeout)
-        with (self.fo)
+        fo = instance_create(0, 0, obj_fadeout)
+        with (fo)
         {
-            self.image_blend = 0x00FFFFFF
-            self.fadespeed = 0.01
+            image_blend = c_white
+            fadespeed = 0.01
         }
     }
-    if (self.slidetimer == 540)
+    if (slidetimer == 540)
     {
-        snd_stop(self.slidesfx)
+        snd_stop(slidesfx)
         snd_free(global.currentsong[0])
         global.interact = 1
         room_goto_next()

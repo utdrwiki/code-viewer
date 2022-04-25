@@ -1,73 +1,70 @@
 global.flag[33] += 1
-if (self.canchoose == 1)
+if (canchoose == true)
 {
-    if (self.mychoice >= 0)
+    if (mychoice >= 0)
     {
         if button1_p()
             event_user(0)
     }
-    if (self.choiced == 0)
+    if (choiced == false)
     {
         if left_h()
-            self.mychoice = 0
-        if (self.choicetotal >= 1)
+            mychoice = 0
+        if (choicetotal >= 1)
         {
             if right_h()
-                self.mychoice = 1
+                mychoice = 1
         }
-        if (self.choicetotal >= 2)
+        if (choicetotal >= 2)
         {
             if up_h()
-                self.mychoice = 2
+                mychoice = 2
         }
-        if (self.choicetotal >= 3)
+        if (choicetotal >= 3)
         {
             if down_h()
-                self.mychoice = 3
+                mychoice = 3
         }
     }
 }
-if (self.dar == 1)
-    scr_84_set_draw_font("main")
-else
-    scr_84_set_draw_font("mainbig")
-self.heartposx[0] = (self.xx + (30 * self.dar))
-self.heartposy[0] = (self.yy + ((34 + self.d_add) * self.dar))
-self.textposx[0] = (self.heartposx[0] + (16 * self.dar))
-self.textposy[0] = (self.yy + ((13 + self.d_add) * self.dar))
-if (self.choicetotal >= 1)
+scr_84_set_draw_font((dar == 1 ? "main" : "mainbig"))
+heartposx[0] = (xx + (30 * dar))
+heartposy[0] = ((yy + ((34 + d_add) * dar)) + (fighting * 30))
+textposx[0] = (heartposx[0] + (16 * dar))
+textposy[0] = ((yy + ((13 + d_add) * dar)) + (fighting * 30))
+if (choicetotal >= 1)
 {
     var str1width = string_width(string_hash_to_newline(global.choicemsg[1]))
-    self.heartposx[1] = ((((self.xx + (320 * self.dar)) - (30 * self.dar)) - str1width) - (14 * self.dar))
-    self.heartposy[1] = (self.yy + ((34 + self.d_add) * self.dar))
-    self.textposx[1] = (self.heartposx[1] + (16 * self.dar))
-    self.textposy[1] = (self.yy + ((13 + self.d_add) * self.dar))
+    heartposx[1] = ((xx + (276 * dar)) - str1width)
+    heartposy[1] = ((yy + ((34 + d_add) * dar)) + (fighting * 30))
+    textposx[1] = (heartposx[1] + (16 * dar))
+    textposy[1] = ((yy + ((13 + d_add) * dar)) + (fighting * 30))
 }
-if (self.choicetotal >= 2)
+if (choicetotal >= 2)
 {
-    var msg0right = ((self.heartposx[0] + (16 * self.dar)) + string_width(string_hash_to_newline(global.choicemsg[0])))
-    var msg1left = self.heartposx[1]
-    var msg2width = (string_width(string_hash_to_newline(global.choicemsg[2])) + (16 * self.dar))
-    if (self.choicetotal == 3)
+    var msg0right = ((heartposx[0] + (16 * dar)) + string_width(string_hash_to_newline(global.choicemsg[0])))
+    var msg1left = heartposx[1]
+    var msg2width = (string_width(string_hash_to_newline(global.choicemsg[2])) + (16 * dar))
+    if (choicetotal == 3)
     {
-        var msg3width = (string_width(string_hash_to_newline(global.choicemsg[3])) + (16 * self.dar))
+        var msg3width = (string_width(string_hash_to_newline(global.choicemsg[3])) + (16 * dar))
         if (msg3width > msg2width)
             msg2width = msg3width
     }
-    self.heartposx[2] = ((msg0right + ((msg1left - msg0right) / 2)) - (msg2width / 2))
-    self.heartposy[2] = (self.yy + ((16 + self.d_add) * self.dar))
-    self.textposx[2] = (self.heartposx[2] + (16 * self.dar))
-    self.textposy[2] = (self.yy + ((13 + self.d_add) * self.dar))
+    heartposx[2] = ((msg0right + ((msg1left - msg0right) / 2)) - (msg2width / 2))
+    heartposy[2] = ((yy + ((16 + d_add) * dar)) + (fighting * 30))
+    textposx[2] = (heartposx[2] + (16 * dar))
+    textposy[2] = ((yy + ((13 + d_add) * dar)) + (fighting * 30))
 }
-if (self.choicetotal >= 3)
+if (choicetotal >= 3)
 {
-    self.heartposx[3] = self.heartposx[2]
-    self.heartposy[3] = (self.yy + ((60 + self.d_add) * self.dar))
-    self.textposx[3] = (self.heartposx[3] + (16 * self.dar))
-    self.textposy[3] = (self.yy + ((56 + self.d_add) * self.dar))
+    heartposx[3] = heartposx[2]
+    heartposy[3] = ((yy + ((60 + d_add) * dar)) + (fighting * 30))
+    textposx[3] = (heartposx[3] + (16 * dar))
+    textposy[3] = ((yy + ((56 + d_add) * dar)) + (fighting * 30))
 }
-if (self.mychoice >= 0)
+if (mychoice >= 0)
 {
-    self.hx = self.heartposx[self.mychoice]
-    self.hy = self.heartposy[self.mychoice]
+    hx = heartposx[mychoice]
+    hy = heartposy[mychoice]
 }

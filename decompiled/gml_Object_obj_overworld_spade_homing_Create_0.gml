@@ -1,5 +1,7 @@
-self.active = 0
-self.image_alpha = 0
-self.timer = 0
-self.damage = 20
-self.target = 0
+destroyoffscreen = false
+tolerance = 0
+active = false
+image_alpha = 0
+timer = 0
+damage = 20
+target = 0

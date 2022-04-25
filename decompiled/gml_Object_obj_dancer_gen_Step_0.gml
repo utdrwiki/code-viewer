@@ -1,11 +1,11 @@
 if instance_exists(obj_lightfairy)
-    obj_lightfairy.factor = (self.battlealpha * 2)
+    obj_lightfairy.factor = (battlealpha * 2)
 if instance_exists(obj_mainchara)
 {
     obj_mainchara.battlemode = 0
-    for (self.i = 0; self.i < self.areas; self.i += 1)
+    for (i = 0; i < areas; i += 1)
     {
-        if ((obj_mainchara.x > self.areax1[self.i]) && ((obj_mainchara.x < self.areax2[self.i]) && ((obj_mainchara.y > self.areay1[self.i]) && (obj_mainchara.y < self.areay2[self.i]))))
+        if (obj_mainchara.x > areax1[i] && obj_mainchara.x < areax2[i] && obj_mainchara.y > areay1[i] && obj_mainchara.y < areay2[i])
             obj_mainchara.battlemode = 1
     }
 }

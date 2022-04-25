@@ -1,0 +1,2 @@
+var a, dmg;
+return;

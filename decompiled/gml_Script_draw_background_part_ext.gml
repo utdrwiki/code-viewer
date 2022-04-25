@@ -1,1 +1,0 @@
-draw_sprite_part_ext(self.argument0, 0, self.argument1, self.argument2, self.argument3, self.argument4, self.argument5, self.argument6, self.argument7, self.argument8, self.argument9, self.argument10)

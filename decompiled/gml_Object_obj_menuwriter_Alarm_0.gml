@@ -1,7 +1,7 @@
-obj_menuwriter.testwho = self.who
+obj_menuwriter.testwho = who
 with (obj_menuwriter)
 {
-    if ((self.active == 1) && (self.testwho == self.who))
+    if (active == true && testwho == who)
         instance_destroy()
 }
-self.active = 1
+active = true

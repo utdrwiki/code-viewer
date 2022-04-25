@@ -1,1 +1,1 @@
-self.touched = 0
+touched = false

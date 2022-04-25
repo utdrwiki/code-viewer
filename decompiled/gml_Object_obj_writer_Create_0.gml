@@ -1,57 +1,70 @@
-self.skipme = 0
-self.textsound = 13
-self.charline = 33
-self.originalcharline = self.charline
-self.hspace = 8
-self.vspace = 18
-self.rate = 1
-self.mycolor = 16777215
-self.myfont = scr_84_get_font("main")
-self.shake = 0
-self.special = 0
-self.skippable = 1
-self.automash_timer = 0
+skipme = false
+forcebutton1 = false
+textsound = snd_text
+charline = 33
+originalcharline = charline
+hspace = 8
+vspace = 18
+rate = 1
+mycolor = c_white
+myfont = scr_84_get_font("main")
+shake = 0
+special = false
+skippable = true
+automash_timer = 0
 if (global.flag[6] == 1)
-    self.skippable = 0
-self.f = 1
-if (global.darkzone == 1)
-    self.f = 2
+    skippable = false
+f = 1
+if (global.darkzone == true)
+    f = 2
+prevent_mash_buffer = 0
+formattext = 1
 scr_texttype()
-self.autoaster = 1
-self.pos = 2
-self.lineno = 0
-self.aster = 0
-self.halt = 0
-self.xcolor = 0
-self.wxskip = 0
-self.msgno = 0
-self.first_alarm = 0
-self.firstnoise = 0
-self.noiseskip = 0
-self.formatted = 0
-self.colorchange = 0
-self.fontchange = 0
-self.sound_played = 0
-self.writingx = self.x
-self.writingy = self.y
-self.dialoguer = 0
-self.smallface = 505050
-self.faced = 0
-self.facedever = 0
-self.facer = 0
-self.siner = 0
-self.specfade = 1
-for (self.i = 0; self.i < 7; self.i += 1)
+autoaster = true
+drawaster = true
+pos = 2
+lineno = 0
+aster = false
+halt = false
+reachedend = 0
+xcolor = c_black
+wxskip = 0
+msgno = 0
+first_alarm = 0
+firstnoise = false
+noiseskip = false
+formatted = false
+colorchange = false
+fontchange = 0
+sound_played = false
+sound_timer = 0
+sound_count = 0
+jpspecial = 0
+jpused = 0
+writingx = x
+writingy = y
+dialoguer = 0
+smallface = 505050
+faced = 0
+facedever = 0
+facer = 0
+siner = 0
+specfade = 1
+autocenter = 0
+miniface_current_pos = -1
+miniface_pos = 0
+miniface_drawn = 0
+for (i = 0; i < 7; i += 1)
 {
-    self.specx[self.i] = (self.i * 6)
-    self.specy[self.i] = (self.i * 6)
+    specx[i] = (i * 6)
+    specy[i] = (i * 6)
 }
-self.mystring = global.msg[0]
-for (self.j = 0; self.j < 100; self.j += 1)
-    self.nstring[self.j] = global.msg[self.j]
-self.length = string_length(self.mystring)
-self.alarm[0] = self.rate
-if (self.rate < 3)
-    self.alarm[2] = 1
+mystring = global.msg[0]
+for (j = 0; j < 100; j += 1)
+    nstring[j] = global.msg[j]
+length = string_length(mystring)
+alarm[0] = rate
+if (rate < 3)
+    alarm[2] = 1
 else
     scr_textsound()

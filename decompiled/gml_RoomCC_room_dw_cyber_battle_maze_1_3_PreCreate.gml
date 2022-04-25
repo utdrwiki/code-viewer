@@ -1,0 +1,10 @@
+endY = 240
+camFollow = 1
+mode = 1
+camFollowAfter = 0
+riseSpeed = 1
+tutorialRide = 1
+riseSpeedBoost = 0
+riseSpeedReverse = 6
+fadeOutOthers = 1
+centerY = 1

@@ -1,40 +1,43 @@
-self.myinteract = 0
-self.talked = 0
-self.image_speed = 0
-self.image_xscale = 2
-self.image_yscale = 2
-self.con = 0
+myinteract = 0
+talked = false
+image_speed = 0
+image_xscale = 2
+image_yscale = 2
+con = 0
 scr_depth()
-self.image_speed = 0
-self.type = 0
-self.siner = 0
-self.active = 0
-self.emotion = 0
-self.beanie[0] = 0
-self.beanie[1] = 0
-self.beanie[2] = 0
-if (self.x < 350)
+image_speed = 0
+type = 0
+siner = 0
+active = false
+emotion = 0
+beanie[0] = false
+beanie[1] = false
+beanie[2] = false
+if (global.chapter == 1)
 {
-    self.beanie[1] = 0
-    self.beanie[0] = 1
-    self.type = 1
-}
-if (self.x < 250)
-{
-    self.beanie[0] = 1
-    self.beanie[2] = 1
-    self.type = 2
-}
-if (self.x < 150)
-{
-    self.beanie[0] = 1
-    self.beanie[1] = 1
-    self.beanie[2] = 1
-    self.type = 3
-    if (self.room == room_field_puzzletutorial)
+    if (x < 350)
     {
-        self.hole = scr_dark_marker(270, 126, spr_donation_hole_and_tree)
-        self.hole.image_index = 1
-        self.hole.depth = 900000
+        beanie[1] = false
+        beanie[0] = true
+        type = 1
     }
+    if (x < 250)
+    {
+        beanie[0] = true
+        beanie[2] = true
+        type = 2
+    }
+    if (x < 150)
+    {
+        beanie[0] = true
+        beanie[1] = true
+        beanie[2] = true
+        type = 3
+    }
+}
+if (global.chapter == 2 && room == room_dw_castle_dojo)
+{
+    beanie[1] = false
+    beanie[0] = true
+    type = 0
 }

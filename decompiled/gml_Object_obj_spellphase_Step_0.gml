@@ -1,56 +1,58 @@
-if (self.active == 1)
+if (global.encounterno == 92)
+    funny = 1
+if (active == true)
 {
-    self.spelltimer += 1
-    if ((self.spelltimer >= global.spelldelay) && (instance_exists(self.spellwriter) == 0))
+    spelltimer += 1
+    if (spelltimer >= global.spelldelay && i_ex(spellwriter) == 0)
     {
-        if ((self.char >= 3) || (self.spelltotal == 1))
+        if (char >= 3 || spelltotal == 1)
         {
             scr_attackphase()
-            with (self.spellwriter)
+            with (spellwriter)
                 instance_destroy()
             instance_destroy()
         }
         else if (scr_monsterpop() > 0)
         {
-            if (self.gotitem[self.char] == 1)
+            if (gotitem[char] == 1)
             {
-                self.re_castyet = 1
-                with (global.charinstance[self.char])
-                    self.state = 4
-                with (self.spellwriter)
+                re_castyet = 1
+                with (global.charinstance[char])
+                    state = 4
+                with (spellwriter)
                     instance_destroy()
-                scr_spelltext(global.charspecial[self.char], self.char)
-                self.spellwriter = scr_battletext_default()
+                scr_spelltext(global.charspecial[char], char)
+                spellwriter = scr_battletext_default()
             }
-            if (self.gotspell[self.char] == 1)
+            if (gotspell[char] == 1)
             {
-                self.re_castyet = 1
-                with (global.charinstance[self.char])
-                    self.state = 2
-                with (self.spellwriter)
+                re_castyet = 1
+                with (global.charinstance[char])
+                    state = 2
+                with (spellwriter)
                     instance_destroy()
-                scr_spelltext(global.charspecial[self.char], self.char)
-                self.spellwriter = scr_battletext_default()
+                scr_spelltext(global.charspecial[char], char)
+                spellwriter = scr_battletext_default()
             }
             global.spelldelay = 90
-            if (self.re_castyet == 0)
+            if (re_castyet == 0)
                 global.spelldelay = 1
-            self.char += 1
+            char += 1
             repeat (2)
             {
-                if (self.char < 3)
+                if (char < 3)
                 {
-                    if (self.using[self.char] == 0)
-                        self.char += 1
+                    if (using[char] == 0)
+                        char += 1
                 }
             }
-            self.spelltimer = 0
-            self.re_castyet = 0
+            spelltimer = 0
+            re_castyet = 0
         }
         else
         {
             scr_attackphase()
-            with (self.spellwriter)
+            with (spellwriter)
                 instance_destroy()
             instance_destroy()
         }

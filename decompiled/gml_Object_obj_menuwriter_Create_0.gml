@@ -1,7 +1,7 @@
-self.image_blend = 0x00FFFFFF
-self.who = -1
-self.active = 0
+image_blend = c_white
+who = -1
+active = false
 with (obj_menuwriter)
-    self.alarm[0] = 1
-self.image_alpha = 6
-self.msg = " "
+    alarm[0] = 1
+image_alpha = 6
+msg = " "

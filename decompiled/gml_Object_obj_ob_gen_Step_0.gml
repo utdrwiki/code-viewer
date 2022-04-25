@@ -1,6 +1,6 @@
-if (self.room == room_field_checkers1)
+if (room == 9999999999)
 {
-    if (self.timer >= 900)
+    if (timer >= 900)
     {
         instance_create(1202, 240, obj_ob_checkertile)
         instance_create(1242, 280, obj_ob_checkertile)
@@ -12,43 +12,43 @@ if (self.room == room_field_checkers1)
         instance_create(762, 280, obj_ob_checkertile)
         instance_create(802, 320, obj_ob_checkertile)
     }
-    if ((obj_mainchara.x >= 4000) && (obj_mainchara.x <= 1620))
+    if (obj_mainchara.x >= 4000 && obj_mainchara.x <= 1620)
         obj_mainchara.battlemode = 1
     else
         obj_mainchara.battlemode = 0
     if (global.interact == 0)
-        self.timer += 1
-    if (self.timer >= 40)
+        timer += 1
+    if (timer >= 40)
     {
-        self.timer = 0
-        self.ch = (self.con * 40)
-        instance_create((1442 - self.ch), (240 + self.ch), obj_ob_checkertile)
-        self.con += 1
-        if (self.con > 2)
-            self.con = 0
+        timer = 0
+        ch = (con * 40)
+        instance_create((1442 - ch), (240 + ch), obj_ob_checkertile)
+        con += 1
+        if (con > 2)
+            con = 0
     }
 }
-if ((self.whitetimer >= 20) && (self.whitecon == 1))
+if (whitetimer >= 20 && whitecon == 1)
 {
-    self.xdiff = (obj_mainchara.x - 340)
+    xdiff = (obj_mainchara.x - 340)
     obj_mainchara.x = 340
-    if instance_exists(global.cinstance[0])
+    if i_ex(global.cinstance[0])
     {
-        global.cinstance[0].x -= self.xdiff
-        for (self.i = 25; self.i >= 0; self.i -= 1)
-            global.cinstance[0].remx[self.i] -= self.xdiff
+        global.cinstance[0].x -= xdiff
+        for (i = 25; i >= 0; i -= 1)
+            global.cinstance[0].remx[i] -= xdiff
     }
-    if instance_exists(global.cinstance[1])
+    if i_ex(global.cinstance[1])
     {
-        global.cinstance[1].x -= self.xdiff
-        for (self.i = 25; self.i >= 0; self.i -= 1)
-            global.cinstance[1].remx[self.i] -= self.xdiff
+        global.cinstance[1].x -= xdiff
+        for (i = 25; i >= 0; i -= 1)
+            global.cinstance[1].remx[i] -= xdiff
     }
-    self.whitecon = 2
+    whitecon = 2
 }
-if ((self.room == room_field_checkers4) || (self.room == room_field_checkers6))
+if (room == 9999999999999)
 {
-    if ((obj_mainchara.x >= 4000) && (obj_mainchara.x <= 1620))
+    if (obj_mainchara.x >= 4000 && obj_mainchara.x <= 1620)
         obj_mainchara.battlemode = 1
     else
         obj_mainchara.battlemode = 0

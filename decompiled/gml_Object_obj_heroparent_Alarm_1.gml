@@ -1,73 +1,157 @@
-global.faceaction[self.myself] = 0
-scr_retarget(self.myself)
-if (self.cancelattack == 0)
+global.faceaction[myself] = 0
+scr_retarget(myself)
+if (cancelattack == false)
 {
-    self.dm = instance_create(global.monsterx[global.chartarget[self.myself]], ((global.monstery[global.chartarget[self.myself]] - (global.hittarget[global.chartarget[self.myself]] * 20)) + 20), obj_dmgwriter)
-    self.dm.type = (self.char - 1)
-    self.dm.delay = 8
-    self.damage = round((((global.battleat[self.myself] * self.points) / 20) - (global.monsterdf[global.chartarget[self.myself]] * 3)))
-    if (global.monstertype[global.chartarget[self.myself]] == 19)
-        self.damage = ceil((self.damage * 0.3))
-    if (self.damage < 0)
-        self.damage = 0
-    if (self.damage == 0)
+    dm = instance_create(global.monsterx[global.chartarget[myself]], ((global.monstery[global.chartarget[myself]] - (global.hittarget[global.chartarget[myself]] * 20)) + 20), obj_dmgwriter)
+    dm.type = (char - 1)
+    if (char == 4)
+        dm.type = 6
+    dm.delay = 8
+    if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.weirdpathendcon > 0)
     {
-        self.dm.delay = 2
-        with (global.monsterinstance[global.chartarget[self.myself]])
+        damage = round(((global.battleat[myself] * points) / 150))
+        if (damage < 5)
+            damage = 5
+        if (damage > 10)
+            damage = 10
+    }
+    else
+        damage = round((((global.battleat[myself] * points) / 20) - (global.monsterdf[global.chartarget[myself]] * 3)))
+    if (global.monstertype[global.chartarget[myself]] == 19)
+        damage = ceil((damage * 0.3))
+    if (damage < 0)
+        damage = 0
+    if (damage == 0)
+    {
+        dm.delay = 2
+        with (global.monsterinstance[global.chartarget[myself]])
         {
-            if ((self.hurttimer <= 15) && (self.candodge == 1))
+            if (hurttimer <= 15 && candodge == true)
             {
-                self.dodgetimer = 0
-                self.state = 4
+                dodgetimer = 0
+                state = 4
             }
         }
     }
-    self.dm.damage = self.damage
-    global.hittarget[global.chartarget[self.myself]] += 1
-    global.monsterhp[global.chartarget[self.myself]] -= self.damage
-    if ((self.is_auto_susie == 1) && (global.monsterhp[global.chartarget[self.myself]] <= 0))
+    dm.damage = damage
+    global.hittarget[global.chartarget[myself]] += 1
+    if (global.chapter == 2)
+        var queenshield = 0
+    if (global.chapter == 2 && instance_exists(obj_queen_enemy))
     {
-        with (global.chartarget[self.myself])
-            global.flag[(51 + self.myself)] = 5
+        if instance_exists(obj_queenshield_enemy)
+        {
+            obj_queen_enemy.shieldhp -= damage
+            queenshield = 1
+        }
+        else
+        {
+            global.monsterhp[global.chartarget[myself]] -= damage
+            if (damage != 0)
+            {
+                with (obj_queen_enemy)
+                    shieldbrokecon = 1
+            }
+        }
     }
-    if (self.damage > 0)
+    else
+        global.monsterhp[global.chartarget[myself]] -= damage
+    if (is_auto_susie == true && global.monsterhp[global.chartarget[myself]] <= 0)
+    {
+        with (global.chartarget[myself])
+            global.flag[(51 + myself)] = 5
+    }
+    if (damage > 0)
     {
         if (global.monstertype[0] != 20)
-            scr_tensionheal(round((self.points / 10)))
+            scr_tensionheal(round((points / 10)))
         if (global.monstertype[0] == 20)
-            scr_tensionheal(round((self.points / 15)))
-        self.attack = instance_create((global.monsterx[global.chartarget[self.myself]] + random(6)), (global.monstery[global.chartarget[self.myself]] + random(6)), obj_basicattack)
-        if (self.object_index == obj_herosusie)
+            scr_tensionheal(round((points / 15)))
+        attack = instance_create((global.monsterx[global.chartarget[myself]] + random(6)), (global.monstery[global.chartarget[myself]] + random(6)), obj_basicattack)
+        if (object_index == obj_herosusie)
         {
-            self.attack.sprite_index = spr_attack_mash2
-            self.attack.image_speed = 0.5
-            self.attack.maxindex = 4
+            attack.sprite_index = spr_attack_mash2
+            attack.image_speed = 0.5
+            attack.maxindex = 4
             snd_play(snd_impact)
             instance_create(0, 0, obj_shake)
         }
-        if (self.object_index == obj_heroralsei)
+        if (object_index == obj_heroralsei)
         {
-            self.attack.sprite_index = spr_attack_slap1
-            self.attack.maxindex = 4
-            self.attack.image_speed = 0.5
+            attack.sprite_index = spr_attack_slap1
+            attack.maxindex = 4
+            attack.image_speed = 0.5
         }
-        if (self.points == 150)
+        if (object_index == obj_heronoelle)
         {
-            self.attack.image_xscale = 2.5
-            self.attack.image_yscale = 2.5
+            attack.sprite_index = spr_attack_slap2
+            attack.maxindex = 4
+            attack.image_speed = 0.5
         }
-        with (global.monsterinstance[global.chartarget[self.myself]])
+        if (points == 150)
         {
-            self.shakex = 9
-            self.state = 3
-            self.hurttimer = 30
+            attack.image_xscale = 2.5
+            attack.image_yscale = 2.5
         }
-        if instance_exists(global.monsterinstance[global.chartarget[self.myself]])
-            global.monsterinstance[global.chartarget[self.myself]].hurtamt = self.damage
+        if (global.chapter == 2 && queenshield == 1)
+        {
+            with (obj_basicattack)
+                x = (obj_queenshield_enemy.x + 34)
+            if (damage != 0)
+            {
+                with (obj_queenshield_enemy)
+                    event_user(0)
+            }
+        }
+        else
+        {
+            if (global.chapter == 2 && instance_exists(obj_queen_enemy))
+            {
+                with (obj_basicattack)
+                    x = (obj_queen_enemy.x + 62)
+            }
+            if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy))
+            {
+                with (obj_spamton_neo_enemy)
+                {
+                    partmode = 40
+                    shockthreshold = 15
+                    shocktimer = 9999
+                    hurttimer2 = 10
+                }
+            }
+            with (global.monsterinstance[global.chartarget[myself]])
+            {
+                shakex = 9
+                state = 3
+                hurttimer = 30
+            }
+        }
+        if i_ex(global.monsterinstance[global.chartarget[myself]])
+            global.monsterinstance[global.chartarget[myself]].hurtamt = damage
     }
-    if (global.monsterhp[global.chartarget[self.myself]] <= 0)
+    if (global.chapter == 2 && queenshield == 1)
     {
-        with (global.monsterinstance[global.chartarget[self.myself]])
+        dm.x = obj_queenshield_enemy.x
+        dm.depth = (dm.depth - 100)
+    }
+    if (global.chapter == 2 && instance_exists(obj_sweet_enemy) && global.monsterhp[global.chartarget[myself]] <= 0)
+        global.monsterhp[global.chartarget[myself]] = 1
+    var a = 0
+    if (global.chapter == 2 && instance_exists(obj_queen_enemy))
+        a = 1
+    if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy))
+        a = 2
+    if (global.chapter == 2 && instance_exists(obj_berdlyb_enemy))
+        a = 3
+    if (global.monsterhp[global.chartarget[myself]] <= 0 && a == 0)
+    {
+        with (global.monsterinstance[global.chartarget[myself]])
             scr_monsterdefeat()
+    }
+    if (global.chapter == 2 && global.monsterhp[global.chartarget[myself]] <= 0 && a == 3)
+    {
+        with (global.monsterinstance[global.chartarget[myself]])
+            endcon = 1
     }
 }

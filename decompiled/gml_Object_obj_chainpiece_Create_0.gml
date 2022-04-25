@@ -1,1 +1,0 @@
-self.siner = 0

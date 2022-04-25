@@ -1,7 +1,7 @@
-if (self.active == 1)
+if (active == true)
 {
-    self.af = instance_create(self.x, self.y, obj_afterimage)
-    self.af.sprite_index = self.sprite_index
-    self.af.depth = self.depth
-    self.af.image_angle = self.futuredir
+    af = instance_create(x, y, obj_afterimage)
+    af.sprite_index = sprite_index
+    af.depth = depth
+    af.image_angle = futuredir
 }

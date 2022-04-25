@@ -1,151 +1,213 @@
 scr_depth()
-self.alarm[2] = 2
-global.currentroom = self.room
-self.autorun = 0
-self.bg = 0
+global.currentroom = room
+scr_initialize_charnames()
+autorun = 0
+bg = 0
 if instance_exists(obj_backgrounderparent)
-    self.bg = 1
-self.stepping = 0
-self.stepped = 0
-self.battlemode = 0
-self.battleheart = instance_create(self.x, self.y, obj_overworldheart)
-self.battleheart.image_alpha = 0
-self.battleheart.image_speed = 0
-self.battlealpha = 0
-self.becamebattle = 0
-self.darkmode = global.darkzone
-if (self.darkmode == 1)
+    bg = 1
+stepping = 0
+stepped = false
+drawbattlemode = 1
+battlemode = 0
+battleheart = instance_create(x, y, obj_overworldheart)
+battleheart.image_alpha = 0
+battleheart.image_speed = 0
+battlealpha = 0
+becamebattle = false
+sliding = 0
+becamesword = 0
+swordmode = 0
+swordcon = 0
+swordtimer = 0
+stop_movement = 0
+roomenterfreezeend = 0
+darkmode = global.darkzone
+if (darkmode == true)
 {
-    self.stepping = 1
-    self.image_xscale = 2
-    self.image_yscale = 2
+    stepping = 1
+    image_xscale = 2
+    image_yscale = 2
 }
-self.cutscene = 0
-self.press_l = 0
-self.press_r = 0
-self.press_d = 0
-self.press_u = 0
-self.px = 0
-self.py = 0
-self.wallcheck = 0
-self.wspeed = 3
-self.bwspeed = 3
-if (self.darkmode == 1)
+cutscene = false
+press_l = 0
+press_r = 0
+press_d = 0
+press_u = 0
+px = 0
+py = 0
+wallcheck = 0
+wspeed = 3
+bwspeed = 3
+if (darkmode == true)
 {
-    self.bwspeed = 4
-    self.wspeed = 4
+    bwspeed = 4
+    wspeed = 4
 }
-self.run = 0
-self.runtimer = 0
-self.subxspeed = 0
-self.subyspeed = 0
-self.subx = 0
-self.suby = 0
-self.walkanim = 0
-self.walkbuffer = 0
-self.walktimer = 0
-self.image_speed = 0
-self.dsprite = spr_krisd
-self.rsprite = spr_krisr
-self.usprite = spr_krisu
-self.lsprite = spr_krisl
-if (global.darkzone == 1)
+run = 0
+runtimer = 0
+runcounter = 0
+subxspeed = 0
+subyspeed = 0
+subx = 0
+suby = 0
+walkanim = 0
+walkbuffer = 0
+walktimer = 0
+image_speed = 0
+dsprite = spr_krisd
+rsprite = spr_krisr
+usprite = spr_krisu
+lsprite = spr_krisl
+if (global.darkzone == true)
 {
-    self.dsprite = spr_krisd_dark
-    self.rsprite = spr_krisr_dark
-    self.lsprite = spr_krisl_dark
-    self.usprite = spr_krisu_dark
+    dsprite = spr_krisd_dark
+    rsprite = spr_krisr_dark
+    lsprite = spr_krisl_dark
+    usprite = spr_krisu_dark
 }
-self.fun = 0
+swordfacing = 1
+swordsprite = rsprite
+fun = false
 if (global.facing == 0)
-    self.sprite_index = self.dsprite
+    sprite_index = dsprite
 if (global.facing == 1)
-    self.sprite_index = self.rsprite
+    sprite_index = rsprite
 if (global.facing == 2)
-    self.sprite_index = self.usprite
+    sprite_index = usprite
 if (global.facing == 3)
-    self.sprite_index = self.lsprite
-self.onebuffer = 0
-self.twobuffer = 0
-self.threebuffer = 0
+    sprite_index = lsprite
+onebuffer = 0
+twobuffer = 0
+threebuffer = 0
 global.menuno = 0
-for (self.i = 0; self.i < 10; self.i += 1)
-    global.menucoord[self.i] = 0
+for (i = 0; i < 10; i += 1)
+    global.menucoord[i] = 0
+cameFromEntrance = global.entrance
 if (global.interact == 3)
 {
+    noentrancefound = 0
     if (global.entrance > 0)
     {
-        global.interact = 0
-        if (global.entrance == 1)
+        if (global.flag[21] <= 0)
         {
-            self.x = obj_markerA.x
-            self.y = obj_markerA.y
+            global.interact = 0
+            global.flag[21] = -10
+            roomenterfreezeend = 1
         }
-        if (global.entrance == 2)
+        switch global.entrance
         {
-            self.x = obj_markerB.x
-            self.y = obj_markerB.y
+            case 1:
+                if i_ex(obj_markerA)
+                    setxy(obj_markerA.x, obj_markerA.y)
+                else
+                    noentrancefound = 1
+                break
+            case 2:
+                if i_ex(obj_markerB)
+                    setxy(obj_markerB.x, obj_markerB.y)
+                else
+                    noentrancefound = 1
+                break
+            case 3:
+                if i_ex(obj_markerC)
+                    setxy(obj_markerC.x, obj_markerC.y)
+                else
+                    noentrancefound = 1
+                break
+            case 4:
+                if i_ex(obj_markerD)
+                    setxy(obj_markerD.x, obj_markerD.y)
+                else
+                    noentrancefound = 1
+                break
+            case 5:
+                if i_ex(obj_markerE)
+                    setxy(obj_markerE.x, obj_markerE.y)
+                else
+                    noentrancefound = 1
+                break
+            case 6:
+                if i_ex(obj_markerF)
+                    setxy(obj_markerF.x, obj_markerF.y)
+                else
+                    noentrancefound = 1
+                break
+            case 18:
+                if i_ex(obj_markerr)
+                    setxy(obj_markerr.x, obj_markerr.y)
+                else
+                    noentrancefound = 1
+                break
+            case 19:
+                if i_ex(obj_markers)
+                    setxy(obj_markers.x, obj_markers.y)
+                else
+                    noentrancefound = 1
+                break
+            case 20:
+                if i_ex(obj_markert)
+                    setxy(obj_markert.x, obj_markert.y)
+                else
+                    noentrancefound = 1
+                break
+            case 21:
+                if i_ex(obj_markeru)
+                    setxy(obj_markeru.x, obj_markeru.y)
+                else
+                    noentrancefound = 1
+                break
+            case 22:
+                if i_ex(obj_markerv)
+                    setxy(obj_markerv.x, obj_markerv.y)
+                else
+                    noentrancefound = 1
+                break
+            case 23:
+                if i_ex(obj_markerw)
+                    setxy(obj_markerw.x, obj_markerw.y)
+                else
+                    noentrancefound = 1
+                break
+            case 24:
+                if i_ex(obj_markerX)
+                    setxy(obj_markerX.x, obj_markerX.y)
+                else
+                    noentrancefound = 1
+                break
+            default:
+                noentrancefound = 1
         }
-        if (global.entrance == 4)
+
+        if (noentrancefound == 1)
         {
-            self.x = obj_markerC.x
-            self.y = obj_markerC.y
-        }
-        if (global.entrance == 5)
-        {
-            self.x = obj_markerD.x
-            self.y = obj_markerD.y
-        }
-        if (global.entrance == 6)
-        {
-            self.x = obj_markerE.x
-            self.y = obj_markerE.y
-        }
-        if (global.entrance == 7)
-        {
-            self.x = obj_markerF.x
-            self.y = obj_markerF.y
-        }
-        if (global.entrance == 18)
-        {
-            self.x = obj_markerr.x
-            self.y = obj_markerr.y
-        }
-        if (global.entrance == 19)
-        {
-            self.x = obj_markers.x
-            self.y = obj_markers.y
-        }
-        if (global.entrance == 20)
-        {
-            self.x = obj_markert.x
-            self.y = obj_markert.y
-        }
-        if (global.entrance == 21)
-        {
-            self.x = obj_markeru.x
-            self.y = obj_markeru.y
-        }
-        if (global.entrance == 22)
-        {
-            self.x = obj_markerv.x
-            self.y = obj_markerv.y
-        }
-        if (global.entrance == 23)
-        {
-            self.x = obj_markerw.x
-            self.y = obj_markerw.y
-        }
-        if (global.entrance == 24)
-        {
-            self.x = obj_markerX.x
-            self.y = obj_markerX.y
+            if i_ex(obj_markerAny)
+            {
+                with (obj_markerAny)
+                {
+                    if (image_index == global.entrance)
+                    {
+                        other.x = x
+                        other.y = y
+                    }
+                }
+            }
+            else
+            {
+                setxy((room_width / 2), (room_height / 2))
+                debug_message("entrance not found, setting to center of room")
+                debug_message(("entrance requested was global.entrance=" + string(global.entrance)))
+            }
         }
     }
 }
-self.initwd = self.sprite_width
-self.initht = self.sprite_height
-self.mywidth = self.sprite_width
-self.myheight = self.sprite_height
-for (self.i = 0; self.i < 3; self.i += 1)
-    global.battledf[self.i] = (((global.df[global.char[self.i]] + global.itemdf[global.char[self.i], 0]) + global.itemdf[global.char[self.i], 1]) + global.itemdf[global.char[self.i], 2])
+initwd = sprite_width
+initht = sprite_height
+mywidth = sprite_width
+myheight = sprite_height
+for (i = 0; i < 3; i += 1)
+    global.battledf[i] = (((global.df[global.char[i]] + global.itemdf[global.char[i]][0]) + global.itemdf[global.char[i]][1]) + global.itemdf[global.char[i]][2])
+if (global.chapter == 2)
+{
+    if (global.flag[302] == 1)
+        instance_create(x, y, obj_kris_headobj)
+}

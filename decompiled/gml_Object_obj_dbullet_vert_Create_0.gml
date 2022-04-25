@@ -1,19 +1,16 @@
-if (self.y < (__view_get(1, 0) + 20))
-    self.y = (__view_get(1, 0) + 20)
-if (self.y > (__view_get(1, 0) + 460))
-    self.y = (__view_get(1, 0) + 460)
-self.difficulty = 1
-self.times = 0
-self.activetimer = 0
-self.grazed = 0
-self.grazepoints = 5
-self.timepoints = 5
-self.target = 0
-self.dont = 1
-self.inv = 120
-self.damage = 124
-self.active = 0
-self.image_alpha = 0
+scr_bullet_init()
+grazepoints = 5
+timepoints = 5
+active = false
+if (y < (__view_get((1 << 0), 0) + 20))
+    y = (__view_get((1 << 0), 0) + 20)
+if (y > (__view_get((1 << 0), 0) + 460))
+    y = (__view_get((1 << 0), 0) + 460)
+dont = 1
+difficulty = 1
+times = 0
+activetimer = 0
+image_alpha = 0
 if (!instance_exists(obj_heart))
     instance_destroy()
-self.type = 0
+type = 0

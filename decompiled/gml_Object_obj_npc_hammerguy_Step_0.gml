@@ -1,103 +1,110 @@
-if (self.myinteract == 3)
+if (myinteract == 3)
 {
 }
-if ((self.myinteract == 3) && (self.con == 0))
+if (myinteract == 3 && con == 0)
 {
-    if (instance_exists(self.mydialoguer) == 0)
+    if (i_ex(mydialoguer) == 0)
     {
-        self.sprite_index = spr_hammerguy
-        self.image_speed = 0.1
+        sprite_index = spr_hammerguy
+        image_speed = 0.1
         global.interact = 0
-        self.myinteract = 0
+        myinteract = 0
         with (obj_mainchara)
-            self.onebuffer = 5
+            onebuffer = 5
     }
 }
-if (self.con >= 5)
+if (con >= 5)
 {
-    if ((self.con == 10) || ((self.con == 30) || (self.con == 50)))
+    if (con == 10 || con == 30 || con == 50)
     {
         if (!d_ex())
         {
             snd_pause(global.currentsong[1])
-            self.sprite_index = spr_hammerguy_powerup
-            self.image_index = 0
-            self.image_speed = 0.5
+            sprite_index = spr_hammerguy_powerup
+            image_index = 0
+            image_speed = 0.5
             snd_play(snd_noise)
-            self.con += 1
-            self.alarm[4] = 30
-            self.charcycle = 0
-            self.charamt = 0
-            if (global.char[1] > 0)
-                self.charamt = 1
-            if (global.char[2] > 0)
-                self.charamt = 2
-            self.charcycle = self.charamt
+            con += 1
+            alarm[4] = 30
+            charcycle = 0
+            charamt = 0
+            if (global.char[1] > obj_sneo_friedpipis)
+                charamt = 1
+            if (global.char[2] > obj_sneo_friedpipis)
+                charamt = 2
+            charcycle = charamt
         }
     }
-    if ((self.con == 12) || ((self.con == 32) || (self.con == 52)))
+    if (con == 12 || con == 32 || con == 52 || con == 72)
     {
-        self.hitmode = 1
-        self.sprite_index = spr_hammerguy_hit
-        self.image_speed = 0.5
-        self.image_index = 0
-        self.con += 1
+        hitmode = 1
+        sprite_index = spr_hammerguy_hit
+        image_speed = 0.5
+        image_index = 0
+        con += 1
     }
-    if (self.con == 15)
+    if (con == 15)
     {
-        with (self.char)
+        with (char)
             instance_destroy()
         with (global.cinstance[0])
-            self.visible = 1
+            visible = true
         with (global.cinstance[1])
-            self.visible = 1
-        obj_mainchara.visible = 1
-        self.con = 13
-        self.charcycle -= 1
-        if (self.charcycle < 0)
-            self.con = 16
+            visible = true
+        obj_mainchara.visible = true
+        con = 13
+        charcycle -= 1
+        if (charcycle < 0)
+            con = 16
     }
-    if (self.con == 13)
+    if (con == 13)
     {
-        self.chartype = global.char[self.charcycle]
-        if (self.charcycle == 0)
+        chartype = global.char[charcycle]
+        if (charcycle == 0)
         {
             with (obj_mainchara)
-                self.visible = 0
-            self.char = scr_dark_marker(390, 125, spr_krisd_dark)
-            with (self.char)
-                self.depth = 400000
+                visible = false
+            var xpos = (global.chapter == 1 ? 390 : (x + 105))
+            var ypos = (global.chapter == 1 ? 125 : (y + 30))
+            char = scr_dark_marker(xpos, ypos, spr_krisd_dark)
+            with (char)
+                depth = 400000
         }
-        if ((self.charcycle == 1) || (self.charcycle == 2))
+        if (charcycle == 1 || charcycle == 2)
         {
-            with (global.cinstance[(self.charcycle - 1)])
-                self.visible = 0
-            if (self.chartype == 2)
+            with (global.cinstance[(charcycle - 1)])
+                visible = false
+            if (chartype == 2)
             {
-                self.char = scr_dark_marker(380, 110, spr_susie_shock)
-                with (self.char)
-                    self.depth = 400000
+                xpos = (global.chapter == 1 ? 380 : (x + 85))
+                ypos = (global.chapter == 1 ? 110 : (y + 15))
+                char = scr_dark_marker(xpos, ypos, spr_susie_shock)
+                with (char)
+                    depth = 400000
             }
-            if (self.chartype == 3)
+            if (chartype == 3)
             {
-                self.char = scr_dark_marker(390, 140, spr_ralsei_shock_overworld)
-                with (self.char)
-                    self.depth = 400000
+                xpos = (global.chapter == 1 ? 390 : (x + 90))
+                ypos = (global.chapter == 1 ? 140 : (y + 35))
+                var ral_sprite = (global.chapter == 1 ? spr_ralsei_shock_overworld : spr_ralsei_hurt)
+                char = scr_dark_marker(xpos, ypos, ral_sprite)
+                with (char)
+                    depth = 400000
             }
         }
-        self.con = 14
-        self.alarm[4] = 36
+        con = 14
+        alarm[4] = 36
     }
-    if ((self.con == 16) || ((self.con == 36) || (self.con == 56)))
+    if (con == 16 || con == 36 || con == 56 || con == 76)
     {
-        self.hitmode = 0
-        self.sprite_index = spr_hammerguy
-        self.image_speed = 0.05
-        self.image_index = 0
+        hitmode = 0
+        sprite_index = spr_hammerguy
+        image_speed = 0.05
+        image_index = 0
         snd_resume(global.currentsong[1])
-        self.con += 1
+        con += 1
     }
-    if (self.con == 17)
+    if (con == 17)
     {
         global.hp[1] = global.maxhp[1]
         global.hp[2] = global.maxhp[2]
@@ -105,70 +112,70 @@ if (self.con >= 5)
         global.typer = 6
         global.fc = 0
         snd_play(snd_power)
-        global.msg[0] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_108_0")
-        global.msg[1] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_109_0")
-        self.mydialoguer = instance_create(0, 0, obj_dialoguer)
-        self.con = 18
+        global.msg[0] = stringsetloc("* (Somehow^1, everyone's HP was restored.)/", "obj_npc_hammerguy_slash_Step_0_gml_108_0")
+        global.msg[1] = stringsetloc("* Well^1, well^1! Don't you feel better after a nice massage^1? Huh-Hah!!/%", "obj_npc_hammerguy_slash_Step_0_gml_109_0")
+        mydialoguer = instance_create(0, 0, obj_dialoguer)
+        con = 18
     }
-    if ((self.con == 18) || ((self.con == 38) || (self.con == 58)))
+    if (con == 18 || con == 38 || con == 58)
     {
         if (!d_ex())
         {
-            self.myinteract = 0
+            myinteract = 0
             global.interact = 0
             with (obj_mainchara)
-                self.onebuffer = 10
-            self.con = 0
+                onebuffer = 10
+            con = 0
         }
     }
-    if (self.hitmode == 1)
+    if (hitmode == 1)
     {
-        if (self.image_index == 4)
+        if (image_index == 4)
             snd_play(snd_squeaky)
-        if (self.image_index >= 10)
-            self.image_index = 0
+        if (image_index >= 10)
+            image_index = 0
     }
-    if (self.con == 33)
+    if (con == 33)
     {
-        self.char = scr_dark_marker(385, 160, spr_brokencake)
-        with (self.char)
-            self.depth = 400000
-        self.con = 34
-        self.alarm[4] = 50
+        char = scr_dark_marker(385, 160, spr_brokencake)
+        with (char)
+            depth = 400000
+        con = 34
+        alarm[4] = 50
     }
-    if (self.con == 35)
+    if (con == 35)
     {
-        with (self.char)
+        with (char)
             instance_destroy()
-        self.con = 36
+        con = 36
     }
-    if (self.con == 37)
+    if (con == 37)
     {
         scr_keyitemremove(3)
         global.typer = 6
         global.fc = 0
         snd_play(snd_item)
-        global.msg[0] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_153_0")
-        global.msg[1] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_154_0")
-        global.msg[2] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_155_0")
-        self.mydialoguer = instance_create(0, 0, obj_dialoguer)
-        self.con = 38
+        global.msg[0] = stringsetloc("* (The Broken Cake was fixed beyond recognition.)/", "obj_npc_hammerguy_slash_Step_0_gml_153_0")
+        global.msg[1] = stringsetloc("* (The Broken Cake became the TOPCAKE.)/", "obj_npc_hammerguy_slash_Step_0_gml_154_0")
+        global.msg[2] = stringsetloc("* This is truly a tremendous cake^1.&* Use its power wisely.../%", "obj_npc_hammerguy_slash_Step_0_gml_155_0")
+        mydialoguer = instance_create(0, 0, obj_dialoguer)
+        con = 38
     }
-    if (self.con == 53)
+    if (con == 53)
     {
-        self.char = scr_dark_marker(390, 170, spr_brokenkey)
-        with (self.char)
-            self.depth = 400000
-        self.con = 54
-        self.alarm[4] = 50
+        char = scr_dark_marker(390, 170, spr_brokenkey)
+        with (char)
+            depth = 400000
+        con = 54
+        alarm[4] = 50
     }
-    if (self.con == 55)
+    if (con == 55)
     {
-        with (self.char)
+        with (char)
             instance_destroy()
-        self.con = 56
+        con = 56
     }
-    if (self.con == 57)
+    if (con == 57)
     {
         scr_keyitemremove(4)
         scr_keyitemremove(6)
@@ -177,12 +184,52 @@ if (self.con >= 5)
         global.typer = 6
         global.fc = 0
         snd_play(snd_item)
-        global.msg[0] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_184_0")
-        global.msg[1] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_185_0")
-        global.msg[2] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_186_0")
-        global.msg[3] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_187_0")
-        global.msg[4] = scr_84_get_lang_string("obj_npc_hammerguy_slash_Step_0_gml_188_0")
-        self.mydialoguer = instance_create(0, 0, obj_dialoguer)
-        self.con = 58
+        global.msg[0] = stringsetloc("* (The Broken Key parts were fixed beyond recognition.)/", "obj_npc_hammerguy_slash_Step_0_gml_184_0")
+        global.msg[1] = stringsetloc("* (The Broken Key parts became the Prison Key.)/", "obj_npc_hammerguy_slash_Step_0_gml_185_0")
+        global.msg[2] = stringsetloc("* .... Hmm^1,  this KEY has a terrible energy coming from it.../", "obj_npc_hammerguy_slash_Step_0_gml_186_0")
+        global.msg[3] = stringsetloc("* Please understand that I only fixed it.../", "obj_npc_hammerguy_slash_Step_0_gml_187_0")
+        global.msg[4] = stringsetloc("* So that you will never have to use it./%", "obj_npc_hammerguy_slash_Step_0_gml_188_0")
+        mydialoguer = instance_create(0, 0, obj_dialoguer)
+        con = 58
     }
+}
+if (con == 70 && (!instance_exists(obj_fusionmenu)))
+{
+    global.interact = 1
+    times_fused++
+    if (times_fused == 1)
+    {
+        scr_speaker("no_name")
+        msgsetloc(0, "* Huh-hah^1! Let's feel my technique!/%", "obj_npc_hammerguy_slash_Step_0_gml_216_0")
+        d_make()
+    }
+    else if (times_fused >= 2)
+    {
+        scr_speaker("no_name")
+        msgsetloc(0, "* Let's pick up the pace./%", "obj_npc_hammerguy_slash_Step_0_gml_221_0")
+        d_make()
+    }
+    con = 71
+}
+if (con == 71)
+    global.interact = 1
+if (con == 71 && (!d_ex()))
+    con = 72
+if (con == 73)
+{
+    con = 75
+    alarm[4] = (times_fused == 1 ? 50 : 18)
+}
+if (con == 77)
+{
+    con = 78
+    msgsetsubloc(0, "* (You got ~1!)/%", fusionResultName, "obj_npc_hammerguy_slash_Step_0_gml_251_0")
+    snd_play(snd_item)
+    d_make()
+}
+if (con == 78 && (!d_ex()))
+{
+    con = 0
+    global.interact = 0
+    myinteract = 0
 }

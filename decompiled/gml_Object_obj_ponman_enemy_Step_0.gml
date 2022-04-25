@@ -1,85 +1,85 @@
-if (global.monster[self.myself] == 1)
+if (global.monster[myself] == true)
 {
-    if ((global.mnfight == 1) && (self.talked == 0))
+    if (global.mnfight == 1 && talked == false)
     {
-        if (global.mercymod[self.myself] < 100)
+        if (global.mercymod[myself] < 100)
             scr_randomtarget()
         if (!instance_exists(obj_darkener))
             instance_create(0, 0, obj_darkener)
         global.typer = 50
-        global.msg[0] = " "
-        self.g = scr_enemyblcon((self.x - 160), self.y, 3)
-        with (self.g.mywriter)
+        global.msg[0] = stringsetloc(" ", "obj_ponman_enemy_slash_Step_0_gml_10_0")
+        g = scr_enemyblcon((x - 160), y, 3)
+        with (g.mywriter)
             instance_destroy()
-        with (self.g)
+        with (g)
             instance_destroy()
-        self.talked = 1
-        self.talktimer = 0
+        talked = true
+        talktimer = 0
     }
-    if ((self.talked == 1) && (global.mnfight == 1))
+    if (talked == true && global.mnfight == 1)
     {
-        self.rtimer = 0
+        rtimer = 0
         scr_blconskip(5)
         if (global.mnfight == 2)
         {
             if (!instance_exists(obj_moveheart))
                 scr_moveheart()
             if (!instance_exists(obj_growtangle))
-                instance_create((__view_get(0, 0) + 320), (__view_get(1, 0) + 170), obj_growtangle)
+                instance_create((__view_get((0 << 0), 0) + 320), (__view_get((1 << 0), 0) + 170), obj_growtangle)
         }
     }
-    if ((global.mnfight == 2) && (self.attacked == 0))
+    if (global.mnfight == 2 && attacked == false)
     {
-        self.rtimer += 1
-        if (self.rtimer == 12)
+        rtimer += 1
+        if (rtimer == 12)
         {
             global.turntimer = 150
-            self.pontotal = scr_monsterpop()
-            for (self.i = 0; self.i < 3; self.i += 1)
+            pontotal = scr_monsterpop()
+            for (i = 0; i < 3; i += 1)
             {
-                if ((global.monster[self.i] == 1) && (global.mercymod[self.i] >= 100))
-                    self.pontotal -= 1
+                if (global.monster[i] == true && global.mercymod[i] >= 100)
+                    pontotal -= 1
             }
-            if (self.pontotal == 3)
-                self.maxshot = 3
-            if (self.pontotal == 2)
-                self.maxshot = 4
-            if (self.pontotal == 1)
-                self.maxshot = 5
-            if (self.pontotal <= 0)
+            if (pontotal == 3)
+                maxshot = 3
+            if (pontotal == 2)
+                maxshot = 4
+            if (pontotal == 1)
+                maxshot = 5
+            if (pontotal <= 0)
             {
                 global.turntimer = 10
-                self.maxshot = 6
+                maxshot = 6
             }
-            self.shotcount = 0
-            self.totalshotcount = 0
-            self.activetimer = 1
-            self.shotbuffer = 8
-            if (global.mercymod[self.myself] < 100)
-                self.eyecon = 20
-            self.turns += 1
-            self.attacked = 1
+            shotcount = 0
+            totalshotcount = 0
+            activetimer = 1
+            shotbuffer = 8
+            if (global.mercymod[myself] < 100)
+                eyecon = 20
+            turns += 1
+            attacked = true
             global.typer = 6
             global.fc = 0
-            self.rr = choose(0, 1, 2, 3, 4)
-            if (self.rr == 0)
-                global.battlemsg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_64_0")
-            if (self.rr == 1)
-                global.battlemsg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_65_0")
-            if (self.rr == 2)
-                global.battlemsg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_66_0")
-            if (self.rr == 3)
-                global.battlemsg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_67_0")
-            if (self.rr == 4)
-                global.battlemsg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_68_0")
-            if (global.monsterstatus[self.myself] == 1)
-                global.battlemsg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_69_0")
-            if (global.monsterhp[self.myself] <= (global.monstermaxhp[self.myself] / 3))
-                global.battlemsg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_70_0")
-            if (global.mercymod[self.myself] >= global.mercymax[self.myself])
-                global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_71_0")
-            if (global.monstercomment[self.myself] == scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_72_0"))
-                global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_72_1")
+            rr = choose(0, 1, 2, 3, 4)
+            if (rr == 0)
+                global.battlemsg[0] = stringsetloc("* Ponman advances one step at a time.", "obj_ponman_enemy_slash_Step_0_gml_64_0")
+            if (rr == 1)
+                global.battlemsg[0] = stringsetloc("* Ponman listens politely^1, despite having no ears.", "obj_ponman_enemy_slash_Step_0_gml_65_0")
+            if (rr == 2)
+                global.battlemsg[0] = stringsetloc("* Ponman seems hypnotized by your idle animation.", "obj_ponman_enemy_slash_Step_0_gml_66_0")
+            if (rr == 3)
+                global.battlemsg[0] = stringsetloc("* Ponman gazes enigmatically.", "obj_ponman_enemy_slash_Step_0_gml_67_0")
+            if (rr == 4)
+                global.battlemsg[0] = stringsetloc("* Smells like a pawn shop.", "obj_ponman_enemy_slash_Step_0_gml_68_0")
+            if (global.monsterstatus[myself] == true)
+                global.battlemsg[0] = stringsetloc("* Ponman can't keep its eye open.", "obj_ponman_enemy_slash_Step_0_gml_69_0")
+            if (global.monsterhp[myself] <= (global.monstermaxhp[myself] / 3))
+                global.battlemsg[0] = stringsetloc("* Ponman looks dilated.", "obj_ponman_enemy_slash_Step_0_gml_70_0")
+            if (global.mercymod[myself] >= global.mercymax[myself])
+                global.msg[0] = stringsetloc("* Ponman is sleeping soundly.", "obj_ponman_enemy_slash_Step_0_gml_71_0")
+            if (global.monstercomment[myself] == "(Sleepy)")
+                global.msg[0] = stringsetloc("* The enemies became SLEEPY from Ralsei's lullaby!", "obj_ponman_enemy_slash_Step_0_gml_72_0")
         }
         else
             global.turntimer = 120
@@ -88,237 +88,237 @@ if (global.monster[self.myself] == 1)
     {
         if (global.turntimer <= 1)
         {
-            if (self.battlecancel == 1)
-                scr_mercyadd(self.myself, 100)
-            if (self.battlecancel == 2)
+            if (battlecancel == 1)
+                scr_mercyadd(myself, 100)
+            if (battlecancel == 2)
             {
                 with (obj_battlecontroller)
-                    self.noreturn = 1
-                self.con = 1
-                self.battlecancel = 3
+                    noreturn = true
+                con = 1
+                battlecancel = 3
             }
         }
     }
 }
 if (global.myfight == 3)
 {
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if ((self.acting == 1) && (self.actcon == 0))
+    xx = __view_get((0 << 0), 0)
+    yy = __view_get((1 << 0), 0)
+    if (acting == true && actcon == 0)
     {
-        self.actcon = 1
-        global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_106_0")
+        actcon = 1
+        global.msg[0] = stringsetloc("* PONMAN - AT 8 DF 0&* Its nucleus doubles as an eyespot./%", "obj_ponman_enemy_slash_Step_0_gml_106_0")
         scr_battletext_default()
     }
-    if ((self.acting == 2) && (self.actcon == 0))
+    if (acting == 2 && actcon == 0)
     {
-        global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_114_0")
-        self.sleeping = 1
-        scr_mercyadd(self.myself, 100)
+        global.msg[0] = stringsetloc("* You whispered goodnight to Ponman^1.&* It fell asleep.../%", "obj_ponman_enemy_slash_Step_0_gml_114_0")
+        sleeping = true
+        scr_mercyadd(myself, 100)
         scr_battletext_default()
-        self.actcon = 1
+        actcon = 1
     }
-    if ((self.acting == 3) && (self.actcon == 0))
+    if (acting == 3 && actcon == 0)
     {
         snd_pause(global.batmusic[1])
-        if (self.lullabied == 0)
+        if (lullabied == 0)
         {
-            self.singy = snd_play(snd_ralseising1)
-            with (self.object_index)
-                self.lullabied = 1
+            singy = snd_play(snd_ralseising1)
+            with (object_index)
+                lullabied = 1
         }
         else
         {
-            self.singy = snd_play(snd_ralseising2)
-            with (self.object_index)
-                self.lullabied = 0
+            singy = snd_play(snd_ralseising2)
+            with (object_index)
+                lullabied = 0
         }
-        global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_134_0")
+        global.msg[0] = stringsetloc("* Ralsei sang a soft and entrancing lullaby!/%", "obj_ponman_enemy_slash_Step_0_gml_134_0")
         with (obj_heroralsei)
-            self.visible = 0
-        self.ralsing = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_sing)
-        with (self.ralsing)
-            self.image_speed = 0.2
-        self.lullatimer = 0
+            visible = false
+        ralsing = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_sing)
+        with (ralsing)
+            image_speed = 0.2
+        lullatimer = 0
         scr_battletext_default()
-        self.actcon = 10
+        actcon = 10
     }
-    if ((self.acting == 4) && (self.actcon == 0))
+    if (acting == 4 && actcon == 0)
     {
-        self.actcon = 1
-        global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_150_0")
+        actcon = 1
+        global.msg[0] = stringsetloc("* You and Ralsei warned Ponman about Susie^1.&* The enemy went on guard.../%", "obj_ponman_enemy_slash_Step_0_gml_150_0")
         if (scr_monsterpop() > 1)
-            global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_152_0")
-        for (self.i = 0; self.i < 3; self.i += 1)
+            global.msg[0] = stringsetloc("* You and Ralsei warned the enemies about Susie^1.&* Everyone went on guard./%", "obj_ponman_enemy_slash_Step_0_gml_152_0")
+        for (i = 0; i < 3; i += 1)
         {
-            global.monstercomment[self.i] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_155_0")
-            global.automiss[self.i] = 1
+            global.monstercomment[i] = "(Warned)"
+            global.automiss[i] = true
         }
         scr_battletext_default()
     }
-    if ((self.actcon == 1) && (!instance_exists(obj_writer)))
+    if (actcon == 1 && (!instance_exists(obj_writer)))
     {
-        self.actcon = 0
+        actcon = 0
         scr_attackphase()
     }
-    if (self.actcon == 10)
+    if (actcon == 10)
     {
-        self.lullatimer += 1
-        if (self.lullatimer >= 30)
-            self.actcon = 11
+        lullatimer += 1
+        if (lullatimer >= 30)
+            actcon = 11
     }
-    if ((self.actcon == 11) && (instance_exists(obj_writer) == 0))
+    if (actcon == 11 && instance_exists(obj_writer) == 0)
     {
-        with (self.ralsing)
+        with (ralsing)
             instance_destroy()
         with (obj_heroralsei)
-            self.visible = 1
-        snd_stop(self.singy)
+            visible = true
+        snd_stop(singy)
         snd_resume(global.batmusic[1])
-        global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_186_0")
-        if ((scr_monsterpop() > 1) && scr_havechar(2))
+        global.msg[0] = stringsetloc("* PONMAN fell asleep^1!&* The enemies became TIRED!/%", "obj_ponman_enemy_slash_Step_0_gml_186_0")
+        if (scr_monsterpop() > 1 && scr_havechar(2))
         {
-            for (self.dx = 0; self.dx < 3; self.dx += 1)
+            for (dx = 0; dx < 3; dx += 1)
             {
-                if (global.char[self.dx] == 2)
+                if (global.char[dx] == 2)
                 {
-                    if (global.charcond[self.dx] != 5)
+                    if (global.charcond[dx] != 5)
                     {
-                        global.charcond[self.dx] = 5
-                        global.faceaction[self.dx] = 9
-                        global.charmove[self.dx] = 0
-                        global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_198_0")
+                        global.charcond[dx] = 5
+                        global.faceaction[dx] = 9
+                        global.charmove[dx] = false
+                        global.msg[0] = stringsetloc("* PONMAN fell asleep^1!&* SUSIE fell asleep^1!&* The enemies became TIRED!/%", "obj_ponman_enemy_slash_Step_0_gml_198_0")
                     }
                 }
             }
         }
-        self.sleeping = 1
-        scr_mercyadd(self.myself, 100)
+        sleeping = true
+        scr_mercyadd(myself, 100)
         with (obj_monsterparent)
         {
-            global.monstercomment[self.myself] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_208_0")
-            global.monsterstatus[self.myself] = 1
+            global.monstercomment[myself] = "(Sleepy)"
+            global.monsterstatus[myself] = true
         }
         scr_battletext_default()
-        self.actcon = 1
+        actcon = 1
     }
 }
 if (global.myfight == 7)
-    self.hspeed = 15
-if (self.sleeping == 1)
-    self.eyecon = 999
-if (self.eyecon == 0)
+    hspeed = 15
+if (sleeping == true)
+    eyecon = 999
+if (eyecon == 0)
 {
-    self.eye_angle = (180 + (sin((self.siner / 8)) * 30))
-    if (self.eye_radius < 8)
-        self.eye_radius += 2
+    eye_angle = (180 + (sin((siner / 8)) * 30))
+    if (eye_radius < 8)
+        eye_radius += 2
     else
-        self.eye_radius = 8
-    if (self.addup == 0)
-        self.image_index = 1
+        eye_radius = 8
+    if (addup == false)
+        image_index = 1
     else
-        self.image_index = 3
-    if (self.eye_angle > 200)
+        image_index = 3
+    if (eye_angle > 200)
     {
-        self.image_index = 0
-        self.addup = 1
+        image_index = 0
+        addup = true
     }
-    if (self.eye_angle < 160)
+    if (eye_angle < 160)
     {
-        self.image_index = 2
-        self.addup = 0
+        image_index = 2
+        addup = false
     }
 }
-if (self.eyecon == 10)
+if (eyecon == 10)
 {
-    self.activetimer = 0
+    activetimer = 0
     with (obj_regularbullet)
     {
-        self.active = 0
-        self.image_alpha -= 0.1
+        active = false
+        image_alpha -= 0.1
     }
-    self.image_index = 0
-    self.eye_radius *= 0.7
-    if (abs(self.eye_radius) < 0.5)
+    image_index = 0
+    eye_radius *= 0.7
+    if (abs(eye_radius) < 0.5)
     {
-        self.eye_radius = 0
-        self.eye_angle = 0
+        eye_radius = 0
+        eye_angle = 0
     }
     if (global.turntimer <= 1)
-        self.eyecon = 0
+        eyecon = 0
 }
-if (self.eyecon == 20)
+if (eyecon == 20)
 {
-    if (self.spinspeed < 10)
-        self.spinspeed += 1
-    if (self.pontotal > 1)
-        self.siner += (self.spinspeed / 8)
+    if (spinspeed < 10)
+        spinspeed += 1
+    if (pontotal > 1)
+        siner += (spinspeed / 8)
     else
-        self.siner += (self.spinspeed / 20)
-    self.eye_angle = (180 + (sin((self.siner / 8)) * 70))
-    if (self.eye_radius < 8)
-        self.eye_radius += 1
-    self.grandbuffer -= 1
+        siner += (spinspeed / 20)
+    eye_angle = (180 + (sin((siner / 8)) * 70))
+    if (eye_radius < 8)
+        eye_radius += 1
+    grandbuffer -= 1
     if instance_exists(obj_heart)
-        self.x_angle = point_direction(((self.eyex + 28) + self.x), ((self.eyey + 32) + self.y), (obj_heart.x + 8), (obj_heart.y + 8))
+        x_angle = point_direction(((eyex + 28) + x), ((eyey + 32) + y), (obj_heart.x + 8), (obj_heart.y + 8))
     else
-        self.x_angle = 0
-    if ((abs((self.x_angle - self.eye_angle)) < 25) && ((self.eye_angle >= 120) && (self.eye_angle <= 240)))
+        x_angle = 0
+    if (abs((x_angle - eye_angle)) < 25 && eye_angle >= 120 && eye_angle <= 240)
     {
-        if ((self.shotbuffer < 0) && ((self.shotcount < 3) && (self.totalshotcount < self.maxshot)))
+        if (shotbuffer < 0 && shotcount < 3 && totalshotcount < maxshot)
         {
-            self.shotcount += 1
-            if (self.pontotal == 2)
-                self.shotcount += 1
-            if (self.pontotal == 3)
-                self.shotcount += 1
-            if (self.shotcount >= 3)
+            shotcount += 1
+            if (pontotal == 2)
+                shotcount += 1
+            if (pontotal == 3)
+                shotcount += 1
+            if (shotcount >= 3)
             {
-                self.totalshotcount += 1
-                self.shotcount = 0
-                if (self.pontotal == 1)
-                    self.shotbuffer = 10
-                if (self.pontotal == 2)
-                    self.shotbuffer = 13
-                if (self.pontotal == 3)
-                    self.shotbuffer = 22
+                totalshotcount += 1
+                shotcount = 0
+                if (pontotal == 1)
+                    shotbuffer = 10
+                if (pontotal == 2)
+                    shotbuffer = 13
+                if (pontotal == 3)
+                    shotbuffer = 22
             }
-            if (self.totalshotcount >= self.maxshot)
-                self.maxtimer = 1
+            if (totalshotcount >= maxshot)
+                maxtimer = 1
             snd_play(snd_hurt1)
-            self.bul = instance_create(((self.eyex + 28) + self.x), ((self.eyey + 32) + self.y), obj_regularbullet)
-            self.bul.speed = 2
-            self.bul.timepoints = 2.5
-            self.bul.target = self.mytarget
-            self.bul.damage = (global.monsterat[self.myself] * 5)
-            self.bul.friction = -0.11
-            if (self.pontotal == 1)
-                self.bul.friction = -0.12
-            self.bul.direction = self.eye_angle
-            with (self.bul)
+            bul = instance_create(((eyex + 28) + x), ((eyey + 32) + y), obj_regularbullet)
+            bul.speed = 2
+            bul.timepoints = 2.5
+            bul.target = mytarget
+            bul.damage = (global.monsterat[myself] * 5)
+            bul.friction = -0.11
+            if (pontotal == 1)
+                bul.friction = -0.12
+            bul.direction = eye_angle
+            with (bul)
             {
-                self.sprite_index = spr_diamondbullet
-                self.image_angle = self.direction
+                sprite_index = spr_diamondbullet
+                image_angle = direction
             }
         }
     }
-    if (self.maxtimer > 0)
-        self.maxtimer += 1
+    if (maxtimer > 0)
+        maxtimer += 1
     if (global.turntimer < 10)
-        self.eyecon = 10
+        eyecon = 10
 }
-self.siner += 1
-self.shotbuffer -= 1
-if (self.becomesleep == 1)
+siner += 1
+shotbuffer -= 1
+if (becomesleep == true)
 {
-    self.eyecon = 999
-    self.sleeping = 1
-    self.becomesleep = 0
-    self.sleep_index = 5
+    eyecon = 999
+    sleeping = true
+    becomesleep = false
+    sleep_index = 5
 }
-if (self.eye_angle < 0)
-    self.eye_angle += 360
-if (self.eye_angle > 360)
-    self.eye_angle -= 360
-self.eyex = lengthdir_x(self.eye_radius, self.eye_angle)
-self.eyey = lengthdir_y(self.eye_radius, self.eye_angle)
+if (eye_angle < 0)
+    eye_angle += 360
+if (eye_angle > 360)
+    eye_angle -= 360
+eyex = lengthdir_x(eye_radius, eye_angle)
+eyey = lengthdir_y(eye_radius, eye_angle)

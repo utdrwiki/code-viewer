@@ -1,101 +1,111 @@
-self.maxdelaytimer += 1
-if (self.spelluse == 1)
+maxdelaytimer += 1
+if (spelluse == true)
 {
     if (scr_monsterpop() > 0)
     {
-        for (self.xyz = 0; self.xyz < 3; self.xyz += 1)
+        for (xyz = 0; xyz < 3; xyz += 1)
         {
-            if (self.maxdelaytimer == self.spelldelay[self.xyz])
+            if (maxdelaytimer == spelldelay[xyz])
             {
-                if (self.charitem[self.xyz] == 1)
+                if (charitem[xyz] == 1)
                 {
-                    with (global.charinstance[self.xyz])
-                        self.state = 4
+                    with (global.charinstance[xyz])
+                        state = 4
                 }
-                if (self.charspell[self.xyz] == 1)
+                if (charspell[xyz] == 1)
                 {
-                    with (global.charinstance[self.xyz])
-                        self.state = 2
+                    with (global.charinstance[xyz])
+                        state = 2
                 }
             }
         }
     }
 }
-if (self.maxdelaytimer >= self.maxdelay)
-    self.active = 1
-if (self.active == 1)
+if (maxdelaytimer >= maxdelay)
+    active = true
+if (active == true)
 {
-    for (self.i = 0; self.i < 3; self.i += 1)
+    for (i = 0; i < 3; i += 1)
     {
-        draw_set_color(self.bcolor)
-        if ((self.i == 1) || (self.i == 2))
-            draw_rectangle(self.x, (self.y + (38 * self.i)), (self.x + 300), ((self.y + (38 * self.i)) + 2), 0)
-        if ((global.char[self.i] != 0) && ((global.charauto[global.char[self.i]] == 0) && (self.havechar[self.i] == 1)))
+        if (havechar[0] == true || havechar[1] == true || havechar[2] == true)
         {
-            self.j = global.char[self.i]
-            self.fullbox = 0
-            if (self.j == 1)
+            draw_set_color(bcolor)
+            if (i == 1 || i == 2)
+                draw_rectangle((x + 77), (y + (38 * i)), (x + 300), ((y + (38 * i)) + 1), false)
+        }
+        if (global.char[i] != 0 && global.charauto[global.char[i]] == false && havechar[i] == true)
+        {
+            draw_set_color(bcolor)
+            j = global.char[i]
+            fullbox = 0
+            if (j == 1)
             {
-                draw_set_color(0x00FF0000)
-                if (self.pressbuffer[1] > 0)
-                    draw_set_color(merge_color(0x00FF0000, 0x00FFFFFF, (self.pressbuffer[1] / 5)))
+                draw_set_color(c_blue)
+                if (pressbuffer[1] > 0)
+                    draw_set_color(merge_color(c_blue, c_white, (pressbuffer[1] / 5)))
             }
-            if (self.j == 2)
+            if (j == 2)
             {
-                draw_set_color(0x00800080)
-                if (self.pressbuffer[2] > 0)
-                    draw_set_color(merge_color(0x00800080, 0x00FFFFFF, (self.pressbuffer[2] / 5)))
+                draw_set_color(c_purple)
+                if (pressbuffer[2] > 0)
+                    draw_set_color(merge_color(c_purple, c_white, (pressbuffer[2] / 5)))
             }
-            if (self.j == 3)
+            if (j == 3)
             {
-                draw_set_color(0x00008000)
-                if (self.pressbuffer[3] > 0)
-                    draw_set_color(merge_color(0x00008000, 0x00FFFFFF, (self.pressbuffer[3] / 5)))
+                draw_set_color(c_green)
+                if (pressbuffer[3] > 0)
+                    draw_set_color(merge_color(c_green, c_white, (pressbuffer[3] / 5)))
             }
-            draw_rectangle((self.x + 78), (self.y + (38 * self.i)), ((self.x + 80) + (15 * self.boltspeed)), ((self.y + (38 * self.i)) + 36), 1)
-            draw_rectangle((self.x + 79), ((self.y + (38 * self.i)) + 1), (((self.x + 80) + (15 * self.boltspeed)) - 1), ((self.y + (38 * self.i)) + 35), 1)
-            draw_sprite(spr_pressfront, (self.j - 1), self.x, (self.y + (38 * self.i)))
+            if (j == 4)
+            {
+                draw_set_color(c_yellow)
+                if (pressbuffer[2] > 0)
+                    draw_set_color(merge_color(c_yellow, c_white, (pressbuffer[2] / 5)))
+            }
+            draw_rectangle((x + 78), ((y + (38 * i)) + 1), ((x + 80) + (15 * boltspeed)), ((y + (38 * i)) + 36), true)
+            draw_rectangle((x + 79), ((y + (38 * i)) + 2), (((x + 80) + (15 * boltspeed)) - 1), ((y + (38 * i)) + 35), true)
+            draw_sprite(spr_pressfront, (j - 1), x, (y + (38 * i)))
             if (global.flag[13] == 0)
-                draw_sprite(spr_pressfront_b, 0, self.x, (self.y + (38 * self.i)))
+                draw_sprite(spr_pressfront_b, 0, x, (y + (38 * i)))
             if (global.flag[13] == 1)
-                draw_sprite(spr_pressfront_b, self.i, self.x, (self.y + (38 * self.i)))
-            draw_sprite(spr_pressspot, (self.j - 1), (self.x + 80), (self.y + (38 * self.i)))
+                draw_sprite(spr_pressfront_b, i, x, (y + (38 * i)))
+            draw_sprite(spr_pressspot, (j - 1), (x + 80), (y + (38 * i)))
         }
     }
-    self.boltcount[0] = 0
-    self.boltcount[1] = 0
-    self.boltcount[2] = 0
-    if (self.method == 1)
+    boltcount[0] = 0
+    boltcount[1] = 0
+    boltcount[2] = 0
+    if (my_method == 1)
     {
-        for (self.i = 0; self.i < self.bolttotal; self.i += 1)
+        for (i = 0; i < bolttotal; i += 1)
         {
-            self.offset = self.boltchar[self.i]
-            if ((self.boltframe[self.i] - self.boltx) < -5)
-                self.boltalive[self.i] = 0
-            self.boltalpha = 1
-            if ((self.boltframe[self.i] - self.boltx) < 0)
-                self.boltalpha = (1 + ((self.boltframe[self.i] - self.boltx) / 3))
-            else if ((self.imagetimer == 0) && (self.boltalive[self.i] == 1))
+            offset = boltchar[i]
+            if ((boltframe[i] - boltx) < -5)
+                boltalive[i] = 0
+            boltalpha = 1
+            if ((boltframe[i] - boltx) < 0)
+                boltalpha = (1 + ((boltframe[i] - boltx) / 3))
+            else if (imagetimer == 0 && boltalive[i] == 1)
             {
-                self.img = instance_create((((self.x + 80) + (self.boltframe[self.i] * self.boltspeed)) - (self.boltx * self.boltspeed)), (self.y + (38 * self.offset)), obj_afterimage)
-                with (self.img)
+                img = instance_create((((x + 80) + (boltframe[i] * boltspeed)) - (boltx * boltspeed)), (y + (38 * offset)), obj_afterimage)
+                with (img)
                 {
-                    self.sprite_index = spr_attackspot
-                    self.image_alpha = 0.4
+                    sprite_index = spr_attackspot
+                    image_alpha = 0.4
                 }
             }
-            if (self.boltalive[self.i] == 1)
+            if (boltalive[i] == 1)
             {
-                draw_sprite_ext(spr_attackspot, 0, (((self.x + 80) + (self.boltframe[self.i] * self.boltspeed)) - (self.boltx * self.boltspeed)), (self.y + (38 * self.offset)), 1, 1, 0, 0x00FFFFFF, self.boltalpha)
-                self.boltcount[self.boltchar[self.i]] += 1
+                draw_sprite_ext(spr_attackspot, 0, (((x + 80) + (boltframe[i] * boltspeed)) - (boltx * boltspeed)), (y + (38 * offset)), 1, 1, 0, c_white, boltalpha)
+                boltcount[boltchar[i]] += 1
             }
         }
-        for (self.i = 0; self.i < 3; self.i += 1)
+        for (i = 0; i < 3; i += 1)
         {
-            if ((self.boltcount[self.i] == 0) && ((self.havechar[self.i] == 1) && (self.attacked[self.i] == 0)))
+            if (boltcount[i] == 0 && havechar[i] == true && attacked[i] == false)
             {
-                self.attacked[self.i] = 1
-                self.target = self.i
+                attacked[i] = true
+                target = i
                 event_user(1)
             }
         }
@@ -104,89 +114,89 @@ if (self.active == 1)
     {
         if (global.flag[13] == 1)
         {
-            if (button1_p() && (self.havechar[0] == 1))
+            if (button1_p() && havechar[0] == true)
                 scr_boltcheck(0)
-            if (button2_p() && (self.havechar[1] == 1))
+            if (button2_p() && havechar[1] == true)
                 scr_boltcheck(1)
-            if (button3_p() && (self.havechar[2] == 1))
+            if (button3_p() && havechar[2] == true)
                 scr_boltcheck(2)
         }
         else if button1_p()
-            scr_boltcheck_onebutton(0)
+            scr_boltcheck_onebutton()
     }
     else
     {
-        self.fakefade = 1
-        if (self.posttimer < (self.timermax - 35))
-            self.posttimer = (self.timermax - 34)
+        fakefade = 1
+        if (posttimer < (timermax - 35))
+            posttimer = (timermax - 34)
     }
-    self.imagetimer += 1
-    self.boltx += 1
-    self.pressbuffer[0] -= 1
-    self.pressbuffer[1] -= 1
-    self.pressbuffer[2] -= 1
-    if (self.imagetimer > 1)
-        self.imagetimer = 0
-    self.goahead = 0
-    if ((self.attacked[0] == 1) || (self.havechar[0] == 0))
+    imagetimer += 1
+    boltx += 1
+    pressbuffer[0] -= 1
+    pressbuffer[1] -= 1
+    pressbuffer[2] -= 1
+    if (imagetimer > 1)
+        imagetimer = 0
+    goahead = false
+    if (attacked[0] == true || havechar[0] == false)
     {
-        if ((self.attacked[1] == 1) || (self.havechar[1] == 0))
+        if (attacked[1] == true || havechar[1] == false)
         {
-            if ((self.attacked[2] == 1) || (self.havechar[2] == 0))
-                self.goahead = 1
+            if (attacked[2] == true || havechar[2] == false)
+                goahead = true
         }
     }
     if (scr_monsterpop() == 0)
-        self.goahead = 1
-    if (self.goahead == 1)
+        goahead = true
+    if (goahead == true)
     {
-        self.posttimer += 1
-        if ((self.posttimer > (self.timermax - 35)) && ((self.haveauto == 1) && ((self.autoed == 0) && (scr_monsterpop() > 0))))
+        posttimer += 1
+        if (posttimer > (timermax - 35) && haveauto == true && autoed == false && scr_monsterpop() > 0)
         {
-            global.charinstance[self.sus].points = 160
-            if (global.automiss[global.chartarget[self.sus]] == 1)
-                global.charinstance[self.sus].points = 0
-            with (global.charinstance[self.sus])
+            global.charinstance[sus].points = 160
+            if (global.automiss[global.chartarget[sus]] == true)
+                global.charinstance[sus].points = 0
+            with (global.charinstance[sus])
             {
-                self.state = 1
-                self.attacktimer = 0
-                self.is_auto_susie = 1
+                state = 1
+                attacktimer = 0
+                is_auto_susie = true
             }
-            self.posttimer -= 25
-            self.autoed = 1
+            posttimer -= 25
+            autoed = true
         }
-        if (self.posttimer > self.timermax)
+        if (posttimer > timermax)
         {
-            self.fade = 1
+            fade = 1
             with (obj_heroparent)
             {
-                if (self.state == 1)
-                    self.state = 0
-                self.attacked = 0
-                self.itemed = 0
+                if (state == 1)
+                    state = 0
+                attacked = false
+                itemed = false
             }
-            self.techwon = 0
+            techwon = false
             if (scr_monsterpop() == 0)
-                self.techwon = 1
-            if (self.techwon == 0)
+                techwon = true
+            if (techwon == true)
+                scr_wincombat()
+            if (techwon == false)
             {
                 global.mnfight = 1
                 global.myfight = -1
             }
-            else
-                scr_wincombat()
         }
     }
-    if ((self.fade == 1) || (self.fakefade == 1))
+    if (fade == 1 || fakefade == 1)
     {
-        self.fadeamt += 0.08
-        draw_set_color(0x00000000)
-        draw_set_alpha(self.fadeamt)
-        draw_rectangle((self.x - 1), (self.y - 1), (self.x + 640), (self.y + 300), 0)
+        fadeamt += 0.08
+        draw_set_color(c_black)
+        draw_set_alpha(fadeamt)
+        draw_rectangle((x - 1), y, (x + 640), (y + 300), false)
         draw_set_alpha(1)
-        if (self.fade == 1)
+        if (fade == 1)
         {
-            if (self.fadeamt > 1)
+            if (fadeamt > 1)
                 instance_destroy()
         }
     }

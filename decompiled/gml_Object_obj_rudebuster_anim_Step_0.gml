@@ -1,22 +1,22 @@
-self.image_index = (self.t / 2)
-if (self.t >= 28)
+image_index = (t / 2)
+if (t >= 28)
 {
     with (obj_herosusie)
-        self.visible = 1
+        visible = true
     instance_destroy()
 }
-if instance_exists(self.target)
+if i_ex(target)
 {
-    if (self.t == 10)
+    if (t == 10)
     {
         snd_play(snd_rudebuster_swing)
-        self.blast = instance_create((self.x + 40), (self.y + 30), obj_rudebuster_bolt)
-        self.blast.caster = self.caster
-        self.blast.target = self.target
-        self.blast.damage = self.damage
-        self.blast.star = self.star
-        if (self.red == 1)
-            self.blast.red = 1
+        blast = instance_create((x + 40), (y + 30), obj_rudebuster_bolt)
+        blast.caster = caster
+        blast.target = target
+        blast.damage = damage
+        blast.star = star
+        if (red == 1)
+            blast.red = 1
     }
 }
-self.t += 1
+t += 1

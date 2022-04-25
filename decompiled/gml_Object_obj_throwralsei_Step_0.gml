@@ -1,68 +1,68 @@
-if (self.throwcon == 1)
+if (throwcon == 1)
 {
-    if (self.throwready == 0)
-        self.angle += self.anglespeed
-    if (self.angle >= 30)
-        self.anglespeed = -2
-    if (self.angle <= -15)
-        self.anglespeed = 2
-    if (button3_p() && ((self.throwalpha >= 0.9) && (self.throwready == 1)))
+    if (throwready == 0)
+        angle += anglespeed
+    if (angle >= 30)
+        anglespeed = -2
+    if (angle <= -15)
+        anglespeed = 2
+    if (button3_p() && throwalpha >= 0.9 && throwready == 1)
     {
-        self.activatethrow = 1
+        activatethrow = true
         with (obj_writer)
             instance_destroy()
     }
-    if (button3_p() && (self.throwready == 0))
+    if (button3_p() && throwready == 0)
     {
-        self.throwready = 1
+        throwready = 1
         with (obj_writer)
             instance_destroy()
-        global.msg[0] = ((scr_84_get_lang_string("obj_throwralsei_slash_Step_0_gml_26_0") + scr_get_input_name(6)) + scr_84_get_lang_string("obj_throwralsei_slash_Step_0_gml_26_1"))
+        global.msg[0] = stringsetsubloc("* Press ~1 to determine the POWER!", scr_get_input_name(6), "obj_throwralsei_slash_Step_0_gml_26_0")
         scr_battletext_default()
     }
-    if (self.activatethrow == 1)
+    if (activatethrow == true)
     {
-        self.activatethrow = 0
-        self.throwready = 0
-        self.image_index = 0
-        self.image_speed = 0.5
-        self.sprite_index = spr_susieb_attack_unarmed
-        self.angledraw = 0
-        self.throwcon = 2
+        activatethrow = false
+        throwready = 0
+        image_index = 0
+        image_speed = 0.5
+        sprite_index = spr_susieb_attack_unarmed
+        angledraw = 0
+        throwcon = 2
         snd_play(snd_ultraswing)
-        self.ral = instance_create(self.rx, self.ry, obj_ralseithrown)
-        self.ral.speed = self.mypower
-        self.ral.mypower = self.mypower
-        self.ral.image_xscale = 2
-        self.ral.image_yscale = 2
-        self.ral.direction = self.angle
-        self.ral.image_angle = self.angle
-        self.ral.gravity = self.ralgrav
+        ral = instance_create(rx, ry, obj_ralseithrown)
+        ral.speed = mypower
+        ral.mypower = mypower
+        ral.image_xscale = 2
+        ral.image_yscale = 2
+        ral.direction = angle
+        ral.image_angle = angle
+        ral.gravity = ralgrav
     }
-    if (self.throwready == 1)
+    if (throwready == 1)
     {
-        self.mypower += (self.powerdir * self.powerspeed)
-        if (self.mypower >= self.maxpower)
-            self.powerdir = -1
-        if (self.mypower <= self.minpower)
-            self.powerdir = 1
+        mypower += (powerdir * powerspeed)
+        if (mypower >= maxpower)
+            powerdir = -1
+        if (mypower <= minpower)
+            powerdir = 1
     }
 }
-if (self.throwcon == 2)
+if (throwcon == 2)
 {
-    if (self.image_index >= 5)
-        self.image_speed = 0
+    if (image_index >= 5)
+        image_speed = 0
 }
-if (self.angledraw == 1)
+if (angledraw == 1)
 {
-    self.lx = lengthdir_x(self.mypower, self.angle)
-    self.ly = lengthdir_y(self.mypower, self.angle)
-    for (self.i = 0; self.i < 42; self.i += 1)
+    lx = lengthdir_x(mypower, angle)
+    ly = lengthdir_y(mypower, angle)
+    for (i = 0; i < 42; i += 1)
     {
-        self.ralyadd = (self.ralgrav + (self.ralgrav * self.i))
-        if (self.i > 0)
-            self.ralyoff[self.i] = (self.ralyoff[(self.i - 1)] + self.ralyadd)
+        ralyadd = (ralgrav + (ralgrav * i))
+        if (i > 0)
+            ralyoff[i] = (ralyoff[(i - 1)] + ralyadd)
         else
-            self.ralyoff[0] = self.ralyadd
+            ralyoff[0] = ralyadd
     }
 }

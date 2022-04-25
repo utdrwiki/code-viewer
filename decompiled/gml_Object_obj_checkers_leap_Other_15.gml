@@ -1,2 +1,2 @@
-if (self.active == 1)
+if (active == true)
     scr_damage()

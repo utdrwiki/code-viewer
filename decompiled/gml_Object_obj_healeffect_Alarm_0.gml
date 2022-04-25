@@ -1,5 +1,5 @@
-self.times += 1
-instance_create(((self.x + 30) + random(20)), ((self.y + 30) + random(20)), obj_healsparkle)
-self.alarm[0] = 3
-if (self.times > 2)
+times += 1
+instance_create(((x + 30) + random(20)), ((y + 30) + random(20)), obj_healsparkle)
+alarm[0] = 3
+if (times > 2)
     instance_destroy()

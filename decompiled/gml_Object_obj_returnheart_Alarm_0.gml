@@ -1,4 +1,4 @@
-self.x = self.distx
-self.y = self.disty
-instance_create(self.x, self.y, obj_heartburst)
+x = distx
+y = disty
+instance_create(x, y, obj_heartburst)
 instance_destroy()

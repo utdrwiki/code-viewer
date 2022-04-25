@@ -1,10 +1,11 @@
-self.con = 0
-self.timer = 0
-self.lyric = " "
-self.textalpha = 1
-self.creditalpha = 1
-for (self.i = 0; self.i < 8; self.i += 1)
+instance_create(x, y, obj_credits_2)
+con = 0
+timer = 0
+lyric = stringset(" ")
+textalpha = 1
+creditalpha = 1
+for (i = 0; i < 8; i += 1)
 {
-    self.line[self.i] = " "
-    self.linecolor[self.i] = 16777215
+    line[i] = stringset(" ")
+    linecolor[i] = c_white
 }

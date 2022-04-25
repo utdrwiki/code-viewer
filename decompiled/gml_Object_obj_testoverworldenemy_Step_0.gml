@@ -1,118 +1,142 @@
-if (self.con == 0)
+if (con == 0)
 {
     if (global.interact == 0)
-        self.frozen = 0
+        frozen = false
     if scr_outside_camera(200)
-        self.frozen = 1
+        frozen = true
     else
-        self.frozen = 0
+        frozen = false
     if (global.interact != 0)
-        self.frozen = 1
-    if (self.frozen == 1)
+        frozen = true
+    if (frozen == true)
     {
-        if (self.hadfrozen == 0)
+        if (hadfrozen == false)
         {
-            self.remspeed = self.speed
-            self.speed = 0
-            self.hadfrozen = 1
+            remspeed = speed
+            speed = 0
+            hadfrozen = true
         }
     }
-    if (self.frozen == 0)
+    if (frozen == false)
     {
-        if (self.hadfrozen == 1)
+        if (hadfrozen == true)
         {
-            if (self.speed == 0)
-                self.speed = self.remspeed
-            self.hadfrozen = 0
+            if (speed == 0)
+                speed = remspeed
+            hadfrozen = false
         }
     }
-    if (self.frozen == 0)
+    if (frozen == false)
     {
-        self.fliptimer += 1
-        if (self.fliptimer >= 30)
+        fliptimer += 1
+        if (fliptimer >= 30)
         {
-            self.vspeed = (-self.vspeed)
-            self.fliptimer = 0
+            vspeed = (-vspeed)
+            fliptimer = 0
         }
     }
 }
-if (self.con == 1)
+if (con == 1)
 {
-    self.sprite_index = self.touchsprite
-    self.hnka = snd_play(snd_tensionhorn)
-    self.con = 2
-    self.alarm[4] = 8
+    sprite_index = touchsprite
+    if (washit == 0 && global.ambush == 0)
+    {
+        hnka = snd_play(snd_tensionhorn)
+        con = 2
+        alarm[4] = 8
+    }
+    if (washit == 1 || global.ambush == 2)
+    {
+        hnka = snd_play(snd_break2)
+        con = 4
+        alarm[4] = 10
+    }
+    if (washit == 0 && global.ambush == 1)
+    {
+        snd_play(snd_battleenter)
+        con = 4
+        alarm[4] = 10
+    }
 }
-if (self.con == 3)
+if (con == 3)
 {
-    self.hnkb = snd_play(snd_tensionhorn)
-    snd_pitch(self.hnkb, 1.1)
-    self.con = 4
-    self.alarm[4] = 12
+    hnkb = snd_play(snd_tensionhorn)
+    snd_pitch(hnkb, 1.1)
+    con = 4
+    alarm[4] = 12
 }
-if (self.con == 5)
+if (con == 5)
 {
-    self.depth = 5000
+    depth = 5000
     instance_create(0, 0, obj_battleback)
     instance_create(0, 0, obj_encounterbasic)
-    self.con = 6
-    self.sprite_index = self.slidesprite
-    self.direction = point_direction(self.x, self.y, global.monstermakex[0], global.monstermakey[0])
-    self.speed = (point_distance(self.x, self.y, global.monstermakex[0], global.monstermakey[0]) / 10)
-    self.copyhave = 0
-    for (self.cc = 0; self.cc < 2; self.cc += 1)
+    con = 6
+    sprite_index = slidesprite
+    direction = point_direction(x, y, global.monstermakex[whichmonster], global.monstermakey[whichmonster])
+    speed = (point_distance(x, y, global.monstermakex[whichmonster], global.monstermakey[whichmonster]) / 10)
+    copyhave = 0
+    copy[0] = self
+    copy[1] = self
+    copy[2] = self
+    for (cc = 0; cc < 3; cc += 1)
     {
-        if (global.monstertype[(self.cc + 1)] != 0)
+        if (global.monstertype[cc] != 0 && cc != whichmonster)
         {
-            self.copyhave += 1
-            if (global.monstertype[(self.cc + 1)] == global.monstertype[0])
+            copyhave += 1
+            if (global.monstertype[cc] == global.monstertype[whichmonster])
             {
-                self.copy[self.cc] = scr_dark_marker(self.x, self.y, self.sprite_index)
-                self.copy[self.cc].direction = point_direction(self.x, self.y, global.monstermakex[(self.cc + 1)], global.monstermakey[(self.cc + 1)])
-                self.copy[self.cc].speed = (point_distance(self.x, self.y, global.monstermakex[(self.cc + 1)], global.monstermakey[(self.cc + 1)]) / 10)
-                self.copy[self.cc].depth = ((self.depth - 1) - self.cc)
+                copy[cc] = scr_dark_marker(x, y, sprite_index)
+                copy[cc].direction = point_direction(x, y, global.monstermakex[cc], global.monstermakey[cc])
+                copy[cc].speed = (point_distance(x, y, global.monstermakex[cc], global.monstermakey[cc]) / 10)
+                copy[cc].depth = ((depth - 1) - cc)
             }
             else
             {
-                self.copy[self.cc] = scr_dark_marker((global.monstermakex[(self.cc + 1)] + 200), global.monstermakey[(self.cc + 1)], object_get_sprite(global.monsterinstancetype[(self.cc + 1)]))
-                self.copy[self.cc].cc = self.cc
-                self.copy[self.cc].depth = ((self.depth - 1) - self.cc)
-                with (self.copy[self.cc])
+                copy[cc] = scr_dark_marker((global.monstermakex[cc] + 200), global.monstermakey[cc], object_get_sprite(global.monsterinstancetype[cc]))
+                copy[cc].cc = cc
+                copy[cc].depth = ((depth - 1) - cc)
+                with (copy[cc])
                 {
-                    self.direction = point_direction(self.x, self.y, global.monstermakex[(self.cc + 1)], global.monstermakey[(self.cc + 1)])
-                    self.speed = (point_distance(self.x, self.y, global.monstermakex[(self.cc + 1)], global.monstermakey[(self.cc + 1)]) / 10)
+                    direction = point_direction(x, y, global.monstermakex[cc], global.monstermakey[cc])
+                    speed = (point_distance(x, y, global.monstermakex[cc], global.monstermakey[cc]) / 10)
                 }
             }
         }
     }
-    self.alarm[4] = 10
+    afterimagetimer = 0
+    alarm[4] = 10
 }
-if (self.con == 7)
+if (con == 6)
 {
-    if (self.copyhave > 0)
+}
+if (con == 7)
+{
+    for (c = 0; c < 3; c += 1)
     {
-        for (self.c = 0; self.c < self.copyhave; self.c += 1)
-        {
-            with (self.copy[self.c])
-                self.speed = 0
-        }
+        with (copy[c])
+            speed = 0
     }
-    self.speed = 0
+    speed = 0
     if instance_exists(obj_battlecontroller)
     {
-        if (self.eraser == 1)
+        if (eraser == true)
         {
             with (obj_chaseenemy)
                 instance_destroy()
         }
-        instance_destroy()
-        if (self.copyhave > 0)
+        if (eraser == 2)
         {
-            for (self.c = 0; self.c < self.copyhave; self.c += 1)
+            with (obj_chaseenemy)
             {
-                with (self.copy[self.c])
+                if (eraser == 2)
                     instance_destroy()
             }
+        }
+        instance_destroy()
+        for (c = 0; c < 3; c += 1)
+        {
+            with (copy[c])
+                instance_destroy()
         }
     }
 }

@@ -1,26 +1,26 @@
-if (self.darken == 1)
+if (darken == true)
 {
     with (obj_heroparent)
-        self.darkify = 1
-    if (self.darkamt < 15)
-        self.darkamt += 1
+        darkify = true
+    if (darkamt < 15)
+        darkamt += 1
     with (obj_whiteedge)
-        self.image_alpha = (obj_darkener.darkamt / 15)
+        image_alpha = (obj_darkener.darkamt / 15)
 }
-if (self.darken == 0)
+if (darken == false)
 {
     with (obj_growtangle)
-        self.growcon = 3
+        growcon = 3
     with (obj_heroparent)
-        self.darkify = 0
-    if (self.darkamt > 0)
-        self.darkamt -= 1
+        darkify = false
+    if (darkamt > 0)
+        darkamt -= 1
     with (obj_whiteedge)
-        self.image_alpha = (obj_darkener.darkamt / 15)
-    if (self.darkamt <= 0)
+        image_alpha = (obj_darkener.darkamt / 15)
+    if (darkamt <= 0)
         instance_destroy()
 }
-draw_set_alpha((self.darkamt / 20))
-draw_set_color(0x00000000)
-draw_rectangle((__view_get(0, 0) - 40), (__view_get(1, 0) - 40), (__view_get(0, 0) + 680), (__view_get(1, 0) + 520), 0)
+draw_set_alpha((darkamt / 20))
+draw_set_color(c_black)
+draw_rectangle((__view_get((0 << 0), 0) - 40), (__view_get((1 << 0), 0) - 40), (__view_get((0 << 0), 0) + 680), (__view_get((1 << 0), 0) + 520), false)
 draw_set_alpha(1)

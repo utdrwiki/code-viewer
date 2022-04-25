@@ -1,0 +1,13 @@
+target_char = -4
+copy_sprite = 1
+lsprite = spr_noelle_walk_left_lw
+rsprite = spr_noelle_young_silhouette
+dsprite = spr_noelle_walk_down_lw
+usprite = spr_noelle_walk_up_lw
+init = false
+color = 0xE8A200
+image_speed = 0
+second_char = -4
+second_sprite = -4
+outline = obj_silhouette_base.outline
+tiled_cover = 1

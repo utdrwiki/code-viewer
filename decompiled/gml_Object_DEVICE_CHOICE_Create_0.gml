@@ -1,80 +1,83 @@
-self.CURX = 0
-self.CURY = 0
-self.XMAX = 0
-self.YMAX = 0
-self.NAME[0, 0] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_7_0")
-self.NAMEX[0, 0] = 20
-self.NAMEY[0, 0] = 20
-self.PLAYERNAMEY = 40
-self.TYPE = 0
-self.NAMESTRING = ""
-self.STRINGMAX = 12
-self.xoff = 0
-self.yoff = 0
-self.LANGSUBTYPE = 0
+CURX = 0
+CURY = 0
+XMAX = 0
+YMAX = 0
+NAME[0][0] = stringsetloc("EGG", "DEVICE_CHOICE_slash_Create_0_gml_7_0")
+NAMEX[0][0] = 20
+NAMEY[0][0] = 20
+PLAYERNAMEY = 40
+TYPE = 0
+NAMESTRING = ""
+STRINGMAX = 12
+xoff = 0
+yoff = 0
+LANGSUBTYPE = 0
 if (global.lang == "ja")
-    self.LANGSUBTYPE = 1
+    LANGSUBTYPE = 1
 global.choice = -1
-if (self.TYPE == 0)
+if (TYPE == 0)
 {
-    self.NAME[0, 0] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_22_0")
-    self.NAME[1, 0] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_23_0")
-    self.NAMEX[0, 0] = 110
-    self.NAMEX[1, 0] = 190
-    self.NAMEY[0, 0] = 180
-    self.NAMEY[1, 0] = 180
-    self.XMAX = 1
-    self.CURX = -1
-    self.IDEALX = 150
-    self.IDEALY = 180
+    NAME[0][0] = stringsetloc("NO", "DEVICE_CHOICE_slash_Create_0_gml_28_0")
+    NAME[1][0] = stringsetloc("YES", "DEVICE_CHOICE_slash_Create_0_gml_29_0")
+    NAMEX[0][0] = 110
+    NAMEX[1][0] = 190
+    NAMEY[0][0] = 180
+    NAMEY[1][0] = 180
+    XMAX = 1
+    CURX = -1
+    IDEALX = 150
+    IDEALY = 180
 }
-if (self.TYPE == 1)
+if (TYPE == 1)
 {
-    for (self.i = 0; self.i <= 7; self.i += 1)
+    for (i = 0; i <= 7; i += 1)
     {
-        self.NAME[self.i, 0] = string((1 + self.i))
-        self.NAMEX[self.i, 0] = (80 + (self.i * 20))
-        self.NAMEY[self.i, 0] = 180
-        self.XMAX += 1
+        NAME[i][0] = string((1 + i))
+        NAMEX[i][0] = (80 + (i * 20))
+        NAMEY[i][0] = 180
+        XMAX += 1
     }
-    self.NAMEY[0, 0] = 180
-    self.NAMEY[1, 0] = 180
-    self.XMAX = 7
-    self.xoff = -7
+    NAMEY[0][0] = 180
+    NAMEY[1][0] = 180
+    XMAX = 7
+    xoff = -7
 }
-if (self.TYPE == 2)
+if (TYPE == 2)
 {
-    for (self.i = 0; self.i <= 6; self.i += 1)
+    for (i = 0; i <= 6; i += 1)
     {
-        self.NAME[0, self.i] = string((1 + self.i))
-        self.NAMEX[0, self.i] = 80
-        self.NAMEY[0, self.i] = (100 + (self.i * 20))
-        self.YMAX += 1
+        NAME[0][i] = string((1 + i))
+        NAMEX[0][i] = 80
+        NAMEY[0][i] = (100 + (i * 20))
+        YMAX += 1
     }
-    self.NAME[0, 0] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_57_0")
-    self.NAME[0, 1] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_58_0")
-    self.NAME[0, 2] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_59_0")
-    self.NAME[0, 3] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_60_0")
-    self.NAME[0, 4] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_61_0")
-    self.NAME[0, 5] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_62_0")
-    self.NAME[0, 6] = scr_84_get_lang_string("DEVICE_CHOICE_slash_Create_0_gml_63_0")
-    self.HEARTX = (self.NAMEX[0, 0] - 20)
-    self.HEARTY = self.NAMEY[0, 0]
-    self.XMAX = 0
-    self.YMAX = 6
-    self.xoff = -20
+    NAME[0][0] = stringsetloc("GRAINS", "DEVICE_CHOICE_slash_Create_0_gml_64_0")
+    NAME[0][1] = stringsetloc("MEAT", "DEVICE_CHOICE_slash_Create_0_gml_65_0")
+    NAME[0][2] = stringsetloc("DAIRY", "DEVICE_CHOICE_slash_Create_0_gml_66_0")
+    NAME[0][3] = stringsetloc("SWEETS", "DEVICE_CHOICE_slash_Create_0_gml_67_0")
+    NAME[0][4] = stringsetloc("FRUIT", "DEVICE_CHOICE_slash_Create_0_gml_68_0")
+    NAME[0][5] = stringsetloc("VEGETABLE", "DEVICE_CHOICE_slash_Create_0_gml_69_0")
+    NAME[0][6] = stringsetloc("EGG", "DEVICE_CHOICE_slash_Create_0_gml_70_0")
+    HEARTX = (NAMEX[0][0] - 20)
+    HEARTY = NAMEY[0][0]
+    XMAX = 0
+    YMAX = 6
+    xoff = -20
 }
-if (self.TYPE == 3)
-{
-    show_debug_message("create type 3")
+if (TYPE == 3)
     scr_84_name_input_setup()
-}
-self.HEARTX = self.NAMEX[0, 0]
-self.HEARTY = self.NAMEY[0, 0]
-if (self.TYPE == 0)
-    self.HEARTX = 150
-self.DRAWHEART = 1
-self.ONEBUFFER = 0
-self.TWOBUFFER = 0
-self.FINISH = 0
-self.fadebuffer = 10
+HEARTX = NAMEX[0][0]
+HEARTY = NAMEY[0][0]
+if (TYPE == 0)
+    HEARTX = 150
+DRAWHEART = 1
+ONEBUFFER = 0
+TWOBUFFER = 0
+FINISH = false
+fadebuffer = 10
+PANASHIR = 0
+PANASHIU = 0
+PANASHID = 0
+PANASHIL = 0
+ERASE = false
+backout = 0

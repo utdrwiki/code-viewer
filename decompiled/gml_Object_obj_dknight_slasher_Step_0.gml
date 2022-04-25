@@ -1,72 +1,72 @@
-if (self.con == 0)
+if (con == 0)
 {
-    self.throwernumber = instance_number(self.object_index)
-    self.con = 12
-    self.movecon = 4
-    self.timer = 0
-    self.thrown = 0
-    self.image_index = 0
+    throwernumber = instance_number(object_index)
+    con = 12
+    movecon = 4
+    timer = 0
+    thrown = 0
+    image_index = 0
 }
-if (self.movecon == 4)
+if (movecon == 4)
 {
-    self.movesiner += 1
+    movesiner += 1
     if (global.turntimer >= 30)
     {
-        if (self.movefactor < 1)
-            self.movefactor += 0.1
+        if (movefactor < 1)
+            movefactor += 0.1
     }
-    self.y = (self.ystart + ((sin((self.movesiner / 16)) * 40) * self.movefactor))
+    y = (ystart + ((sin((movesiner / 16)) * 40) * movefactor))
     if (global.turntimer <= 30)
     {
-        if (self.movefactor > 0)
-            self.movefactor -= 0.1
+        if (movefactor > 0)
+            movefactor -= 0.1
         else
-            self.movefactor = 0
+            movefactor = 0
     }
 }
-if (self.con == 10)
+if (con == 10)
 {
-    self.timer = 0
-    self.thrown = 0
-    self.image_index = 0
+    timer = 0
+    thrown = 0
+    image_index = 0
     if (global.turntimer > 15)
-        self.con = 11
+        con = 11
 }
-if (self.con == 11)
+if (con == 11)
 {
-    self.image_index += 0.334
-    if ((self.image_index >= 4) && (self.thrown == 0))
+    image_index += 0.334
+    if (image_index >= 4 && thrown == 0)
     {
-        self.swordbullet = instance_create((self.x + 6), (self.y + 34), obj_regularbullet)
-        self.swordbullet.siner = self.movesiner
-        scr_bullet_inherit(self.swordbullet)
-        self.swordbullet.throwernumber = self.throwernumber
-        with (self.swordbullet)
+        swordbullet = instance_create((x + 6), (y + 34), obj_regularbullet)
+        swordbullet.siner = movesiner
+        scr_bullet_inherit(swordbullet)
+        swordbullet.throwernumber = throwernumber
+        with (swordbullet)
         {
-            self.active = 1
-            self.sprite_index = spr_diamondswordbullet
-            self.image_xscale = 2
-            self.image_yscale = 2
-            move_towards_point((obj_heart.x + 8), (obj_heart.y + 8), (9 + (sin((self.siner / 10)) * 4)))
-            if (self.throwernumber == 2)
-                self.speed *= 0.85
-            if (self.throwernumber == 3)
-                self.speed *= 0.7
-            self.direction += (5 - random(10))
-            self.image_angle = self.direction
+            active = true
+            sprite_index = spr_diamondswordbullet
+            image_xscale = 2
+            image_yscale = 2
+            move_towards_point((obj_heart.x + 8), (obj_heart.y + 8), (9 + (sin((siner / 10)) * 4)))
+            if (throwernumber == 2)
+                speed *= 0.85
+            if (throwernumber == 3)
+                speed *= 0.7
+            direction += (5 - random(10))
+            image_angle = direction
         }
-        self.swordbullet.depth = (self.depth + 1)
-        self.thrown = 1
+        swordbullet.depth = (depth + 1)
+        thrown = 1
     }
-    if (self.image_index >= 6)
+    if (image_index >= 6)
     {
-        self.con = 12
-        self.timer = 0
+        con = 12
+        timer = 0
     }
 }
-if (self.con == 12)
+if (con == 12)
 {
-    self.timer += 1
-    if (self.timer >= (self.throwernumber * 3))
-        self.con = 10
+    timer += 1
+    if (timer >= (throwernumber * 3))
+        con = 10
 }

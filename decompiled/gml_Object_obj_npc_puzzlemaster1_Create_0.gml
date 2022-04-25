@@ -1,17 +1,17 @@
-self.myinteract = 0
-self.talked = 0
-self.image_speed = 0
-self.image_xscale = 2
-self.image_yscale = 2
-self.con = 0
+myinteract = 0
+talked = false
+image_speed = 0
+image_xscale = 2
+image_yscale = 2
+con = 0
 if (global.flag[215] == 1)
     instance_destroy()
 else
 {
-    self.pwall = instance_create((self.x + 10), (self.y - 20), obj_soliddark)
-    self.pwall.image_yscale = 3
+    pwall = instance_create((x + 10), (y - 20), obj_soliddark)
+    pwall.image_yscale = 3
 }
-self.lecturecon = 0
-if ((global.plot >= 42) || (global.flag[211] == 3))
-    self.lecturecon = 100
+lecturecon = 0
+if (global.plot >= 42 || global.flag[211] == 3)
+    lecturecon = 100
 scr_depth()

@@ -1,0 +1,9 @@
+active = false
+visible = false
+image_alpha = 0
+con = 0
+xpos = choose(0, 1, 2, 3)
+ypos = -8
+fallspeed = 5
+falltimer = 0
+halt = false

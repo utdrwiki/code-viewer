@@ -1,9 +1,19 @@
 global.sp = 4
-self.wspeed = global.sp
-self.image_speed = 0
-self.fly = 0
-self.darken = 1
-self.darkamt = 0
-self.dmgnoise = 0
-instance_create((self.x + 10), (self.y + 10), obj_grazebox)
-self.boundaryup = 0
+wspeed = global.sp
+image_speed = 0
+fly = 0
+darken = true
+darkamt = 0
+dmgnoise = false
+chargeshot_sound = -1
+canmove = 1
+instance_create((x + 10), (y + 10), obj_grazebox)
+boundaryup = 0
+color = c_black
+z_hold = 0
+siner = 0
+z_charge = 0
+f = 2
+z_hold_f = 0
+chargeshot_delay = 0
+superchargetimer = 0

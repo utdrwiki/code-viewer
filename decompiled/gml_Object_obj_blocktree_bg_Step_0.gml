@@ -1,68 +1,44 @@
-self.oo = 0
-if (self.spec == 1)
+oo = 0
+if (spec < 2)
+    blocktimer += 1
+if (blocktimer == 20)
 {
-    if instance_exists(obj_darkponman_ow)
+    xv = ((x + (sprite_width / 4)) + random((sprite_width / 2)))
+    yv = ((y + (sprite_height / 4)) + random((sprite_height / 4)))
+    block = scr_dark_marker(xv, yv, spr_blocktree_block)
+    with (block)
     {
-        self.oo = (-0.8 + ((obj_darkponman_ow.battlealpha * obj_darkponman_ow.max_battlealpha) * 1.5))
-        if (self.oo < 0)
-            self.oo = 0
-        if (self.oo > 1)
-            self.oo = 1
-        self.image_blend = merge_color(0x00FFFFFF, 0x00000000, self.oo)
+        hspeed = (0.4 + random(1))
+        vspeed = (0.7 + random(1.5))
+        gravity_direction = 0
+        gravity = 0.1
+        image_alpha = 0
+        friction = -0.1
     }
-}
-if (self.spec == 2)
-{
-    if instance_exists(obj_darkponman_ow)
+    block.depth = (depth - 1)
+    block.image_blend = merge_color(c_white, c_black, oo)
+    if (oo >= 0.8)
     {
-        self.oo = (4 - ((obj_darkponman_ow.battlealpha * obj_darkponman_ow.max_battlealpha) * 4))
-        if (self.oo > 1)
-            self.oo = 1
-        if (self.oo < 0)
-            self.oo = 0
-        self.image_blend = merge_color(0x00FFFFFF, 0x00000000, self.oo)
-    }
-}
-if (self.spec < 2)
-    self.blocktimer += 1
-if (self.blocktimer == 20)
-{
-    self.xv = ((self.x + (self.sprite_width / 4)) + random((self.sprite_width / 2)))
-    self.yv = ((self.y + (self.sprite_height / 4)) + random((self.sprite_height / 4)))
-    self.block = scr_dark_marker(self.xv, self.yv, spr_blocktree_block)
-    with (self.block)
-    {
-        self.hspeed = (0.4 + random(1))
-        self.vspeed = (0.7 + random(1.5))
-        self.gravity_direction = 0
-        self.gravity = 0.1
-        self.image_alpha = 0
-        self.friction = -0.1
-    }
-    self.block.depth = (self.depth - 1)
-    self.block.image_blend = merge_color(0x00FFFFFF, 0x00000000, self.oo)
-    if (self.oo >= 0.8)
-    {
-        with (self.block)
+        with (block)
             instance_destroy()
     }
 }
-if ((self.blocktimer >= 20) && (self.blocktimer <= 30))
+if (blocktimer >= 20 && blocktimer <= 30)
 {
-    with (self.block)
+    with (block)
     {
-        if (self.image_alpha < 1)
-            self.image_alpha += 0.2
+        if (image_alpha < 1)
+            image_alpha += 0.2
     }
 }
-if (self.blocktimer >= 38)
+if (blocktimer >= 38)
 {
-    with (self.block)
-        self.image_alpha -= 0.1
+    with (block)
+        image_alpha -= 0.1
 }
-if (self.blocktimer >= 48)
+if (blocktimer >= 48)
 {
-    self.blocktimer = 0
-    with (self.block)
+    blocktimer = 0
+    with (block)
         instance_destroy()
 }

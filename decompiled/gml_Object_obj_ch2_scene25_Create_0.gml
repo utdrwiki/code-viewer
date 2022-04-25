@@ -1,0 +1,32 @@
+con = -1
+customcon = 0
+timer = 0
+forceend2 = 0
+shortened = 0
+if (scr_sideb_get_phase() >= 3)
+    instance_destroy()
+else if (global.chapter != 2)
+    instance_destroy()
+else if (global.plot >= 165)
+{
+    var savepoint = instance_create(905, 40, obj_savepoint)
+    with (savepoint)
+        scr_depth()
+    berdlynpc = instance_create(895, 228, obj_npc_sign)
+    berdlynpc.sprite_index = (global.flag[457] == 1 ? spr_berdly_hurt_kneel : spr_berdly_hurt_kneel_burnt)
+    with (berdlynpc)
+        scr_depth()
+    instance_destroy()
+}
+else
+{
+    if (global.tempflag[31] == 1)
+        shortened = 1
+    berdlynpc = instance_create(895, 228, obj_npc_sign)
+    berdlynpc.sprite_index = (global.flag[457] == 1 ? spr_berdly_hurt_kneel : spr_berdly_hurt_kneel_burnt)
+    with (berdlynpc)
+        scr_depth()
+    berdlynpc.visible = false
+    berdly_npc_realign = 0
+    berdly_full_spare = 0
+}

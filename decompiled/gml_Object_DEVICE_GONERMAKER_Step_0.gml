@@ -1,57 +1,57 @@
-self.siner += 1
-self.x = (self.initx + (sin((self.siner / 24)) * 2))
-self.y = (self.inity + (cos((self.siner / 30)) * 2))
-if ((self.FINISH == 0) && ((self.ONEBUFFER < 0) && (self.CANCEL == 0)))
+siner += 1
+x = (initx + (sin((siner / 24)) * 2))
+y = (inity + (cos((siner / 30)) * 2))
+if (FINISH == false && ONEBUFFER < 0 && CANCEL == false)
 {
     if left_p()
-        self.PART[self.s] -= 1
+        PART[s] -= 1
     if right_p()
-        self.PART[self.s] += 1
-    if (button1_p() && (self.LOCK[self.s] == 1))
+        PART[s] += 1
+    if (button1_p() && LOCK[s] == true)
     {
-        self.FINISH = 1
-        global.flag[(900 + self.s)] = self.PART[self.s]
+        FINISH = true
+        global.flag[(900 + s)] = PART[s]
         global.flag[20] = 1
     }
 }
-for (self.i = 0; self.i < 3; self.i += 1)
+for (i = 0; i < 3; i += 1)
 {
-    if (self.PART[self.i] > self.PARTMAX[self.i])
-        self.PART[self.i] = self.PARTMAX[self.i]
-    if (self.PART[self.i] < 0)
-        self.PART[self.i] = 0
-    self.IDEALX[self.i] = (self.PART[self.i] * -50)
-    if (self.PARTX[self.i] < self.IDEALX[self.i])
+    if (PART[i] > PARTMAX[i])
+        PART[i] = PARTMAX[i]
+    if (PART[i] < 0)
+        PART[i] = 0
+    IDEALX[i] = (PART[i] * -50)
+    if (PARTX[i] < IDEALX[i])
     {
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) >= 0)
-            self.PARTX[self.i] += 10
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) > 50)
-            self.PARTX[self.i] += 10
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) > 100)
-            self.PARTX[self.i] += 10
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) > 150)
-            self.PARTX[self.i] += 10
+        if (abs((IDEALX[i] - PARTX[i])) >= 0)
+            PARTX[i] += 10
+        if (abs((IDEALX[i] - PARTX[i])) > 50)
+            PARTX[i] += 10
+        if (abs((IDEALX[i] - PARTX[i])) > 100)
+            PARTX[i] += 10
+        if (abs((IDEALX[i] - PARTX[i])) > 150)
+            PARTX[i] += 10
     }
-    if (self.PARTX[self.i] > self.IDEALX[self.i])
+    if (PARTX[i] > IDEALX[i])
     {
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) >= 0)
-            self.PARTX[self.i] -= 10
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) > 50)
-            self.PARTX[self.i] -= 10
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) > 100)
-            self.PARTX[self.i] -= 10
-        if (abs((self.IDEALX[self.i] - self.PARTX[self.i])) > 150)
-            self.PARTX[self.i] -= 10
+        if (abs((IDEALX[i] - PARTX[i])) >= 0)
+            PARTX[i] -= 10
+        if (abs((IDEALX[i] - PARTX[i])) > 50)
+            PARTX[i] -= 10
+        if (abs((IDEALX[i] - PARTX[i])) > 100)
+            PARTX[i] -= 10
+        if (abs((IDEALX[i] - PARTX[i])) > 150)
+            PARTX[i] -= 10
     }
-    if (self.PARTX[self.i] == self.IDEALX[self.i])
-        self.LOCK[self.i] = 1
+    if (PARTX[i] == IDEALX[i])
+        LOCK[i] = true
     else
-        self.LOCK[self.i] = 0
+        LOCK[i] = false
 }
-self.ONEBUFFER -= 1
-if ((self.FADEBUFFER > 0) && (self.FINISH <= 0))
-    self.FADEBUFFER -= 1
-if (self.FINISH == 1)
-    self.FADEBUFFER += 1
-if (self.FADEBUFFER > 10)
+ONEBUFFER -= 1
+if (FADEBUFFER > 0 && FINISH <= false)
+    FADEBUFFER -= 1
+if (FINISH == true)
+    FADEBUFFER += 1
+if (FADEBUFFER > 10)
     instance_destroy()

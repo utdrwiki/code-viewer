@@ -1,21 +1,26 @@
-self.spec = 0
-self.delaytimer = 0
-self.delay = 2
-self.active = 0
-self.damage = round(random(600))
-self.bounces = 0
-self.type = -1
-self.stretch = 0.2
-self.stretchgo = 1
-self.lightf = merge_color(0x00800080, 0x00FFFFFF, 0.6)
-self.lightb = merge_color(0x00FFFF00, 0x00FFFFFF, 0.5)
-self.lightg = merge_color(0x0000FF00, 0x00FFFFFF, 0.5)
-self.kill = 0
-self.killtimer = 0
-self.killactive = 0
+spec = 0
+delaytimer = 0
+delay = 2
+active = false
+damage = round(random(600))
+bounces = 0
+type = -1
+stretch = 0.2
+stretchgo = 1
+lightf = merge_color(c_purple, c_white, 0.6)
+lightb = merge_color(c_aqua, c_white, 0.5)
+lightg = merge_color(c_lime, c_white, 0.5)
+lighty = merge_color(c_yellow, c_white, 0.3)
+init = false
+kill = 0
+killtimer = 0
+killactive = false
 with (obj_dmgwriter)
 {
-    if (self.type != 3)
-        self.killtimer = 0
+    if (type != 3)
+        killtimer = 0
 }
-self.specialmessage = 0
+specialmessage = 0
+stayincamera = 1
+xx = camerax()
+message_sprite = scr_84_get_sprite("spr_battlemsg")

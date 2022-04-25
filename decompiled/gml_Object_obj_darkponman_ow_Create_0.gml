@@ -1,76 +1,58 @@
-global.charinstance[0] = 326
+global.charinstance[0] = obj_mainchara
 global.charinstance[1] = global.cinstance[0]
 global.charinstance[2] = global.cinstance[1]
-self.boss = 0
-if (instance_find(self.object_index, 0) == self.id)
+boss = false
+if (instance_find(object_index, 0) == id)
 {
-    self.boss = 1
-    self.depth += 1
+    boss = true
+    depth += 1
 }
-self.battlealpha = 0
-self.max_battlealpha = 1
-self.image_xscale = 2
-self.image_yscale = 2
-self.rot = 0
-self.init = 0
-self.con = 0
-self.timer = 0
-self.eyer = 0
-self.image_speed = 0
-self.rotspeed = 4
-self.tile_fade = 0
-self.tile_layer_choice = 222222
-if (self.room == room_forest_area2)
+battlealpha = 0
+max_battlealpha = 1
+image_xscale = 2
+image_yscale = 2
+rot = 0
+init = false
+con = 0
+timer = 0
+eyer = 0
+image_speed = 0
+rotspeed = 4
+tile_fade = false
+tile_layer_choice = 222222
+if (room == room_forest_area2)
 {
-    if (self.x >= (self.room_width / 2))
+    if (x >= (room_width / 2))
     {
-        self.rotspeed = -4
-        self.rot = 180
+        rotspeed = -4
+        rot = 180
     }
-    self.tile_fade = 1
-    self.tile_layer_choice = 222222
+    tile_fade = true
+    tile_layer_choice = 222222
 }
-self.bmax = 8
-self.made = 0
-self.offx = 30
-self.offy = 30
-self.xrange = 300
-self.yrange = 240
-if (self.room == room_forest_area5)
+bmax = 8
+made = 0
+offx = 30
+offy = 30
+xrange = 300
+yrange = 240
+if (room == room_forest_area5)
 {
-    self.rotspeed = 2.5
-    self.bmax = 11
-    self.xrange = 300
-    self.yrange = 280
-    self.tile_fade = 1
-    self.tile_layer_choice = 222222
+    rotspeed = 2.5
+    bmax = 11
+    xrange = 300
+    yrange = 280
+    tile_fade = true
+    tile_layer_choice = 222222
 }
-if (self.room == room_cc_2f)
+if (tile_fade == true && boss == true)
 {
-    self.rotspeed = 3
-    self.bmax = 8
-    self.yrange = 280
-    if ((self.x >= 800) && (self.y <= 800))
-    {
-        self.rotspeed = -3
-        self.rot = 180
-    }
-    if ((self.x <= 800) && (self.y >= 800))
-    {
-        self.rotspeed = -3
-        self.rot = 180
-    }
-    self.tile_fade = 1
-    self.tile_layer_choice = 222222
+    alpha_changed = false
+    tile_fade = true
+    tilearray = tile_get_ids_at_depth(tile_layer_choice)
+    for (var i = 0; i < array_length_1d(tilearray); i++)
+        tile_set_alpha(tilearray[i], 0)
 }
-if ((self.tile_fade == 1) && (self.boss == 1))
-{
-    self.alpha_changed = 0
-    self.tile_fade = 1
-    self.tilearray = tile_get_ids_at_depth(self.tile_layer_choice)
-    for (var i = 0; i < array_length_1d(self.tilearray); i++)
-        tile_set_alpha(self.tilearray[i], 0)
-}
-self.xx = 0
-self.yy = 0
-self.siner = 0
+xx = 0
+yy = 0
+siner = 0

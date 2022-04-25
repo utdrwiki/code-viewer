@@ -1,47 +1,48 @@
-if (self.dont == 0)
+if (dont == 0)
 {
-    if (self.active == 0)
+    if (active == false)
     {
-        self.futuredir = point_direction(self.x, self.y, (obj_heart.x + 8), (obj_heart.y + 8))
-        draw_sprite_ext(spr_diamondbullet_form, 0, self.x, self.y, (3 - (self.image_alpha * 2)), (3 - (self.image_alpha * 2)), self.futuredir, 0x00FFFFFF, (1 - self.image_alpha))
-        if (self.image_alpha < 1)
-            self.image_alpha += 0.1
+        futuredir = point_direction(x, y, (obj_heart.x + 8), (obj_heart.y + 8))
+        draw_sprite_ext(spr_diamondbullet_form, 0, x, y, (3 - (image_alpha * 2)), (3 - (image_alpha * 2)), futuredir, c_white, (1 - image_alpha))
+        if (image_alpha < 1)
+            image_alpha += 0.1
         else
         {
             move_towards_point((obj_heart.x + 8), (obj_heart.y + 8), 2)
-            self.futuredir = self.direction
-            self.active = 1
-            self.speed = 0
+            futuredir = direction
+            active = true
+            speed = 0
         }
     }
-    draw_sprite_ext(self.sprite_index, 0, self.x, self.y, (2 - self.image_alpha), (2 - self.image_alpha), self.futuredir, 0x00FFFFFF, self.image_alpha)
-    if (self.active == 1)
+    draw_sprite_ext(sprite_index, 0, x, y, (2 - image_alpha), (2 - image_alpha), futuredir, c_white, image_alpha)
+    if (active == true)
     {
-        self.activetimer += 1
-        if ((self.activetimer >= 5) && (self.times < self.difficulty))
+        activetimer += 1
+        if (activetimer >= 5 && times < difficulty)
         {
-            self.mybul = instance_create(self.x, self.y, obj_regularbullet)
-            if instance_exists(self.mybul)
+            mybul = instance_create(x, y, obj_regularbullet)
+            if i_ex(mybul)
             {
-                self.mybul.damage = self.damage
-                self.mybul.target = self.target
-                self.mybul.sprite_index = spr_diamondbullet
-                self.mybul.direction = self.futuredir
-                with (self.mybul)
+                mybul.grazepoints = grazepoints
+                mybul.damage = damage
+                mybul.target = target
+                mybul.sprite_index = spr_diamondbullet
+                mybul.direction = futuredir
+                with (mybul)
                 {
-                    self.speed = 6
-                    self.image_angle = self.direction
+                    speed = 6
+                    image_angle = direction
                 }
             }
-            self.times += 1
-            self.activetimer = 0
+            times += 1
+            activetimer = 0
         }
-        if ((self.activetimer >= 5) && (self.times >= self.difficulty))
+        if (activetimer >= 5 && times >= difficulty)
         {
-            self.image_alpha -= 0.2
-            if (self.image_alpha <= 0)
+            image_alpha -= 0.2
+            if (image_alpha <= 0)
                 instance_destroy()
         }
     }
 }
-self.dont = 0
+dont = 0

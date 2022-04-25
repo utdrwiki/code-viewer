@@ -1,0 +1,14 @@
+endY = 320
+camFollow = 1
+mode = 1
+camFollowAfter = 0
+startOffset = 1000
+riseSpeedInitial = 2
+uniqueRideExperience = 1
+holdHeight = 1600
+holdDistance = 6000
+spinSpeed = 10
+riseSpeedReverse = 4
+riseSpeed = 12
+camTargetHeightNormal = 389
+fadeOutOthers = 1

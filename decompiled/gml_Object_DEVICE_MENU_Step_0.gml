@@ -1,402 +1,563 @@
-if ((self.MENU_NO == 1) || ((self.MENU_NO == 4) || ((self.MENU_NO == 6) || (self.MENU_NO == 7))))
+if (!input_enabled)
+    return;
+if (MENU_NO == 1 || MENU_NO == 4 || MENU_NO == 6 || MENU_NO == 7 || MENU_NO == 11)
 {
     if left_p()
     {
-        if (self.MENUCOORD[self.MENU_NO] == 1)
+        if (MENUCOORD[MENU_NO] == 1)
         {
-            self.MENUCOORD[self.MENU_NO] = 0
-            self.MOVENOISE = 1
+            MENUCOORD[MENU_NO] = 0
+            MOVENOISE = 1
         }
     }
     if right_p()
     {
-        if (self.MENUCOORD[self.MENU_NO] == 0)
+        if (MENUCOORD[MENU_NO] == 0)
         {
-            self.MENUCOORD[self.MENU_NO] = 1
-            self.MOVENOISE = 1
+            MENUCOORD[MENU_NO] = 1
+            MOVENOISE = 1
         }
     }
-    if (button1_p() && (self.ONEBUFFER < 0))
+    if (button1_p() && ONEBUFFER < 0)
     {
-        self.ONEBUFFER = 2
-        self.TWOBUFFER = 2
-        self.SELNOISE = 1
-        if (self.MENUCOORD[self.MENU_NO] == 0)
+        ONEBUFFER = 2
+        TWOBUFFER = 2
+        SELNOISE = true
+        if (MENUCOORD[MENU_NO] == 0)
         {
-            if (self.MENU_NO == 1)
+            if (MENU_NO == 1 || MENU_NO == 11)
             {
-                if (self.FILE[self.MENUCOORD[0]] == 1)
+                var FILECHECK = false
+                var FILESLOT = 0
+                var DONAMING = 0
+                if (MENU_NO == 1)
+                    FILESLOT = MENUCOORD[0]
+                if (MENU_NO == 11)
+                    FILESLOT = MENUCOORD[10]
+                if (MENU_NO == 1 && FILE[MENUCOORD[0]] == 1)
+                    FILECHECK = true
+                if (MENU_NO == 11)
                 {
-                    global.filechoice = self.MENUCOORD[0]
-                    scr_windowcaption(scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_35_0"))
-                    snd_free_all()
-                    self.f = instance_create(0, 0, obj_persistentfadein)
-                    self.f.image_xscale = 1000
-                    self.f.image_yscale = 1000
-                    if file_exists((("config_" + string(global.filechoice)) + ".ini"))
+                    if INCOMPLETE_LOAD
                     {
-                        ini_open((("config_" + string(global.filechoice)) + ".ini"))
-                        for (self.i = 0; self.i < 10; self.i += 1)
-                        {
-                            self.readval = ini_read_real("KEYBOARD_CONTROLS", string(self.i), -1)
-                            if (self.readval != -1)
-                                global.input_k[self.i] = self.readval
-                        }
-                        for (self.i = 0; self.i < 10; self.i += 1)
-                        {
-                            self.readval = ini_read_real("GAMEPAD_CONTROLS", string(self.i), -1)
-                            if (self.readval != -1)
-                                global.input_g[self.i] = self.readval
-                        }
-                        ini_close()
+                        if (INCOMPLETEFILE_PREV[FILESLOT] == 1)
+                            FILECHECK = true
+                        else
+                            FILECHECK = -1
                     }
-                    scr_load()
+                    else if (COMPLETEFILE_PREV[FILESLOT] == true)
+                        FILECHECK = true
+                    else
+                        FILECHECK = -1
                 }
-                if (self.FILE[self.MENUCOORD[0]] == 0)
+                if FILECHECK
                 {
-                    global.filechoice = self.MENUCOORD[0]
+                    global.filechoice = FILESLOT
                     snd_free_all()
-                    room_goto(PLACE_CONTACT)
-                }
-            }
-            if (self.MENU_NO == 4)
-            {
-                if (self.TYPE == 0)
-                {
-                    self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_74_0")
-                    if ((self.NAME[0] == self.NAME[1]) && (self.NAME[1] == self.NAME[2]))
+                    f = instance_create(0, 0, obj_persistentfadein)
+                    f.image_xscale = 1000
+                    f.image_yscale = 1000
+                    if ossafe_file_exists((("config_" + string(global.filechoice)) + ".ini"))
                     {
-                        if ((self.TIME[0] == self.TIME[1]) && (self.TIME[1] == self.TIME[2]))
+                        ossafe_ini_open((("config_" + string(global.filechoice)) + ".ini"))
+                        for (i = 0; i < 10; i += 1)
                         {
-                            if ((self.PLACE[0] == self.PLACE[1]) && (self.PLACE[1] == self.PLACE[2]))
-                                self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_77_0")
+                            readval = ini_read_real("KEYBOARD_CONTROLS", string(i), -1)
+                            if (readval != -1)
+                                global.input_k[i] = readval
+                        }
+                        for (i = 0; i < 10; i += 1)
+                        {
+                            readval = ini_read_real("GAMEPAD_CONTROLS", string(i), -1)
+                            if (readval != -1)
+                                global.input_g[i] = readval
+                        }
+                        if (!global.is_console)
+                            ini_close()
+                        else
+                        {
+                            readval = ini_read_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", obj_gamecontroller.gamepad_shoulderlb_reassign)
+                            if (readval != -1)
+                                obj_gamecontroller.gamepad_shoulderlb_reassign = readval
+                            global.button0 = global.input_g[4]
+                            global.button1 = global.input_g[5]
+                            global.button2 = global.input_g[6]
+                            global.screen_border_id = ini_read_string("BORDER", "TYPE", "Dynamic")
+                            var _disable_border = (global.screen_border_id == "None" || global.screen_border_id == "なし")
+                            scr_enable_screen_border((!_disable_border))
+                            ossafe_ini_close()
+                            ossafe_savedata_save()
+                        }
+                    }
+                    if (MENU_NO == 1)
+                    {
+                        scr_load()
+                        return;
+                    }
+                    if (MENU_NO == 11)
+                    {
+                        if (INCOMPLETE_LOAD == false)
+                        {
+                            global.filechoice += 3
+                            scr_load_chapter1()
+                            global.filechoice -= 3
+                        }
+                        else
+                            scr_load_chapter1()
+                        if (global.flag[914] == 0)
+                            global.flag[914] = (global.chapter - 1)
+                        FILECHECK = -2
+                        STARTGAME = true
+                    }
+                }
+                if (FILECHECK == false)
+                {
+                    global.filechoice = FILESLOT
+                    var namer = instance_create(0, 0, DEVICE_NAMER)
+                    namer.REMMENU = MENU_NO
+                    REMMENU = MENU_NO
+                    MENU_NO = -1
+                }
+                if (FILECHECK == -1)
+                    snd_play(snd_error)
+            }
+            if (MENU_NO == 4)
+            {
+                var temp_comment_is_interesting = false
+                if (TYPE == 0)
+                {
+                    TEMPCOMMENT = stringsetloc("IT CONFORMED TO THE REFLECTION.", "DEVICE_MENU_slash_Step_0_gml_74_0")
+                    if (NAME[0] == NAME[1] && NAME[1] == NAME[2])
+                    {
+                        if (TIME[0] == TIME[1] && TIME[1] == TIME[2])
+                        {
+                            if (PLACE[0] == PLACE[1] && PLACE[1] == PLACE[2])
+                            {
+                                temp_comment_is_interesting = true
+                                TEMPCOMMENT = stringsetloc("WHAT AN INTERESTING BEHAVIOR.", "DEVICE_MENU_slash_Step_0_gml_77_0")
+                            }
                         }
                     }
                 }
                 event_user(5)
-                if (self.TYPE == 0)
+                if (TYPE == 0)
                 {
-                    if ((self.NAME[0] == self.NAME[1]) && (self.NAME[1] == self.NAME[2]))
+                    if (NAME[0] == NAME[1] && NAME[1] == NAME[2])
                     {
-                        if ((self.TIME[0] == self.TIME[1]) && (self.TIME[1] == self.TIME[2]))
+                        if (TIME[0] == TIME[1] && TIME[1] == TIME[2])
                         {
-                            if ((self.PLACE[0] == self.PLACE[1]) && ((self.PLACE[1] == self.PLACE[2]) && (self.TEMPCOMMENT != scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_86_0"))))
-                                self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_86_1")
+                            if (PLACE[0] == PLACE[1] && PLACE[1] == PLACE[2] && (!temp_comment_is_interesting))
+                                TEMPCOMMENT = stringsetloc("PREPARATIONS ARE COMPLETE.", "DEVICE_MENU_slash_Step_0_gml_86_0")
                         }
                     }
                 }
-                if (self.TYPE == 1)
-                    self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_91_0")
-                self.MESSAGETIMER = 90
-                self.SELNOISE = 0
-                self.DEATHNOISE = 1
-                self.MENU_NO = 0
+                if (TYPE == 1)
+                    TEMPCOMMENT = stringsetloc("Copy complete.", "DEVICE_MENU_slash_Step_0_gml_91_0")
+                MESSAGETIMER = 90
+                SELNOISE = false
+                DEATHNOISE = true
+                MENU_NO = 0
             }
-            if (self.MENU_NO == 7)
+            if (MENU_NO == 7)
             {
-                self.FILE[self.MENUCOORD[5]] = 0
-                self.NAME[self.MENUCOORD[5]] = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_105_0")
-                self.TIME[self.MENUCOORD[5]] = 0
-                self.PLACE[self.MENUCOORD[5]] = "------------"
-                self.LEVEL[self.MENUCOORD[5]] = 0
-                self.TIME_STRING[self.MENUCOORD[5]] = "--:--"
-                file_delete(("filech1_" + string(self.MENUCOORD[5])))
-                self.iniwrite = ini_open("dr.ini")
-                ini_write_string(("G" + string(self.MENUCOORD[5])), "Name", "[EMPTY]")
-                ini_write_real(("G" + string(self.MENUCOORD[5])), "Level", 0)
-                ini_write_real(("G" + string(self.MENUCOORD[5])), "Love", 0)
-                ini_write_real(("G" + string(self.MENUCOORD[5])), "Time", 0)
-                ini_write_real(("G" + string(self.MENUCOORD[5])), "Room", 0)
-                ini_close()
-                if file_exists((("config_" + string(self.MENUCOORD[5])) + ".ini"))
-                    file_delete((("config_" + string(self.MENUCOORD[5])) + ".ini"))
-                self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_126_0")
-                if (self.TYPE == 1)
-                    self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_127_0")
-                self.MESSAGETIMER = 90
-                self.SELNOISE = 0
-                self.DEATHNOISE = 1
-                self.MENU_NO = 0
+                FILE[MENUCOORD[5]] = 0
+                NAME[MENUCOORD[5]] = stringsetloc("[EMPTY]", "DEVICE_MENU_slash_Step_0_gml_105_0")
+                TIME[MENUCOORD[5]] = 0
+                PLACE[MENUCOORD[5]] = "------------"
+                LEVEL[MENUCOORD[5]] = 0
+                TIME_STRING[MENUCOORD[5]] = "--:--"
+                ossafe_file_delete(((("filech" + string(global.chapter)) + "_") + string(MENUCOORD[5])))
+                iniwrite = ossafe_ini_open("dr.ini")
+                ini_write_string(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Name", "[EMPTY]")
+                ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Level", 0)
+                ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Love", 0)
+                ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Time", 0)
+                ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Room", 0)
+                ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Date", 0)
+                ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "UraBoss", 0)
+                ossafe_ini_close()
+                ossafe_savedata_save()
+                if ossafe_file_exists((("config_" + string(MENUCOORD[5])) + ".ini"))
+                    ossafe_file_delete((("config_" + string(MENUCOORD[5])) + ".ini"))
+                TEMPCOMMENT = stringsetloc("IT WAS AS IF IT WAS NEVER THERE AT ALL.", "DEVICE_MENU_slash_Step_0_gml_126_0")
+                if (TYPE == 1)
+                    TEMPCOMMENT = stringsetloc("Erase complete.", "DEVICE_MENU_slash_Step_0_gml_127_0")
+                MESSAGETIMER = 90
+                SELNOISE = false
+                DEATHNOISE = true
+                MENU_NO = 0
             }
-            if (self.MENU_NO == 6)
+            if (MENU_NO == 6)
             {
-                self.THREAT += 1
-                self.MENU_NO = 7
-                self.MENUCOORD[7] = 0
+                THREAT += 1
+                MENU_NO = 7
+                MENUCOORD[7] = 0
             }
         }
-        if (self.MENUCOORD[self.MENU_NO] == 1)
+        if (MENU_NO >= 0)
         {
-            if ((self.MENU_NO == 4) && (self.TYPE == 0))
+            if (MENUCOORD[MENU_NO] == 1)
             {
-                self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_149_0")
-                self.MESSAGETIMER = 90
-            }
-            if ((self.MENU_NO == 6) || (self.MENU_NO == 7))
-            {
-                if (self.TYPE == 0)
+                if (MENU_NO == 4 && TYPE == 0)
                 {
-                    self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_156_0")
-                    if (self.THREAT >= 10)
-                    {
-                        self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_159_0")
-                        self.THREAT = 0
-                    }
-                    self.MESSAGETIMER = 90
+                    TEMPCOMMENT = stringsetloc("IT RETAINED ITS ORIGINAL SHAPE.", "DEVICE_MENU_slash_Step_0_gml_149_0")
+                    MESSAGETIMER = 90
                 }
+                if (MENU_NO == 6 || MENU_NO == 7)
+                {
+                    if (TYPE == 0)
+                    {
+                        TEMPCOMMENT = stringsetloc("THEN IT WAS SPARED.", "DEVICE_MENU_slash_Step_0_gml_156_0")
+                        if (THREAT >= 10)
+                        {
+                            TEMPCOMMENT = stringsetloc("VERY INTERESTING.", "DEVICE_MENU_slash_Step_0_gml_159_0")
+                            THREAT = 0
+                        }
+                        MESSAGETIMER = 90
+                    }
+                }
+                if (MENU_NO == 11)
+                    MENU_NO = 10
+                else
+                    MENU_NO = 0
             }
-            self.MENU_NO = 0
         }
     }
-    if (button2_p() && (self.TWOBUFFER < 0))
+    if (button2_p() && TWOBUFFER < 0)
     {
-        self.ONEBUFFER = 1
-        self.TWOBUFFER = 1
-        self.BACKNOISE = 1
-        if (self.MENU_NO == 1)
-            self.MENU_NO = 0
-        if (self.MENU_NO == 4)
-            self.MENU_NO = 2
-        if (self.MENU_NO == 6)
-            self.MENU_NO = 5
-        if (self.MENU_NO == 7)
-            self.MENU_NO = 5
+        ONEBUFFER = 1
+        TWOBUFFER = 1
+        if (MENU_NO != 0)
+            BACKNOISE = true
+        if (MENU_NO == 1)
+            MENU_NO = 0
+        else if (MENU_NO == 4)
+            MENU_NO = 2
+        else if (MENU_NO == 6)
+            MENU_NO = 5
+        else if (MENU_NO == 7)
+            MENU_NO = 5
+        else if (MENU_NO == 11)
+            MENU_NO = 10
     }
 }
-if ((self.MENU_NO == 2) || ((self.MENU_NO == 3) || (self.MENU_NO == 5)))
+if (MENU_NO == 2 || MENU_NO == 3 || MENU_NO == 5)
 {
     if down_p()
     {
-        if (self.MENUCOORD[self.MENU_NO] < 3)
+        if (MENUCOORD[MENU_NO] < 3)
         {
-            self.MENUCOORD[self.MENU_NO] += 1
-            self.MOVENOISE = 1
+            MENUCOORD[MENU_NO] += 1
+            MOVENOISE = 1
         }
     }
     if up_p()
     {
-        if (self.MENUCOORD[self.MENU_NO] > 0)
+        if (MENUCOORD[MENU_NO] > 0)
         {
-            self.MENUCOORD[self.MENU_NO] -= 1
-            self.MOVENOISE = 1
+            MENUCOORD[MENU_NO] -= 1
+            MOVENOISE = 1
         }
     }
-    if (button1_p() && (self.ONEBUFFER < 0))
+    if (button1_p() && ONEBUFFER < 0)
     {
-        if (self.MENUCOORD[self.MENU_NO] < 3)
+        if (MENUCOORD[MENU_NO] < 3)
         {
-            if (self.MENU_NO == 3)
+            if (MENU_NO == 3)
             {
-                if (self.MENUCOORD[2] != self.MENUCOORD[3])
+                if (MENUCOORD[2] != MENUCOORD[3])
                 {
-                    if (self.FILE[self.MENUCOORD[self.MENU_NO]] == 1)
+                    if (FILE[MENUCOORD[MENU_NO]] == 1)
                     {
-                        self.TWOBUFFER = 2
-                        self.ONEBUFFER = 2
-                        self.SELNOISE = 1
-                        self.MENUCOORD[4] = 0
-                        self.MENU_NO = 4
+                        TWOBUFFER = 2
+                        ONEBUFFER = 2
+                        SELNOISE = true
+                        MENUCOORD[4] = 0
+                        MENU_NO = 4
                     }
                     else
                     {
-                        self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_225_0")
-                        self.MESSAGETIMER = 90
-                        if (self.TYPE == 1)
-                            self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_227_0")
-                        self.DEATHNOISE = 1
-                        self.MENU_NO = 0
-                        self.ONEBUFFER = 2
-                        self.TWOBUFFER = 2
+                        TEMPCOMMENT = stringsetloc("THE DIVISION IS COMPLETE.", "DEVICE_MENU_slash_Step_0_gml_225_0")
+                        MESSAGETIMER = 90
+                        if (TYPE == 1)
+                            TEMPCOMMENT = stringsetloc("Copy complete.", "DEVICE_MENU_slash_Step_0_gml_227_0")
+                        DEATHNOISE = true
+                        MENU_NO = 0
+                        ONEBUFFER = 2
+                        TWOBUFFER = 2
                         event_user(5)
                     }
                 }
                 else
                 {
-                    self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_238_0")
-                    if (self.TYPE == 1)
-                        self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_239_0")
-                    self.MESSAGETIMER = 90
-                    self.TWOBUFFER = 2
-                    self.ONEBUFFER = 2
-                    self.BACKNOISE = 1
+                    TEMPCOMMENT = stringsetloc("IT IS IMMUNE TO ITS OWN IMAGE.", "DEVICE_MENU_slash_Step_0_gml_238_0")
+                    if (TYPE == 1)
+                        TEMPCOMMENT = stringsetloc("You can't copy there.", "DEVICE_MENU_slash_Step_0_gml_239_0")
+                    MESSAGETIMER = 90
+                    TWOBUFFER = 2
+                    ONEBUFFER = 2
+                    BACKNOISE = true
                 }
             }
-            if (self.MENU_NO == 2)
+            if (MENU_NO == 2)
             {
-                if (self.FILE[self.MENUCOORD[self.MENU_NO]] == 1)
+                if (FILE[MENUCOORD[MENU_NO]] == 1)
                 {
-                    self.TWOBUFFER = 2
-                    self.ONEBUFFER = 2
-                    self.SELNOISE = 1
-                    self.MENUCOORD[3] = 0
-                    self.MENU_NO = 3
+                    TWOBUFFER = 2
+                    ONEBUFFER = 2
+                    SELNOISE = true
+                    MENUCOORD[3] = 0
+                    MENU_NO = 3
                 }
                 else
                 {
-                    self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_261_0")
-                    if ((self.FILE[0] == 0) && ((self.FILE[1] == 0) && (self.FILE[2] == 0)))
-                        self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_264_0")
-                    if (self.TYPE == 1)
-                        self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_266_0")
-                    self.MESSAGETIMER = 90
-                    self.BACKNOISE = 1
-                    self.TWOBUFFER = 2
-                    self.ONEBUFFER = 2
+                    TEMPCOMMENT = stringsetloc("IT IS BARREN AND CANNOT BE COPIED.", "DEVICE_MENU_slash_Step_0_gml_261_0")
+                    if (FILE[0] == 0 && FILE[1] == 0 && FILE[2] == 0)
+                        TEMPCOMMENT = stringsetloc("BUT THERE WAS NOTHING LEFT TO COPY.", "DEVICE_MENU_slash_Step_0_gml_264_0")
+                    if (TYPE == 1)
+                        TEMPCOMMENT = stringsetloc("It can't be copied.", "DEVICE_MENU_slash_Step_0_gml_266_0")
+                    MESSAGETIMER = 90
+                    BACKNOISE = true
+                    TWOBUFFER = 2
+                    ONEBUFFER = 2
                 }
             }
-            if (self.MENU_NO == 5)
+            if (MENU_NO == 5)
             {
-                if (self.FILE[self.MENUCOORD[self.MENU_NO]] == 1)
+                if (FILE[MENUCOORD[MENU_NO]] == 1)
                 {
-                    self.TWOBUFFER = 2
-                    self.ONEBUFFER = 2
-                    self.SELNOISE = 1
-                    self.MENUCOORD[6] = 0
-                    self.MENU_NO = 6
+                    TWOBUFFER = 2
+                    ONEBUFFER = 2
+                    SELNOISE = true
+                    MENUCOORD[6] = 0
+                    MENU_NO = 6
                 }
                 else
                 {
-                    self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_289_0")
-                    if ((self.FILE[0] == 0) && ((self.FILE[1] == 0) && (self.FILE[2] == 0)))
-                        self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_292_0")
-                    if (self.TYPE == 1)
-                        self.TEMPCOMMENT = scr_84_get_lang_string("DEVICE_MENU_slash_Step_0_gml_294_0")
-                    self.MESSAGETIMER = 90
-                    self.TWOBUFFER = 2
-                    self.ONEBUFFER = 2
-                    self.BACKNOISE = 1
+                    TEMPCOMMENT = stringsetloc("BUT IT WAS ALREADY GONE.", "DEVICE_MENU_slash_Step_0_gml_289_0")
+                    if (FILE[0] == 0 && FILE[1] == 0 && FILE[2] == 0)
+                        TEMPCOMMENT = stringsetloc("BUT THERE WAS NOTHING LEFT TO ERASE.", "DEVICE_MENU_slash_Step_0_gml_292_0")
+                    if (TYPE == 1)
+                        TEMPCOMMENT = stringsetloc("There's nothing to erase.", "DEVICE_MENU_slash_Step_0_gml_294_0")
+                    MESSAGETIMER = 90
+                    TWOBUFFER = 2
+                    ONEBUFFER = 2
+                    BACKNOISE = true
                 }
             }
         }
-        if (self.MENUCOORD[self.MENU_NO] == 3)
+        if (MENUCOORD[MENU_NO] == 3)
         {
-            self.TWOBUFFER = 2
-            self.ONEBUFFER = 2
-            self.SELNOISE = 1
-            self.MENU_NO = 0
+            TWOBUFFER = 2
+            ONEBUFFER = 2
+            SELNOISE = true
+            MENU_NO = 0
         }
     }
-    if (button2_p() && (self.TWOBUFFER < 0))
+    if (button2_p() && TWOBUFFER < 0)
     {
-        self.TWOBUFFER = 2
-        self.ONEBUFFER = 2
-        self.BACKNOISE = 1
-        if ((self.MENU_NO == 2) || (self.MENU_NO == 5))
-            self.MENU_NO = 0
-        if (self.MENU_NO == 3)
-            self.MENU_NO = 2
+        TWOBUFFER = 2
+        ONEBUFFER = 2
+        BACKNOISE = true
+        if (MENU_NO == 2 || MENU_NO == 5)
+            MENU_NO = 0
+        if (MENU_NO == 3)
+            MENU_NO = 2
     }
 }
-if (self.MENU_NO == 0)
+if (MENU_NO == 0 || MENU_NO == 10)
 {
+    var M = MENU_NO
+    var MAXY = 8
+    if (M == 10)
+        MAXY = 3
     if down_p()
     {
-        if (self.MENUCOORD[0] < 3)
+        if (MENUCOORD[M] < MAXY)
         {
-            self.MENUCOORD[0] += 1
-            self.MOVENOISE = 1
+            if (MENUCOORD[M] < 3)
+                MENUCOORD[M] += 1
+            else if (MENUCOORD[M] == 3)
+                MENUCOORD[M] = 5
+            else if (MENUCOORD[M] == 4)
+                MENUCOORD[M] = 6
+            else if (MENUCOORD[M] == 7 && CANQUIT == true)
+                MENUCOORD[M] = 8
+            MOVENOISE = 1
         }
     }
     if up_p()
     {
-        if (self.MENUCOORD[0] > 0)
+        if (MENUCOORD[M] > 0)
         {
-            self.MENUCOORD[0] -= 1
-            if (self.MENUCOORD[0] == 3)
-                self.MENUCOORD[0] = 2
-            self.MOVENOISE = 1
+            if (MENUCOORD[M] < 3)
+                MENUCOORD[M] -= 1
+            else if (MENUCOORD[M] == 3 || MENUCOORD[M] == 4 || MENUCOORD[M] == 7)
+                MENUCOORD[M] = 2
+            else if (MENUCOORD[M] == 5 || MENUCOORD[M] == 6)
+                MENUCOORD[M] -= 2
+            else if (MENUCOORD[M] == 8)
+                MENUCOORD[M] = 7
+            MOVENOISE = 1
         }
     }
     if right_p()
     {
-        if ((self.MENUCOORD[0] >= 3) && (self.MENUCOORD[0] <= 5))
+        if (MENUCOORD[M] >= 3 && MENUCOORD[M] < 7)
         {
-            self.MOVENOISE = 1
-            self.MENUCOORD[0] += 1
-            if (self.MENUCOORD[0] > 5)
-                self.MENUCOORD[0] = 3
+            MOVENOISE = 1
+            if (MENUCOORD[M] == 4)
+                MENUCOORD[M] = 7
+            else if (MENUCOORD[M] == 6 && CANQUIT == true)
+                MENUCOORD[M] = 8
+            else
+                MENUCOORD[M]++
         }
     }
     if left_p()
     {
-        if ((self.MENUCOORD[0] >= 3) && (self.MENUCOORD[0] <= 5))
+        if (MENUCOORD[M] >= 4 && MENUCOORD[M] != 5)
         {
-            self.MOVENOISE = 1
-            self.MENUCOORD[0] -= 1
-            if (self.MENUCOORD[0] < 3)
-                self.MENUCOORD[0] = 5
+            if (MENUCOORD[M] == 7)
+                MENUCOORD[M] = 4
+            else if (MENUCOORD[M] == 8)
+                MENUCOORD[M] = 6
+            else
+                MENUCOORD[M]--
+            MOVENOISE = 1
         }
     }
-    if (button1_p() && (self.ONEBUFFER < 0))
+    if (button1_p() && ONEBUFFER < 0)
     {
-        self.MESSAGETIMER = -1
-        if (self.MENUCOORD[0] <= 2)
+        MESSAGETIMER = -1
+        if (MENUCOORD[M] <= 2)
         {
-            self.MENUCOORD[1] = 0
-            self.ONEBUFFER = 1
-            self.TWOBUFFER = 1
-            self.MENU_NO = 1
-            self.SELNOISE = 1
+            FILECHECK = true
+            if (MENU_NO == 10)
+            {
+                if (INCOMPLETE_LOAD == false && COMPLETEFILE_PREV[MENUCOORD[M]] != true)
+                    FILECHECK = false
+                if (INCOMPLETE_LOAD == true && INCOMPLETEFILE_PREV[MENUCOORD[M]] != 1)
+                    FILECHECK = false
+            }
+            if FILECHECK
+            {
+                MENUCOORD[(M + 1)] = 0
+                ONEBUFFER = 1
+                TWOBUFFER = 1
+                MENU_NO = (M + 1)
+                SELNOISE = true
+            }
+            else
+            {
+                ONEBUFFER = 4
+                snd_play(snd_error)
+            }
         }
-        if (self.MENUCOORD[0] == 3)
+        if (MENUCOORD[M] == 3)
         {
-            self.MENUCOORD[2] = 0
-            self.ONEBUFFER = 1
-            self.TWOBUFFER = 1
-            self.MENU_NO = 2
-            self.SELNOISE = 1
+            if (M == 0)
+            {
+                MENUCOORD[2] = 0
+                ONEBUFFER = 1
+                TWOBUFFER = 1
+                MENU_NO = 2
+                SELNOISE = true
+            }
+            else
+            {
+                MENUCOORD[0] = 5
+                ONEBUFFER = 1
+                TWOBUFFER = 1
+                MENU_NO = 0
+                SELNOISE = true
+            }
         }
-        if (self.MENUCOORD[0] == 4)
+        if (MENUCOORD[M] == 4)
         {
-            self.MENUCOORD[5] = 0
-            self.ONEBUFFER = 1
-            self.TWOBUFFER = 1
-            self.MENU_NO = 5
-            self.SELNOISE = 1
+            MENUCOORD[5] = 0
+            ONEBUFFER = 1
+            TWOBUFFER = 1
+            MENU_NO = 5
+            SELNOISE = true
         }
-        if (self.MENUCOORD[0] == 5)
+        if (MENUCOORD[M] == 5)
         {
+            MENUCOORD[10] = 0
+            ONEBUFFER = 1
+            TWOBUFFER = 1
+            MENU_NO = 10
+            SELNOISE = true
+        }
+        if (MENUCOORD[M] == 6)
+        {
+            SELNOISE = true
             scr_change_language()
             scr_84_load_ini()
-            self.ONEBUFFER = 2
-            self.TWOBUFFER = 2
-            self.SELNOISE = 1
+        }
+        if (MENUCOORD[M] == 7)
+        {
+            input_enabled = false
+            SELNOISE = true
+            snd_free_all()
+            alarm[0] = 30
+        }
+        if (MENUCOORD[M] == 8 && CANQUIT)
+        {
+            SELNOISE = true
+            ossafe_game_end()
         }
     }
-}
-if (self.OBMADE == 1)
-{
-    self.OB_DEPTH += 1
-    self.obacktimer += self.OBM
-    if (self.obacktimer >= 20)
+    if (button2_p() && TWOBUFFER < 0)
     {
-        self.DV = instance_create(0, 0, DEVICE_OBACK_4)
-        self.DV.depth = (5 + self.OB_DEPTH)
-        self.DV.OBSPEED = (0.01 * self.OBM)
-        if (self.OB_DEPTH >= 60000)
-            self.OB_DEPTH = 0
-        self.obacktimer = 0
+        ONEBUFFER = 1
+        TWOBUFFER = 1
+        BACKNOISE = true
+        if (MENU_NO == 10)
+            MENU_NO = 0
     }
 }
-if (self.MOVENOISE == 1)
+if (OBMADE == 1)
+{
+    OB_DEPTH += 1
+    obacktimer += OBM
+    if (obacktimer >= 20)
+    {
+        DV = instance_create(0, 0, DEVICE_OBACK_4)
+        DV.depth = (5 + OB_DEPTH)
+        DV.OBSPEED = (0.01 * OBM)
+        if (OB_DEPTH >= 60000)
+            OB_DEPTH = 0
+        obacktimer = 0
+    }
+}
+if (MOVENOISE == 1)
 {
     snd_play(snd_menumove)
-    self.MOVENOISE = 0
+    MOVENOISE = 0
 }
-if (self.SELNOISE == 1)
+if (SELNOISE == true)
 {
     snd_play(snd_select)
-    self.SELNOISE = 0
+    SELNOISE = false
 }
-if (self.BACKNOISE == 1)
+if (BACKNOISE == true)
 {
     snd_play(snd_swing)
-    self.BACKNOISE = 0
+    BACKNOISE = false
 }
-if (self.DEATHNOISE == 1)
+if (DEATHNOISE == true)
 {
     snd_play(AUDIO_APPEARANCE)
-    self.DEATHNOISE = 0
+    DEATHNOISE = false
 }
-self.ONEBUFFER -= 1
-self.TWOBUFFER -= 1
+ONEBUFFER -= 1
+TWOBUFFER -= 1
+if (STARTGAME == true)
+{
+    snd_free_all()
+    if (global.chapter == 1)
+        room_goto(PLACE_CONTACT)
+    if (global.chapter >= 2)
+        room_goto(room_krisroom)
+}

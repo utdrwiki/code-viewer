@@ -1,6 +1,6 @@
-if ((self.canchoose == 1) && (self.choiced == 0))
+if (canchoose == true && choiced == false)
 {
-    self.choiced = 1
-    global.choice = self.mychoice
-    self.alarm[0] = 1
+    choiced = true
+    global.choice = mychoice
+    alarm[0] = 1
 }

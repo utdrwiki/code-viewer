@@ -1,123 +1,171 @@
-if (self.fadebuffer > 0)
-    self.ONEBUFFER = 1
-if (self.TYPE > 0)
+if (fadebuffer > 0)
+    ONEBUFFER = 1
+if (TYPE > 0)
 {
-    if ((self.fadebuffer < 0) && (self.FINISH == 0))
+    var OSUR = 0
+    var OSUL = 0
+    var OSUD = 0
+    var OSUU = 0
+    if (fadebuffer < 0 && FINISH == false)
     {
         var dx = 0
         var dy = 0
         if right_p()
-            dx = 1
+            OSUR = 1
         if left_p()
-            dx = -1
+            OSUL = 1
         if down_p()
-            dy = 1
+            OSUD = 1
         if up_p()
+            OSUU = 1
+        if right_h()
+            PANASHIR++
+        else
+            PANASHIR = 0
+        if left_h()
+            PANASHIL++
+        else
+            PANASHIL = 0
+        if up_h()
+            PANASHIU++
+        else
+            PANASHIU = 0
+        if down_h()
+            PANASHID++
+        else
+            PANASHID = 0
+        if (PANASHIR >= 6)
+        {
+            PANASHIR = 3
+            OSUR = 1
+        }
+        if (PANASHIL >= 6)
+        {
+            PANASHIL = 3
+            OSUL = 1
+        }
+        if (PANASHIU >= 6)
+        {
+            PANASHIU = 3
+            OSUU = 1
+        }
+        if (PANASHID >= 6)
+        {
+            PANASHID = 3
+            OSUD = 1
+        }
+        if OSUR
+            dx = 1
+        if OSUL
+            dx = -1
+        if OSUD
+            dy = 1
+        if OSUU
             dy = -1
-        if ((dx != 0) && (self.XMAX > 0))
+        if (dx != 0 && XMAX > 0)
         {
             var found = 0
-            do {
-                self.CURX = (((self.CURX + (self.XMAX + 1)) + dx) % (self.XMAX + 1))
-                var ccc = self.NAME[self.CURX, self.CURY]
-                if ((ccc != " ") && ((ccc != "　") && ((ccc != ">") && (ccc != "<"))))
+            do
+            {
+                CURX = (((CURX + (XMAX + 1)) + dx) % (XMAX + 1))
+                var ccc = NAME[CURX][CURY]
+                if (ccc != " " && ccc != "　" && ccc != ">" && ccc != "<")
                     found = 1
             } until found;
-            
         }
-        else if ((dy != 0) && (self.YMAX > 0))
+        else if (dy != 0 && YMAX > 0)
         {
             found = 0
-            do {
-                self.CURY = (((self.CURY + (self.YMAX + 1)) + dy) % (self.YMAX + 1))
+            do
+            {
+                CURY = (((CURY + (YMAX + 1)) + dy) % (YMAX + 1))
                 var move = 1
                 ccc = ""
                 if move
                 {
-                    ccc = self.NAME[self.CURX, self.CURY]
+                    ccc = NAME[CURX][CURY]
                     if (ccc == ">")
-                        self.CURX += 1
+                        CURX += 1
                     else if (ccc == "<")
-                        self.CURX -= 1
+                        CURX -= 1
                     else
                         move = 0
                     while move
                     {
-                        ccc = self.NAME[self.CURX, self.CURY]
+                        ccc = NAME[CURX][CURY]
                         if (ccc == ">")
-                            self.CURX += 1
+                            CURX += 1
                         else if (ccc == "<")
-                            self.CURX -= 1
+                            CURX -= 1
                         else
                             move = 0
                     }
                 }
-                if ((ccc != " ") && (ccc != "　"))
+                if (ccc != " " && ccc != "　")
                     found = 1
             } until found;
-            
         }
     }
 }
-else if ((self.fadebuffer < 0) && (self.FINISH == 0))
+else if (fadebuffer < 0 && FINISH == false)
 {
     if right_p()
-        self.CURX = 1
+        CURX = 1
     if left_p()
-        self.CURX = 0
+        CURX = 0
 }
-if ((self.TYPE >= 0) && (self.TYPE <= 2))
+if (TYPE >= 0 && TYPE <= 2)
 {
-    self.DRAWHEART = 1
-    if (self.CURX >= 0)
+    DRAWHEART = 1
+    if (CURX >= 0)
     {
-        self.IDEALX = self.NAMEX[self.CURX, self.CURY]
-        self.IDEALY = self.NAMEY[self.CURX, self.CURY]
-        if (self.TYPE == 0)
+        IDEALX = NAMEX[CURX][CURY]
+        IDEALY = NAMEY[CURX][CURY]
+        if (TYPE == 0)
         {
             scr_84_set_draw_font("main")
-            self.IDEALX += ((string_width(self.NAME[self.CURX, self.CURY]) / 2) - 10)
+            IDEALX += ((string_width(NAME[CURX][CURY]) / 2) - 10)
         }
     }
     else
     {
-        self.IDEALX = 150
-        self.IDEALY = 180
+        IDEALX = 150
+        IDEALY = 180
     }
-    if (abs((self.HEARTX - self.IDEALX)) <= 2)
-        self.HEARTX = self.IDEALX
-    if (abs((self.HEARTY - self.IDEALY)) <= 2)
-        self.HEARTY = self.IDEALY
-    self.HEARTDIFF = ((self.IDEALX - self.HEARTX) * 0.3)
-    self.HEARTX += self.HEARTDIFF
-    if (self.DRAWHEART == 0)
+    if (abs((HEARTX - IDEALX)) <= 2)
+        HEARTX = IDEALX
+    if (abs((HEARTY - IDEALY)) <= 2)
+        HEARTY = IDEALY
+    HEARTDIFF = ((IDEALX - HEARTX) * 0.3)
+    HEARTX += HEARTDIFF
+    if (DRAWHEART == 0)
     {
-        self.HEARTX = self.IDEALX
-        self.DRAWHEART = 1
+        HEARTX = IDEALX
+        DRAWHEART = 1
     }
-    self.HEARTDIFF = ((self.IDEALY - self.HEARTY) * 0.3)
-    self.HEARTY += self.HEARTDIFF
-    if (self.DRAWHEART == 0)
+    HEARTDIFF = ((IDEALY - HEARTY) * 0.3)
+    HEARTY += HEARTDIFF
+    if (DRAWHEART == 0)
     {
-        self.HEARTY = self.IDEALY
-        self.DRAWHEART = 1
+        HEARTY = IDEALY
+        DRAWHEART = 1
     }
-    if (self.FINISH == 0)
+    if (FINISH == false)
     {
-        if (button1_p() && ((self.CURX >= 0) && (self.ONEBUFFER < 0)))
+        if (button1_p() && CURX >= 0 && ONEBUFFER < 0)
         {
-            global.choice = self.CURX
-            if (self.TYPE == 2)
-                global.choice = self.CURY
-            self.FINISH = 1
-            self.ONEBUFFER = 99
+            global.choice = CURX
+            if (TYPE == 2)
+                global.choice = CURY
+            FINISH = true
+            ONEBUFFER = 99
         }
     }
 }
-if (self.TYPE == 3)
+if (TYPE == 3)
 {
-    self.DRAWHEART = 1
-    var str = self.NAME[self.CURX, self.CURY]
+    DRAWHEART = 1
+    var str = NAME[CURX][CURY]
     var cmd = ""
     if (string_length(str) > 1)
     {
@@ -125,76 +173,78 @@ if (self.TYPE == 3)
         str = string_copy(str, 4, (string_length(str) - 3))
     }
     scr_84_set_draw_font("main")
-    self.IDEALX = ((self.NAMEX[self.CURX, self.CURY] + (string_width(str) / 2)) - 10)
-    self.IDEALY = (self.NAMEY[self.CURX, self.CURY] - 2)
-    if (abs((self.HEARTX - self.IDEALX)) <= 2)
-        self.HEARTX = self.IDEALX
-    if (abs((self.HEARTY - self.IDEALY)) <= 2)
-        self.HEARTY = self.IDEALY
-    self.HEARTDIFF = ((self.IDEALX - self.HEARTX) * 0.5)
-    if (abs(self.HEARTDIFF) > 60)
-        self.DRAWHEART = 0
-    self.HEARTX += self.HEARTDIFF
-    if (self.DRAWHEART == 0)
+    IDEALX = ((NAMEX[CURX][CURY] + (string_width(str) / 2)) - 10)
+    IDEALY = (NAMEY[CURX][CURY] - 2)
+    if (abs((HEARTX - IDEALX)) <= 2)
+        HEARTX = IDEALX
+    if (abs((HEARTY - IDEALY)) <= 2)
+        HEARTY = IDEALY
+    HEARTDIFF = ((IDEALX - HEARTX) * 0.5)
+    if (abs(HEARTDIFF) > 60)
+        DRAWHEART = 0
+    HEARTX += HEARTDIFF
+    if (DRAWHEART == 0)
     {
-        self.HEARTX = self.IDEALX
-        self.DRAWHEART = 1
+        HEARTX = IDEALX
+        DRAWHEART = 1
     }
-    self.HEARTDIFF = ((self.IDEALY - self.HEARTY) * 0.5)
-    if (abs(self.HEARTDIFF) > 60)
-        self.DRAWHEART = 0
-    self.HEARTY += self.HEARTDIFF
-    if (self.DRAWHEART == 0)
+    HEARTDIFF = ((IDEALY - HEARTY) * 0.5)
+    if (abs(HEARTDIFF) > 60)
+        DRAWHEART = 0
+    HEARTY += HEARTDIFF
+    if (DRAWHEART == 0)
     {
-        self.HEARTY = self.IDEALY
-        self.DRAWHEART = 1
+        HEARTY = IDEALY
+        DRAWHEART = 1
     }
-    self.ERASE = 0
-    if (self.FINISH == 0)
+    ERASE = false
+    if (FINISH == false)
     {
         if button2_p()
-            self.ERASE = 1
-        if (button1_p() && (self.ONEBUFFER < 0))
+            ERASE = true
+        if (button1_p() && ONEBUFFER < 0)
         {
             if (cmd == "")
             {
-                if (string_length(self.NAMESTRING) < self.STRINGMAX)
-                    self.NAMESTRING += self.NAME[self.CURX, self.CURY]
+                if (string_length(NAMESTRING) < STRINGMAX)
+                    NAMESTRING += NAME[CURX][CURY]
             }
             if (cmd == "B")
-                self.ERASE = 1
-            if ((cmd == "1") || ((cmd == "2") || (cmd == "3")))
+                ERASE = true
+            if (cmd == "1" || cmd == "2" || cmd == "3")
             {
                 var new_type = real(cmd)
-                if (self.LANGSUBTYPE != new_type)
+                if (LANGSUBTYPE != new_type)
                 {
-                    self.LANGSUBTYPE = new_type
+                    LANGSUBTYPE = new_type
                     scr_84_name_input_setup()
                 }
             }
-            if ((cmd == "E") && ((self.ONEBUFFER < 0) && (string_length(self.NAMESTRING) >= 1)))
+            if (cmd == "E" && ONEBUFFER < 0 && string_length(NAMESTRING) >= 1)
             {
-                self.ONEBUFFER = 99
-                self.FINISH = 1
+                ONEBUFFER = 99
+                FINISH = true
                 global.choice = 1
             }
         }
     }
-    if ((self.ERASE == 1) && (self.FINISH == 0))
+    if (ERASE == true && string_length(NAMESTRING) == 0)
+        backout = 1
+    if (ERASE == true && FINISH == false)
     {
-        if (string_length(self.NAMESTRING) > 0)
-            self.NAMESTRING = string_delete(self.NAMESTRING, string_length(self.NAMESTRING), 1)
+        if (string_length(NAMESTRING) > 0)
+            NAMESTRING = string_delete(NAMESTRING, string_length(NAMESTRING), 1)
     }
 }
-self.ONEBUFFER -= 1
-if (self.FINISH == 0)
-    self.fadebuffer -= 1
-if (self.FINISH == 1)
+ONEBUFFER -= 1
+if (FINISH == false)
+    fadebuffer -= 1
+if (FINISH == true)
 {
     global.flag[20] = 1
-    if (self.fadebuffer < 0)
-        self.fadebuffer = 0
-    self.fadebuffer += 1
-    if (self.fadebuffer >= 10)
+    if (fadebuffer < 0)
+        fadebuffer = 0
+    fadebuffer += 1
+    if (fadebuffer >= 10)
         instance_destroy()
 }

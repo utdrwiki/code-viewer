@@ -1,6 +1,6 @@
-if (self.bluh == 0)
+if (bluh == 0)
 {
-    self.bluh = 1
+    bluh = 1
     snd_play(snd_bluh)
-    self.image_index = 1
+    image_index = 1
 }

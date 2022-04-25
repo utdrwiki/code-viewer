@@ -1,0 +1,23 @@
+scr_bullet_init()
+fleetsize = 3
+fleetspeed = 1
+caralert = false
+moveinterval = 30
+lborder = 0
+rborder = 640
+movedirection = 8
+animframe = 1
+init = false
+timer = 0
+damage = 8
+target = 0
+targetB = 0
+grazepoints = 4
+boys[0] = scr_childbullet(x, y, 420)
+boys[0].image_alpha = 0
+shottimer = (irandom(30) + 20)
+shotqueue[0] = 0
+shotqueue[1] = 1
+shotqueue[2] = 2
+shotindex = 0
+bigshot = 0

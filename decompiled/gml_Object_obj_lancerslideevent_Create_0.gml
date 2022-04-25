@@ -1,6 +1,6 @@
 global.interact = 1
-self.con = 1
-self.cameracon = 0
-self.ever = 0
-self.seiz = global.flag[8]
-self.slidetimer = 0
+con = 1
+cameracon = 0
+ever = 0
+seiz = global.flag[8]
+slidetimer = 0

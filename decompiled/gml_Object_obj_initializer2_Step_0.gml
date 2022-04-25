@@ -1,31 +1,58 @@
+if global.is_console
+{
+    if (global.savedata_async_id >= 0)
+        return;
+    if (!variable_global_exists("chapter"))
+        return;
+}
+var CH = string(global.chapter)
 if audio_group_is_loaded(1)
 {
-    self.roomchoice = PLACE_CONTACT
-    self.menu_go = 0
-    if file_exists("filech1_0")
-        self.menu_go = 1
-    if file_exists("filech1_1")
-        self.menu_go = 1
-    if file_exists("filech1_2")
-        self.menu_go = 1
-    if file_exists("filech1_3")
-        self.menu_go = 1
-    if file_exists("dr.ini")
-        self.menu_go = 1
-    if file_exists("filech1_3")
-        self.menu_go = 2
-    if file_exists("filech1_4")
-        self.menu_go = 2
-    if file_exists("filech1_5")
-        self.menu_go = 2
-    if (self.menu_go == 1)
-        self.roomchoice = PLACE_MENU
-    if (self.menu_go == 2)
+    roomchoice = PLACE_CONTACT
+    menu_go = 0
+    if ossafe_file_exists((("filech" + CH) + "_0"))
+        menu_go = 1
+    if ossafe_file_exists((("filech" + CH) + "_1"))
+        menu_go = 1
+    if ossafe_file_exists((("filech" + CH) + "_2"))
+        menu_go = 1
+    if ossafe_file_exists((("filech" + CH) + "_3"))
+        menu_go = 1
+    if ossafe_file_exists("dr.ini")
+        menu_go = 1
+    if ossafe_file_exists((("filech" + CH) + "_3"))
+        menu_go = 2
+    if ossafe_file_exists((("filech" + CH) + "_4"))
+        menu_go = 2
+    if ossafe_file_exists((("filech" + CH) + "_5"))
+        menu_go = 2
+    if global.is_console
     {
-        scr_windowcaption(scr_84_get_lang_string("obj_initializer2_slash_Step_0_gml_22_0"))
+        if (global.game_won == true)
+            menu_go = 2
+    }
+    if scr_debug()
+        menu_go = 3
+    if (menu_go == 0 || menu_go == 1)
+    {
+        if global.is_console
+            global.screen_border_alpha = 0
+        roomchoice = room_intro_ch2
+    }
+    if (menu_go == 2)
+    {
+        if global.is_console
+            global.screen_border_alpha = 1
+        scr_windowcaption("DELTARUNE")
         global.tempflag[10] = 1
-        self.roomchoice = 132
+        roomchoice = room_legend
         global.plot = 0
     }
-    room_goto(self.roomchoice)
+    if (menu_go == 3)
+    {
+        if global.is_console
+            global.screen_border_alpha = 0
+        roomchoice = room_next(room)
+    }
+    room_goto(roomchoice)
 }

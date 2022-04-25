@@ -1,32 +1,32 @@
-if (self.active == 0)
+if (active == false)
     instance_destroy()
-if (self.active == 2)
+if (active == 2)
 {
-    if instance_exists(self.target)
+    if i_ex(target)
     {
-        self.frame += self.framespeed
-        if (self.frame >= (self.maxframe - 1))
+        frame += framespeed
+        if (frame >= (maxframe - 1))
         {
-            self.done = 1
-            self.frame = (self.maxframe - 1)
+            done = 1
+            frame = (maxframe - 1)
         }
-        self.target.sprite_index = self.sprite_index
-        self.target.image_index = self.frame
+        target.sprite_index = sprite_index
+        target.image_index = frame
     }
     else
         instance_destroy()
-    if (self.done == 1)
+    if (done == 1)
         instance_destroy()
 }
-if (self.active == 1)
+if (active == true)
 {
-    if instance_exists(self.target)
+    if i_ex(target)
     {
-        self.target.sprite_index = self.sprite_index
-        self.target.image_speed = 0
-        self.target.image_index = 0
+        target.sprite_index = sprite_index
+        target.image_speed = 0
+        target.image_index = 0
     }
     else
         instance_destroy()
-    self.active = 2
+    active = 2
 }

@@ -1,0 +1,2 @@
+myString = "A"
+jaString = "E"

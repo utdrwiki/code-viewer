@@ -1,40 +1,40 @@
-self.siner += 1
-if ((self.on >= 1) && (self.on <= 4))
+siner += 1
+if (on >= 1 && on <= 4)
 {
-    if ((self.on == 1) && (self.special == 1))
-        self.special = 2
-    if ((self.on == 1) || ((self.on == 2) || (self.on == 3)))
+    if (on == 1 && special == true)
+        special = 2
+    if (on == 1 || on == 2 || on == 3)
     {
-        if (self.onion_blue_alpha < 1)
-            self.onion_blue_alpha += 0.05
+        if (onion_blue_alpha < 1)
+            onion_blue_alpha += 0.05
     }
-    draw_sprite_ext(spr_onionblue, 0, self.x, self.y, ((0.1 + self.onion_blue_alpha) + (sin((self.siner / 4)) * 0.05)), (self.onion_blue_alpha + (sin((self.siner / 4)) * 0.05)), 0, 0x00FFFFFF, self.onion_blue_alpha)
+    draw_sprite_ext(spr_onionblue, 0, x, y, ((0.1 + onion_blue_alpha) + (sin((siner / 4)) * 0.05)), (onion_blue_alpha + (sin((siner / 4)) * 0.05)), 0, c_white, onion_blue_alpha)
 }
-if ((self.on == 2) || ((self.on == 3) || (self.on == 4)))
+if (on == 2 || on == 3 || on == 4)
 {
     if (global.flag[20] == 0)
-        self.onionsprite = spr_onionsan_kawaii
+        onionsprite = spr_onionsan_kawaii
     if (global.flag[20] == 1)
-        self.onionsprite = spr_onionsan_yhear
+        onionsprite = spr_onionsan_yhear
     if (global.flag[20] == 2)
-        self.onionsprite = spr_onionsan_wistful
+        onionsprite = spr_onionsan_wistful
     if (global.flag[20] == 3)
-        self.onionsprite = spr_onionsan_disappoint
+        onionsprite = spr_onionsan_disappoint
     if (global.flag[20] == 4)
-        self.onionsprite = spr_onionsan_sing
+        onionsprite = spr_onionsan_sing
     if (global.flag[20] == 5)
-        self.onionsprite = 257
-    draw_sprite_part(self.onionsprite, floor((self.siner / 6)), 0, 0, 63, floor(self.onionh), (self.x - 32), (self.y - floor(self.onionh)))
-    if ((self.on == 2) || (self.on == 3))
+        onionsprite = spr_onionsan_menace
+    draw_sprite_part(onionsprite, floor((siner / 6)), 0, 0, 63, floor(onionh), (x - 32), (y - floor(onionh)))
+    if (on == 2 || on == 3)
     {
-        if (self.onionh < 63)
-            self.onionh += 0.5
+        if (onionh < 63)
+            onionh += 0.5
     }
-    if (self.on == 4)
+    if (on == 4)
     {
-        if (self.onionh > 0)
-            self.onionh -= 0.5
-        else if (self.onion_blue_alpha > 0)
-            self.onion_blue_alpha -= 0.05
+        if (onionh > 0)
+            onionh -= 0.5
+        else if (onion_blue_alpha > 0)
+            onion_blue_alpha -= 0.05
     }
 }

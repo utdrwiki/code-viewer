@@ -1,6 +1,11 @@
-if (self.grazetimer > 0)
+if (grazetimer > 0)
 {
-    draw_sprite_ext(self.sprite_index, 0, self.x, self.y, 1, 1, 0, 0x00FFFFFF, (self.grazetimer / 6))
-    draw_sprite_ext(self.sprite_index, 3, self.x, self.y, 1, 1, 0, 0x00FFFFFF, ((self.grazetimer / 6) - 0.2))
+    draw_sprite_ext(sprite_index, 0, x, y, 1, 1, 0, c_white, (grazetimer / 6))
+    draw_sprite_ext(sprite_index, 3, x, y, 1, 1, 0, c_white, ((grazetimer / 6) - 0.2))
+    if (image_xscale > 1)
+    {
+        draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, 0, c_white, (grazetimer / 6))
+        draw_sprite_ext(sprite_index, 3, x, y, image_xscale, image_yscale, 0, c_white, ((grazetimer / 6) - 0.2))
+    }
 }
-self.grazetimer -= 1
+grazetimer -= 1

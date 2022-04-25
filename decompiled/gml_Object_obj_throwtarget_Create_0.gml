@@ -1,17 +1,17 @@
-self.image_xscale = 2
-self.image_yscale = 2
-self.image_speed = 0.2
-self.good = 1
-self.offing = 0
-if (instance_number(self.object_index) == 1)
+image_xscale = 2
+image_yscale = 2
+image_speed = 0.2
+good = 1
+offing = 0
+if (instance_number(object_index) == 1)
 {
-    self.tt = instance_create(self.x, self.y, obj_throwtarget)
-    self.tt.depth = (self.depth + 1)
-    with (self.tt)
+    tt = instance_create(x, y, obj_throwtarget)
+    tt.depth = (depth + 1)
+    with (tt)
     {
-        self.offing = 0
-        self.good = 0
-        self.sprite_index = spr_checkers_idle_crownless
+        offing = 0
+        good = 0
+        sprite_index = spr_checkers_idle_crownless
     }
 }
-self.con = 0
+con = 0

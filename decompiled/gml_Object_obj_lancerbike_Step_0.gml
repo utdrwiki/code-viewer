@@ -1,292 +1,292 @@
-if (self.lcon == 1)
+if (lcon == 1)
 {
-    self.orx = self.x
-    self.ory = self.y
-    self.ang = 0
-    self.ltimer = 0
-    self.shrinktimer = 0
-    self.lcon = 1.5
+    orx = x
+    ory = y
+    ang = 0
+    ltimer = 0
+    shrinktimer = 0
+    lcon = 1.5
 }
-if (self.lcon == 1.5)
+if (lcon == 1.5)
 {
-    self.ltimer += 1
-    if (self.ltimer >= 10)
+    ltimer += 1
+    if (ltimer >= 10)
     {
-        self.ltimer = 0
-        self.lcon = 2
+        ltimer = 0
+        lcon = 2
         snd_play(snd_cardrive)
     }
 }
-if ((self.lcon >= 6) && (self.lcon < 10))
+if (lcon >= 6 && lcon < 10)
 {
-    self.btimer += 1
-    if (self.btimer >= 10)
+    btimer += 1
+    if (btimer >= 10)
     {
-        self.xoff = lengthdir_x(40, (self.image_angle - 20))
-        self.yoff = lengthdir_y(40, (self.image_angle - 20))
+        xoff = lengthdir_x(40, (image_angle - 20))
+        yoff = lengthdir_y(40, (image_angle - 20))
         snd_play(snd_spearrise)
-        self.bullet = instance_create((self.x - self.xoff), (self.y - self.yoff), obj_regularbullet)
-        with (self.bullet)
+        bullet = instance_create((x - xoff), (y - yoff), obj_regularbullet)
+        with (bullet)
         {
-            self.target = obj_lancerbike.target
-            self.damage = obj_lancerbike.damage
-            if (self.target == 0)
+            target = obj_lancerbike.target
+            damage = obj_lancerbike.damage
+            if (target == 0)
             {
                 if (global.hp[1] <= (global.maxhp[1] / 2))
-                    self.damage = ceil((global.hp[1] / 3))
+                    damage = ceil((global.hp[1] / 3))
             }
-            self.timepoints = 0
-            self.sprite_index = spr_spadebullet
+            timepoints = 0
+            sprite_index = spr_spadebullet
             move_towards_point((obj_heart.x + 8), (obj_heart.y + 8), 4)
-            self.image_angle = self.direction
-            self.friction = -0.4
+            image_angle = direction
+            friction = -0.4
         }
-        self.bullet.depth = (self.depth + 1)
-        self.btimer = 0
+        bullet.depth = (depth + 1)
+        btimer = 0
     }
 }
-if (self.lcon == 2)
+if (lcon == 2)
 {
-    self.ltimer += 1
-    self.shrinktimer += 1
-    self.hspeed = (sin((self.ltimer / 3)) * 5)
-    self.image_yscale = (2 - (sin((self.ltimer / 5)) * 1))
-    if (self.shrinktimer > 4)
-        self.image_yscale = (2 - ((sin((self.ltimer / 5)) * 1) * (8 / self.shrinktimer)))
-    if (self.ltimer > 7)
+    ltimer += 1
+    shrinktimer += 1
+    hspeed = (sin((ltimer / 3)) * 5)
+    image_yscale = (2 - (sin((ltimer / 5)) * 1))
+    if (shrinktimer > 4)
+        image_yscale = (2 - ((sin((ltimer / 5)) * 1) * (8 / shrinktimer)))
+    if (ltimer > 7)
     {
-        self.image_angle -= (abs(sin((self.ltimer / 5))) * 4)
-        self.ang = (-self.image_angle)
+        image_angle -= (abs(sin((ltimer / 5))) * 4)
+        ang = (-image_angle)
     }
-    if ((self.ltimer > 4) && (abs(sin((self.ltimer / 5))) <= 0.06))
+    if (ltimer > 4 && abs(sin((ltimer / 5))) <= 0.06)
     {
-        self.lcon = 5
-        self.image_yscale = 2
-        self.direction = 180
-        self.speed = 4
-    }
-}
-if (self.lcon == 5)
-{
-    if (self.speed < 16)
-        self.speed += 2
-    if (self.ang < 45)
-        self.ang += 4
-    self.image_angle = (-self.ang)
-    if (self.x < (__view_get(0, 0) + 80))
-        self.lcon = 6
-}
-if (self.lcon == 6)
-{
-    if (self.ang < 135)
-        self.ang += 10
-    self.image_angle = (-self.ang)
-    if (self.x <= (__view_get(0, 0) + 5))
-    {
-        self.lcon = 7
-        self.direction = 90
+        lcon = 5
+        image_yscale = 2
+        direction = 180
+        speed = 4
     }
 }
-if (self.lcon == 7)
+if (lcon == 5)
 {
-    if (self.y < (__view_get(1, 0) + 80))
+    if (speed < 16)
+        speed += 2
+    if (ang < 45)
+        ang += 4
+    image_angle = (-ang)
+    if (x < (__view_get((0 << 0), 0) + 80))
+        lcon = 6
+}
+if (lcon == 6)
+{
+    if (ang < 135)
+        ang += 10
+    image_angle = (-ang)
+    if (x <= (__view_get((0 << 0), 0) + 5))
     {
-        if (self.ang < 225)
-            self.ang += 10
-        if (self.y <= (__view_get(1, 0) + 5))
+        lcon = 7
+        direction = 90
+    }
+}
+if (lcon == 7)
+{
+    if (y < (__view_get((1 << 0), 0) + 80))
+    {
+        if (ang < 225)
+            ang += 10
+        if (y <= (__view_get((1 << 0), 0) + 5))
         {
-            self.direction = 0
-            self.lcon = 8
+            direction = 0
+            lcon = 8
         }
     }
-    else if (self.ang < 135)
-        self.ang += 10
-    self.image_angle = (-self.ang)
+    else if (ang < 135)
+        ang += 10
+    image_angle = (-ang)
 }
-if (self.lcon == 8)
+if (lcon == 8)
 {
-    if (self.x >= (__view_get(0, 0) + 540))
+    if (x >= (__view_get((0 << 0), 0) + 540))
     {
-        if (self.ang < 315)
-            self.ang += 10
-        if (self.x >= (__view_get(0, 0) + 630))
+        if (ang < 315)
+            ang += 10
+        if (x >= (__view_get((0 << 0), 0) + 630))
         {
-            self.direction = 270
-            self.lcon = 9
+            direction = 270
+            lcon = 9
         }
     }
-    else if (self.ang < 225)
-        self.ang += 10
-    self.image_angle = (-self.ang)
+    else if (ang < 225)
+        ang += 10
+    image_angle = (-ang)
 }
-if (self.lcon == 9)
+if (lcon == 9)
 {
-    if (self.y > (self.ory - 70))
+    if (y > (ory - 70))
     {
-        if (self.ang < 360)
-            self.ang += 10
-        if (self.y >= (self.ory - 5))
+        if (ang < 360)
+            ang += 10
+        if (y >= (ory - 5))
         {
-            self.y = self.ory
-            self.direction = 180
-            self.lcon = 10
+            y = ory
+            direction = 180
+            lcon = 10
         }
     }
-    else if (self.ang < 315)
-        self.ang += 10
-    self.image_angle = (-self.ang)
+    else if (ang < 315)
+        ang += 10
+    image_angle = (-ang)
 }
-if (self.lcon == 10)
+if (lcon == 10)
 {
-    self.ang = 0
-    self.image_angle = 0
-    if (self.x <= self.orx)
+    ang = 0
+    image_angle = 0
+    if (x <= orx)
     {
-        self.speed = 0
-        self.x = self.orx
-        self.lcon = 11
-        self.ltimer = 0
+        speed = 0
+        x = orx
+        lcon = 11
+        ltimer = 0
     }
 }
-if (self.lcon == 11)
+if (lcon == 11)
 {
-    self.sprite_index = spr_lancerbike_l
-    self.ltimer += 1
-    if (self.ltimer >= 25)
+    sprite_index = spr_lancerbike_l
+    ltimer += 1
+    if (ltimer >= 25)
     {
         with (obj_regularbullet)
         {
-            self.active = 0
-            self.image_alpha -= 0.2
+            active = false
+            image_alpha -= 0.2
         }
-        self.image_alpha = 1
+        image_alpha = 1
     }
-    if (self.ltimer >= 30)
+    if (ltimer >= 30)
     {
-        self.lcon = 0
-        self.endcon = 1
+        lcon = 0
+        endcon = 1
     }
 }
-if (self.racecon == 1)
+if (racecon == 1)
 {
-    self.sy = 0
-    self.s_moveup = 0
+    sy = 0
+    s_moveup = 0
     if instance_exists(obj_susieandlancer_event)
     {
-        self.s = obj_susieandlancer_event.s
-        self.sy = self.s.y
-        self.s_moveup = 1
+        s = obj_susieandlancer_event.s
+        sy = s.y
+        s_moveup = 1
     }
     else if instance_exists(obj_susieenemy)
     {
-        self.s = obj_susieenemy
-        self.sy = self.s.y
-        self.s_moveup = 1
+        s = obj_susieenemy
+        sy = s.y
+        s_moveup = 1
     }
-    self.orx = self.x
-    self.ory = self.y
-    self.ang = 0
-    self.racecon = 2
-    self.vspeed = (-14 * choose(1, -1))
-    self.rtimer = 0
-    self.maxr = (15 + random(25))
+    orx = x
+    ory = y
+    ang = 0
+    racecon = 2
+    vspeed = (-14 * choose(1, -1))
+    rtimer = 0
+    maxr = (15 + random(25))
 }
-if (self.racecon == 2)
+if (racecon == 2)
 {
-    if (self.s_moveup == 1)
+    if (s_moveup == 1)
     {
-        if (self.s.y > -20)
-            self.s.y -= 10
+        if (s.y > -20)
+            s.y -= 10
     }
-    if (self.y < (self.topy + 10))
-        self.vspeed = 12
-    if (self.y > (self.bottomy - 10))
-        self.vspeed = -12
-    self.rtimer += 1
-    if (self.rtimer > self.maxr)
+    if (y < (topy + 10))
+        vspeed = 12
+    if (y > (bottomy - 10))
+        vspeed = -12
+    rtimer += 1
+    if (rtimer > maxr)
     {
-        self.vspeed = 0
-        self.racecon = 3
-        self.rtimer = 0
+        vspeed = 0
+        racecon = 3
+        rtimer = 0
     }
 }
-if (self.racecon == 3)
+if (racecon == 3)
 {
-    self.rtimer += 1
-    if ((self.rtimer == 5) || (self.rtimer == 10))
+    rtimer += 1
+    if (rtimer == 5 || rtimer == 10)
     {
         snd_play(snd_lancerhonk)
-        self.honkimg = instance_create((self.x - 60), (self.y - 40), obj_afterimage_grow)
-        with (self.honkimg)
-            self.sprite_index = spr_lancernoise
+        honkimg = instance_create((x - 60), (y - 40), obj_afterimage_grow)
+        with (honkimg)
+            sprite_index = spr_lancernoise
     }
-    if (self.rtimer >= 25)
+    if (rtimer >= 25)
     {
         snd_play(snd_drive)
-        self.racecon = 4
-        self.hspeed = -20
-        self.rtimer = 0
-        self.ang = 0
+        racecon = 4
+        hspeed = -20
+        rtimer = 0
+        ang = 0
     }
 }
-if (self.racecon == 4)
+if (racecon == 4)
 {
-    if (self.s_moveup == 1)
+    if (s_moveup == 1)
     {
-        self.s.y += 10
-        if (self.s.y >= self.sy)
+        s.y += 10
+        if (s.y >= sy)
         {
-            self.s.y = self.sy
-            self.s_moveup = 0
+            s.y = sy
+            s_moveup = 0
         }
     }
-    self.rtimer += 1
-    self.ang += ((self.rtimer * 2) + 4)
-    if (self.ang > 50)
-        self.ang = 50
-    self.image_angle = (-self.ang)
-    if (self.x <= (__view_get(0, 0) - 40))
+    rtimer += 1
+    ang += ((rtimer * 2) + 4)
+    if (ang > 50)
+        ang = 50
+    image_angle = (-ang)
+    if (x <= (__view_get((0 << 0), 0) - 40))
     {
-        self.ang = 0
-        self.image_angle = 0
-        self.x = (__view_get(0, 0) + 740)
-        self.y = self.ory
-        self.hspeed = -12
-        self.racecon = 5
+        ang = 0
+        image_angle = 0
+        x = (__view_get((0 << 0), 0) + 740)
+        y = ory
+        hspeed = -12
+        racecon = 5
     }
 }
-if (self.racecon == 5)
+if (racecon == 5)
 {
-    if (self.x <= (self.orx + 5))
+    if (x <= (orx + 5))
     {
-        self.hspeed = 0
-        self.x = self.orx
-        self.racecon = 0
-        self.endcon = 1
+        hspeed = 0
+        x = orx
+        racecon = 0
+        endcon = 1
     }
 }
-if (self.endcon == 1)
+if (endcon == 1)
 {
     global.turntimer = 2
     with (obj_lancerboss)
     {
-        self.visible = 1
-        if (self.turns >= 4)
+        visible = true
+        if (turns >= 4)
         {
-            self.con = 1
+            con = 1
             with (obj_battlecontroller)
-                self.noreturn = 1
+                noreturn = true
         }
     }
     with (obj_lancerboss3)
-        self.visible = 1
+        visible = true
     instance_destroy()
 }
 with (obj_lancerboss)
 {
-    if (self.compliment >= 3)
+    if (compliment >= 3)
     {
         with (obj_dmgwriter)
-            self.spec = 1
+            spec = 1
     }
 }

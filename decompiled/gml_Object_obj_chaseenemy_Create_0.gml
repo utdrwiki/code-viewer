@@ -1,163 +1,609 @@
-self.image_xscale = 2
-self.image_yscale = 2
-self.facing = 0
-self.walk_index = 0
-self.state = 0
-self.alertcon = 0
-self.alerttimer = 0
-self.facetimer = 0
-self.chasetype = 0
-self.pacetype = 1
-self.pacecon = 0
-self.pacecon2 = 0
-self.pacetimer = 0
-self.targetx = 0
-self.targety = 0
+event_inherited()
+test_release_bullet = 0
+test_release_bullet_timer = 0
+init = false
+state = 0
+image_xscale = 2
+image_yscale = 2
+facing = 0
+walk_index = 0
+alertcon = 0
+alerttimer = 0
+facetimer = 0
+pacecon = 0
+pacecon2 = 0
+pacetimer = 0
+targetx = 0
+targety = 0
 scr_depth()
-self.radius = 200
-self.moveradius = 160
-self.pacespeed = 1
-self.frozen = 0
-self.hadfrozen = 0
-self.offscreen_frozen = 1
-self.remspeed = 0
-self.myencounter = 4
-self.touchsprite = 504
-self.cancelwalk = 0
-self.eraser = 0
-self.touchflag = 0
-self.ignoresolid = 0
-if (self.room == room_battletest)
-    self.myencounter = 40
-if (self.room == room_field1)
-    self.myencounter = 4
-if (self.room == room_field2)
+frozen = false
+hadfrozen = false
+remspeed = 0
+drawsiner = 0
+ignorefreeze = 0
+viewblocked = 0
+canAlertThroughWalls = 1
+extflag = 0
+startPath = path_index
+pathProgress = path_position
+pathSpeed = 0
+stopPath = 0
+noAlertSound = false
+chasecon = 0
+excl = 0
+pacespeed = 4
+pacesinspeed = 0
+paceinit = 0
+drawoffscreen = 0
+dodraw = 1
+float = false
+detectpointxoffset = 0
+detectpointyoffset = 0
+viewpointx = 0
+viewpointy = 0
+yy = y
+xx = x
+increment = 0
+amplitude = 0
+t = 0
+rotation = 0
+distance = 14
+spd = 4
+customhitbox = 0
+hitx1 = 0
+hitx2 = 0
+hity1 = 0
+hity2 = 0
+hitvar = 0
+mymidx = x
+mymidy = y
+minspeed = 4
+maxspeed = 7
+specialspritecase = 0
+moveradius = 160
+pacespeed = 1
+offscreen_frozen = true
+cancelwalk = false
+alertskip = 0
+alerttype = 0
+alerted = 0
+slide = 1
+whichmonster = 0
+chasetype = 0
+pacetype = 1
+radius = 200
+ignoresolid = false
+touchflag = 0
+eraser = false
+blind = 0
+encounterflag = 0
+startchasespeed = 4
+topchasespeed = 8
+chaseaccel = 0.1
+myencounter = 4
+touchsprite = sprite_index
+frozensprite = IMAGE_LOGO
+if (room == room_GMS2_test)
 {
-    self.myencounter = 5
-    if (global.flag[501] > 0)
-        instance_destroy()
+    radius = 60
+    myencounter = 50
 }
-if (self.room == room_field_puzzle1)
+if (room == room_battletest)
+    myencounter = global.encounterno
+if (room == room_dw_cyber_tasque_battle)
 {
-    self.myencounter = 6
-    self.radius = 200
-    self.pacetype = 5
+    myencounter = 52
+    sprite_index = spr_tasque_idle
+    touchsprite = spr_tasque_hurt
+    radius = 160
+    pacetype = 9
+    pacespeed = 0.8
+    chasetype = 3
+    alertskip = 1
+    ignoresolid = false
+    specialspritecase = "tasque"
 }
-if (self.room == room_field_getsusie)
+if (room == room_dw_cyber_maze_tasque)
 {
-    self.myencounter = 7
-    self.sprite_index = spr_smallchecker_front
-    self.touchsprite = self.sprite_index
-    self.pacetype = 6
-    self.image_speed = 0.2
+    myencounter = 52
+    sprite_index = spr_tasque_idle
+    touchsprite = spr_tasque_hurt
+    radius = 160
+    pacetype = 21
+    chasetype = 0
+    alertskip = 1
+    ignoresolid = false
+    specialspritecase = "tasque"
 }
-if (self.room == room_field4)
-    self.myencounter = 33
-if (self.room == room_field_secret1)
+if (room == room_dw_cyber_maze_virokun)
 {
-    self.sprite_index = spr_jigsawry_idle
-    self.touchsprite = 602
-    self.myencounter = 23
-    if (global.plot < 130)
-        instance_destroy()
-}
-if (self.room == room_forest_area0)
-{
-    self.sprite_index = spr_rabbick_enemy_overworld
-    self.myencounter = 16
-    self.touchsprite = 590
-    self.alertcon = -1
-    self.pacetype = 10
-}
-if ((self.room == room_forest_area1) || ((self.room == room_forest_area3) || (self.room == room_forest_secret1)))
-{
-    self.pacetype = 7
-    self.sprite_index = spr_rabbick_enemy_overworld
-    if (self.room == room_forest_area1)
-        self.pacetype = 11
-    self.myencounter = 17
-    self.touchflag = 505
-    self.touchsprite = 590
-    if (self.room == room_forest_area3)
-        self.myencounter = 24
-    if (self.room == room_forest_secret1)
-        self.myencounter = 32
-    self.alertcon = -1
-}
-if (self.room == room_forest_maze1)
-{
-    self.touchflag = 505
-    self.sprite_index = spr_rabbick_enemy_overworld
-    self.myencounter = 17
-    self.touchsprite = 590
-    self.pacetype = 1
-    if (global.flag[505] == 1)
-        self.chasetype = 3
-}
-if (self.room == room_forest_maze2)
-{
-    self.touchflag = 506
-    self.myencounter = 18
-    self.sprite_index = spr_blockguy_overworld
-    self.touchsprite = 594
-    self.pacetype = 1
-    if (global.flag[506] == 1)
-        self.chasetype = 3
+    if (global.flag[391] == 0)
+    {
+        myencounter = 55
+        sprite_index = spr_virovirokun_idle
+        touchsprite = spr_virovirokun_hurt
+        radius = 120
+        pacetype = 17
+        chasetype = 0
+        ignoresolid = false
+        alertskip = 0
+    }
     else
-        self.chasetype = 4
+    {
+        x = 1500
+        y = 280
+        myencounter = 55
+        sprite_index = spr_virovirokun_idle
+        touchsprite = spr_virovirokun_hurt
+        radius = 0
+        pacetype = 14
+        chasetype = 4
+        alertskip = 0
+        ignoresolid = true
+        rotation = 0
+        distance = 120
+        spd = 2
+        rotation = 180
+        var _c = dcos(rotation)
+        var _s = dsin(rotation)
+        x = ((xx + (_c * distance)) + (_s * distance))
+        y = ((yy + ((-_s) * distance)) + (_c * distance))
+    }
 }
-if (self.room == room_forest_beforeclover)
+if (room == room_dw_mansion_east_2f_c)
 {
-    self.myencounter = 18
-    self.sprite_index = spr_blockguy_overworld
-    self.touchsprite = 594
-    self.pacetype = 7
-    self.alertcon = -1
+    myencounter = 56
+    sprite_index = spr_npc_butler
+    touchsprite = spr_swatchling_hurt
+    radius = 150
+    pacetype = 1
+    chasetype = 5
+    alertskip = 1
+    ignoresolid = false
+    moveradius = 10
 }
-if (self.room == room_forest_area4)
+if (room == room_dw_city_roadblock)
 {
-    self.myencounter = 19
-    self.sprite_index = spr_blockguy_overworld
-    self.touchsprite = 594
-    self.pacetype = 7
-    if (self.x < (self.room_width / 2))
-        self.pacetype = 7.5
-    self.eraser = 1
-    self.touchflag = 506
-    self.chasetype = 4
-    self.radius = 90
-    self.ignoresolid = 1
-    self.offscreen_frozen = 0
-    if (global.flag[506] >= 1)
-        self.alertcon = -1
+    myencounter = 51
+    sprite_index = spr_poppup_idle
+    touchsprite = spr_poppup_hurt
+    radius = 150
+    pacetype = 1
+    chasetype = 3
+    alertskip = 1
+    ignoresolid = false
+    moveradius = 10
 }
-if (self.room == room_cc_1f)
+if (room == room_dw_city_big_1)
 {
-    self.pacetype = 9
-    self.chasetype = 4
-    self.moveradius = 160
-    self.sprite_index = spr_daimond_knight_idle
-    self.myencounter = 28
-    self.touchsprite = 621
-    self.touchflag = 507
-    if (global.flag[507] == 1)
-        self.alertcon = -1
+    if (y > 320)
+    {
+        if (x > 600)
+        {
+            path_start(path_dw_city_big_1_enem1, 6, path_action_continue, 1)
+            path_position = 0.25
+            myencounter = 50
+            sprite_index = spr_omawaroid_chase
+            touchsprite = spr_omawaroid_chase
+            radius = 1
+            alertskip = 0
+            pacetype = 11
+            chasetype = -1
+            ignoresolid = false
+            moveradius = 10
+            eraser = true
+            alerttype = 1
+            canAlertThroughWalls = 0
+            extflag = "rightOma"
+        }
+        else
+        {
+            path_start(path_dw_city_big_1_enem1, 6, path_action_continue, 1)
+            path_position = 0.75
+            myencounter = 50
+            sprite_index = spr_omawaroid_chase
+            touchsprite = spr_omawaroid_chase
+            radius = 150
+            pacetype = 11
+            chasetype = 5
+            ignoresolid = false
+            moveradius = 10
+            eraser = true
+            alerttype = 1
+            canAlertThroughWalls = 0
+            extflag = "leftOma"
+        }
+    }
+    else
+        extflag = "tutViro"
 }
-if (self.room == room_cc_3f)
+if (room == room_dw_city_big_2)
 {
-    self.eraser = 1
-    self.ignoresolid = 1
-    self.chasetype = 4
-    self.pacetype = 9
-    self.radius = 165
-    self.moveradius = 160
-    if (self.x >= (self.room_width / 2))
-        self.moveradius = -160
-    self.sprite_index = spr_hathyx_overworld
-    self.myencounter = 30
-    self.touchsprite = 624
-    self.offscreen_frozen = 0
-    self.touchflag = 508
-    if (global.flag[508] == 1)
-        self.alertcon = -1
+    if scr_havechar(4)
+    {
+        if (y < 300)
+        {
+            extflag = "oma"
+            myencounter = 69
+            sprite_index = spr_omawaroid_chase
+            touchsprite = spr_omawaroid_hurt
+            radius = 80
+            pacetype = 11
+            chasetype = 5
+            alertskip = 0
+            ignoresolid = false
+            moveradius = 10
+            eraser = true
+            path_start(path_viro_chase, 6, path_action_continue, 1)
+            remPath = path_speed
+        }
+        else
+        {
+            extflag = "viro"
+            myencounter = 68
+            sprite_index = spr_virovirokun_idle
+            touchsprite = spr_virovirokun_hurt
+            radius = 80
+            pacetype = 11
+            chasetype = 5
+            alertskip = 0
+            ignoresolid = false
+            moveradius = 10
+            eraser = true
+            path_start(path_viro_chase, 6, path_action_continue, 1)
+            path_position = 0.1
+        }
+    }
+    else
+        instance_destroy()
+}
+if (room == room_dw_city_big_3)
+{
+    if (x < 620)
+    {
+        extflag = "viro"
+        myencounter = 55
+        sprite_index = spr_virovirokun_idle
+        touchsprite = spr_virovirokun_hurt
+        radius = 180
+        pacetype = 17
+        chasetype = 3
+        alertskip = 0
+        ignoresolid = false
+        moveradius = 5
+        canAlertThroughWalls = 1
+        eraser = false
+    }
+    if (x > 620 && y > 600)
+    {
+        myencounter = 53
+        sprite_index = spr_werewire_hang_overworld
+        touchsprite = sprite_index
+        radius = 1
+        alertskip = 0
+        pacetype = 24
+        moveradius = 240
+        pacespeed = 50
+        chasetype = -1
+        ignoresolid = false
+        eraser = 2
+        offscreen_frozen = false
+    }
+    if (y < 300)
+    {
+        myencounter = 53
+        sprite_index = spr_werewire_hang_overworld
+        touchsprite = sprite_index
+        radius = 1
+        alertskip = 0
+        pacetype = 24
+        moveradius = 240
+        pacespeed = 4
+        chasetype = -1
+        ignoresolid = false
+        eraser = 2
+        offscreen_frozen = false
+    }
+}
+if (room == room_dw_mansion_bridges)
+{
+    myencounter = 53
+    sprite_index = spr_werewire_hang_overworld
+    touchsprite = spr_werewire_hang_overworld
+    radius = 200
+    pacetype = 14
+    chasetype = 4
+    alertskip = 0
+    ignoresolid = true
+    rotation = 0
+    distance = 50
+    spd = 4
+    if (global.flag[389] == 1)
+        instance_destroy()
+}
+if (room == room_dw_mansion_east_4f_b)
+{
+    myencounter = 81
+    sprite_index = spr_werewerewire_idle
+    touchsprite = sprite_index
+    radius = 50
+    pacetype = 16
+    hspeed = -1
+    chasetype = 4
+    alertskip = 0
+    ignoresolid = true
+    moveradius = 160
+}
+if (room == room_dw_city_traffic_3)
+{
+    if (x < 800)
+    {
+        myencounter = 85
+        sprite_index = spr_omawaroid_chase
+        touchsprite = spr_omawaroid_hurt
+        radius = 200
+        pacetype = 20
+        pacespeed = 4
+        moveradius = 100
+        chasetype = 8
+        extflag = "oma"
+    }
+    else
+    {
+        myencounter = 86
+        sprite_index = spr_virovirokun_idle
+        touchsprite = spr_virovirokun_hurt
+        radius = 200
+        pacetype = 17
+        chasetype = 8
+        moveradius = 10
+        extflag = "viro"
+    }
+}
+if (room == room_dw_city_queen_drunk)
+{
+    myencounter = 87
+    sprite_index = spr_tasque_idle
+    touchsprite = spr_tasque_hurt
+    radius = 200
+    pacetype = 19
+    chasetype = 8
+    ignoresolid = false
+    specialspritecase = "tasque"
+}
+if (room == room_dw_city_cheesemaze)
+{
+    myencounter = 79
+    sprite_index = spr_maus_idle
+    touchsprite = spr_maus_hurt
+    radius = 200
+    pacetype = 19
+    chasetype = 8
+    ignoresolid = false
+}
+if (room == room_dw_mansion_east_2f_transformed_new)
+{
+    path_start(path_dw_mansion_east_2f_transformed_new_mauswheel, 12, path_action_continue, 1)
+    path_position = 0.75
+    myencounter = 83
+    sprite_index = spr_mauswheel_idle
+    touchsprite = sprite_index
+    radius = 1
+    pacetype = 11
+    chasetype = 0
+}
+if (room == room_dw_mansion_dining3 || room == room_dw_mansion_dininghall)
+{
+    myencounter = 56
+    sprite_index = spr_npc_butler
+    touchsprite = spr_swatchling_hurt
+    radius = 180
+    pacetype = 20
+    pacespeed = choose(3, 4, 5, 6)
+    minspeed = 4
+    maxspeed = 9
+    moveradius = irandom_range(80, 160)
+    if (room == room_dw_mansion_dininghall)
+        moveradius = 100
+    chasetype = 5.5
+    eraser = true
+}
+if (room == room_dw_mansion_east_2f_d)
+{
+    myencounter = 57
+    encounterflag = 542
+    pacetype = 0
+    chasetype = -1
+    radius = 0
+    facing = 1
+    alertskip = 1
+    whichmonster = 1
+    sprite_index = spr_npc_tasquemanager
+    touchsprite = spr_npc_tasquemanager_flipped
+    if (global.flag[encounterflag] != 0)
+        instance_destroy()
+}
+if (room == room_dw_mansion_east_3f_projection)
+{
+    encounterflag = 569
+    image_speed = 0.25
+    myencounter = 81
+    sprite_index = spr_werewerewire_idle
+    touchsprite = sprite_index
+    radius = 200
+    pacetype = 1
+    hspeed = -1
+    chasetype = 6
+    alertskip = 0
+    ignoresolid = true
+    moveradius = 160
+}
+if (room == room_dw_city_spamton_house)
+{
+    if (x < 720)
+    {
+        myencounter = 95
+        sprite_index = spr_werewire_hang_overworld
+        touchsprite = sprite_index
+        radius = 1
+        alertskip = 0
+        pacetype = 23
+        chasetype = -1
+        ignoresolid = false
+        moveradius = 140
+        eraser = 2
+        offscreen_frozen = false
+        encounterflag = 561
+        moveradius = 80
+    }
+    else
+    {
+        myencounter = 96
+        sprite_index = spr_virovirokun_idle
+        touchsprite = spr_virovirokun_hurt
+        radius = 120
+        pacetype = 17
+        chasetype = 0
+        ignoresolid = false
+        alertskip = 0
+        encounterflag = 560
+    }
+}
+if (room == room_dw_city_traffic_1)
+{
+    if (x < 1300)
+    {
+        myencounter = 97
+        sprite_index = spr_omawaroid_chase
+        touchsprite = spr_omawaroid_hurt
+        radius = 200
+        pacetype = 20
+        pacespeed = 4
+        moveradius = 100
+        chasetype = 3
+        extflag = "oma"
+        encounterflag = 562
+    }
+    else
+    {
+        myencounter = 98
+        sprite_index = spr_tasque_idle
+        touchsprite = spr_tasque_hurt
+        radius = 160
+        pacetype = 21
+        moveradius = 80
+        chasetype = 3
+        ignoresolid = false
+        extflag = "tasque"
+        encounterflag = 563
+        specialspritecase = "tasque"
+    }
+}
+if (room == room_dw_city_traffic_2)
+{
+    if (x > 1300)
+    {
+        myencounter = 95
+        sprite_index = spr_werewire_hang_overworld
+        touchsprite = sprite_index
+        radius = 1
+        alertskip = 0
+        pacetype = 23
+        chasetype = -1
+        ignoresolid = false
+        moveradius = 140
+        eraser = 2
+        offscreen_frozen = false
+        encounterflag = 565
+        moveradius = 80
+    }
+    else
+    {
+        myencounter = 96
+        sprite_index = spr_virovirokun_idle
+        touchsprite = spr_virovirokun_hurt
+        radius = 120
+        pacetype = 17
+        chasetype = 0
+        ignoresolid = false
+        alertskip = 0
+        encounterflag = 564
+    }
+}
+if (room == room_dw_city_big_1)
+{
+    if (extflag == "tutViro")
+        encounterflag = 531
+    if (extflag == "rightOma")
+        encounterflag = 532
+    if (extflag == "leftOma")
+        encounterflag = 532
+}
+if (room == room_dw_city_big_2)
+    encounterflag = 533
+if (room == room_dw_city_big_3)
+{
+    if (extflag == "viro")
+        encounterflag = 535
+    else
+        encounterflag = 534
+}
+if (room == room_dw_cyber_maze_queenscreen)
+    encounterflag = 528
+if (room == room_dw_cyber_maze_virokun)
+    encounterflag = 527
+if (room == room_dw_cyber_battle_maze_1)
+    encounterflag = 525
+if (room == room_dw_cyber_tasque_battle)
+    encounterflag = 526
+if (room == room_dw_cyber_maze_tasque)
+    encounterflag = 539
+if (room == room_dw_mansion_single_pot)
+    encounterflag = 540
+if (room == room_dw_mansion_potBalance)
+    encounterflag = 541
+if (room == room_dw_mansion_east_2f_c)
+    encounterflag = 544
+if (room == room_dw_mansion_bridges)
+    encounterflag = 545
+if (room == room_dw_mansion_east_4f_b)
+    encounterflag = 547
+if (room == room_dw_city_traffic_3)
+{
+    if (extflag == "oma")
+        encounterflag = 553
+    if (extflag == "viro")
+        encounterflag = 554
+}
+if (room == room_dw_city_queen_drunk)
+    encounterflag = 556
+if (room == room_dw_city_cheesemaze)
+{
+    if (x > 1260)
+        encounterflag = 555
+    else
+        encounterflag = 566
+}
+if (room == room_dw_mansion_east_2f_transformed_new)
+{
+    encounterflag = 543
+    if (global.flag[encounterflag] != 0)
+        instance_destroy()
+}
+if (room == room_dw_mansion_dining3)
+    encounterflag = 557
+if (room == room_dw_mansion_dininghall)
+    encounterflag = 558
+if (room == room_dw_city_postbaseball_1)
+{
+    myencounter = 50
+    encounterflag = 570
+    sprite_index = spr_omawaroid_chase
+    touchsprite = spr_omawaroid_chase
+}
+if (room == room_dw_city_postbaseball_2)
+{
+    myencounter = 79
+    sprite_index = spr_maus_idle
+    touchsprite = spr_maus_hurt
 }

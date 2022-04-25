@@ -1,91 +1,127 @@
-if (self.delaytimer < self.delay)
+if (delaytimer < delay)
 {
     with (obj_dmgwriter)
-        self.killtimer = 0
+        killtimer = 0
 }
-self.delaytimer += 1
-if (self.delaytimer == self.delay)
+delaytimer += 1
+if (delaytimer == delay)
 {
-    self.vspeed = (-5 - random(2))
-    self.hspeed = 10
-    self.vstart = self.vspeed
-    self.flip = 90
+    vspeed = (-5 - random(2))
+    hspeed = 10
+    vstart = vspeed
+    flip = 90
 }
-if (self.delaytimer >= self.delay)
+if (delaytimer >= delay)
 {
-    draw_set_color(0x00FFFFFF)
-    if (self.type == 0)
-        draw_set_color(self.lightb)
-    if (self.type == 1)
-        draw_set_color(self.lightf)
-    if (self.type == 2)
-        draw_set_color(self.lightg)
-    if (self.type == 3)
-        draw_set_color(0x0000FF00)
-    if (self.type == 4)
-        draw_set_color(0x000000FF)
-    self.message = self.specialmessage
-    if (self.damage == 0)
-        self.message = 1
-    if (self.type == 4)
-        self.message = 2
-    draw_set_font(global.damagefont)
-    if (self.hspeed > 0)
-        self.hspeed -= 1
-    if (self.hspeed < 0)
-        self.hspeed += 1
-    if (abs(self.hspeed) < 1)
-        self.hspeed = 0
-    if (self.message == 0)
+    draw_set_color(c_white)
+    if (type == 0)
+        draw_set_color(lightb)
+    if (type == 1)
+        draw_set_color(lightf)
+    if (type == 2)
+        draw_set_color(lightg)
+    if (type == 3)
+        draw_set_color(c_lime)
+    if (type == 4)
+        draw_set_color(c_red)
+    if (type == 5 && damage < 0)
+        draw_set_color(c_silver)
+    if (type == 6)
+        draw_set_color(lighty)
+    message = specialmessage
+    if (damage == 0)
+        message = 1
+    if (type == 4)
+        message = 2
+    if (type == 5 && damage == 100)
+        message = 5
+    if (type != 5)
+        draw_set_font(global.damagefont)
+    if (type == 5)
+        draw_set_font(global.damagefontgold)
+    if (hspeed > 0)
+        hspeed -= 1
+    if (hspeed < 0)
+        hspeed += 1
+    if (abs(hspeed) < 1)
+        hspeed = 0
+    if (init == false)
     {
-        draw_set_alpha((1 - self.kill))
+        damagemessage = string(damage)
+        if (type == 5)
+            damagemessage = (("+" + string(damage)) + "%")
+        if (type == 5 && damage < 0)
+            damagemessage = (string(damage) + "%")
+        init = true
+    }
+    if (message == 0)
+    {
+        draw_set_alpha((1 - kill))
         draw_set_halign(fa_right)
-        if (self.spec == 0)
-            draw_text_transformed((self.x + 30), self.y, string_hash_to_newline(string(self.damage)), (2 - self.stretch), (self.stretch + self.kill), 0)
-        if (self.spec == 1)
-            draw_text_transformed((self.x + 30), self.y, string_hash_to_newline(string(self.damage)), (2 - self.stretch), (self.stretch + self.kill), 90)
+        if (spec == 0)
+            draw_text_transformed((x + 30), y, damagemessage, (2 - stretch), (stretch + kill), 0)
+        if (spec == 1)
+            draw_text_transformed((x + 30), y, damagemessage, (2 - stretch), (stretch + kill), 90)
         draw_set_halign(fa_left)
         draw_set_alpha(1)
     }
     else
     {
-        if (self.message == 1)
-            draw_sprite_ext(spr_battlemsg, 0, (self.x + 30), self.y, (2 - self.stretch), (self.stretch + self.kill), 0, draw_get_color(), (1 - self.kill))
-        if (self.message == 2)
-            draw_sprite_ext(spr_battlemsg, 1, (self.x + 30), self.y, (2 - self.stretch), (self.stretch + self.kill), 0, 0x000000FF, (1 - self.kill))
-        if (self.message == 3)
-            draw_sprite_ext(spr_battlemsg, 2, (self.x + 30), self.y, (2 - self.stretch), (self.stretch + self.kill), 0, 0x0000FF00, (1 - self.kill))
-        if (self.message == 4)
-            draw_sprite_ext(spr_battlemsg, 3, (self.x + 30), self.y, (2 - self.stretch), (self.stretch + self.kill), 0, 0x0000FF00, (1 - self.kill))
+        if (message == 1)
+            draw_sprite_ext(message_sprite, 0, (x + 30), y, (2 - stretch), (stretch + kill), 0, draw_get_color(), (1 - kill))
+        if (message == 2)
+            draw_sprite_ext(message_sprite, 1, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_red, (1 - kill))
+        if (message == 3)
+            draw_sprite_ext(message_sprite, 2, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_lime, (1 - kill))
+        if (message == 4)
+            draw_sprite_ext(message_sprite, 3, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_lime, (1 - kill))
+        if (message == 5)
+            draw_sprite_ext(message_sprite, 5, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_lime, (1 - kill))
+        if (message == 6)
+            draw_sprite_ext(message_sprite, 8, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_white, (1 - kill))
+        if (message == 7)
+            draw_sprite_ext(message_sprite, 9, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_white, (1 - kill))
+        if (message == 8)
+            draw_sprite_ext(message_sprite, 10, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_white, (1 - kill))
+        if (message == 9)
+            draw_sprite_ext(message_sprite, 11, (x + 30), y, (2 - stretch), (stretch + kill), 0, c_white, (1 - kill))
     }
-    if (self.bounces < 2)
-        self.vspeed += 1
-    if ((self.y > self.ystart) && ((self.bounces < 2) && (self.killactive == 0)))
+    if (bounces < 2)
+        vspeed += 1
+    if (y > ystart && bounces < 2 && killactive == false)
     {
-        self.y = self.ystart
-        self.vspeed = (self.vstart / 2)
-        self.bounces += 1
+        y = ystart
+        vspeed = (vstart / 2)
+        bounces += 1
     }
-    if ((self.bounces >= 2) && (self.killactive == 0))
+    if (bounces >= 2 && killactive == false)
     {
-        self.vspeed = 0
-        self.y = self.ystart
+        vspeed = 0
+        y = ystart
     }
-    if (self.stretchgo == 1)
-        self.stretch += 0.4
-    if (self.stretch >= 1.2)
+    if (stretchgo == 1)
+        stretch += 0.4
+    if (stretch >= 1.2)
     {
-        self.stretch = 1
-        self.stretchgo = 0
+        stretch = 1
+        stretchgo = 0
     }
-    self.killtimer += 1
-    if (self.killtimer > 35)
-        self.killactive = 1
-    if (self.killactive == 1)
+    killtimer += 1
+    if (killtimer > 35)
+        killactive = true
+    if (killactive == true)
     {
-        self.kill += 0.08
-        self.y -= 4
+        kill += 0.08
+        y -= 4
     }
-    if (self.kill > 1)
+    if (kill > 1)
         instance_destroy()
+}
+if (global.fighting == true)
+{
+    if (stayincamera == 1)
+    {
+        if (x >= (xx + 600))
+            x = (xx + 600)
+    }
 }

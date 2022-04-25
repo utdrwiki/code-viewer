@@ -1,57 +1,57 @@
 scr_84_set_draw_font("main")
-self.xfade = ((10 - self.fadebuffer) / 10)
-if (self.xfade > 1)
-    self.xfade = 1
-if (self.TYPE <= 2)
+xfade = ((10 - fadebuffer) / 10)
+if (xfade > 1)
+    xfade = 1
+if (TYPE <= 2)
 {
-    if (self.DRAWHEART == 1)
-        draw_sprite_ext(IMAGE_SOUL_BLUR, 0, (self.HEARTX + self.xoff), (self.HEARTY + self.yoff), 1, 1, 0, 0x00FFFFFF, (0.6 * self.xfade))
-    draw_set_alpha(self.xfade)
-    if (self.TYPE < 2)
+    if (DRAWHEART == 1)
+        draw_sprite_ext(IMAGE_SOUL_BLUR, 0, (HEARTX + xoff), (HEARTY + yoff), 1, 1, 0, c_white, (0.6 * xfade))
+    draw_set_alpha(xfade)
+    if (TYPE < 2)
     {
-        for (self.i = 0; self.i <= self.XMAX; self.i += 1)
+        for (i = 0; i <= XMAX; i += 1)
         {
-            draw_set_color(0x00FFFFFF)
-            if (self.CURX == self.i)
-                draw_set_color(0x0000FFFF)
-            draw_text(self.NAMEX[self.i, 0], self.NAMEY[self.i, 0], string_hash_to_newline(self.NAME[self.i, 0]))
+            draw_set_color(c_white)
+            if (CURX == i)
+                draw_set_color(c_yellow)
+            draw_text(NAMEX[i][0], NAMEY[i][0], string_hash_to_newline(NAME[i][0]))
         }
     }
-    if (self.TYPE == 2)
+    if (TYPE == 2)
     {
-        for (self.i = 0; self.i <= self.YMAX; self.i += 1)
+        for (i = 0; i <= YMAX; i += 1)
         {
-            draw_set_color(0x00FFFFFF)
-            if (self.CURY == self.i)
-                draw_set_color(0x0000FFFF)
-            draw_text(self.NAMEX[0, self.i], self.NAMEY[0, self.i], string_hash_to_newline(self.NAME[0, self.i]))
+            draw_set_color(c_white)
+            if (CURY == i)
+                draw_set_color(c_yellow)
+            draw_text(NAMEX[0][i], NAMEY[0][i], string_hash_to_newline(NAME[0][i]))
         }
     }
     draw_set_alpha(1)
 }
-if (self.TYPE == 3)
+if (TYPE == 3)
 {
-    if (self.DRAWHEART == 1)
-        draw_sprite_ext(IMAGE_SOUL_BLUR, 0, self.HEARTX, self.HEARTY, 1, 1, 0, 0x00FFFFFF, (0.5 * self.xfade))
-    draw_set_alpha(self.xfade)
-    for (self.j = 0; self.j <= self.YMAX; self.j += 1)
+    if (DRAWHEART == 1)
+        draw_sprite_ext(IMAGE_SOUL_BLUR, 0, HEARTX, HEARTY, 1, 1, 0, c_white, (0.5 * xfade))
+    draw_set_alpha(xfade)
+    for (j = 0; j <= YMAX; j += 1)
     {
-        for (self.i = 0; self.i <= self.XMAX; self.i += 1)
+        for (i = 0; i <= XMAX; i += 1)
         {
-            draw_set_color(0x00FFFFFF)
-            if ((self.CURX == self.i) && (self.CURY == self.j))
-                draw_set_color(0x0000FFFF)
-            var str = string_hash_to_newline(self.NAME[self.i, self.j])
-            if ((string_char_at(str, 1) == "(") && (string_length(str) > 3))
+            draw_set_color(c_white)
+            if (CURX == i && CURY == j)
+                draw_set_color(c_yellow)
+            var str = string_hash_to_newline(NAME[i][j])
+            if (string_char_at(str, 1) == "(" && string_length(str) > 3)
                 str = string_copy(str, 4, (string_length(str) - 3))
-            if ((str != "<") && (str != ">"))
-                draw_text(self.NAMEX[self.i, self.j], self.NAMEY[self.i, self.j], str)
+            if (str != "<" && str != ">")
+                draw_text(NAMEX[i][j], NAMEY[i][j], str)
         }
     }
-    draw_set_color(0x00FFFFFF)
-    if (string_length(self.NAMESTRING) == self.STRINGMAX)
-        draw_set_color(0x0000FFFF)
-    var width = string_width(self.NAMESTRING)
-    draw_text(((320 - width) / 2), self.PLAYERNAMEY, string_hash_to_newline(self.NAMESTRING))
+    draw_set_color(c_white)
+    if (string_length(NAMESTRING) == STRINGMAX)
+        draw_set_color(c_yellow)
+    var width = string_width(NAMESTRING)
+    draw_text(((320 - width) / 2), PLAYERNAMEY, string_hash_to_newline(NAMESTRING))
     draw_set_alpha(1)
 }

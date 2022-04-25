@@ -1,30 +1,30 @@
-self.siner = 0
-self.targetx = 0
-self.wing_index = 0
-self.wingtimer = 0
-self.shot = 0
-self.xmake = 2
-self.attacktimer = 0
-self.attackcon = -1
-self.shakefactor = 4
-self.side = 1
-self.loc_check = 0
-self.mazemode = 0
-self.beatcon = 0
-self.introcon = 0
-self.introtimer = 0
-self.shadowy = (self.y + 160)
-self.shadow = scr_dark_marker(self.x, self.shadowy, self.sprite_index)
-with (self.shadow)
+siner = 0
+targetx = 0
+wing_index = 0
+wingtimer = 0
+shot = 0
+xmake = 2
+attacktimer = 0
+attackcon = -1
+shakefactor = 4
+side = 1
+loc_check = 0
+mazemode = 0
+beatcon = 0
+introcon = 0
+introtimer = 0
+shadowy = (y + 160)
+shadow = scr_dark_marker(x, shadowy, sprite_index)
+with (shadow)
 {
-    self.sprite_index = spr_starwalker_wings
-    self.image_yscale = 0.25
-    self.image_blend = 0x00000000
-    self.depth = 600000
+    sprite_index = spr_starwalker_wings
+    image_yscale = 0.25
+    image_blend = c_black
+    depth = 600000
 }
-self.depth = self.shadow.depth
-for (self.i = 0; self.i < 6; self.i += 1)
+depth = shadow.depth
+for (i = 0; i < 6; i += 1)
 {
-    self.char_xcheck[self.i] = obj_mainchara.x
-    self.char_ycheck[self.i] = obj_mainchara.y
+    char_xcheck[i] = obj_mainchara.x
+    char_ycheck[i] = obj_mainchara.y
 }

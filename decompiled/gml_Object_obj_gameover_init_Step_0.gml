@@ -1,55 +1,55 @@
-self.timer += 1
-if (self.timer == 1)
+timer += 1
+if (timer == 1)
     snd_free_all()
-if (self.timer == 30)
+if (timer == 30)
 {
-    with (self.bg)
+    with (bg)
         instance_destroy()
-    self.visible = 1
-    self.x = global.heartx
-    self.y = global.hearty
+    visible = true
+    x = global.heartx
+    y = global.hearty
 }
-if (self.timer == 31)
+if (timer == 31)
     sprite_delete(global.screenshot)
-if (self.timer == 50)
+if (timer == 50)
 {
     snd_play(snd_break1)
-    self.sprite_index = spr_heartbreak
-    self.x -= 2
+    sprite_index = spr_heartbreak
+    x -= 2
 }
-if (self.timer == 90)
+if (timer == 90)
 {
     snd_play(snd_break2)
-    self.visible = 0
-    self.sh[0] = instance_create((self.x - 2), self.y, obj_marker)
-    self.sh[1] = instance_create(self.x, (self.y + 3), obj_marker)
-    self.sh[2] = instance_create((self.x + 2), (self.y + 6), obj_marker)
-    self.sh[3] = instance_create((self.x + 8), self.y, obj_marker)
-    self.sh[4] = instance_create((self.x + 10), (self.y + 3), obj_marker)
-    self.sh[5] = instance_create((self.x + 12), (self.y + 6), obj_marker)
-    for (self.i = 0; self.i < 6; self.i += 1)
+    visible = false
+    sh[0] = instance_create((x - 2), y, obj_marker)
+    sh[1] = instance_create(x, (y + 3), obj_marker)
+    sh[2] = instance_create((x + 2), (y + 6), obj_marker)
+    sh[3] = instance_create((x + 8), y, obj_marker)
+    sh[4] = instance_create((x + 10), (y + 3), obj_marker)
+    sh[5] = instance_create((x + 12), (y + 6), obj_marker)
+    for (i = 0; i < 6; i += 1)
     {
-        with (self.sh[self.i])
+        with (sh[i])
         {
-            self.direction = random(360)
-            self.speed = 7
-            self.gravity_direction = 270
-            self.gravity = 0.2
-            self.sprite_index = spr_heartshards
-            self.image_speed = 0.2
+            direction = random(360)
+            speed = 7
+            gravity_direction = 270
+            gravity = 0.2
+            sprite_index = spr_heartshards
+            image_speed = 0.2
         }
     }
     if (global.tempflag[3] >= 1)
-        self.timer += 15
+        timer += 15
 }
-if (self.timer == 140)
+if (timer == 140)
     instance_create(0, 0, obj_fadeout)
-if ((self.timer >= 80) && (self.timer < 150))
+if (timer >= 80 && timer < 150)
 {
     if button1_p()
-        self.Z_COUNT += 1
-    if (self.Z_COUNT >= 4)
+        Z_COUNT += 1
+    if (Z_COUNT >= 4)
         scr_tempload()
 }
-if (self.timer == 150)
+if (timer == 150)
     room_goto(PLACE_FAILURE)

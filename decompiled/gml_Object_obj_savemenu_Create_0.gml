@@ -1,38 +1,104 @@
-self.cur_jewel = 0
-self.saved = 0
-self.coord = 0
-self.ini_ex = 0
-self.buffer = 3
-self.name = scr_84_get_lang_string("obj_savemenu_slash_Create_0_gml_7_0")
-self.level = 1
-self.love = 1
-self.time = 0
-self.roome = 0
-self.endme = 0
-global.currentroom = self.room
-global.interact = 1
-if file_exists("dr.ini")
+cur_jewel = 0
+saved = 0
+xcoord = 0
+ycoord = 0
+ini_ex = 0
+buffer = 3
+name = stringsetloc("Kris", "obj_savemenu_slash_Create_0_gml_8_0")
+level = 1
+love = 1
+time = 0
+roome = PLACE_DOGCHECK2
+saved = 0
+endme = 0
+menuno = 0
+mpos = global.filechoice
+overwrite = 0
+overcoord = 0
+init = false
+type = 0
+if (global.chapter >= 2 && global.darkzone == true)
 {
-    self.ini_ex = 1
-    self.iniread = ini_open("dr.ini")
-    self.name = ini_read_string(("G" + string(global.filechoice)), "Name", "Kris")
-    self.level = ini_read_real(("G" + string(global.filechoice)), "Level", 1)
-    self.love = ini_read_real(("G" + string(global.filechoice)), "Love", 1)
-    self.time = ini_read_real(("G" + string(global.filechoice)), "Time", 0)
-    self.roome = ini_read_real(("G" + string(global.filechoice)), "Room", 0)
-    ini_close()
+    if (global.plot >= 12)
+        type = 1
 }
-self.d = (global.darkzone + 1)
-self.minutes = floor((self.time / 1800))
-self.seconds = round((((self.time / 1800) - self.minutes) * 60))
-if (self.seconds == 60)
-    self.seconds = 59
-if (self.seconds < 10)
-    self.seconds = ("0" + string(self.seconds))
-scr_roomname(self.roome)
-if (self.d == 2)
-    self.heartsprite = 908
-if (self.d == 1)
-    self.heartsprite = 910
-if (self.d == 1)
-    self.name = scr_84_get_lang_string("obj_savemenu_slash_Create_0_gml_43_0")
+haverecruited = 1
+recruitsubtype = 1
+if (global.chapter == 2)
+{
+    if (room >= room_dw_cyber_intro_1)
+    {
+        recruitsubtype = 2
+        haverecruited = 0
+        var i = 25
+        while (i < 50)
+        {
+            if (global.flag[(600 + i)] > 0)
+            {
+                haverecruited = 1
+                break
+            }
+            else
+            {
+                i++
+                continue
+            }
+        }
+    }
+}
+global.currentroom = room
+global.interact = 1
+if ossafe_file_exists("dr.ini")
+{
+    ini_ex = 1
+    iniread = ossafe_ini_open("dr.ini")
+    name = ini_read_string(scr_ini_chapter(global.chapter, global.filechoice), "Name", "Kris")
+    level = ini_read_real(scr_ini_chapter(global.chapter, global.filechoice), "Level", 1)
+    love = ini_read_real(scr_ini_chapter(global.chapter, global.filechoice), "Love", 1)
+    time = ini_read_real(scr_ini_chapter(global.chapter, global.filechoice), "Time", 0)
+    roome = ini_read_real(scr_ini_chapter(global.chapter, global.filechoice), "Room", 0)
+    ossafe_ini_close()
+    ossafe_savedata_save()
+}
+d = (global.darkzone + 1)
+minutes = floor((time / 1800))
+seconds = round((((time / 1800) - minutes) * 60))
+if (seconds == 60)
+    seconds = 59
+if (seconds < 10)
+    seconds = ("0" + string(seconds))
+scr_roomname(roome)
+if (d == 2)
+    heartsprite = spr_heart
+if (d == 1)
+    heartsprite = spr_heartsmall
+if (d == 1)
+    name = stringsetloc("Kris", "obj_savemenu_slash_Create_0_gml_75_0")
+if (type == 1)
+{
+    name_current = global.truename
+    love_current = global.llv
+    room_current = scr_roomname(room)
+    level_current = global.lv
+    time_current = global.time
+    for (i = 0; i < 3; i++)
+    {
+        name_file[i] = "Kris"
+        level_file[i] = 1
+        love_file[i] = 1
+        time_file[i] = 0
+        roome_file[i] = 0
+        if ossafe_file_exists("dr.ini")
+        {
+            ini_ex_file[i] = 1
+            iniread_file[i] = ossafe_ini_open("dr.ini")
+            name_file[i] = ini_read_string(scr_ini_chapter(global.chapter, i), "Name", "Kris")
+            level_file[i] = ini_read_real(scr_ini_chapter(global.chapter, i), "Level", 0)
+            love_file[i] = ini_read_real(scr_ini_chapter(global.chapter, i), "Love", 1)
+            time_file[i] = ini_read_real(scr_ini_chapter(global.chapter, i), "Time", 0)
+            roome_file[i] = ini_read_real(scr_ini_chapter(global.chapter, i), "Room", 0)
+            ossafe_ini_close()
+            ossafe_savedata_save()
+        }
+    }
+}

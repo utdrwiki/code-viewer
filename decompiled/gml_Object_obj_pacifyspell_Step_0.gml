@@ -1,57 +1,79 @@
-if (instance_exists(self.target) == 0)
+debug_message("I was born today")
+debug_message(("x:" + string(x)))
+debug_message(("y:" + string(y)))
+debug_message(("con:" + string(con)))
+if ((!i_ex(target)) && con < 20)
 {
-    self.con = 99
+    debug_message("target does not exist")
+    con = 99
     instance_destroy()
+    return;
 }
-if (self.con == 1)
+if (con == 1)
 {
-    if (self.fail == 0)
+    if (fail == 0)
     {
-        self.siner += 1
-        self.target.image_blend = merge_color(self.target.image_blend, self.flashcolor, 0.1)
-        if ((self.siner % 2) == 0)
+        siner += 1
+        target.image_blend = merge_color(target.image_blend, flashcolor, 0.1)
+        if ((siner % 2) == 0)
         {
-            self.ai = instance_create((self.target.x + random(self.target.sprite_width)), ((self.target.y + self.target.sprite_height) - 20), obj_afterimage)
-            self.ai.gravity = 0.5
-            self.ai.sprite_index = spr_savepoint
-            self.ai.image_speed = 0.2
+            ai = instance_create((target.x + random(target.sprite_width)), ((target.y + target.sprite_height) - 20), obj_afterimage)
+            ai.gravity = 0.5
+            ai.sprite_index = spr_savepoint
+            ai.image_speed = 0.2
         }
-        self.target.x += ((self.siner / 4) + (sin((self.siner / 8)) * 10))
-        self.target.y -= (self.siner / 5)
+        target.x += ((siner / 4) + (sin((siner / 8)) * 10))
+        target.y -= (siner / 5)
     }
     else
     {
-        self.siner = 0
-        self.con = 5
+        siner = 0
+        con = 5
     }
 }
-if (self.con == 2)
+if (con == 2)
 {
-    with (self.target)
+    with (target)
         instance_destroy()
     instance_destroy()
 }
-if (instance_exists(self.target) == 0)
+if (con == 5)
 {
-    self.con = 99
+    con = 6
+    alarm[4] = 8
+}
+if (con == 6)
+    target.image_blend = merge_color(target.image_blend, flashcolor, 0.12)
+if (con == 7)
+{
+    con = 8
+    alarm[4] = 8
+}
+if (con == 8)
+    target.image_blend = merge_color(target.image_blend, c_white, 0.16)
+if (con == 9)
+{
+    target.image_blend = c_white
     instance_destroy()
 }
-if (self.con == 5)
+if (con == 20)
 {
-    self.con = 6
-    self.alarm[4] = 8
-}
-if (self.con == 6)
-    self.target.image_blend = merge_color(self.target.image_blend, self.flashcolor, 0.12)
-if (self.con == 7)
-{
-    self.con = 8
-    self.alarm[4] = 8
-}
-if (self.con == 8)
-    self.target.image_blend = merge_color(self.target.image_blend, 0x00FFFFFF, 0.16)
-if (self.con == 9)
-{
-    self.target.image_blend = 0x00FFFFFF
-    instance_destroy()
+    if (timer == 0 && zcounter == 0)
+        snd_play(snd_pacify)
+    timer--
+    if (timer <= 0)
+    {
+        var zobj = instance_create(x, y, obj_afterimage_grow)
+        zobj.sprite_index = spr_spare_z
+        zobj.speed = 12
+        zobj.direction = (zcounter * 40)
+        zobj.friction = 1
+        timer = 2
+        zcounter++
+    }
+    if (zcounter >= 9)
+    {
+        con++
+        instance_destroy()
+    }
 }

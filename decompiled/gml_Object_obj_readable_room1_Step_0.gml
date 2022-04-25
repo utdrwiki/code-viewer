@@ -1,10 +1,14 @@
-if (self.myinteract == 3)
+if (myinteract == 3)
 {
-    if (instance_exists(self.mydialoguer) == 0)
+    if (!d_ex())
     {
         global.interact = 0
-        self.myinteract = 0
+        myinteract = 0
         with (obj_mainchara)
-            self.onebuffer = 3
+            onebuffer = 3
+        if (selfdestruct == 1)
+            alarm[0] = 2
     }
 }
+if (room == room_dw_mansion_potBalance || room == room_dw_mansion_east_2f_c)
+    scr_depth()

@@ -1,31 +1,31 @@
-if (self.boss == 1)
+if (boss == true)
 {
-    self.cur_alpha = self.battlealpha
+    cur_alpha = battlealpha
     if (obj_mainchara.battlemode == 1)
     {
-        if (self.battlealpha < 0.5)
-            self.battlealpha += 0.04
+        if (battlealpha < 0.5)
+            battlealpha += 0.04
     }
-    else if (self.battlealpha > 0)
-        self.battlealpha -= 0.04
-    if (self.tile_fade == 1)
+    else if (battlealpha > 0)
+        battlealpha -= 0.04
+    if (tile_fade == true)
     {
-        if (self.cur_alpha != self.battlealpha)
+        if (cur_alpha != battlealpha)
         {
-            for (var i = 0; i < array_length_1d(self.tilearray); i++)
-                tile_set_alpha(self.tilearray[i], ((self.battlealpha * 2) * self.max_battlealpha))
+            for (var i = 0; i < array_length_1d(tilearray); i++)
+                tile_set_alpha(tilearray[i], ((battlealpha * 2) * max_battlealpha))
         }
     }
-    draw_set_alpha((self.battlealpha * self.max_battlealpha))
-    draw_set_color(0x00000000)
-    draw_rectangle((__view_get(0, 0) - 100), (__view_get(1, 0) - 100), (__view_get(0, 0) + 740), (__view_get(1, 0) + 540), 0)
+    draw_set_alpha((battlealpha * max_battlealpha))
+    draw_set_color(c_black)
+    draw_rectangle((__view_get((0 << 0), 0) - 100), (__view_get((1 << 0), 0) - 100), (__view_get((0 << 0), 0) + 740), (__view_get((1 << 0), 0) + 540), false)
     draw_set_alpha(1)
     if instance_exists(obj_caterpillarchara)
     {
-        obj_caterpillarchara.image_blend = merge_color(0x00FFFFFF, 0x00000000, (self.battlealpha * self.max_battlealpha))
-        if (self.battlealpha <= 0)
-            obj_caterpillarchara.image_blend = 0x00FFFFFF
+        obj_caterpillarchara.image_blend = merge_color(c_white, c_black, (battlealpha * max_battlealpha))
+        if (battlealpha <= 0)
+            obj_caterpillarchara.image_blend = c_white
     }
 }
-draw_sprite_ext(self.sprite_index, self.image_index, self.x, self.y, self.image_xscale, self.image_yscale, self.image_angle, self.image_blend, self.image_alpha)
-draw_sprite_ext(spr_ponman_eye_white, self.image_index, (self.x + self.xx), (self.y + self.yy), self.image_xscale, self.image_yscale, self.image_angle, 0x000000FF, self.image_alpha)
+draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha)
+draw_sprite_ext(spr_ponman_eye_white, image_index, (x + xx), (y + yy), image_xscale, image_yscale, image_angle, c_red, image_alpha)

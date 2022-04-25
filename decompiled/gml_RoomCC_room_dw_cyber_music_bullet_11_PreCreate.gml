@@ -1,0 +1,10 @@
+endY = 300
+camFollow = 1
+mode = 1
+camFollowAfter = 0
+centerX = 1
+returnOnFinish = 1
+uniqueBulletPattern = 1
+riseSpeed = 1
+riseSpeedInitial = 6
+riseSpeedBoostFriction = 0.4

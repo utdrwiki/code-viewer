@@ -1,27 +1,21 @@
-self.timer = 0
-self.darkamt = 0
+timer = 0
+darkamt = 0
 with (obj_mainchara)
-    self.battlemode = 1
-global.charinstance[0] = 326
-self.alarm[0] = 5
-self.side = 0
-self.homing = 0
-if (self.room == room_dark_chase2)
-    self.homing = 2
-if (self.room == room_forest_chase1)
-    self.homing = 3
-if (self.room == room_forest_chase2)
-    self.homing = 4
-self.sidespade[0] = 4732847832
-self.sidespade[1] = 4732847832
-self.intensity = 0
-self.tile_fade = 0
-if ((self.room == room_forest_chase1) || ((self.room == room_forest_chase2) || (self.room == room_dark_chase1)))
+    battlemode = 1
+global.charinstance[0] = obj_mainchara
+alarm[0] = 5
+side = 0
+homing = 0
+sidespade[0] = 4732847832
+sidespade[1] = 4732847832
+intensity = 0
+tile_fade = false
+if (room == 9999999999)
 {
-    self.alpha_changed = 0
-    self.tile_fade = 1
-    self.tile_layer_choice = 99999
-    self.tilearray = tile_get_ids_at_depth(self.tile_layer_choice)
-    for (var i = 0; i < array_length_1d(self.tilearray); i++)
-        tile_set_alpha(self.tilearray[i], 0)
+    alpha_changed = false
+    tile_fade = true
+    tile_layer_choice = 99999
+    tilearray = tile_get_ids_at_depth(tile_layer_choice)
+    for (var i = 0; i < array_length_1d(tilearray); i++)
+        tile_set_alpha(tilearray[i], 0)
 }

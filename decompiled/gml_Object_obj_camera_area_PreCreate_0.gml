@@ -1,0 +1,24 @@
+event_inherited()
+collisionObject = 80
+targetObject = 80
+hasTargetObject = 1
+overrideDefaultValues = 1
+leaveAreaPixelLeeway = 40
+myView = 1
+defaultOutsideView = 0
+revertViewWhenOutsideArea = 1
+overrideLimits = 0
+panLimitBottom = -1
+panLimitTop = -1
+panLimitLeft = -1
+panLimitRight = -1
+panStyle = 0
+targetX = 0
+targetY = 0
+targetXRelative = 0
+targetYRelative = 0
+panSpeedInit = -1
+useTargetX = 0
+useTargetY = 0
+ignoreFreezeArea = -2
+camID = 0

@@ -1,5 +1,5 @@
-self.target = 42894289
-self.starcount = 0
-self.t = 0
-self.particlesprite = 853
-self.particlecolor = 65280
+target = 42894289
+starcount = 0
+t = 0
+particlesprite = spr_sparestar_anim
+particlecolor = c_lime

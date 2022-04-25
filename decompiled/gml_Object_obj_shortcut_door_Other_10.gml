@@ -4,9 +4,11 @@ global.fc = 0
 global.fe = 0
 global.interact = 1
 global.msc = 460
+if (global.chapter == 2)
+    global.msc = 1200
 scr_text(global.msc)
-if (self.on == 0)
-    global.msg[0] = scr_84_get_lang_string("obj_shortcut_door_slash_Other_10_gml_13_0")
-self.myinteract = 3
-self.mydialoguer = instance_create(0, 0, obj_dialoguer)
-self.talked += 1
+if (on == 0)
+    global.msg[0] = stringsetloc("* (It's a lone doorframe.^1)&* (But for some reason^1, you can't see through it...)/%", "obj_shortcut_door_slash_Other_10_gml_13_0")
+myinteract = 3
+mydialoguer = instance_create(0, 0, obj_dialoguer)
+talked += 1

@@ -1,86 +1,86 @@
-if (global.monstertype[self.myself] == 21)
-    self.secondtime = 1
-if (global.monster[self.myself] == 1)
+if (global.monstertype[myself] == 21)
+    secondtime = true
+if (global.monster[myself] == true)
 {
-    global.flag[(51 + self.myself)] = 4
-    if (self.secondtime == 1)
-        self.milk_counter = 99
-    if (self.secondtime == 1)
-        self.ralsei_lecture = 99
-    if ((global.mnfight == 1) && (self.talked == 0))
+    global.flag[(51 + myself)] = 4
+    if (secondtime == true)
+        milk_counter = 99
+    if (secondtime == true)
+        ralsei_lecture = 99
+    if (global.mnfight == 1 && talked == false)
     {
         scr_randomtarget()
         if (!instance_exists(obj_darkener))
             instance_create(0, 0, obj_darkener)
-        self.milkmax = 1000
-        if (self.milk_counter > 0)
-            self.milkmax = 600
-        if (global.monsterhp[self.myself] > self.milkmax)
+        milkmax = 1000
+        if (milk_counter > 0)
+            milkmax = 600
+        if (global.monsterhp[myself] > milkmax)
         {
             if ((!instance_exists(obj_moveheart)) && (!instance_exists(obj_heart)))
                 scr_moveheart()
             if (!instance_exists(obj_growtangle))
-                instance_create((__view_get(0, 0) + 320), (__view_get(1, 0) + 170), obj_growtangle)
+                instance_create((__view_get((0 << 0), 0) + 320), (__view_get((1 << 0), 0) + 170), obj_growtangle)
         }
         global.mnfight = 2
-        self.rtimer = 0
+        rtimer = 0
         global.typer = 50
-        self.talked = 2
-        self.attacked = 0
-        self.talktimer = 0
+        talked = 2
+        attacked = false
+        talktimer = 0
     }
-    if (self.talked == 2)
+    if (talked == 2)
         global.mnfight = 2
-    if ((global.mnfight == 2) && (self.attacked == 0))
+    if (global.mnfight == 2 && attacked == false)
     {
-        self.rtimer += 1
-        if (self.rtimer == 12)
+        rtimer += 1
+        if (rtimer == 12)
         {
-            self.talked = 0
-            self.milkmax = 1000
-            if (self.milk_counter > 0)
-                self.milkmax = 600
-            if (global.monsterhp[self.myself] <= self.milkmax)
+            talked = false
+            milkmax = 1000
+            if (milk_counter > 0)
+                milkmax = 600
+            if (global.monsterhp[myself] <= milkmax)
             {
-                if (self.scon == 0)
-                    self.scon = 1
+                if (scon == 0)
+                    scon = 1
             }
             else
             {
                 if (!instance_exists(obj_checkers_leap))
                 {
-                    if (self.attacktype == 0)
-                        self.rr = 0
-                    if (self.attacktype == 1)
-                        self.rr = 3
-                    if (self.attacktype == 2)
-                        self.rr = 1
-                    if (self.attacktype == 3)
-                        self.rr = 2
-                    self.dc = instance_create(self.x, self.y, obj_checkers_leap)
-                    self.dc.leapmode = self.rr
-                    self.dc.target = self.mytarget
-                    self.dc.damage = (global.monsterat[self.myself] * 5)
-                    self.attacktype += 1
-                    if (self.attacktype > 3)
-                        self.attacktype = 0
+                    if (attacktype == 0)
+                        rr = false
+                    if (attacktype == 1)
+                        rr = 3
+                    if (attacktype == 2)
+                        rr = true
+                    if (attacktype == 3)
+                        rr = 2
+                    dc = instance_create(x, y, obj_checkers_leap)
+                    dc.leapmode = rr
+                    dc.target = mytarget
+                    dc.damage = (global.monsterat[myself] * 5)
+                    attacktype += 1
+                    if (attacktype > 3)
+                        attacktype = 0
                 }
-                self.siner = 0
-                self.visible = 0
-                self.turns += 1
+                siner = 0
+                visible = false
+                turns += 1
             }
             global.turntimer = 999
-            self.attacked = 1
+            attacked = true
             global.typer = 6
             global.fc = 0
-            self.rr = choose(0)
-            global.battlemsg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_77_0")
-            if (global.monsterstatus[self.myself] == 1)
-                global.battlemsg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_79_0")
-            if (global.monsterhp[self.myself] <= (global.monstermaxhp[self.myself] / 3))
-                global.battlemsg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_80_0")
-            if (self.crown > 0)
-                global.battlemsg[0] = scr_84_get_subst_string(scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_82_0"), string(self.crown))
+            rr = choose(0)
+            global.battlemsg[0] = stringsetloc("* K.Round shuffles furiously.", "obj_checkers_enemy_slash_Step_0_gml_77_0")
+            if (global.monsterstatus[myself] == true)
+                global.battlemsg[0] = stringsetloc("* K.Round looks weak.", "obj_checkers_enemy_slash_Step_0_gml_79_0")
+            if (global.monsterhp[myself] <= (global.monstermaxhp[myself] / 3))
+                global.battlemsg[0] = stringsetloc("* K.Round's shuffle becomes lethargic.", "obj_checkers_enemy_slash_Step_0_gml_80_0")
+            if (crown > 0)
+                global.battlemsg[0] = stringsetsubloc("* The crown is \\cY~1-percent\\cW loose!", string(crown), "obj_checkers_enemy_slash_Step_0_gml_82_0")
         }
         else
             global.turntimer = 120
@@ -89,380 +89,380 @@ if (global.monster[self.myself] == 1)
     {
         if (global.turntimer <= 1)
         {
-            if (self.battlecancel == 1)
-                global.mercymod[self.myself] = 999
-            if (self.battlecancel == 2)
+            if (battlecancel == 1)
+                global.mercymod[myself] = 999
+            if (battlecancel == 2)
             {
                 with (obj_battlecontroller)
-                    self.noreturn = 1
-                self.con = 1
-                self.battlecancel = 3
+                    noreturn = true
+                con = 1
+                battlecancel = 3
             }
         }
     }
 }
-if (self.scon == 1)
+if (scon == 1)
 {
-    if (self.milk_counter > 0)
-        self.scon = 1.5
+    if (milk_counter > 0)
+        scon = 1.5
     else
     {
         with (obj_writer)
             instance_destroy()
-        global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_119_0")
+        global.msg[0] = stringsetloc("* K. ROUND felt stressed out and attacked!/%", "obj_checkers_enemy_slash_Step_0_gml_119_0")
         scr_battletext_default()
-        self.scon = 1.5
+        scon = 1.5
     }
 }
-if ((self.scon == 1.5) && (!instance_exists(obj_writer)))
+if (scon == 1.5 && (!instance_exists(obj_writer)))
 {
     snd_play(snd_magicsprinkle)
     with (obj_writer)
         instance_destroy()
-    global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_129_0")
+    global.msg[0] = stringsetloc("* K. ROUND practiced self-care!", "obj_checkers_enemy_slash_Step_0_gml_129_0")
     global.turntimer = 999
     scr_battletext_default()
-    self.milk = scr_dark_marker((self.x - 100), (self.y + 60), spr_checkers_milk)
-    with (self.milk)
+    milk = scr_dark_marker((x - 100), (y + 60), spr_checkers_milk)
+    with (milk)
     {
-        self.image_speed = 0
-        self.image_xscale = 4
-        self.image_yscale = 4
-        self.image_alpha = 0
+        image_speed = 0
+        image_xscale = 4
+        image_yscale = 4
+        image_alpha = 0
     }
-    self.milk.depth = (self.depth - 1)
-    self.scon = 2
-    self.milktimer = 0
+    milk.depth = (depth - 1)
+    scon = 2
+    milktimer = 0
 }
-if (self.scon == 2)
+if (scon == 2)
 {
-    with (self.milk)
+    with (milk)
     {
-        self.image_xscale -= 0.2
-        self.image_yscale -= 0.2
-        self.image_alpha += 0.1
+        image_xscale -= 0.2
+        image_yscale -= 0.2
+        image_alpha += 0.1
     }
-    self.milktimer += 1
-    if (self.milktimer >= 10)
+    milktimer += 1
+    if (milktimer >= 10)
     {
-        self.scon = 3
-        self.milktimer = 0
-        with (self.milk)
-            self.image_alpha = 1.4
-    }
-}
-if (self.scon == 3)
-{
-    self.milktimer += 1
-    if (self.milktimer >= 25)
-    {
-        self.scon = 4
-        self.milktimer = 0
+        scon = 3
+        milktimer = 0
+        with (milk)
+            image_alpha = 1.4
     }
 }
-if (self.scon == 4)
+if (scon == 3)
 {
-    with (self.milk)
+    milktimer += 1
+    if (milktimer >= 25)
     {
-        self.hspeed += 2
-        self.image_alpha -= 0.1
+        scon = 4
+        milktimer = 0
     }
-    self.milktimer += 1
-    if (self.milktimer == 10)
+}
+if (scon == 4)
+{
+    with (milk)
     {
-        if (global.monsterat[self.myself] < 10)
-            global.monsterat[self.myself] += 0.5
+        hspeed += 2
+        image_alpha -= 0.1
+    }
+    milktimer += 1
+    if (milktimer == 10)
+    {
+        if (global.monsterat[myself] < 10)
+            global.monsterat[myself] += 0.5
         snd_play(snd_power)
-        self.milkheal = 700
-        if (self.milk_counter == 0)
-            self.milkheal = 300
-        global.monsterhp[self.myself] += self.milkheal
-        self.healamt = instance_create(global.monsterx[self.myself], global.monstery[self.myself], obj_dmgwriter)
-        with (self.healamt)
+        milkheal = 700
+        if (milk_counter == 0)
+            milkheal = 300
+        global.monsterhp[myself] += milkheal
+        healamt = instance_create(global.monsterx[myself], global.monstery[myself], obj_dmgwriter)
+        with (healamt)
         {
-            self.delay = 8
-            self.type = 3
-            self.damage = 700
+            delay = 8
+            type = 3
+            damage = 700
         }
-        self.healamt.damage = self.milkheal
-        self.hanim = instance_create(self.x, self.y, obj_healanim)
-        self.hanim.target = self.id
+        healamt.damage = milkheal
+        hanim = instance_create(x, y, obj_healanim)
+        hanim.target = id
     }
-    if (self.milktimer >= 15)
+    if (milktimer >= 15)
     {
-        with (self.milk)
+        with (milk)
             instance_destroy()
-        self.scon = 5
-        self.milktimer = 0
+        scon = 5
+        milktimer = 0
     }
 }
-if (self.scon == 5)
+if (scon == 5)
 {
-    self.milktimer += 1
-    if (self.milktimer >= 30)
+    milktimer += 1
+    if (milktimer >= 30)
     {
-        if (self.milk_counter > 0)
+        if (milk_counter > 0)
         {
             with (obj_writer)
                 instance_destroy()
-            self.scon = 0
-            self.milktimer = 0
+            scon = 0
+            milktimer = 0
             global.turntimer = 0
         }
         else
         {
             with (obj_writer)
                 instance_destroy()
-            self.scon = 6
-            global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_226_0")
+            scon = 6
+            global.msg[0] = stringsetloc("* K. ROUND's HP and ATTACK went up!/", "obj_checkers_enemy_slash_Step_0_gml_226_0")
             scr_ralface(1, 3)
-            global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_228_0")
+            global.msg[2] = stringsetloc("* Susie^1! Stop attacking it^1! You're making it stronger!/", "obj_checkers_enemy_slash_Step_0_gml_228_0")
             scr_susface(3, 3)
-            global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_230_0")
+            global.msg[4] = stringsetloc("* Pssh^1, and let it think I'm AFRAID^1? No way!/%", "obj_checkers_enemy_slash_Step_0_gml_230_0")
             scr_battletext_default()
         }
-        self.milk_counter += 1
+        milk_counter += 1
     }
 }
-if (self.scon == 6)
+if (scon == 6)
 {
     if (!instance_exists(obj_writer))
     {
         global.fc = 0
-        self.scon = 0
-        self.milktimer = 0
+        scon = 0
+        milktimer = 0
         global.turntimer = 0
     }
 }
 if (global.myfight == 3)
 {
-    self.xx = __view_get(0, 0)
-    self.yy = __view_get(1, 0)
-    if ((self.acting == 1) && (self.actcon == 0))
+    xx = __view_get((0 << 0), 0)
+    yy = __view_get((1 << 0), 0)
+    if (acting == true && actcon == 0)
     {
-        self.actcon = 1
-        if (self.secondtime == 0)
+        actcon = 1
+        if (secondtime == false)
         {
-            global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_263_0")
-            global.actname[self.myself, 0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_264_0")
+            global.msg[0] = stringsetloc("* K.ROUND - AT 9 DF 3&* Check^1?&* That's chess^1, not checkers!/%", "obj_checkers_enemy_slash_Step_0_gml_263_0")
+            global.actname[myself][0] = stringsetloc("Checkers", "obj_checkers_enemy_slash_Step_0_gml_264_0")
             global.flag[246] = 1
-            if (self.checked == 1)
-                global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_268_0")
-            self.checked = 1
+            if (checked == true)
+                global.msg[0] = stringsetloc("* K.ROUND - AT 9 DF 3&* That's better./%", "obj_checkers_enemy_slash_Step_0_gml_268_0")
+            checked = true
         }
         else
         {
             if (global.flag[246] == 1)
             {
-                global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_277_0")
-                global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_278_0")
+                global.msg[0] = stringsetloc("* K.ROUND - AT 9 DF 3&* Watch out for its Flying King attack!/", "obj_checkers_enemy_slash_Step_0_gml_277_0")
+                global.msg[1] = stringsetloc("* (Also^1, you need to get the CROWN off of its head.)/%", "obj_checkers_enemy_slash_Step_0_gml_278_0")
             }
             else
             {
-                global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_282_0")
-                global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_283_0")
+                global.msg[0] = stringsetloc("* K.ROUND - AT 9 DF 3&* It's being controlled into attacking...!/", "obj_checkers_enemy_slash_Step_0_gml_282_0")
+                global.msg[1] = stringsetloc("* (Though^1, wouldn't it just attack anyway...?)/%", "obj_checkers_enemy_slash_Step_0_gml_283_0")
             }
-            self.checked = 1
+            checked = true
         }
         scr_battletext_default()
     }
-    if ((self.acting == 2) && (self.actcon == 0))
+    if (acting == 2 && actcon == 0)
     {
-        if (self.secondtime == 0)
-            self.crown += 15
-        if (self.secondtime == 1)
-            self.crown += 18
-        global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_296_0")
+        if (secondtime == false)
+            crown += 15
+        if (secondtime == true)
+            crown += 18
+        global.msg[0] = stringsetloc("* You bowed to K. ROUND./%", "obj_checkers_enemy_slash_Step_0_gml_296_0")
         with (obj_herokris)
-            self.visible = 0
+            visible = false
         global.faceaction[0] = 0
         global.charaction[0] = 0
-        self.bowkris = scr_dark_marker(obj_herokris.x, obj_herokris.y, spr_krisb_bow)
-        with (self.bowkris)
+        bowkris = scr_dark_marker(obj_herokris.x, obj_herokris.y, spr_krisb_bow)
+        with (bowkris)
         {
             scr_oflash()
-            self.a = scr_afterimage()
-            self.a.hspeed = 5
-            self.a.depth = (self.depth + 1)
+            a = scr_afterimage()
+            a.hspeed = 5
+            a.depth = (depth + 1)
         }
         snd_play(snd_item)
         scr_battletext_default()
-        self.actcon = 20
+        actcon = 20
     }
-    if ((self.actcon == 20) && (!instance_exists(obj_writer)))
+    if (actcon == 20 && (!instance_exists(obj_writer)))
     {
-        self.visible = 0
-        self.bowcheck = scr_dark_marker(self.x, self.y, spr_checkers_bow)
-        with (self.bowcheck)
-            self.image_speed = 0.334
+        visible = false
+        bowcheck = scr_dark_marker(x, y, spr_checkers_bow)
+        with (bowcheck)
+            image_speed = 0.334
         global.fc = 0
         global.typer = 4
-        global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_327_0")
-        if ((self.ralsei_lecture == 0) && (self.secondtime == 0))
+        global.msg[0] = stringsetloc("* It bowed back^1.&* Its crown loosened a little./%", "obj_checkers_enemy_slash_Step_0_gml_327_0")
+        if (ralsei_lecture == false && secondtime == false)
         {
-            global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_330_0")
+            global.msg[0] = stringsetloc("* It bowed back^1.&* Its crown loosened a little./", "obj_checkers_enemy_slash_Step_0_gml_330_0")
             scr_ralface(1, 0)
-            global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_332_0")
-            global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_333_0")
-            global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_334_0")
+            global.msg[2] = stringsetloc("* That's it^1, Kris^1! If we can get its crown off.../", "obj_checkers_enemy_slash_Step_0_gml_332_0")
+            global.msg[3] = stringsetloc("\\E8* It should turn back into a little guy...!/", "obj_checkers_enemy_slash_Step_0_gml_333_0")
+            global.msg[4] = stringsetloc("\\E0* Susie^1! Help us bow at it!/", "obj_checkers_enemy_slash_Step_0_gml_334_0")
             scr_susface(5, 0)
-            global.msg[6] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_336_0")
-            global.msg[7] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_337_0")
+            global.msg[6] = stringsetloc("* Nah^1, it's crown'll come off.../", "obj_checkers_enemy_slash_Step_0_gml_336_0")
+            global.msg[7] = stringsetloc("\\E4* When I smash this guy into the GROUND!/", "obj_checkers_enemy_slash_Step_0_gml_337_0")
             scr_ralface(8, 1)
-            global.msg[9] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_339_0")
-            self.ralsei_lecture = 1
+            global.msg[9] = stringsetloc("* .../%", "obj_checkers_enemy_slash_Step_0_gml_339_0")
+            ralsei_lecture = true
         }
-        if ((self.thrown == 0) && (self.secondtime == 1))
+        if (thrown == 0 && secondtime == true)
         {
-            if (self.bowcounter == 0)
+            if (bowcounter == 0)
             {
                 global.fc = 2
                 global.fe = 3
                 global.typer = 45
-                global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_349_0")
-                global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_350_0")
+                global.msg[0] = stringsetloc("* Huh!? That hardly did anything!/", "obj_checkers_enemy_slash_Step_0_gml_349_0")
+                global.msg[1] = stringsetloc("\\E1* How can we push off that CROWN...?/", "obj_checkers_enemy_slash_Step_0_gml_350_0")
                 scr_susface(2, 1)
-                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_352_0")
+                global.msg[3] = stringsetloc("* ... Hmm./%", "obj_checkers_enemy_slash_Step_0_gml_352_0")
             }
-            if (self.bowcounter == 1)
+            if (bowcounter == 1)
             {
                 global.fc = 2
                 global.fe = 3
                 global.typer = 45
-                global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_359_0")
-                global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_360_0")
+                global.msg[0] = stringsetloc("* It's still hardly working!/", "obj_checkers_enemy_slash_Step_0_gml_359_0")
+                global.msg[1] = stringsetloc("\\E6* Whatever can we do^1, Kris...?/", "obj_checkers_enemy_slash_Step_0_gml_360_0")
                 scr_susface(2, 2)
-                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_362_0")
+                global.msg[3] = stringsetloc("* ... Hey./%", "obj_checkers_enemy_slash_Step_0_gml_362_0")
             }
-            if (self.bowcounter == 2)
+            if (bowcounter == 2)
             {
                 global.fc = 2
                 global.fe = 8
                 global.typer = 45
-                global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_369_0")
-                global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_370_0")
+                global.msg[0] = stringsetloc("* Sometimes persistence is key^1, Kris!!/", "obj_checkers_enemy_slash_Step_0_gml_369_0")
+                global.msg[1] = stringsetloc("\\E6* It'll be hard^1, but we can do it!!/", "obj_checkers_enemy_slash_Step_0_gml_370_0")
                 scr_susface(2, 7)
-                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_372_0")
+                global.msg[3] = stringsetloc("* HEY YOU GUYS!!!/%", "obj_checkers_enemy_slash_Step_0_gml_372_0")
             }
         }
-        self.bowcounter += 1
+        bowcounter += 1
         scr_battletext()
-        self.actcon = 21
+        actcon = 21
     }
-    if ((self.actcon == 21) && (!instance_exists(obj_writer)))
+    if (actcon == 21 && (!instance_exists(obj_writer)))
     {
-        with (self.bowkris)
+        with (bowkris)
             instance_destroy()
-        with (self.bowcheck)
+        with (bowcheck)
             instance_destroy()
-        self.visible = 1
+        visible = true
         with (obj_herokris)
-            self.visible = 1
-        self.actcon = 1
+            visible = true
+        actcon = 1
     }
-    if (self.secondtime == 0)
+    if (secondtime == false)
     {
-        if ((self.acting == 3) && (self.actcon == 0))
+        if (acting == 3 && actcon == 0)
         {
-            self.crown += 20
-            global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_398_0")
+            crown += 20
+            global.msg[0] = stringsetloc("* You and Ralsei bowed./%", "obj_checkers_enemy_slash_Step_0_gml_398_0")
             with (obj_herokris)
-                self.visible = 0
+                visible = false
             with (obj_heroralsei)
-                self.visible = 0
+                visible = false
             global.faceaction[0] = 0
             global.charaction[0] = 0
             global.faceaction[1] = 0
             global.charaction[1] = 0
-            self.bowkris = scr_dark_marker(obj_herokris.x, obj_herokris.y, spr_krisb_bow)
-            with (self.bowkris)
+            bowkris = scr_dark_marker(obj_herokris.x, obj_herokris.y, spr_krisb_bow)
+            with (bowkris)
             {
                 scr_oflash()
-                self.a = scr_afterimage()
-                self.a.hspeed = 5
-                self.a.depth = (self.depth + 1)
+                a = scr_afterimage()
+                a.hspeed = 5
+                a.depth = (depth + 1)
             }
-            self.bowral = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_bow)
-            with (self.bowral)
+            bowral = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_bow)
+            with (bowral)
             {
                 scr_oflash()
-                self.a = scr_afterimage()
-                self.a.hspeed = 5
-                self.a.depth = (self.depth + 1)
+                a = scr_afterimage()
+                a.hspeed = 5
+                a.depth = (depth + 1)
             }
             snd_play(snd_item)
             scr_battletext_default()
-            self.actcon = 30
+            actcon = 30
         }
     }
-    if ((self.actcon == 30) && (!instance_exists(obj_writer)))
+    if (actcon == 30 && (!instance_exists(obj_writer)))
     {
-        self.visible = 0
-        self.bowcheck = scr_dark_marker(self.x, self.y, spr_checkers_bow)
-        with (self.bowcheck)
-            self.image_speed = 0.5
-        global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_442_0")
-        if ((self.ralsei_lecture == 0) && (self.secondtime == 0))
+        visible = false
+        bowcheck = scr_dark_marker(x, y, spr_checkers_bow)
+        with (bowcheck)
+            image_speed = 0.5
+        global.msg[0] = stringsetloc("* K. ROUND bowed back^1.&* Its crown loosened!/%", "obj_checkers_enemy_slash_Step_0_gml_442_0")
+        if (ralsei_lecture == false && secondtime == false)
         {
-            global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_445_0")
+            global.msg[0] = stringsetloc("* K. ROUND bowed back^1.&* Its crown loosened!/", "obj_checkers_enemy_slash_Step_0_gml_445_0")
             scr_ralface(1, 0)
-            global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_447_0")
-            global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_448_0")
-            global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_449_0")
+            global.msg[2] = stringsetloc("* That's it^1, Kris^1! If we can get its crown off.../", "obj_checkers_enemy_slash_Step_0_gml_447_0")
+            global.msg[3] = stringsetloc("\\E8* It should turn back into a little guy...!/", "obj_checkers_enemy_slash_Step_0_gml_448_0")
+            global.msg[4] = stringsetloc("\\E0* Susie^1! Help us bow at it!/", "obj_checkers_enemy_slash_Step_0_gml_449_0")
             scr_susface(5, 0)
-            global.msg[6] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_451_0")
-            global.msg[7] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_452_0")
+            global.msg[6] = stringsetloc("* Nah^1, its crown'll come off.../", "obj_checkers_enemy_slash_Step_0_gml_451_0")
+            global.msg[7] = stringsetloc("\\E4* When I smash this guy to the GROUND!/", "obj_checkers_enemy_slash_Step_0_gml_452_0")
             scr_ralface(8, 1)
-            global.msg[9] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_454_0")
-            self.ralsei_lecture = 1
+            global.msg[9] = stringsetloc("* .../%", "obj_checkers_enemy_slash_Step_0_gml_454_0")
+            ralsei_lecture = true
         }
         scr_battletext_default()
-        self.actcon = 31
+        actcon = 31
     }
-    if ((self.actcon == 31) && (!instance_exists(obj_writer)))
+    if (actcon == 31 && (!instance_exists(obj_writer)))
     {
-        with (self.bowral)
+        with (bowral)
             instance_destroy()
-        with (self.bowkris)
+        with (bowkris)
             instance_destroy()
-        with (self.bowcheck)
+        with (bowcheck)
             instance_destroy()
-        self.visible = 1
+        visible = true
         with (obj_heroralsei)
-            self.visible = 1
+            visible = true
         with (obj_herokris)
-            self.visible = 1
-        self.actcon = 1
+            visible = true
+        actcon = 1
     }
-    if (self.secondtime == 1)
+    if (secondtime == true)
     {
-        if ((self.acting == 3) && (self.actcon == 0))
+        if (acting == 3 && actcon == 0)
         {
-            if (self.thrown == 1)
+            if (thrown == 1)
             {
-                with (self.trsus)
+                with (trsus)
                     instance_destroy()
-                self.thrown = 2
+                thrown = 2
             }
-            if (self.thrown > 0)
+            if (thrown > 0)
             {
-                global.actname[self.myself, 2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_487_0")
-                global.msg[0] = ((scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_489_0") + scr_get_input_name(6)) + scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_489_1"))
-                self.flash = 0
-                self.becomeflash = 0
+                global.actname[myself][2] = stringsetloc("Throw", "obj_checkers_enemy_slash_Step_0_gml_487_0")
+                global.msg[0] = stringsetsubloc("* Press ~1 to determine the ANGLE!", scr_get_input_name(6), "obj_checkers_enemy_slash_Step_0_gml_489_0")
+                flash = false
+                becomeflash = false
                 scr_battletext_default()
-                self.actcon = 90
-                instance_create(self.x, self.y, obj_throwtarget)
-                self.throwsus = instance_create(obj_herosusie.x, obj_herosusie.y, obj_throwralsei)
-                self.visible = 0
+                actcon = 90
+                instance_create(x, y, obj_throwtarget)
+                throwsus = instance_create(obj_herosusie.x, obj_herosusie.y, obj_throwralsei)
+                visible = false
                 global.faceaction[1] = 0
                 global.charaction[1] = 0
                 global.faceaction[2] = 0
                 global.charaction[2] = 0
                 with (obj_herosusie)
-                    self.visible = 0
+                    visible = false
                 with (obj_heroralsei)
-                    self.visible = 0
+                    visible = false
                 snd_play(snd_grab)
             }
             else
@@ -470,84 +470,84 @@ if (global.myfight == 3)
                 global.typer = 31
                 global.fc = 2
                 global.fe = 6
-                global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_510_0")
+                global.msg[0] = stringsetloc("* Susie^1? You want to ACT^1? Aww, what's your idea?/", "obj_checkers_enemy_slash_Step_0_gml_510_0")
                 scr_susface(1, 0)
-                global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_512_0")
-                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_513_0")
+                global.msg[2] = stringsetloc("* Umm..^1. well..^1. how do I say this./", "obj_checkers_enemy_slash_Step_0_gml_512_0")
+                global.msg[3] = stringsetloc("* I kind of..^1.&* Need you for this one./", "obj_checkers_enemy_slash_Step_0_gml_513_0")
                 scr_ralface(4, 8)
-                global.msg[5] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_515_0")
-                global.msg[6] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_516_0")
+                global.msg[5] = stringsetloc("* That's fine^1, Susie^1!&* I'll help!/", "obj_checkers_enemy_slash_Step_0_gml_515_0")
+                global.msg[6] = stringsetloc("\\E0* You want to apologize to it for earlier^1, right?/", "obj_checkers_enemy_slash_Step_0_gml_516_0")
                 scr_susface(7, 2)
-                global.msg[8] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_518_0")
-                self.actcon = 10
+                global.msg[8] = stringsetloc("* Nah^1, I just need you to stay still./%", "obj_checkers_enemy_slash_Step_0_gml_518_0")
+                actcon = 10
                 scr_battletext()
             }
         }
     }
-    if ((self.acting == 4) && (self.actcon == 0))
+    if (acting == 4 && actcon == 0)
     {
-        self.actcon = 1
-        global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_531_0")
-        global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_532_0")
-        if (self.warned == 1)
+        actcon = 1
+        global.msg[0] = stringsetloc("* You explained to K. Round about the importance of dodging Susie's attacks./", "obj_checkers_enemy_slash_Step_0_gml_531_0")
+        global.msg[1] = stringsetloc("* But it didn't seem to understand.../%", "obj_checkers_enemy_slash_Step_0_gml_532_0")
+        if (warned == true)
         {
-            global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_535_0")
-            global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_536_0")
+            global.msg[0] = stringsetloc("* You started making siren noises with your mouth and looking at Susie./", "obj_checkers_enemy_slash_Step_0_gml_535_0")
+            global.msg[1] = stringsetloc("* K. Round still didn't understand.../%", "obj_checkers_enemy_slash_Step_0_gml_536_0")
         }
-        if (self.warned == 2)
+        if (warned == 2)
         {
-            global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_540_0")
-            global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_541_0")
-            global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_542_0")
+            global.msg[0] = stringsetloc("* You started explaining that Susie is really dangerous and strong./", "obj_checkers_enemy_slash_Step_0_gml_540_0")
+            global.msg[1] = stringsetloc("* Susie got a large boost to her morale./", "obj_checkers_enemy_slash_Step_0_gml_541_0")
+            global.msg[2] = stringsetloc("* Susie's ATTACK went up massively...!/%", "obj_checkers_enemy_slash_Step_0_gml_542_0")
             global.battleat[2] *= 1.5
         }
-        self.warned += 1
+        warned += 1
         scr_battletext_default()
     }
-    if ((self.actcon == 1) && (!instance_exists(obj_writer)))
+    if (actcon == 1 && (!instance_exists(obj_writer)))
     {
-        self.actcon = 0
-        if (self.crown >= 100)
+        actcon = 0
+        if (crown >= 100)
         {
-            global.mercymod[self.myself] = 999
-            self.actcon = 50
+            global.mercymod[myself] = 999
+            actcon = 50
         }
         else
             scr_attackphase()
     }
-    if ((self.actcon == 10) && (!instance_exists(obj_writer)))
+    if (actcon == 10 && (!instance_exists(obj_writer)))
     {
-        self.actcon = 11
-        self.alarm[4] = 30
+        actcon = 11
+        alarm[4] = 30
         with (obj_herosusie)
-            self.visible = 0
+            visible = false
         with (obj_heroralsei)
-            self.visible = 0
-        self.thrown = 1
-        self.trsus = scr_dark_marker(obj_herosusie.x, obj_herosusie.y, spr_susieb_throwralseiready)
+            visible = false
+        thrown = 1
+        trsus = scr_dark_marker(obj_herosusie.x, obj_herosusie.y, spr_susieb_throwralseiready)
         snd_play(snd_grab)
     }
-    if (self.actcon == 12)
+    if (actcon == 12)
     {
         global.fe = 7
-        global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_578_0")
-        global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_579_0")
+        global.msg[0] = stringsetloc("* Kris^1! We gotta get that CROWN off its head!/", "obj_checkers_enemy_slash_Step_0_gml_578_0")
+        global.msg[1] = stringsetloc("* Help me throw Ralsei at it!/%", "obj_checkers_enemy_slash_Step_0_gml_579_0")
         scr_battletext()
-        self.actcon = 13
+        actcon = 13
     }
-    if ((self.actcon == 13) && (!instance_exists(obj_writer)))
-        self.actcon = 0
-    if (self.actcon == 50)
+    if (actcon == 13 && (!instance_exists(obj_writer)))
+        actcon = 0
+    if (actcon == 50)
     {
-        self.visible = 0
+        visible = false
         snd_free_all()
-        self.animtest = instance_create(self.x, self.y, obj_checker_animtest)
-        self.animtest.sprite_index = spr_smallchecker_transform3
-        self.animtest.image_xscale = 2
-        self.animtest.image_yscale = 2
-        self.animtest.type = 1
-        self.actcon = 51
+        animtest = instance_create(x, y, obj_checker_animtest)
+        animtest.sprite_index = spr_smallchecker_transform3
+        animtest.image_xscale = 2
+        animtest.image_yscale = 2
+        animtest.type = 1
+        actcon = 51
     }
 }
 if (global.myfight == 7)
-    self.hspeed = 15
+    hspeed = 15

@@ -1,1 +1,3 @@
-self.touched = 0
+touched = false
+extdestination = 0
+extflag = 0

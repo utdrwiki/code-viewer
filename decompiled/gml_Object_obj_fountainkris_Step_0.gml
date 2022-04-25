@@ -1,111 +1,140 @@
-if (self.songplay == 2)
+if (songplay == 2)
 {
     global.currentsong[0] = snd_init("THE_HOLY.ogg")
     global.currentsong[1] = mus_loop_ext(global.currentsong[0], 0.8, 0.9)
-    self.songplay = 3
+    songplay = 3
 }
-if (self.songplay == 1)
+if (songplay == 1)
 {
     snd_free_all()
-    self.songplay = 2
+    songplay = 2
 }
-if (self.songplay == 0)
+if (songplay == 0)
 {
     with (obj_mainchara)
-        self.visible = 0
-    self.songplay = 1
+        visible = false
+    songplay = 1
 }
-if (self.con == 0)
+if (con == 0)
 {
-    self.JA_XOFF = 0
-    self.con = 1
-    self.alarm[4] = 220
+    JA_XOFF = 0
+    con = 1
+    alarm[4] = 220
 }
-if (self.con == 1)
+if (con == 1)
 {
-    self.y -= 1
-    self.image_index += 0.1
-    self.susindex += 0.1
-    self.susy -= 1
+    y -= 1
+    image_index = susindex
+    susindex += 0.1
+    susy -= 1
     global.interact = 1
 }
-if (self.con == 2)
+if (con == 2)
 {
-    self.image_index = 0
-    self.susindex = 0
-    self.con = 2.1
-    self.alarm[4] = 60
+    image_speed = 0
+    image_index = 0
+    susindex = 0
+    con = 2.1
+    alarm[4] = 60
 }
-if (self.con == 3.1)
+if (con == 3.1)
 {
-    self.JA_XOFF = 0
-    if (global.lang == "ja")
-        self.JA_XOFF = 50
+    JA_XOFF = langopt(0, 50)
     global.typer = 37
-    global.msg[0] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_47_0")
-    instance_create((100 + self.JA_XOFF), 80, obj_writer)
-    self.con = 4
+    if (global.chapter == 1)
+        global.msg[0] = stringsetloc("Is this... the fountain...?/%", "obj_fountainkris_slash_Step_0_gml_49_0")
+    if (global.chapter == 2)
+        global.msg[0] = stringsetloc("Kris.../%", "obj_fountainkris_slash_Step_0_gml_56_0")
+    instance_create((100 + JA_XOFF), 80, obj_writer)
+    con = 4
 }
-if ((self.con == 4) && (!instance_exists(obj_writer)))
+if (con == 4 && (!instance_exists(obj_writer)))
 {
-    self.sussprite = 793
-    self.con = 3.2
-    self.alarm[4] = 30
+    sussprite = spr_susier_bright
+    con = 3.2
+    alarm[4] = 30
 }
-if (self.con == 4.2)
+if (con == 4.2)
 {
-    global.msg[0] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_64_0")
-    global.msg[1] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_65_0")
-    global.msg[2] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_66_0")
-    global.msg[3] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_67_0")
-    instance_create((100 + self.JA_XOFF), 80, obj_writer)
-    self.con = 6
+    if (global.chapter == 1)
+    {
+        global.msg[0] = stringsetloc("Dunno how, but.../", "obj_fountainkris_slash_Step_0_gml_75_0")
+        global.msg[1] = stringsetloc("It feels like we&stumbled into/", "obj_fountainkris_slash_Step_0_gml_76_0")
+        global.msg[2] = stringsetloc("something really&important, didn't we...?/", "obj_fountainkris_slash_Step_0_gml_77_0")
+        global.msg[3] = stringsetloc(".../%", "obj_fountainkris_slash_Step_0_gml_78_0")
+    }
+    if (global.chapter == 2)
+    {
+        global.msg[0] = stringsetloc("It looks like we're&here again, huh.../", "obj_fountainkris_slash_Step_0_gml_85_0")
+        global.msg[1] = stringsetloc("The Roaring Knight.../", "obj_fountainkris_slash_Step_0_gml_86_0")
+        global.msg[2] = stringsetloc("Whatever they are,&they're making&these fountains.../", "obj_fountainkris_slash_Step_0_gml_87_0")
+        global.msg[3] = stringsetloc(".../%", "obj_fountainkris_slash_Step_0_gml_88_0")
+    }
+    instance_create((100 + JA_XOFF), 80, obj_writer)
+    con = 6
 }
-if ((self.con == 6) && (!instance_exists(obj_writer)))
+if (con == 6 && (!instance_exists(obj_writer)))
 {
-    self.sussprite = 794
-    self.con = 7
-    self.alarm[4] = 40
+    sussprite = spr_susieu_bright
+    con = 7
+    alarm[4] = 40
 }
-if (self.con == 8)
+if (con == 8)
 {
-    global.msg[0] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_81_0")
-    global.msg[1] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_82_0")
-    global.msg[2] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_83_0")
-    global.msg[3] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_84_0")
-    instance_create((100 + self.JA_XOFF), 80, obj_writer)
-    self.con = 8.1
+    if (global.chapter == 1)
+    {
+        global.msg[0] = stringsetloc("Well, there's no time to&think about that now./", "obj_fountainkris_slash_Step_0_gml_104_0")
+        global.msg[1] = stringsetloc("Right now.../", "obj_fountainkris_slash_Step_0_gml_105_0")
+        global.msg[2] = stringsetloc("It's time to go home,/", "obj_fountainkris_slash_Step_0_gml_106_0")
+        global.msg[3] = stringsetloc("right^1, Kris?/%", "obj_fountainkris_slash_Step_0_gml_107_0")
+    }
+    if (global.chapter == 2)
+    {
+        global.msg[0] = stringsetloc("But... is that really&a bad thing...?/", "obj_fountainkris_slash_Step_0_gml_114_0")
+        global.msg[1] = stringsetloc("Since they started&showing up,/", "obj_fountainkris_slash_Step_0_gml_115_0")
+        global.msg[2] = stringsetloc("Everything's gotten a lot&more interesting,&hasn't it...?/", "obj_fountainkris_slash_Step_0_gml_116_0")
+        global.msg[3] = stringsetloc(".../", "obj_fountainkris_slash_Step_0_gml_117_0")
+        global.msg[4] = stringsetloc("Well, we don't have to&think about that now.../", "obj_fountainkris_slash_Step_0_gml_118_0")
+        global.msg[5] = stringsetloc("Kris, it's your turn./%", "obj_fountainkris_slash_Step_0_gml_119_0")
+    }
+    instance_create((100 + JA_XOFF), 80, obj_writer)
+    con = 8.1
 }
-if ((self.con == 8.1) && (!instance_exists(obj_writer)))
+if (con == 8.1 && (!instance_exists(obj_writer)))
 {
-    self.con = 9
-    self.alarm[4] = 40
+    con = 9
+    alarm[4] = 40
 }
-if ((self.con == 9) && (!instance_exists(obj_writer)))
+if (con == 9 && (!instance_exists(obj_writer)))
 {
-    self.y -= 1
-    self.image_index += 0.1
+    y -= 1
+    image_index += 0.1
 }
-if (self.con == 10)
+if (con == 10)
 {
-    self.image_index = 0
-    self.con = 9.1
-    self.alarm[4] = 30
+    image_index = 0
+    con = 9.1
+    alarm[4] = 30
 }
-if (self.con == 10.1)
+if (con == 10.1)
 {
     global.typer = 42
-    global.msg[0] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_112_0")
-    global.msg[1] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_113_0")
-    global.msg[2] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_114_0")
-    global.msg[3] = scr_84_get_lang_string("obj_fountainkris_slash_Step_0_gml_115_0")
-    instance_create((80 + self.JA_XOFF), 80, obj_writer)
-    self.con = 12
+    if (global.chapter == 1)
+    {
+        global.msg[0] = stringsetloc("(As you stood in front&of the fountain,)/", "obj_fountainkris_slash_Step_0_gml_150_0")
+        global.msg[1] = stringsetloc("(You felt something strange.)/", "obj_fountainkris_slash_Step_0_gml_151_0")
+        global.msg[2] = stringsetloc("(It was as if)/", "obj_fountainkris_slash_Step_0_gml_152_0")
+        global.msg[3] = stringsetloc("(Your very SOUL was glowing...)/%", "obj_fountainkris_slash_Step_0_gml_153_0")
+    }
+    if (global.chapter == 2)
+        global.msg[0] = stringsetloc("(It was as if your very SOUL was glowing...)/%", "obj_fountainkris_slash_Step_0_gml_160_0")
+    instance_create((80 + JA_XOFF), 80, obj_writer)
+    con = 12
 }
-if ((self.con == 12) && (!instance_exists(obj_writer)))
+if (con == 12 && (!instance_exists(obj_writer)))
 {
     snd_free_all()
-    self.made = 1
-    instance_create((self.x + (self.sprite_width / 2)), ((self.y + (self.sprite_width / 2)) + 20), obj_darkfountain_event)
-    self.con = 13
+    made = 1
+    instance_create((x + (sprite_width / 2)), ((y + (sprite_width / 2)) + 20), obj_darkfountain_event)
+    con = 13
 }

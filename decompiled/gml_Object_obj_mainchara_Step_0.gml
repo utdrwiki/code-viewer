@@ -1,672 +1,632 @@
 scr_depth()
-self.wallcheck = 0
-self.nowx = self.x
-self.nowy = self.y
-if ((self.press_d == 0) && ((self.press_l == 0) && ((self.press_u == 0) && (self.press_r == 0))))
-    self.nopress = 1
-self.press_l = 0
-self.press_r = 0
-self.press_d = 0
-self.press_u = 0
-self.bkx = 0
-self.bky = 0
-self.bkxy = 0
-self.jelly = 2
+wallcheck = 0
+nowx = x
+nowy = y
+if (press_d == 0 && press_l == 0 && press_u == 0 && press_r == 0)
+    nopress = 1
+press_l = 0
+press_r = 0
+press_d = 0
+press_u = 0
+bkx = 0
+bky = 0
+bkxy = 0
+jelly = 2
+if (!roomenterfreezeend)
+{
+    if (global.interact == 3)
+    {
+        if (global.flag[21] > 0)
+            global.flag[21] = (global.flag[21] - 1)
+        else
+        {
+            roomenterfreezeend = 1
+            global.interact = 0
+            global.flag[21] = -10
+        }
+    }
+}
 if (global.interact == 0)
 {
-    if (button3_p() && (self.threebuffer < 0))
+    if (button3_p() && threebuffer < 0)
     {
-        if ((global.flag[7] == 0) && (self.battlemode == 0))
+        if (global.flag[7] == 0 && battlemode == 0 && swordmode == 0)
         {
+            with (obj_darkcontroller)
+                threebuffer = 2
             with (obj_overworldc)
-                self.movenoise = 1
+            {
+                movenoise = true
+                threebuffer = 2
+            }
             global.menuno = 0
             global.interact = 5
-            self.threebuffer = 2
-            self.twobuffer = 2
+            threebuffer = 2
+            twobuffer = 2
         }
+    }
+}
+if (swordcon == 1)
+{
+    swordtimer++
+    if (swordtimer >= 15)
+    {
+        with (slashmarker)
+            instance_destroy()
+        swordcon = 0
+        swordsprite = rsprite
+        fun = false
+        if (global.interact == 4)
+            global.interact = 0
+        swordtimer = 0
+        image_speed = 0
+        image_index = 0
+        image_alpha = 1
     }
 }
 if (global.interact == 0)
 {
     if (global.flag[11] == 1)
     {
-        if (button2_h() && (self.twobuffer < 0))
-            self.run = 0
+        if (button2_h() && twobuffer < 0)
+            run = 0
         else
-            self.run = 1
+            run = 1
     }
-    else if (button2_h() && (self.twobuffer < 0))
-        self.run = 1
+    else if (button2_h() && twobuffer < 0)
+        run = 1
     else
-        self.run = 0
-    if (self.autorun > 0)
+        run = 0
+    if (autorun > 0)
     {
-        if (self.autorun == 1)
+        if (autorun == 1)
         {
-            self.run = 1
-            self.runtimer = 200
+            run = 1
+            runtimer = 200
         }
-        if (self.autorun == 2)
+        if (autorun == 2)
         {
-            self.run = 1
-            self.runtimer = 50
+            run = 1
+            runtimer = 50
         }
     }
-    if (self.run == 1)
+    if (run == 1)
     {
-        if (self.darkmode == 0)
+        if (darkmode == false)
         {
-            self.wspeed = (self.bwspeed + 1)
-            if (self.runtimer > 10)
-                self.wspeed = (self.bwspeed + 2)
-            if (self.runtimer > 60)
-                self.wspeed = (self.bwspeed + 3)
+            wspeed = (bwspeed + 1)
+            if (runtimer > 10)
+                wspeed = (bwspeed + 2)
+            if (runtimer > 60)
+                wspeed = (bwspeed + 3)
         }
-        if (self.darkmode == 1)
+        if (darkmode == true)
         {
-            self.wspeed = (self.bwspeed + 2)
-            if (self.runtimer > 10)
-                self.wspeed = (self.bwspeed + 4)
-            if (self.runtimer > 60)
-                self.wspeed = (self.bwspeed + 5)
+            wspeed = (bwspeed + 2)
+            if (runtimer > 10)
+                wspeed = (bwspeed + 4)
+            if (runtimer > 60)
+                wspeed = (bwspeed + 5)
         }
     }
-    if (self.run == 0)
-        self.wspeed = self.bwspeed
+    if (run == 0)
+        wspeed = bwspeed
     if left_h()
-        self.press_l = 1
+        press_l = 1
     if right_h()
-        self.press_r = 1
+        press_r = 1
     if up_h()
-        self.press_u = 1
+        press_u = 1
     if down_h()
-        self.press_d = 1
-    self.px = 0
-    self.py = 0
-    self.pressdir = -1
-    if (self.press_r == 1)
+        press_d = 1
+    px = 0
+    py = 0
+    pressdir = -1
+    if (press_r == 1)
     {
-        self.px = self.wspeed
-        self.pressdir = 1
+        px = wspeed
+        pressdir = 1
     }
-    if (self.press_l == 1)
+    if (press_l == 1)
     {
-        self.px = (-self.wspeed)
-        self.pressdir = 3
+        px = (-wspeed)
+        pressdir = 3
     }
-    if (self.press_d == 1)
+    if (press_d == 1)
     {
-        self.py = self.wspeed
-        self.pressdir = 0
+        py = wspeed
+        pressdir = 0
     }
-    if (self.press_u == 1)
+    if (press_u == 1)
     {
-        self.py = (-self.wspeed)
-        self.pressdir = 2
+        py = (-wspeed)
+        pressdir = 2
     }
-    if ((self.nopress == 1) && (self.pressdir != -1))
-        global.facing = self.pressdir
+    if (nopress == 1 && pressdir != -1)
+        global.facing = pressdir
     if (global.facing == 2)
     {
-        if (self.press_d == 1)
+        if (press_d == 1)
             global.facing = 0
-        if ((self.press_u == 0) && (self.pressdir != -1))
-            global.facing = self.pressdir
+        if (press_u == 0 && pressdir != -1)
+            global.facing = pressdir
     }
     if (global.facing == 0)
     {
-        if (self.press_u == 1)
+        if (press_u == 1)
             global.facing = 2
-        if ((self.press_d == 0) && (self.pressdir != -1))
-            global.facing = self.pressdir
+        if (press_d == 0 && pressdir != -1)
+            global.facing = pressdir
     }
     if (global.facing == 3)
     {
-        if (self.press_r == 1)
+        if (press_r == 1)
             global.facing = 1
-        if ((self.press_l == 0) && (self.pressdir != -1))
-            global.facing = self.pressdir
+        if (press_l == 0 && pressdir != -1)
+            global.facing = pressdir
     }
     if (global.facing == 1)
     {
-        if (self.press_l == 1)
+        if (press_l == 1)
             global.facing = 3
-        if ((self.press_r == 0) && (self.pressdir != -1))
-            global.facing = self.pressdir
+        if (press_r == 0 && pressdir != -1)
+            global.facing = pressdir
     }
-    self.nopress = 0
-    self.xmeet = 0
-    self.ymeet = 0
-    self.xymeet = 0
-    if place_meeting((self.x + self.px), (self.y + self.py), obj_solidblock)
-        self.xymeet = 1
-    if place_meeting((self.x + self.px), self.y, obj_solidblock)
+    if (press_r == 1)
+        swordfacing = 1
+    if (press_l == 1)
+        swordfacing = -1
+    if (swordmode == 1)
     {
-        if place_meeting((self.x + self.px), self.y, obj_solidblock)
+        if (button1_p() && swordcon == 0 && global.interact == 0)
         {
-            self.g = self.wspeed
-            while (self.g > 0)
+            global.interact = 4
+            swordsprite = rsprite
+            slashmarker = scr_dark_marker(x, y, rsprite)
+            slashmarker.depth = depth
+            slashmarker.image_speed = 1
+            if (swordfacing == -1)
             {
-                self.mvd = 0
-                if ((self.press_d == 0) && (!place_meeting((self.x + self.px), (self.y - self.g), obj_solidblock)))
-                {
-                    self.y -= self.g
-                    self.py = 0
-                    break
-                }
-                else if ((self.press_u == 0) && ((self.mvd == 0) && (!place_meeting((self.x + self.px), (self.y + self.g), obj_solidblock))))
-                {
-                    self.y += self.g
-                    self.py = 0
-                    break
-                }
-                else
-                {
-                    self.g -= 1
-                    continue
-                }
+                slashmarker.x += sprite_width
+                slashmarker.image_xscale = (-image_xscale)
             }
+            image_alpha = 0
+            fun = true
+            snd_play(snd_laz_c)
+            image_index = 0
+            image_speed = 0.5
+            swordtimer = 0
+            swordcon = 1
+            press_l = 0
+            press_r = 0
+            press_u = 0
+            press_d = 0
+            swordhitbox = instance_create(slashmarker.x, slashmarker.y, obj_swordhitbox)
+            swordhitbox.image_xscale = slashmarker.image_xscale
+            swordhitbox.image_yscale = image_yscale
         }
-        self.xmeet = 1
-        self.bkx = 0
-        if (self.px > 0)
-        {
-            self.i = self.px
-            while (self.i >= 0)
-            {
-                if (!place_meeting((self.x + self.i), self.y, obj_solidblock))
-                {
-                    self.px = self.i
-                    self.bkx = 1
-                    break
-                }
-                else
-                {
-                    self.i -= 1
-                    continue
-                }
-            }
-        }
-        if (self.px < 0)
-        {
-            self.i = self.px
-            while (self.i <= 0)
-            {
-                if (!place_meeting((self.x + self.i), self.y, obj_solidblock))
-                {
-                    self.px = self.i
-                    self.bkx = 1
-                    break
-                }
-                else
-                {
-                    self.i += 1
-                    continue
-                }
-            }
-        }
-        if (self.bkx == 0)
-            self.px = 0
     }
-    if place_meeting(self.x, (self.y + self.py), obj_solidblock)
+    nopress = 0
+    xmeet = 0
+    ymeet = 0
+    xymeet = 0
+    if place_meeting((x + px), (y + py), obj_solidblock)
+        xymeet = 1
+    if place_meeting((x + px), y, obj_solidblock)
     {
-        self.ymeet = 1
-        self.bky = 0
-        if place_meeting(self.x, (self.y + self.py), obj_solidblock)
+        if place_meeting((x + px), y, obj_solidblock)
         {
-            self.g = self.wspeed
-            while (self.g > 0)
+            g = wspeed
+            while (g > 0)
             {
-                self.mvd = 0
-                if ((self.press_r == 0) && (!place_meeting((self.x - self.g), (self.y + self.py), obj_solidblock)))
+                mvd = 0
+                if (press_d == 0 && (!(place_meeting((x + px), (y - g), obj_solidblock))))
                 {
-                    self.x -= self.g
-                    self.px = 0
+                    y -= g
+                    py = 0
                     break
                 }
-                else if ((self.mvd == 0) && ((self.press_l == 0) && (!place_meeting((self.x + self.g), (self.y + self.py), obj_solidblock))))
+                else if (press_u == 0 && mvd == 0 && (!(place_meeting((x + px), (y + g), obj_solidblock))))
                 {
-                    self.x += self.g
-                    self.px = 0
+                    y += g
+                    py = 0
                     break
                 }
                 else
                 {
-                    self.g -= 1
+                    g -= 1
                     continue
                 }
             }
         }
-        if (self.py > 0)
+        xmeet = 1
+        bkx = 0
+        if (px > 0)
         {
-            self.i = self.py
-            while (self.i >= 0)
+            i = px
+            while (i >= 0)
             {
-                if (!place_meeting(self.x, (self.y + self.i), obj_solidblock))
+                if (!(place_meeting((x + i), y, obj_solidblock)))
                 {
-                    self.py = self.i
-                    self.bky = 1
+                    px = i
+                    bkx = 1
                     break
                 }
                 else
                 {
-                    self.i -= 1
+                    i -= 1
                     continue
                 }
             }
         }
-        if (self.py < 0)
+        if (px < 0)
         {
-            self.i = self.py
-            while (self.i <= 0)
+            i = px
+            while (i <= 0)
             {
-                if (!place_meeting(self.x, (self.y + self.i), obj_solidblock))
+                if (!(place_meeting((x + i), y, obj_solidblock)))
                 {
-                    self.py = self.i
-                    self.bky = 1
+                    px = i
+                    bkx = 1
                     break
                 }
                 else
                 {
-                    self.i += 1
+                    i += 1
                     continue
                 }
             }
         }
-        if (self.bky == 0)
-            self.py = 0
+        if (bkx == 0)
+            px = 0
     }
-    if place_meeting((self.x + self.px), (self.y + self.py), obj_solidblock)
+    if place_meeting(x, (y + py), obj_solidblock)
     {
-        self.xymeet = 1
-        self.bkxy = 0
-        self.i = self.px
-        self.j = self.py
-        while ((self.j != 0) || (self.i != 0))
+        ymeet = 1
+        bky = 0
+        if place_meeting(x, (y + py), obj_solidblock)
         {
-            if (!place_meeting((self.x + self.i), (self.y + self.j), obj_solidblock))
+            g = wspeed
+            while (g > 0)
             {
-                self.px = self.i
-                self.py = self.j
-                self.bkxy = 1
-				break
+                mvd = 0
+                if (press_r == 0 && (!(place_meeting((x - g), (y + py), obj_solidblock))))
+                {
+                    x -= g
+                    px = 0
+                    break
+                }
+                else if (mvd == 0 && press_l == 0 && (!(place_meeting((x + g), (y + py), obj_solidblock))))
+                {
+                    x += g
+                    px = 0
+                    break
+                }
+                else
+                {
+                    g -= 1
+                    continue
+                }
+            }
+        }
+        if (py > 0)
+        {
+            i = py
+            while (i >= 0)
+            {
+                if (!(place_meeting(x, (y + i), obj_solidblock)))
+                {
+                    py = i
+                    bky = 1
+                    break
+                }
+                else
+                {
+                    i -= 1
+                    continue
+                }
+            }
+        }
+        if (py < 0)
+        {
+            i = py
+            while (i <= 0)
+            {
+                if (!(place_meeting(x, (y + i), obj_solidblock)))
+                {
+                    py = i
+                    bky = 1
+                    break
+                }
+                else
+                {
+                    i += 1
+                    continue
+                }
+            }
+        }
+        if (bky == 0)
+            py = 0
+    }
+    if place_meeting((x + px), (y + py), obj_solidblock)
+    {
+        xymeet = 1
+        bkxy = 0
+        i = px
+        j = py
+        while (j != 0 || i != 0)
+        {
+            if (!(place_meeting((x + i), (y + j), obj_solidblock)))
+            {
+                px = i
+                py = j
+                bkxy = 1
             }
             else
             {
-                if (abs(self.j) >= 1)
+                if (abs(j) >= 1)
                 {
-                    if (self.j > 0)
-                        self.j -= 1
-                    if (self.j < 0)
-                        self.j += 1
+                    if (j > 0)
+                        j -= 1
+                    if (j < 0)
+                        j += 1
                 }
                 else
-                    self.j = 0
-                if (abs(self.i) >= 1)
+                    j = 0
+                if (abs(i) >= 1)
                 {
-                    if (self.i > 0)
-                        self.i -= 1
-                    if (self.i < 0)
-                        self.i += 1
+                    if (i > 0)
+                        i -= 1
+                    if (i < 0)
+                        i += 1
                 }
                 else
-                    self.i = 0
+                    i = 0
                 continue
             }
         }
-        if (self.bkxy == 0)
+        if (bkxy == 0)
         {
-            self.px = 0
-            self.py = 0
+            px = 0
+            py = 0
         }
     }
-    self.runmove = 0
-    if ((self.run == 1) && ((self.xmeet == 0) && ((self.ymeet == 0) && (self.xymeet == 0))))
+    runmove = false
+    if (run == 1 && xmeet == 0 && ymeet == 0 && xymeet == 0)
     {
-        if ((abs(self.px) > 0) || (abs(self.py) > 0))
+        if (abs(px) > 0 || abs(py) > 0)
         {
-            self.runmove = 1
-            self.runtimer += 1
+            runmove = true
+            runtimer += 1
+            runcounter += 1
         }
         else
-            self.runtimer = 0
+            runtimer = 0
     }
     else
-        self.runtimer = 0
-    self.x += self.px
-    self.y += self.py
+        runtimer = 0
+    x += px
+    y += py
 }
-self.walk = 0
-if ((self.x != self.nowx) && (self.nopress == 0))
-    self.walk = 1
-if ((self.y != self.nowy) && (self.nopress == 0))
-    self.walk = 1
-if (self.walk == 1)
-    self.walkbuffer = 6
-if ((self.walkbuffer > 3) && (self.fun == 0))
+if (fun == false)
 {
-    self.walktimer += 1.5
-    if (self.runmove == 1)
-        self.walktimer += 1.5
-    if (self.walktimer >= 40)
-        self.walktimer -= 40
-    if (self.walktimer < 10)
-        self.image_index = 0
-    if (self.walktimer >= 10)
-        self.image_index = 1
-    if (self.walktimer >= 20)
-        self.image_index = 2
-    if (self.walktimer >= 30)
-        self.image_index = 3
+    walk = false
+    if (x != nowx && nopress == 0)
+        walk = true
+    if (y != nowy && nopress == 0)
+        walk = true
+    if (walk == true)
+        walkbuffer = 6
+    if (walkbuffer > 3 && fun == false)
+    {
+        walktimer += 1.5
+        if (runmove == true)
+            walktimer += 1.5
+        if (walktimer >= 40)
+            walktimer -= 40
+        if (walktimer < 10)
+            image_index = 0
+        if (walktimer >= 10)
+            image_index = 1
+        if (walktimer >= 20)
+            image_index = 2
+        if (walktimer >= 30)
+            image_index = 3
+    }
+    if (walkbuffer <= 0 && fun == false)
+    {
+        if (walktimer < 10)
+            walktimer = 9.5
+        if (walktimer >= 10 && walktimer < 20)
+            walktimer = 19.5
+        if (walktimer >= 20 && walktimer < 30)
+            walktimer = 29.5
+        if (walktimer >= 30)
+            walktimer = 39.5
+        image_index = 0
+    }
+    walkbuffer -= 0.75
 }
-if ((self.walkbuffer <= 0) && (self.fun == 0))
-{
-    if (self.walktimer < 10)
-        self.walktimer = 9.5
-    if ((self.walktimer >= 10) && (self.walktimer < 20))
-        self.walktimer = 19.5
-    if ((self.walktimer >= 20) && (self.walktimer < 30))
-        self.walktimer = 29.5
-    if (self.walktimer >= 30)
-        self.walktimer = 39.5
-    self.image_index = 0
-}
-self.walkbuffer -= 0.75
-if (self.fun == 0)
+if (fun == false)
 {
     if (global.facing == 0)
-        self.sprite_index = self.dsprite
+        sprite_index = dsprite
     if (global.facing == 1)
-        self.sprite_index = self.rsprite
+        sprite_index = rsprite
     if (global.facing == 2)
-        self.sprite_index = self.usprite
+        sprite_index = usprite
     if (global.facing == 3)
-        self.sprite_index = self.lsprite
+        sprite_index = lsprite
 }
-if (self.stepping == 1)
+if (stepping == 1 && fun == false)
 {
-    if ((self.image_index == 1) && (self.stepped == 0))
+    if (image_index == 1 && stepped == false)
     {
         if (global.flag[31] == 0)
             snd_play(snd_step1)
-        self.stepped = 1
+        stepped = true
     }
-    if ((self.image_index == 0) || (self.image_index == 2))
-        self.stepped = 0
-    if ((self.image_index == 3) && (self.stepped == 0))
+    if (image_index == 0 || image_index == 2)
+        stepped = false
+    if (image_index == 3 && stepped == false)
     {
-        self.stepped = 1
+        stepped = true
         if (global.flag[31] == 0)
             snd_play(snd_step2)
     }
 }
-if (self.onebuffer < 0)
+if (onebuffer < 0)
 {
     if (global.interact == 0)
     {
         if button1_p()
         {
-            self.thisinteract = 0
-            self.d = (global.darkzone + 1)
+            thisinteract = 0
+            d = (global.darkzone + 1)
             if (global.facing == 1)
             {
-                if collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), ((self.x + self.sprite_width) + (13 * self.d)), (self.y + self.sprite_height), obj_interactable, 0, 1)
-                    self.thisinteract = 1
-                if collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), ((self.x + self.sprite_width) + (13 * self.d)), (self.y + self.sprite_height), obj_interactablesolid, 0, 1)
-                    self.thisinteract = 2
+                if collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), ((x + sprite_width) + (13 * d)), (y + sprite_height), obj_interactable, 0, 1)
+                    thisinteract = 1
+                if collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), ((x + sprite_width) + (13 * d)), (y + sprite_height), obj_interactablesolid, 0, 1)
+                    thisinteract = 2
             }
-            if (self.thisinteract > 0)
+            if (thisinteract > 0)
             {
-                if (self.thisinteract == 1)
-                    self.interactedobject = collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), ((self.x + self.sprite_width) + (13 * self.d)), (self.y + self.sprite_height), obj_interactable, 0, 1)
-                if (self.thisinteract == 2)
-                    self.interactedobject = collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), ((self.x + self.sprite_width) + (13 * self.d)), (self.y + self.sprite_height), obj_interactablesolid, 0, 1)
-                if (self.interactedobject != noone)
+                if (thisinteract == 1)
+                    interactedobject = collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), ((x + sprite_width) + (13 * d)), (y + sprite_height), obj_interactable, 0, 1)
+                if (thisinteract == 2)
+                    interactedobject = collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), ((x + sprite_width) + (13 * d)), (y + sprite_height), obj_interactablesolid, 0, 1)
+                if (interactedobject != noone)
                 {
-                    with (self.interactedobject)
-                        self.facing = 3
-                    with (self.interactedobject)
+                    with (interactedobject)
+                        facing = 3
+                    with (interactedobject)
                         scr_interact()
                 }
             }
-            self.thisinteract = 0
+            thisinteract = 0
             if (global.facing == 3)
             {
-                if collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), (self.x - (13 * self.d)), (self.y + self.sprite_height), obj_interactable, 0, 1)
-                    self.thisinteract = 1
-                if collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), (self.x - (13 * self.d)), (self.y + self.sprite_height), obj_interactablesolid, 0, 1)
-                    self.thisinteract = 2
+                if collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), (x - (13 * d)), (y + sprite_height), obj_interactable, 0, 1)
+                    thisinteract = 1
+                if collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), (x - (13 * d)), (y + sprite_height), obj_interactablesolid, 0, 1)
+                    thisinteract = 2
             }
-            if (self.thisinteract > 0)
+            if (thisinteract > 0)
             {
-                if (self.thisinteract == 1)
-                    self.interactedobject = collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), (self.x - (13 * self.d)), (self.y + self.sprite_height), obj_interactable, 0, 1)
-                if (self.thisinteract == 2)
-                    self.interactedobject = collision_rectangle((self.x + (self.sprite_width / 2)), ((self.y + (6 * self.d)) + (self.sprite_height / 2)), (self.x - (13 * self.d)), (self.y + self.sprite_height), obj_interactablesolid, 0, 1)
-                if (self.interactedobject != noone)
+                if (thisinteract == 1)
+                    interactedobject = collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), (x - (13 * d)), (y + sprite_height), obj_interactable, 0, 1)
+                if (thisinteract == 2)
+                    interactedobject = collision_rectangle((x + (sprite_width / 2)), ((y + (6 * d)) + (sprite_height / 2)), (x - (13 * d)), (y + sprite_height), obj_interactablesolid, 0, 1)
+                if (interactedobject != noone)
                 {
-                    with (self.interactedobject)
-                        self.facing = 1
-                    with (self.interactedobject)
+                    with (interactedobject)
+                        facing = 1
+                    with (interactedobject)
                         scr_interact()
                 }
             }
-            self.thisinteract = 0
+            thisinteract = 0
             if (global.facing == 0)
             {
-                if collision_rectangle((self.x + (4 * self.d)), (self.y + (28 * self.d)), ((self.x + self.sprite_width) - (4 * self.d)), ((self.y + self.sprite_height) + (15 * self.d)), obj_interactable, 0, 1)
-                    self.thisinteract = 1
-                if collision_rectangle((self.x + (4 * self.d)), (self.y + (28 * self.d)), ((self.x + self.sprite_width) - (4 * self.d)), ((self.y + self.sprite_height) + (15 * self.d)), obj_interactablesolid, 0, 1)
-                    self.thisinteract = 2
+                if collision_rectangle((x + (4 * d)), (y + (28 * d)), ((x + sprite_width) - (4 * d)), ((y + sprite_height) + (15 * d)), obj_interactable, 0, 1)
+                    thisinteract = 1
+                if collision_rectangle((x + (4 * d)), (y + (28 * d)), ((x + sprite_width) - (4 * d)), ((y + sprite_height) + (15 * d)), obj_interactablesolid, 0, 1)
+                    thisinteract = 2
             }
-            if (self.thisinteract > 0)
+            if (thisinteract > 0)
             {
-                if (self.thisinteract == 1)
-                    self.interactedobject = collision_rectangle((self.x + (4 * self.d)), (self.y + (28 * self.d)), ((self.x + self.sprite_width) - (4 * self.d)), ((self.y + self.sprite_height) + (15 * self.d)), obj_interactable, 0, 1)
-                if (self.thisinteract == 2)
-                    self.interactedobject = collision_rectangle((self.x + (4 * self.d)), (self.y + (28 * self.d)), ((self.x + self.sprite_width) - (4 * self.d)), ((self.y + self.sprite_height) + (15 * self.d)), obj_interactablesolid, 0, 1)
-                if (self.interactedobject != noone)
+                if (thisinteract == 1)
+                    interactedobject = collision_rectangle((x + (4 * d)), (y + (28 * d)), ((x + sprite_width) - (4 * d)), ((y + sprite_height) + (15 * d)), obj_interactable, 0, 1)
+                if (thisinteract == 2)
+                    interactedobject = collision_rectangle((x + (4 * d)), (y + (28 * d)), ((x + sprite_width) - (4 * d)), ((y + sprite_height) + (15 * d)), obj_interactablesolid, 0, 1)
+                if (interactedobject != noone)
                 {
-                    with (self.interactedobject)
-                        self.facing = 2
-                    with (self.interactedobject)
+                    with (interactedobject)
+                        facing = 2
+                    with (interactedobject)
                         scr_interact()
                 }
             }
-            self.thisinteract = 0
+            thisinteract = 0
             if (global.facing == 2)
             {
-                if collision_rectangle((self.x + 3), ((self.y + self.sprite_height) - (5 * self.d)), ((self.x + self.sprite_width) - (5 * self.d)), (self.y + (5 * self.d)), obj_interactable, 0, 1)
-                    self.thisinteract = 1
-                if collision_rectangle((self.x + 3), ((self.y + self.sprite_height) - (5 * self.d)), ((self.x + self.sprite_width) - (5 * self.d)), (self.y + (5 * self.d)), obj_interactablesolid, 0, 1)
-                    self.thisinteract = 2
+                if collision_rectangle((x + 3), ((y + sprite_height) - (5 * d)), ((x + sprite_width) - (5 * d)), (y + (5 * d)), obj_interactable, 0, 1)
+                    thisinteract = 1
+                if collision_rectangle((x + 3), ((y + sprite_height) - (5 * d)), ((x + sprite_width) - (5 * d)), (y + (5 * d)), obj_interactablesolid, 0, 1)
+                    thisinteract = 2
             }
-            if (self.thisinteract > 0)
+            if (thisinteract > 0)
             {
-                if (self.thisinteract == 1)
-                    self.interactedobject = collision_rectangle((self.x + (3 * self.d)), ((self.y + self.sprite_height) - (5 * self.d)), ((self.x + self.sprite_width) - (5 * self.d)), (self.y + (5 * self.d)), obj_interactable, 0, 1)
-                if (self.thisinteract == 2)
-                    self.interactedobject = collision_rectangle((self.x + (3 * self.d)), ((self.y + self.sprite_height) - (5 * self.d)), ((self.x + self.sprite_width) - (5 * self.d)), (self.y + (5 * self.d)), obj_interactablesolid, 0, 1)
-                if (self.interactedobject != noone)
+                if (thisinteract == 1)
+                    interactedobject = collision_rectangle((x + (3 * d)), ((y + sprite_height) - (5 * d)), ((x + sprite_width) - (5 * d)), (y + (5 * d)), obj_interactable, 0, 1)
+                if (thisinteract == 2)
+                    interactedobject = collision_rectangle((x + (3 * d)), ((y + sprite_height) - (5 * d)), ((x + sprite_width) - (5 * d)), (y + (5 * d)), obj_interactablesolid, 0, 1)
+                if (interactedobject != noone)
                 {
-                    with (self.interactedobject)
-                        self.facing = 0
-                    with (self.interactedobject)
+                    with (interactedobject)
+                        facing = 0
+                    with (interactedobject)
                         scr_interact()
                 }
             }
         }
     }
 }
-self.onebuffer -= 1
-self.twobuffer -= 1
-self.threebuffer -= 1
-with (collision_rectangle(self.bbox_left, self.bbox_top, self.bbox_right, self.bbox_bottom, obj_doorparent, 0, 0))
+onebuffer -= 1
+twobuffer -= 1
+threebuffer -= 1
+with (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_doorparent, 0, 0))
     event_user(9)
-if (self.battlemode == 1)
+if (battlemode == 1)
 {
     global.inv -= 1
     if (global.inv < 0)
     {
-        with (collision_rectangle((self.x + 12), (self.y + 40), (self.x + 27), (self.y + 49), obj_overworldbulletparent, 1, 0))
+        with (collision_rectangle((x + 12), (y + 40), (x + 27), (y + 49), obj_overworldbulletparent, 1, 0))
             event_user(5)
-        with (collision_line((self.x + 12), (self.y + 49), (self.x + 19), (self.y + 57), obj_overworldbulletparent, 1, 0))
+        with (collision_line((x + 12), (y + 49), (x + 19), (y + 57), obj_overworldbulletparent, true, false))
             event_user(5)
-        with (collision_line((self.x + 26), (self.y + 49), (self.x + 19), (self.y + 57), obj_overworldbulletparent, 1, 0))
+        with (collision_line((x + 26), (y + 49), (x + 19), (y + 57), obj_overworldbulletparent, true, false))
             event_user(5)
     }
 }
 if scr_debug()
 {
-    if keyboard_check_pressed(ord("P"))
-        self.room_speed = 60
-    if keyboard_check_pressed(ord("O"))
-        self.room_speed = 3
-    if (keyboard_check(ord("3")) && keyboard_check(ord("D")))
-    {
-        global.char[0] = 1
-        global.char[1] = 0
-        global.char[2] = 0
-        global.interact = 0
-        global.darkzone = 1
-        room_goto(room_dark1)
-    }
-    if (keyboard_check(ord("4")) && keyboard_check(ord("D")))
-    {
-        global.char[0] = 1
-        global.char[1] = 3
-        global.char[2] = 2
-        global.interact = 0
-        global.darkzone = 1
-        room_goto(room_field_checkers5)
-    }
-    if (keyboard_check(ord("5")) && keyboard_check(ord("D")))
-    {
-        global.char[0] = 1
-        global.char[1] = 0
-        global.char[2] = 0
-        global.interact = 0
-        global.darkzone = 1
-        room_goto(room_castle_tutorial)
-    }
-    if (keyboard_check(ord("6")) && keyboard_check(ord("D")))
-    {
-        global.char[0] = 1
-        global.char[1] = 3
-        global.char[2] = 0
-        global.interact = 0
-        global.darkzone = 1
-        room_goto(room_field1)
-    }
-    if (keyboard_check(ord("7")) && keyboard_check(ord("D")))
-    {
-        global.char[0] = 1
-        global.char[1] = 3
-        global.char[2] = 0
-        global.interact = 0
-        global.darkzone = 1
-        room_goto(room_forest_area3)
-    }
-    if (keyboard_check(ord("8")) && keyboard_check(ord("D")))
-    {
-        global.char[0] = 1
-        global.char[1] = 3
-        global.char[2] = 0
-        global.interact = 0
-        global.darkzone = 1
-        room_goto(room_forest_fightsusie)
-    }
-    if (keyboard_check(ord("9")) && keyboard_check(ord("D")))
-    {
-        global.char[0] = 2
-        global.char[1] = 0
-        global.char[2] = 0
-        global.interact = 0
-        global.darkzone = 1
-        global.plot = 154
-        room_goto(room_cc_prison_cells)
-    }
-    if (keyboard_check(ord("6")) && keyboard_check(ord("J")))
-    {
-        global.char[0] = 1
-        global.char[1] = 3
-        global.char[2] = 0
-        global.interact = 0
-        global.darkzone = 1
-        global.charauto[2] = 0
-        room_goto(room_battletest)
-    }
-    if (keyboard_check(ord("7")) && keyboard_check(ord("J")))
-    {
-        global.char[0] = 1
-        global.char[1] = 2
-        global.char[2] = 3
-        global.interact = 0
-        global.darkzone = 1
-        global.charauto[2] = 0
-        room_goto(room_battletest)
-    }
-    if (keyboard_check(ord("8")) && keyboard_check(ord("J")))
-    {
-        global.char[0] = 1
-        global.char[1] = 2
-        global.char[2] = 3
-        global.interact = 0
-        global.darkzone = 1
-        global.charauto[2] = 0
-        global.plot = 165
-        scr_keyitemget(5)
-        global.tempflag[4] = 1
-        repeat (13)
-            scr_weaponget(5)
-        room_goto(room_cc_prison_prejoker)
-    }
-    if (keyboard_check(ord("9")) && keyboard_check(ord("J")))
-    {
-        global.char[0] = 1
-        global.char[1] = 2
-        global.char[2] = 3
-        global.interact = 0
-        global.darkzone = 1
-        global.charauto[2] = 0
-        global.flag[248] = 0
-        room_goto(room_cc_kingbattle)
-    }
-    if (keyboard_check(ord("2")) && keyboard_check(ord("W")))
-    {
-        global.interact = 0
-        global.darkzone = 0
-        room_goto(room_town_krisyard)
-    }
-    if (keyboard_check(ord("3")) && keyboard_check(ord("W")))
-    {
-        global.interact = 0
-        global.darkzone = 0
-        room_goto(room_schooldoor)
-    }
-    if (keyboard_check(ord("4")) && keyboard_check(ord("W")))
-    {
-        global.interact = 0
-        global.darkzone = 0
-        room_goto(room_school_unusedroom)
-    }
-    if (keyboard_check(ord("5")) && keyboard_check(ord("W")))
-    {
-        global.interact = 0
-        global.darkzone = 0
-        global.plot = 251
-        room_goto(room_town_school)
-    }
-    if (keyboard_check(ord("6")) && keyboard_check(ord("W")))
-    {
-        global.interact = 0
-        global.darkzone = 0
-        global.plot = 251
-        room_goto(room_town_north)
-    }
     if keyboard_check_pressed(vk_insert)
         room_goto_next()
     if keyboard_check_pressed(vk_delete)
         room_goto_previous()
+    if keyboard_check_pressed(vk_home)
+    {
+        if keyboard_check(ord("1"))
+        {
+            room_goto(room_dw_cyber_intro_1)
+            global.darkzone = true
+        }
+        if keyboard_check(ord("2"))
+        {
+            room_goto(room_krisroom)
+            global.plot = 0
+            global.darkzone = false
+        }
+        if keyboard_check(ord("3"))
+        {
+            room_goto(room_dw_castle_area_1)
+            global.plot = 7
+            global.darkzone = true
+        }
+        if keyboard_check(ord("7"))
+            room_goto(room_legend_neo)
+        if keyboard_check(ord("8"))
+        {
+            room_goto(room_battletest)
+            global.darkzone = true
+        }
+        if keyboard_check(ord("9"))
+        {
+            room_goto(room_bullettest)
+            global.darkzone = true
+        }
+    }
 }

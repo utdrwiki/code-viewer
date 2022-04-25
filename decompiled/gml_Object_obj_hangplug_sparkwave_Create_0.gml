@@ -1,0 +1,11 @@
+destroyoffscreen = true
+tolerance = 80
+deshspeed = 0
+con = 0
+image_yscale = 0.1
+fadeaway = 0
+init = false
+target = 3
+active = true
+timer = 0
+damage = 18

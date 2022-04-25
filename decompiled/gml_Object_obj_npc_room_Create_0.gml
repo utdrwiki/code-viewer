@@ -1,347 +1,496 @@
-self.myinteract = 0
-self.talked = 0
-self.tempvar = 0
-self.image_speed = 0
-self.depthcancel = 0
-self.normalanim = 1
-self.remanimspeed = 0
-if (global.darkzone == 0)
+myinteract = 0
+talked = false
+tempvar = 0
+image_speed = 0
+depthcancel = false
+normalanim = 1
+remanimspeed = 0
+flag = 0
+extflag = 0
+alwaysanimate = 0
+jpspecial = 0
+if (global.darkzone == false)
 {
-    if (self.room == room_krisroom)
-        self.sprite_index = spr_redwagon
-    if (self.room == room_torhouse)
+    if (room == room_krisroom)
+        sprite_index = spr_redwagon
+    if (room == room_torhouse)
     {
-        self.sprite_index = spr_chairiel_empty
+        sprite_index = spr_chairiel_empty
         if (global.plot >= 250)
-            self.sprite_index = spr_chairiel
+        {
+            if (global.chapter == 1)
+                sprite_index = spr_chairiel
+        }
     }
-    if (self.room == room_graveyard)
+    if (room == room_graveyard)
     {
-        self.sprite_index = spr_npc_bench
-        self.fence = scr_marker(81, 122, spr_npc_graveyardfence)
-        with (self.fence)
+        fence = scr_marker(81, 122, spr_npc_graveyardfence)
+        with (fence)
             scr_depth()
+        if (x < 30)
+            sprite_index = spr_npc_bench
     }
-    if (self.room == room_hospital_lobby)
-        self.sprite_index = spr_npc_nurse
-    if (self.room == room_hospital_rudy)
-        self.sprite_index = spr_rudy_d
-    if (self.room == room_library)
-        self.sprite_index = spr_normalnpc
-    if (self.room == room_townhall)
+    if (room == room_hospital_lobby)
+        sprite_index = spr_npc_nurse
+    if (room == room_hospital_rudy)
     {
-        self.sprite_index = spr_npc_businessguy
-        if (self.x > 100)
-            self.sprite_index = spr_npc_receptionist
-        if (self.x > 200)
-            self.sprite_index = spr_npc_politicsbear
+        if (global.chapter == 1)
+            sprite_index = spr_rudy_d
+        if (global.chapter == 2)
+            sprite_index = spr_rudy_l
     }
-    if (self.room == room_diner)
+    if (room == room_library)
+        sprite_index = spr_normalnpc
+    if (room == room_townhall)
     {
-        if (self.x < 120)
-            self.sprite_index = spr_npc_cattiwaitress
-        if (self.x < 60)
-            self.sprite_index = spr_npc_dragonfamily
-        if ((self.x >= 120) && (self.x <= 140))
-            self.sprite_index = spr_npc_qc
-        if (self.y > 130)
+        if (global.chapter == 1)
         {
-            if (self.x > 180)
-                self.sprite_index = spr_npc_dresslion
-            if (self.x > 240)
-            {
-                self.sprite_index = spr_npc_greenfire
-                self.depth = 4000
-                self.depthcancel = 1
-            }
-            if (self.x > 260)
-            {
-                self.sprite_index = spr_npc_flanneldemon
-                self.depth = 4000
-                self.depthcancel = 1
-            }
+            sprite_index = spr_npc_businessguy
+            if (x > 100)
+                sprite_index = spr_npc_receptionist
+            if (x > 200)
+                sprite_index = spr_npc_politicsbear
         }
-        if (self.y < 120)
+        if (global.chapter == 2)
         {
-            if (self.x > 160)
-                self.sprite_index = spr_npc_most_improved_1997
-            if (self.x > 200)
-                self.sprite_index = spr_npc_icewolf
+            sprite_index = spr_npc_businessguy
+            if (x > 100)
+                sprite_index = spr_npc_receptionist
+            if (x > 200)
+                sprite_index = spr_npc_politicsbear
         }
     }
-    if (self.room == room_town_south)
+    if (room == room_diner)
     {
-        if (self.x > 560)
-            self.sprite_index = spr_npc_donutcar
-        if (self.x > 720)
-            self.sprite_index = spr_npc_snailcar
+        if (global.chapter == 1)
+        {
+            if (x < 120)
+                sprite_index = spr_npc_cattiwaitress
+            if (x < 60)
+                sprite_index = spr_npc_dragonfamily
+            if (x >= 120 && x <= 140)
+                sprite_index = spr_npc_qc
+            if (y > 130)
+            {
+                if (x > 180)
+                    sprite_index = spr_npc_dresslion
+                if (x > 240)
+                {
+                    sprite_index = spr_npc_greenfire
+                    depth = 4000
+                    depthcancel = true
+                }
+                if (x > 260)
+                {
+                    sprite_index = spr_npc_flanneldemon
+                    depth = 4000
+                    depthcancel = true
+                }
+            }
+            if (y < 120)
+            {
+                if (x > 160)
+                    sprite_index = spr_npc_most_improved_1997
+                if (x > 200)
+                    sprite_index = spr_npc_icewolf
+            }
+        }
+        if (global.chapter == 2)
+        {
+            if (y < 85)
+                sprite_index = spr_npc_qc
+            if (x > 150 && x < 180 && y < 115)
+                sprite_index = spr_jockington_lt
+            if (x > 80 && x < 120)
+                sprite_index = spr_npc_cattiwaitress
+        }
     }
-    if (self.room == room_town_church)
-        self.sprite_index = spr_npc_alvin
-    if (self.room == room_town_mid)
+    if (room == room_town_south)
     {
-        if (self.x >= 1800)
-            self.sprite_index = spr_mkid_dt
-        if (self.x >= 1900)
-            self.sprite_index = spr_snowy_dt
+        if (global.chapter == 1)
+        {
+            if (x > 560)
+                sprite_index = spr_npc_donutcar
+            if (x > 720)
+                sprite_index = spr_npc_snailcar
+        }
     }
-    if (self.room == room_town_north)
+    if (room == room_town_church)
     {
-        if (self.x >= 480)
-            self.sprite_index = spr_npc_catty
-        if (self.x >= 640)
-            self.sprite_index = spr_npc_cattydad
-        if (self.x >= 880)
-            self.sprite_index = spr_npc_bratty
+        if (global.chapter == 1)
+            sprite_index = spr_npc_alvin
+        if (global.chapter == 2)
+        {
+            if (x > 270 && y < 320)
+                sprite_index = spr_npc_terry
+            if (x > 220 && x < 260 && y > 310)
+                sprite_index = spr_npc_icecap_r
+            if (x > 230 && x < 245 && y > 300)
+                sprite_index = spr_npc_icecap_g
+            if (x > 250 && x < 260 && y > 300)
+                sprite_index = spr_npc_icecap_b
+            if (x > 380)
+                sprite_index = spr_npc_rgbun
+            if (x > 400)
+                sprite_index = spr_npc_rgdragon
+            if (x > 590)
+                sprite_index = spr_npc_rabbitkid
+        }
     }
-    if (self.room == room_beach)
+    if (room == room_town_mid)
     {
-        if (self.x >= 60)
-            self.sprite_index = spr_npc_rgbun
-        if (self.x >= 100)
-            self.sprite_index = spr_npc_rgdragon
+        if (x >= 1800 && x < 1840)
+        {
+            if (global.chapter == 1)
+                sprite_index = spr_mkid_dt
+            else
+                instance_destroy()
+        }
+        if (x >= 1900 && x < 1920)
+        {
+            if (global.chapter == 1)
+                sprite_index = spr_snowy_dt
+            else
+                instance_destroy()
+        }
+    }
+    if (room == room_town_north)
+    {
+        if (global.chapter == 1)
+        {
+            if (x >= 480)
+                sprite_index = spr_npc_catty
+            if (x >= 640)
+                sprite_index = spr_npc_cattydad
+            if (x >= 880)
+                sprite_index = spr_npc_bratty
+        }
+        if (global.chapter == 2)
+        {
+            if (x < 1000)
+                instance_destroy()
+        }
+    }
+    if (room == room_beach)
+    {
+        if (global.chapter == 1)
+        {
+            if (x >= 60)
+                sprite_index = spr_npc_rgbun
+            if (x >= 100)
+                sprite_index = spr_npc_rgdragon
+        }
+        if (global.chapter == 2)
+            instance_destroy()
     }
 }
-if (global.darkzone == 1)
+if (room == room_flowershop_1f)
 {
-    self.image_xscale = 2
-    self.image_yscale = 2
-    if (self.room == room_castle_tutorial)
-        self.sprite_index = spr_dummynpc
-    if ((self.room == room_field2A) || ((self.room == room_field_puzzle1) || (self.room == room_field4)))
-        self.sprite_index = spr_candytree
-    if (self.room == room_field_topchef)
+    if (global.chapter == 2)
+        sprite_index = spr_asgored
+    else
+        instance_destroy()
+}
+if (room == room_lw_police)
+{
+    if (x > 80)
+        sprite_index = spr_npc_napstablook_police_down
+    if (x > 140)
+        sprite_index = spr_undyne_dt
+    if (x > 170)
     {
-        self.sprite_index = spr_topchef
-        if (self.y <= 120)
-        {
-            self.sprite_index = spr_smoldercake
-            self.alarm[11] = 1
-        }
+        sprite_index = spr_npc_prisoner_dog_m
+        depthcancel = true
     }
-    if (self.room == room_field_puzzletutorial)
+    if (x > 190)
     {
-        self.sprite_index = spr_npc_puzzlepiece
-        if (global.flag[251] == 1)
-            instance_destroy()
-    }
-    if (self.room == room_field_maze)
-    {
-        if (self.x < 1600)
-            self.sprite_index = spr_jigsawry_idle
-        if (self.x > 1600)
-            self.sprite_index = spr_lancer_dt
-    }
-    if (self.room == room_field_boxpuzzle)
-        self.sprite_index = spr_npc_block_broken
-    if (self.room == room_field_checkers7)
-    {
-        if (self.x <= (self.room_width / 2))
-        {
-            self.sprite_index = spr_npc_mrelegance
-            if (global.plot >= 60)
-                instance_destroy()
-        }
-        else
-            self.sprite_index = spr_npc_mrsociety
-    }
-    if (self.room == room_forest_savepoint1)
-    {
-        if (self.x <= (self.room_width / 2))
-        {
-            self.sprite_index = spr_npc_puzzlepiece
-            if (global.flag[251] == 0)
-                instance_destroy()
-        }
-        else
-            self.sprite_index = spr_npc_mrelegance
-    }
-    if (self.room == room_forest_area1)
-        self.sprite_index = spr_diamond_overworld
-    if (self.room == room_forest_area2A)
-    {
-        if (self.x <= (self.room_width / 2))
-            self.sprite_index = spr_jackperson
-        if (self.x >= (self.room_width / 2))
-            self.sprite_index = spr_ballperson
-    }
-    if (self.room == room_forest_area3A)
-    {
-        if (self.x <= (self.room_width / 2))
-            self.sprite_index = spr_blockler_b
-        if (self.x >= (self.room_width / 2))
-            self.sprite_index = spr_blockler_o
-    }
-    if (self.room == room_forest_savepoint2)
-    {
-        self.sprite_index = spr_bakesale_rudinn
-        if ((self.x >= 800) && (self.x <= 880))
-            self.sprite_index = spr_bakesale_hathy
-        if (self.x >= 980)
-            self.sprite_index = spr_bakesale_lancer
-    }
-    if (self.room == room_forest_area4)
-        self.sprite_index = spr_npc_coody
-    if (self.room == room_forest_starwalker)
-        self.sprite_index = spr_npc_originalstarwalker
-    if (self.room == room_forest_savepoint_relax)
-    {
-        if (self.x <= 200)
-            self.sprite_index = spr_diamond_overworld
-        if (self.x > 260)
-        {
-            if (global.plot >= 90)
-                instance_destroy()
-            if (self.y >= 240)
-                self.sprite_index = spr_lancer_dark_relax
-            else
-                self.sprite_index = spr_susie_dark_relax
-        }
-    }
-    if (self.room == room_forest_fightsusie)
-    {
-        self.sprite_index = spr_lancer_dt
-        if (global.plot >= 150)
-            instance_destroy()
-    }
-    if (self.room == room_cc_prison_cells)
-        self.sprite_index = spr_diamond_trash
-    if (self.room == room_cc_prison2)
-    {
-        global.flag[296] = 1
-        self.sprite_index = spr_npc_gouldensam
-        if ((self.x > 240) && (self.x < 440))
-        {
-            self.king = instance_create(-100, -100, obj_npc_room)
-            self.king.x = self.x
-            self.king.y = self.y
-            self.king.sprite_index = spr_npc_cage_king
-            scr_depth()
-            self.king.depth = (self.depth - 10)
-        }
-        if ((self.x > 480) && (self.x < 680))
-        {
-            self.x += 4
-            self.puzz = instance_create(-100, -100, obj_npc_room)
-            self.puzz.x = 660
-            self.puzz.y = 130
-            self.puzz.sprite_index = spr_npc_puzzlepiece_jail
-            self.tempvar = 1
-        }
-        if ((self.x > 680) && (self.x < 900))
-        {
-            self.x += 8
-            self.rudinn = instance_create(-100, -100, obj_npc_room)
-            self.rudinn.x = 900
-            self.rudinn.y = 115
-            self.rudinn.sprite_index = spr_diamond_overworld
-            self.tempvar = 2
-        }
-        if ((self.x > 900) && (self.x < 1120))
-        {
-            self.x += 12
-            self.tempvar = 3
-            self.animal = instance_create(-100, -100, obj_npc_room)
-            self.animal.x = self.x
-            self.animal.y = self.y
-            self.animal.sprite_index = spr_npc_cage_animals
-        }
-    }
-    if (self.room == room_cc_rudinn)
-        self.sprite_index = spr_diamond_overworld
-    if (self.room == room_cc_rurus1)
-        self.sprite_index = spr_diamond_overworld
-    if (self.room == room_cc_hathy)
-        self.sprite_index = spr_heartenemy_overworld
-    if (self.room == room_cc_rurus2)
-        self.sprite_index = spr_diamond_overworld
-    if (self.room == room_cc_clover)
-    {
-        self.sprite_index = spr_clubs_overworld
-        if (self.x < 160)
-            self.sprite_index = spr_diamond_overworld
-        if (self.x > 400)
-            self.sprite_index = spr_heartenemy_overworld
-    }
-    if (self.room == room_cc_throneroom)
-    {
-        if (global.plot < 240)
-            instance_destroy()
-        else if ((self.y < 300) && (self.y > 80))
-        {
-            self.sprite_index = spr_npc_gouldensam
-            if (self.x < (self.room_width / 2))
-            {
-                self.king = instance_create(-100, -100, obj_npc_room)
-                self.king.x = self.x
-                self.king.y = self.y
-                self.king.sprite_index = spr_npc_cage_king
-                scr_depth()
-                self.king.depth = (self.depth - 10)
-                if (global.flag[296] == 0)
-                    instance_destroy()
-            }
-            else
-            {
-                self.tempvar = 1
-                self.animal = instance_create(-100, -100, obj_npc_room)
-                self.animal.x = self.x
-                self.animal.y = self.y
-                self.animal.sprite_index = spr_npc_cage_animals
-                if (global.flag[296] == 0)
-                    instance_destroy()
-            }
-        }
-        else if (self.x < (self.room_width / 2))
-            self.sprite_index = spr_diamond_overworld
-        else
-            self.sprite_index = spr_topchef
-    }
-    if (self.room == room_cc_preroof)
-    {
-        if (global.plot < 240)
-            instance_destroy()
-        if (self.x > 180)
-            self.sprite_index = spr_diamond_overworld
-        if (self.x > 320)
-            self.sprite_index = spr_heartenemy_overworld
-        if (self.x > 460)
-            self.sprite_index = spr_clubs_overworld
-        if (self.x > 680)
-            self.sprite_index = spr_diamond_overworld
-    }
-    if (self.room == room_cc_kingbattle)
-    {
-        if (global.plot < 240)
-            instance_destroy()
-        if (self.x < 440)
-            self.sprite_index = spr_rurus_idle
-        if (self.y < 160)
-        {
-            if (self.x == 398)
-                self.sprite_index = spr_npc_mrsociety
-            if (self.x == 522)
-                self.sprite_index = spr_npc_mrelegance
-            if (self.x == 740)
-                self.sprite_index = spr_blockler_b
-            if (self.x == 820)
-                self.sprite_index = spr_blockler_o
-            if (self.x == 940)
-                self.sprite_index = spr_blockler_o
-            if (self.x == 1020)
-                self.sprite_index = spr_blockler_b
-            if (self.x > 1140)
-            {
-                self.sprite_index = spr_npc_puzzlepiece_happy
-                if (global.flag[216] == 1)
-                    self.sprite_index = spr_npc_puzzlepiece_shaved
-            }
-        }
-        else if (self.x < 900)
-            self.sprite_index = spr_jackperson
-        else
-            self.sprite_index = spr_ballperson
+        sprite_index = spr_npc_prisoner_dog_f
+        depthcancel = true
     }
 }
-if (self.depthcancel == 0)
+if (room == room_alphysalley)
+    sprite_index = spr_npc_bratty
+if (room == room_lw_conbini)
+{
+    if (x > 280)
+        sprite_index = spr_npc_diamond_tallboy
+    else
+        sprite_index = spr_npc_milklooker
+}
+if (global.darkzone == true)
+{
+    image_xscale = 2
+    image_yscale = 2
+    if (room == room_castle_tutorial)
+    {
+        if (global.chapter == 1)
+            sprite_index = spr_dummynpc
+        if (global.chapter == 2)
+        {
+            if (x > 760 && x < 780)
+            {
+                if (global.plot < 200 || global.plot < 9)
+                    sprite_index = spr_dummynpc
+                else
+                    sprite_index = spr_mannequin_ralsei_nugu
+            }
+        }
+    }
+    if (room == room_dw_ralsei_castle_front)
+    {
+        if (x >= 250 && y >= 430)
+        {
+            if (global.plot >= 200 && scr_get_total_recruits(2) >= 9)
+                sprite_index = spr_npc_ballperson_wig
+            else
+                sprite_index = spr_ballperson
+        }
+        if (x >= 650)
+        {
+            sprite_index = spr_npc_jackperson_hat
+            x = 740
+            y = 225
+        }
+        if (x >= 350 && y >= 430)
+        {
+            if (global.plot >= 200 && scr_get_total_recruits(2) >= 9)
+            {
+                sprite_index = spr_npc_nubert
+                image_xscale = -2
+                x = 410
+            }
+            else
+                instance_destroy()
+        }
+    }
+    if (room == room_dw_castle_area_2)
+        sprite_index = spr_susiel_wall_eyes
+    if (room == room_dw_castle_area_2_transformed)
+    {
+        if (x > 600 && x < 640 && y > 750 && y < 780)
+        {
+            sprite_index = spr_diamond_overworld
+            image_xscale = -2
+        }
+        if (x > 1100 && x < 1300 && y > 870 && y < 890)
+            sprite_index = spr_heartenemy_overworld
+        if (x > 1150 && x < 1170 && y > 590 && y < 610)
+        {
+            if (global.flag[636] != 1)
+                sprite_index = spr_npc_rabbick_clean
+            else
+            {
+                rabbicksweep = instance_create(1222, 562, obj_npc_room_animated)
+                rabbicksweep.sprite_index = spr_npc_rabbick_sweep
+                rabbicksweep.image_speed = 0.1
+                with (rabbicksweep)
+                    scr_depth()
+                instance_destroy()
+            }
+        }
+        if (global.flag[636] == 1)
+        {
+            var swatchling_sweep = 0
+            if i_ex(obj_npc_room_animated)
+            {
+                with (obj_npc_room_animated)
+                {
+                    if (sprite_index == spr_npc_swatchling_sweep)
+                        swatchling_sweep = 1
+                }
+            }
+            if (!swatchling_sweep)
+            {
+                swatchsweep = instance_create(1085, 522, obj_npc_room_animated)
+                swatchsweep.sprite_index = spr_npc_swatchling_sweep
+                swatchsweep.image_speed = 0.1
+                with (swatchsweep)
+                    scr_depth()
+            }
+        }
+        if (x > 250 && x < 280 && y > 550 && y < 650)
+        {
+            if (global.flag[633] == 1)
+            {
+                sprite_index = spr_npc_werewire
+                image_xscale = -2
+                x = 353
+                y = 612
+                depth = 93000
+                depthcancel = true
+            }
+            else
+                sprite_index = spr_blockler_b
+        }
+        if (x > 230 && x < 250 && y > 910 && y < 930)
+        {
+            sprite_index = spr_diamond_overworld
+            image_xscale = -2
+            x = 320
+        }
+        if (x > 320 && x < 350 && y > 910 && y < 930)
+        {
+            if (global.flag[635] == 1)
+            {
+                var viro_exists = 0
+                if i_ex(obj_npc_room_animated)
+                {
+                    with (obj_npc_room_animated)
+                    {
+                        if (sprite_index == spr_virovirokun_idle)
+                            viro_exists = 1
+                    }
+                }
+                if (!viro_exists)
+                {
+                    viro = instance_create(x, (y - 20), obj_npc_room_animated)
+                    viro.sprite_index = spr_virovirokun_idle
+                    with (viro)
+                        scr_depth()
+                }
+                instance_destroy()
+            }
+            else
+                sprite_index = spr_daimond_knight_idle
+        }
+        if (x > 820 && x < 840 && y > 670 && y < 690)
+        {
+            if (global.plot < 200)
+            {
+                x = 859
+                y = 796
+                sprite_index = spr_rurus_idle
+            }
+            else if (global.flag[633] == 1)
+                sprite_index = spr_npc_plugboy_static_outline
+            else
+                instance_destroy()
+        }
+    }
+    if (room == room_cc_lancer)
+    {
+        if (global.plot >= 200 && scr_get_total_recruits(2) >= 9)
+            instance_destroy()
+        else
+            sprite_index = spr_lancer_dt
+    }
+    if (room == room_dw_castle_dungeon)
+    {
+        sprite_index = spr_king_left
+        depthcancel = true
+    }
+    if (room == room_dw_cyber_intro_2)
+    {
+        if (global.plot < 51)
+            sprite_index = spr_plugboy_cower
+        else
+            instance_destroy()
+    }
+    if (room == room_dw_city_big_1)
+    {
+        if (y < 270)
+        {
+            if (global.flag[309] == 9)
+                instance_destroy()
+            else
+                sprite_index = spr_npc_addison_blue
+        }
+        else if (global.flag[309] == 9)
+        {
+            sprite_index = spr_npc_plugboy_static_outline
+            x = 500
+            y = 384
+        }
+        else
+            sprite_index = spr_npc_addison_orange
+    }
+    if (room == room_dw_city_traffic_2)
+        sprite_index = spr_npc_plugboy_static
+    if (room == room_dw_city_big_2)
+    {
+        if (global.flag[309] == 9)
+            instance_destroy()
+    }
+    if (room == room_dw_city_big_3)
+    {
+        if (x < 600)
+        {
+            if (global.flag[309] == 9)
+                instance_destroy()
+            else
+                sprite_index = spr_npc_addison_blue
+        }
+        if (x > 1000)
+        {
+            if (global.flag[309] == 9)
+            {
+                var viro_npc = instance_create(x, y, obj_npc_room_animated)
+                viro_npc.sprite_index = spr_virovirokun_idle
+                instance_destroy()
+            }
+            else
+                sprite_index = spr_npc_addison_orange
+        }
+    }
+    if (room == room_dw_castle_west_cliff)
+    {
+        if (global.chapter == 2 && global.flag[302] >= 1)
+        {
+            if (x < 210)
+            {
+                if (global.flag[314] == 0 && global.plot < 200)
+                    sprite_index = spr_npc_mrsociety
+                else
+                    instance_destroy()
+            }
+            else if (global.flag[357] == 1)
+                sprite_index = spr_npc_cursor_walk_right
+            else
+                instance_destroy()
+        }
+        else
+            instance_destroy()
+    }
+    if (room == room_dw_cyber_keyboard_puzzle_1)
+    {
+        sprite_index = spr_npc_nubert
+        image_xscale = -2
+        if (global.plot >= 70)
+            instance_destroy()
+    }
+    if (room == room_dw_mansion_bridges_funny)
+    {
+        scr_depth()
+        sprite_index = spr_npc_butler
+        image_xscale = 2
+        x = 1280
+        y = 140
+    }
+    if (room == room_dw_city_mirrorfriend)
+        sprite_index = spr_npc_iconman
+    if (room == room_dw_mansion_east_3f_toilet)
+        sprite_index = spr_dw_mansion_toilet
+    if (room == room_dw_cyber_music_bullet)
+        sprite_index = spr_plugboy_cower
+    if (room == room_dw_cyber_tasque_battle)
+    {
+        if (x < 300)
+            sprite_index = spr_npc_plugboy_hat
+        else
+            sprite_index = spr_npc_plugboy_girl
+    }
+    if (room == room_dw_cyber_maze_queenscreen)
+        sprite_index = spr_npc_plugboy_hat
+    if (room == room_dw_cyber_battle_maze_2)
+    {
+        normalanim = 3
+        remanimspeed = 0.25
+    }
+    if (room == room_dw_city_postbaseball_1)
+    {
+        sprite_index = spr_noelle_walk_right_dw
+        normalanim = 4
+    }
+}
+if (depthcancel == false)
     scr_depth()

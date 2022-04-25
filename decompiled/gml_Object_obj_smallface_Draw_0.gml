@@ -1,55 +1,58 @@
-if (self.facealpha < 1)
-    self.facealpha += 0.2
-draw_sprite_ext(self.sprite_index, self.image_index, self.x, self.y, self.image_xscale, self.image_yscale, self.image_angle, self.image_blend, self.facealpha)
-draw_set_alpha(self.facealpha)
-if ((self.type == 0) || (self.type == 3))
+if (global.darkzone == true)
 {
-    scr_84_set_draw_font("main")
-    draw_set_color(self.mycolor)
-    draw_text((self.x + 70), (self.y + 10), string_hash_to_newline(self.mystring))
-}
-if ((self.type == 1) && ((self.active == 1) && (self.getrid == 0)))
-{
-    scr_84_set_draw_font("main")
-    draw_set_color(self.mycolor)
-    draw_text((self.x + 70), (self.y + 15), string_hash_to_newline(self.mystring))
-    self.finished = 1
-}
-if ((self.type == 2) || (self.type == 4))
-{
-    if (self.active == 1)
+    if (facealpha < 1)
+        facealpha += 0.2
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, facealpha)
+    draw_set_alpha(facealpha)
+    if (type == 0 || type == 3)
     {
         scr_84_set_draw_font("main")
-        draw_set_color(self.mycolor)
-        if (self.finished == 0)
-        {
-            self.partstring += string_char_at(self.mystring, self.part)
-            self.part += 1
-            if (self.part >= (string_length(self.mystring) + 1))
-                self.finished = 1
-        }
-        draw_text(((self.x + 70) + random(1)), ((self.y + 15) + random(1)), string_hash_to_newline(self.partstring))
+        draw_set_color(mycolor)
+        draw_text((x + 70), (y + 10), string_hash_to_newline(mystring))
     }
-}
-if instance_exists(self.writergod)
-{
-    if ((self.finished == 1) && (self.getrid == 0))
+    if (type == 1 && active == true && getrid == 0)
     {
-        with (self.writergod)
-        {
-            if (self.halt == 0)
-                self.halt = 1
-        }
-        self.finished = 2
+        scr_84_set_draw_font("main")
+        draw_set_color(mycolor)
+        draw_text((x + 70), (y + 15), string_hash_to_newline(mystring))
+        finished = true
     }
-}
-else
-    instance_destroy()
-if (self.getrid == 1)
-{
-    self.direction = (-self.nowdir)
-    self.speed += 2
-    if ((self.type == 3) || (self.type == 4))
+    if (type == 2 || type == 4)
+    {
+        if (active == true)
+        {
+            scr_84_set_draw_font("main")
+            draw_set_color(mycolor)
+            if (finished == false)
+            {
+                partstring += string_char_at(mystring, part)
+                part += 1
+                if (part >= (string_length(mystring) + 1))
+                    finished = true
+            }
+            draw_text(((x + 70) + random(1)), ((y + 15) + random(1)), string_hash_to_newline(partstring))
+        }
+    }
+    if i_ex(writergod)
+    {
+        if (finished == true && getrid == 0)
+        {
+            with (writergod)
+            {
+                if (halt == false)
+                    halt = true
+            }
+            finished = 2
+        }
+    }
+    else
         instance_destroy()
+    if (getrid == 1)
+    {
+        direction = (-nowdir)
+        speed += 2
+        if (type == 3 || type == 4)
+            instance_destroy()
+    }
+    draw_set_alpha(1)
 }
-draw_set_alpha(1)

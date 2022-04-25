@@ -1,31 +1,36 @@
-self.myinteract = 0
-self.talked = 0
-self.checked = 0
-global.flag[32] = 0
-self.image_xscale = 2
-self.image_yscale = 2
-self.con = 0
-self.image_speed = 0
-self.teleportmode = 0
-self.door_destination = self.room
-self.door_location = self.room
-self.on = 1
-self.weirdlight = scr_dark_marker((self.x + 6), (self.y + 96), spr_weirdlight)
-with (self.weirdlight)
+myinteract = 0
+talked = false
+checked = false
+image_xscale = 2
+image_yscale = 2
+con = 0
+image_speed = 0
+teleportmode = 0
+door_destination = room
+door_location = room
+on = 1
+weirdlight = scr_dark_marker((x + 6), (y + 96), spr_weirdlight)
+with (weirdlight)
 {
-    self.depth = 895000
-    self.image_speed = 0.125
+    depth = 895000
+    image_speed = 0.125
 }
-if (global.plot < 60)
-    self.on = 0
-if (self.room == room_forest_fightsusie)
+if (global.chapter == 1)
 {
-    if (global.plot < 154)
-        self.on = 0
+    if (global.plot < 60)
+        on = 0
 }
-if (self.on == 0)
+if (global.chapter == 2)
 {
-    self.sprite_index = spr_shortcut_door_off
-    with (self.weirdlight)
+    scr_depth()
+    if (global.plot < 100)
+        on = 0
+}
+if (global.chapter == 2 && room == room_dw_mansion_entrance && scr_sideb_get_phase() > 2)
+    on = 0
+if (on == 0)
+{
+    sprite_index = spr_shortcut_door_off
+    with (weirdlight)
         instance_destroy()
 }

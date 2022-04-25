@@ -1,7 +1,7 @@
-self.t = 0
-self.g = 0
-self.image_speed = 0
-self.starcount = 0
-self.redup = 0
-self.bsize = 6
+t = 0
+g = 0
+image_speed = 0
+starcount = 0
+redup = 0
+bsize = 6
 snd_play(snd_defeatrun)

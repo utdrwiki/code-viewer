@@ -1,7 +1,7 @@
-self.image_blend = 0x00000000
-self.fadespeed = -0.08
-self.image_alpha = 1
-self.length = (10 + (self.room_width / 4))
-self.height = (10 + (self.room_height / 4))
-self.x = -20
-self.y = -20
+image_blend = c_black
+fadespeed = -0.08
+image_alpha = 1
+length = (10 + (room_width / 4))
+height = (10 + (room_height / 4))
+x = -20
+y = -20

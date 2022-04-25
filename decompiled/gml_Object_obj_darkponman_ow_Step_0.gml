@@ -1,65 +1,65 @@
-self.rot += self.rotspeed
-self.xx = (lengthdir_x(self.eyer, self.rot) + self.offx)
-self.yy = (lengthdir_y(self.eyer, self.rot) + self.offy)
-if (self.boss == 1)
+rot += rotspeed
+xx = (lengthdir_x(eyer, rot) + offx)
+yy = (lengthdir_y(eyer, rot) + offy)
+if (boss == true)
 {
     if instance_exists(obj_mainchara)
     {
         obj_mainchara.battlemode = 0
         with (obj_darkponman_ow)
         {
-            if ((obj_mainchara.x > (self.x - self.xrange)) && ((obj_mainchara.x < (self.x + self.xrange)) && ((obj_mainchara.y > (self.y - self.yrange)) && (obj_mainchara.y < (self.y + self.yrange)))))
+            if (obj_mainchara.x > (x - xrange) && obj_mainchara.x < (x + xrange) && obj_mainchara.y > (y - yrange) && obj_mainchara.y < (y + yrange))
                 obj_mainchara.battlemode = 1
         }
     }
 }
-if (self.con == 0)
+if (con == 0)
 {
-    if (self.made == 0)
+    if (made == 0)
     {
-        for (self.i = 0; self.i < self.bmax; self.i += 1)
+        for (i = 0; i < bmax; i += 1)
         {
-            self.xa = (lengthdir_x((self.eyer * (2 + (self.i * 2))), (self.rot - (self.i * 2))) + self.offx)
-            self.ya = (lengthdir_y((self.eyer * (2 + (self.i * 2))), (self.rot - (self.i * 2))) + self.offy)
-            self.fb[self.i] = instance_create((self.x + self.xa), (self.y + self.ya), obj_overworldbulletparent)
-            self.fb[self.i].sprite_index = spr_diamondbullet
-            self.fb[self.i].active = 1
-            self.fb[self.i].target = 3
-            self.fb[self.i].damage = 16
-            self.fb[self.i].image_angle = (self.rot - self.i)
-            self.fb[self.i].depth = 200
-            self.fb[self.i].alarm[0] = -10
-            self.fb[self.i].image_alpha = 0
-            self.fb[self.i].image_xscale = 0.7
+            xa = (lengthdir_x((eyer * (2 + (i * 2))), (rot - (i * 2))) + offx)
+            ya = (lengthdir_y((eyer * (2 + (i * 2))), (rot - (i * 2))) + offy)
+            fb[i] = instance_create((x + xa), (y + ya), obj_overworldbulletparent)
+            fb[i].sprite_index = spr_diamondbullet
+            fb[i].active = true
+            fb[i].target = 3
+            fb[i].damage = 16
+            fb[i].image_angle = (rot - i)
+            fb[i].depth = 200
+            fb[i].alarm[0] = -10
+            fb[i].image_alpha = 0
+            fb[i].image_xscale = 0.7
         }
-        self.made = 1
+        made = 1
     }
-    if (self.eyer <= 10)
-        self.eyer += 1
+    if (eyer <= 10)
+        eyer += 1
     else
     {
-        self.con = 1
-        self.image_speed = 0.1
+        con = 1
+        image_speed = 0.1
     }
 }
-if (self.made == 1)
+if (made == 1)
 {
-    if (self.rotspeed > 0)
-        self.siner += 1
-    if (self.rotspeed < 0)
-        self.siner -= 1
-    for (self.i = 0; self.i < self.bmax; self.i += 1)
+    if (rotspeed > 0)
+        siner += 1
+    if (rotspeed < 0)
+        siner -= 1
+    for (i = 0; i < bmax; i += 1)
     {
-        if instance_exists(self.fb[self.i])
+        if i_ex(fb[i])
         {
-            self.xa = (lengthdir_x((self.eyer * (2 + (self.i * 2))), (self.rot - (sin((self.siner / 10)) * (self.i * 2)))) + self.offx)
-            self.ya = (lengthdir_y((self.eyer * (2 + (self.i * 2))), (self.rot - (sin((self.siner / 10)) * (self.i * 2)))) + self.offy)
-            self.fb[self.i].x = (self.x + self.xa)
-            self.fb[self.i].y = (self.y + self.ya)
-            self.fb[self.i].image_alpha = (0.8 + (sin((((self.i * 4) + self.siner) / 5)) * 0.2))
-            if (self.con < 1)
-                self.fb[self.i].image_alpha = (0 + (self.eyer / 10))
-            self.fb[self.i].image_angle = (self.rot - (sin((self.siner / 10)) * (self.i * 4)))
+            xa = (lengthdir_x((eyer * (2 + (i * 2))), (rot - (sin((siner / 10)) * (i * 2)))) + offx)
+            ya = (lengthdir_y((eyer * (2 + (i * 2))), (rot - (sin((siner / 10)) * (i * 2)))) + offy)
+            fb[i].x = (x + xa)
+            fb[i].y = (y + ya)
+            fb[i].image_alpha = (0.8 + (sin((((i * 4) + siner) / 5)) * 0.2))
+            if (con < 1)
+                fb[i].image_alpha = (0 + (eyer / 10))
+            fb[i].image_angle = (rot - (sin((siner / 10)) * (i * 4)))
         }
     }
 }

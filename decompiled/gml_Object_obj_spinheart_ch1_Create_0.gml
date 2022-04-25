@@ -1,0 +1,16 @@
+con = 0
+htimer = 0
+image_xscale = 4
+image_yscale = 4
+active = false
+image_alpha = 0
+x = (obj_heart_ch1.x + 8)
+y = (obj_heart_ch1.y + 8)
+image_angle = -90
+joker = 0
+damage = 100
+grazed = false
+grazepoints = 5
+timepoints = 0
+inv = 60
+grazetimer = 0

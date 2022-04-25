@@ -1,0 +1,14 @@
+creator = obj_dojo_spareenemy
+creator_x = (creator.x + (creator.sprite_width / 2))
+creator_y = (creator.y + (creator.sprite_height / 2))
+depth = (creator.depth - 1)
+image_speed = 0
+start_color = 0x643F28
+image_blend = start_color
+end_speed = random_range(0.1, 0.2)
+sparkle_timer = 0
+image_xscale = 2
+image_yscale = 2
+blend_timer = -0.6
+wait = 1
+alarm[0] = 1

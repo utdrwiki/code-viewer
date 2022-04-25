@@ -1,0 +1,9 @@
+timer = 0
+trackpos = 0
+sndinit = 0
+sndlength = 0
+cooldown = 0.5
+active = false
+con = 0
+seq = 0
+modifier = 0

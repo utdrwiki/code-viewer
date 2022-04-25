@@ -1,21 +1,38 @@
-if (self.normalanim == 1)
+if (normalanim == 1)
 {
-    if ((self.myinteract > 0) && instance_exists(obj_writer))
+    if (myinteract > 0 && instance_exists(obj_writer))
     {
-        if (obj_writer.halt > 0)
+        if (obj_writer.halt > false)
         {
-            self.image_speed = 0
-            self.image_index = 0
+            image_speed = 0
+            image_index = 0
         }
-        if (obj_writer.halt == 0)
-            self.image_speed = self.remanimspeed
+        if (obj_writer.halt == false)
+            image_speed = remanimspeed
     }
 }
-if ((self.normalanim == 1) || (self.normalanim == 2))
+if (normalanim == 1 || normalanim == 2)
 {
-    if (self.myinteract == 0)
+    if (myinteract == 0)
     {
-        self.image_index = 0
-        self.image_speed = 0
+        image_index = 0
+        image_speed = 0
     }
+}
+if (normalanim == 3)
+{
+    if (myinteract > 0 && instance_exists(obj_writer))
+    {
+        if (obj_writer.halt > false)
+            image_speed = remanimspeed
+        if (obj_writer.halt == false)
+            image_speed = (remanimspeed / 2)
+    }
+    else
+        image_speed = remanimspeed
+}
+if (normalanim == 4)
+{
+    image_index = 0
+    image_speed = 0
 }

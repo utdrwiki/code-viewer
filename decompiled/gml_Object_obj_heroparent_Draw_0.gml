@@ -1,231 +1,258 @@
-if (global.hp[global.char[self.myself]] > 0)
+if (global.hp[global.char[myself]] > 0)
 {
-    if ((global.myfight == 3) && (global.faceaction[self.myself] == 6))
-        self.state = 6
-    if ((self.state == 0) && (self.hurt == 0))
+    if (global.myfight == 3 && global.faceaction[myself] == 6)
+        state = 6
+    if (state == 0 && hurt == false)
     {
-        self.acttimer = 0
-        self.thissprite = self.idlesprite
-        if (global.faceaction[self.myself] == 1)
-            self.thissprite = self.attackreadysprite
-        if (global.faceaction[self.myself] == 3)
-            self.thissprite = self.itemreadysprite
-        if (global.faceaction[self.myself] == 2)
-            self.thissprite = self.spellreadysprite
-        if (global.faceaction[self.myself] == 6)
-            self.thissprite = self.actreadysprite
-        if (global.charcond[self.myself] == 5)
+        acttimer = 0
+        thissprite = idlesprite
+        if (global.faceaction[myself] == 1)
+            thissprite = attackreadysprite
+        if (global.faceaction[myself] == 3)
+            thissprite = itemreadysprite
+        if (global.faceaction[myself] == 2)
+            thissprite = spellreadysprite
+        if (global.faceaction[myself] == 6)
+            thissprite = actreadysprite
+        if (global.charcond[myself] == 5)
         {
-            self.thissprite = self.defeatsprite
-            global.faceaction[self.myself] = 9
+            thissprite = defeatsprite
+            global.faceaction[myself] = 9
         }
-        if (global.faceaction[self.myself] == 4)
+        if (global.faceaction[myself] == 4)
         {
-            self.thissprite = self.defendsprite
-            self.index = self.defendtimer
-            if (self.defendtimer < self.defendframes)
-                self.defendtimer += 0.5
+            thissprite = defendsprite
+            index = defendtimer
+            if (defendtimer < defendframes)
+                defendtimer += 0.5
         }
         else
         {
-            self.defendtimer = 0
-            self.index = (self.siner / 5)
+            defendtimer = 0
+            index = (siner / 5)
         }
-        self.siner += 1
+        siner += 1
     }
-    if ((self.state == 1) && (self.hurt == 0))
+    if (state == 1 && hurt == false)
     {
-        self.siner += 1
-        if (self.attacked == 0)
+        siner += 1
+        if (attacked == false)
         {
             snd_stop(snd_laz_c)
-            if (self.object_index == obj_herokris)
+            if (object_index == obj_herokris)
                 snd_play(snd_laz_c)
-            if (self.object_index == obj_heroralsei)
+            if (object_index == obj_heroralsei)
             {
-                self.ls = snd_play(snd_laz_c)
-                snd_pitch(self.ls, 1.15)
+                ls = snd_play(snd_laz_c)
+                snd_pitch(ls, 1.15)
             }
-            if (self.object_index == obj_herosusie)
+            if (object_index == obj_herosusie)
             {
-                self.ls = snd_play(snd_laz_c)
-                snd_pitch(self.ls, 0.9)
+                ls = snd_play(snd_laz_c)
+                snd_pitch(ls, 0.9)
             }
-            if (self.points == 150)
+            if (object_index == obj_heronoelle)
+            {
+                ls = snd_play(snd_laz_c)
+                snd_pitch(ls, 1.5)
+            }
+            if (points == 150)
             {
                 snd_stop(snd_criticalswing)
                 snd_play(snd_criticalswing)
                 repeat (3)
                 {
-                    self.anim = instance_create(((self.x + self.mywidth) + random(50)), ((self.y + 30) + random(30)), obj_afterimage)
-                    self.anim.sprite_index = spr_lightfairy
-                    self.anim.image_speed = 0.25
-                    self.anim.depth = -20
-                    self.anim.image_xscale = 2
-                    self.anim.image_yscale = 2
-                    self.anim.hspeed = (2 + random(4))
-                    self.anim.friction = -0.25
+                    anim = instance_create(((x + mywidth) + random(50)), ((y + 30) + random(30)), obj_afterimage)
+                    anim.sprite_index = spr_lightfairy
+                    anim.image_speed = 0.25
+                    anim.depth = -20
+                    anim.image_xscale = 2
+                    anim.image_yscale = 2
+                    anim.hspeed = (2 + random(4))
+                    anim.friction = -0.25
                 }
             }
-            self.attacked = 1
-            self.alarm[1] = 10
+            attacked = true
+            alarm[1] = 10
         }
-        if (self.attacktimer < self.attackframes)
-            self.image_index = self.attacktimer
+        if (attacktimer < attackframes)
+            image_index = attacktimer
         else
-            self.image_index = self.attackframes
-        self.thissprite = self.attacksprite
-        self.index = self.image_index
-        self.attacktimer += self.attackspeed
+            image_index = attackframes
+        thissprite = attacksprite
+        index = image_index
+        attacktimer += attackspeed
     }
-    if ((self.state == 2) && (self.hurt == 0))
+    if (state == 2 && hurt == false)
     {
-        self.siner += 1
-        if (self.itemed == 0)
+        siner += 1
+        if (itemed == false)
         {
-            self.itemed = 1
-            self.alarm[4] = 15
+            itemed = true
+            alarm[4] = 15
         }
-        if (self.attacktimer < self.spellframes)
-            self.image_index = self.attacktimer
+        if (attacktimer < spellframes && spellframes != 0)
+            image_index = attacktimer
         else
-            self.image_index = self.spellframes
+            image_index = spellframes
         if (scr_monsterpop() == 0)
-            self.attacktimer = 0
-        self.thissprite = self.spellsprite
-        self.index = self.image_index
-        self.attacktimer += 0.5
+            attacktimer = 0
+        thissprite = spellsprite
+        index = image_index
+        attacktimer += 0.5
     }
-    if ((self.state == 4) && (self.hurt == 0))
+    if (state == 4 && hurt == false)
     {
-        self.siner += 1
-        if (self.itemed == 0)
+        siner += 1
+        if (itemed == false)
         {
-            self.itemed = 1
-            self.alarm[4] = 15
+            itemed = true
+            alarm[4] = 15
         }
-        if (self.attacktimer < self.itemframes)
-            self.image_index = self.attacktimer
+        if (attacktimer < itemframes)
+            image_index = attacktimer
         else
-            self.image_index = self.itemframes
+            image_index = itemframes
         if (scr_monsterpop() == 0)
-            self.attacktimer = 0
-        self.index = self.image_index
-        self.thissprite = self.itemsprite
-        self.attacktimer += 0.5
+            attacktimer = 0
+        index = image_index
+        thissprite = itemsprite
+        attacktimer += 0.5
     }
-    if (self.state == 6)
+    if (state == 6)
     {
         if (global.myfight == 3)
         {
-            if (self.acttimer < self.actframes)
-                self.acttimer += 0.5
+            if (acttimer < actframes)
+                acttimer += 0.5
         }
         else
-            self.acttimer += 0.5
-        self.thissprite = self.actsprite
-        self.index = self.acttimer
-        if (self.acttimer >= self.actreturnframes)
+            acttimer += 0.5
+        thissprite = actsprite
+        index = acttimer
+        if (acttimer >= actreturnframes)
         {
-            self.acttimer = 0
-            self.state = 0
-            global.faceaction[self.myself] = 0
+            acttimer = 0
+            state = 0
+            global.faceaction[myself] = 0
         }
     }
-    if (self.state == 7)
+    if (state == 7)
     {
-        self.hurt = 0
-        self.hurttimer = 0
-        if (self.victoryanim < self.victoryframes)
+        hurt = false
+        hurttimer = 0
+        if (_sideb == 1 && _victoried == 0)
         {
-            self.thissprite = self.victorysprite
-            self.index = self.victoryanim
-            self.victoryanim += 0.334
+            _victorysequence = instance_create(x, y, obj_noellevictory_example)
+            _victorysequence.depth = (depth - 1)
+            _victoried = 1
+            image_alpha = 0
+        }
+        if (victoryanim < victoryframes)
+        {
+            thissprite = victorysprite
+            index = victoryanim
+            victoryanim += 0.334
         }
         else
         {
-            self.thissprite = self.normalsprite
-            self.index = 0
+            thissprite = normalsprite
+            index = 0
         }
     }
-    if (self.hurt == 1)
+    if (hurt == true)
     {
-        self.hurtindex = (self.hurttimer / 2)
-        if (self.hurtindex > 2)
-            self.hurtindex = 2
-        if (global.charcond[self.myself] == 5)
+        hurtindex = (hurttimer / 2)
+        if (hurtindex > 2)
+            hurtindex = 2
+        if (global.charcond[myself] == 5)
         {
-            global.faceaction[self.myself] = 5
-            global.charmove[self.myself] = 1
-            global.charcond[self.myself] = 0
+            global.faceaction[myself] = 5
+            global.charmove[myself] = true
+            global.charcond[myself] = 0
         }
-        if (global.faceaction[self.myself] == 0)
-            global.faceaction[self.myself] = 5
-        if (global.faceaction[self.myself] != 4)
+        if (global.faceaction[myself] == 0)
+            global.faceaction[myself] = 5
+        if (global.faceaction[myself] != 4)
         {
-            self.specdraw = 1
-            draw_sprite_ext(self.hurtsprite, self.hurtindex, ((self.x - 20) + (self.hurtindex * 10)), self.y, 2, 2, 0, self.image_blend, self.image_alpha)
+            specdraw = 1
+            draw_sprite_ext(hurtsprite, hurtindex, ((x - 20) + (hurtindex * 10)), y, 2, 2, 0, image_blend, image_alpha)
         }
         else
         {
-            self.specdraw = 1
-            self.thissprite = self.defendsprite
-            self.index = self.defendtimer
-            draw_sprite_ext(self.defendsprite, self.defendtimer, ((self.x - 20) + (self.hurtindex * 10)), self.y, 2, 2, 0, self.image_blend, self.image_alpha)
+            specdraw = 1
+            thissprite = defendsprite
+            index = defendtimer
+            draw_sprite_ext(defendsprite, defendtimer, ((x - 20) + (hurtindex * 10)), y, 2, 2, 0, image_blend, image_alpha)
         }
-        if (self.hurttimer > 15)
+        if (hurttimer > 15)
         {
-            self.hurttimer = 0
-            self.hurt = 0
-            if (global.faceaction[self.myself] == 5)
-                global.faceaction[self.myself] = 0
+            hurttimer = 0
+            hurt = false
+            if (global.faceaction[myself] == 5)
+                global.faceaction[myself] = 0
         }
-        self.hurttimer += 1
+        hurttimer += 1
     }
 }
 else
 {
-    global.charcond[self.myself] = 0
-    self.hurttimer = 0
-    self.hurt = 0
-    self.thissprite = self.defeatsprite
-    self.index = 0
-    self.siner += 1
+    global.charcond[myself] = 0
+    hurttimer = 0
+    hurt = false
+    thissprite = defeatsprite
+    index = 0
+    siner += 1
 }
-if (self.specdraw == 0)
+if (specdraw == 0)
 {
-    self.sprite_index = self.thissprite
-    self.image_index = self.index
-    draw_sprite_ext(self.thissprite, self.index, self.x, self.y, 2, 2, 0, self.image_blend, self.image_alpha)
-    if (self.flash == 1)
+    sprite_index = thissprite
+    image_index = index
+    draw_sprite_ext(thissprite, index, x, y, 2, 2, 0, image_blend, image_alpha)
+    if (flash == true)
     {
-        self.fsiner += 1
-        d3d_set_fog(1, 16777215, 0, 1)
-        draw_sprite_ext(self.thissprite, self.index, self.x, self.y, 2, 2, 0, self.image_blend, (((-cos((self.fsiner / 5))) * 0.4) + 0.6))
-        d3d_set_fog(0, 0, 0, 0)
+        fsiner += 1
+        d3d_set_fog(true, c_white, 0, 1)
+        draw_sprite_ext(thissprite, index, x, y, 2, 2, 0, image_blend, (((-(cos((fsiner / 5)))) * 0.4) + 0.6))
+        d3d_set_fog(false, c_black, 0, 0)
     }
 }
-self.specdraw = 0
-if (self.becomeflash == 0)
-    self.flash = 0
-if (global.targeted[self.myself] == 1)
+specdraw = 0
+if (becomeflash == false)
+    flash = false
+if (global.targeted[myself] == true)
 {
-    if (global.mnfight == 1)
-        draw_sprite_ext(spr_chartarget, (self.siner / 10), self.x, self.y, 2, 2, 0, 0x00FFFFFF, 1)
+    if (global.mnfight == 1 && global.chapter == 1)
+        draw_sprite_ext(spr_chartarget, (siner / 10), x, y, 2, 2, 0, c_white, 1)
 }
-else if ((self.combatdarken == 1) && instance_exists(obj_darkener))
+else if (combatdarken == true && instance_exists(obj_darkener))
 {
-    if (self.darkify == 1)
+    if (darkify == true)
     {
-        if (self.darkentimer < 15)
-            self.darkentimer += 1
-        self.image_blend = merge_color(0x00FFFFFF, 0x00000000, (self.darkentimer / 30))
+        if (darkentimer < 15)
+            darkentimer += 1
+        image_blend = merge_color(c_white, c_black, (darkentimer / 30))
     }
 }
-if (self.darkify == 0)
+if (darkify == false)
 {
-    if (self.darkentimer > 0)
-        self.darkentimer -= 3
-    self.image_blend = merge_color(0x00FFFFFF, 0x00000000, (self.darkentimer / 30))
+    if (darkentimer > 0)
+        darkentimer -= 3
+    image_blend = merge_color(c_white, c_black, (darkentimer / 30))
 }
-self.becomeflash = 0
+becomeflash = false
+if (poisonamount > 0)
+{
+    poisontimer++
+    if (poisontimer >= 10)
+    {
+        if (global.hp[global.char[myself]] > 1)
+        {
+            global.hp[global.char[myself]] = (global.hp[global.char[myself]] - 1)
+            poisonamount--
+        }
+        else
+            poisonamount = 0
+        poisontimer = 0
+    }
+}

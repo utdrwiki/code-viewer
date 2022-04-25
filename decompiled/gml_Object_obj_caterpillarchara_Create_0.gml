@@ -1,45 +1,69 @@
 scr_depth()
-self.image_speed = 0
-self.darkmode = global.darkzone
-if (self.darkmode == 1)
+image_speed = 0
+darkmode = global.darkzone
+if (darkmode == true)
 {
-    self.image_xscale = 2
-    self.image_yscale = 2
+    image_xscale = 2
+    image_yscale = 2
 }
-self.walk = 0
-self.fun = 0
-self.runmove = 0
-self.dir = 0
-self.walkbuffer = 0
-self.walktimer = 0
-self.blushtimer = 0
-self.target = 12
-self.usprite = spr_susieu_dark
-self.dsprite = spr_susied_dark
-self.rsprite = spr_susier_dark
-self.lsprite = spr_susiel_dark
-if (global.plot >= 240)
+walk = false
+fun = false
+follow = 1
+runmove = false
+dir = 0
+walkbuffer = 0
+walktimer = 0
+slided = 0
+blushtimer = 0
+name = "susie"
+target = 12
+usprite = spr_susieu_dark
+dsprite = spr_susied_dark
+rsprite = spr_susier_dark
+lsprite = spr_susiel_dark
+slidesprite = spr_susie_slide
+if (global.chapter >= 2)
 {
-    self.usprite = spr_susieu_dark
-    self.dsprite = spr_susied_dark_eyes
-    self.rsprite = spr_susier_dark_eyes
-    self.lsprite = spr_susiel_dark_eyes
+    usprite = spr_susie_walk_up_dw
+    rsprite = spr_susie_walk_right_dw
+    lsprite = spr_susie_walk_left_dw
+    dsprite = spr_susie_walk_down_dw
+    if (global.darkzone == false)
+    {
+        usprite = spr_susie_walk_up_lw
+        rsprite = spr_susie_walk_right_lw
+        lsprite = spr_susie_walk_left_lw
+        dsprite = spr_susie_walk_down_lw
+    }
 }
-self.usprite_blush = 206
-self.dsprite_blush = 204
-self.rsprite_blush = 210
-self.lsprite_blush = 208
-self.parent = obj_mainchara
-self.pd = self.parent.dsprite
-self.pr = self.parent.rsprite
-self.pl = self.parent.lsprite
-self.pu = self.parent.usprite
-for (self.i = 0; self.i < 25; self.i += 1)
+usprite_blush = spr_ralseiu
+dsprite_blush = spr_ralseid
+rsprite_blush = spr_ralseir_blush
+lsprite_blush = spr_ralseil_blush
+if (global.chapter >= 2)
 {
-    self.remx[self.i] = obj_mainchara.x
-    self.remy[self.i] = obj_mainchara.y
-    self.facing[self.i] = global.facing
+    usprite_blush = spr_ralsei_walk_up
+    dsprite_blush = spr_ralsei_walk_down_blush
+    rsprite_blush = spr_ralsei_walk_right_blush
+    lsprite_blush = spr_ralsei_walk_left_blush
 }
-self.depth = (obj_mainchara.depth + 5)
-self.mywidth = self.sprite_width
-self.myheight = self.sprite_height
+parent = obj_mainchara
+pd = parent.dsprite
+pr = parent.rsprite
+pl = parent.lsprite
+pu = parent.usprite
+for (i = 0; i < 75; i += 1)
+{
+    remx[i] = parent.x
+    remy[i] = parent.y
+    facing[i] = global.facing
+    sliding[i] = 0
+}
+depth = (parent.depth + 5)
+mywidth = sprite_width
+myheight = sprite_height
+xoffset = 0
+yoffset = 0
+init = false
+forget = 0
+ignoredepth = false

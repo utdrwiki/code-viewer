@@ -1,21 +1,31 @@
 global.facing = 0
-self.obj[0] = scr_marker(126, 63, spr_torieldesk)
-self.obj[1] = scr_marker(107, 116, spr_smalldesk)
-self.obj[2] = scr_marker(158, 116, spr_smalldesk)
-self.obj[3] = scr_marker(208, 116, spr_smalldesk)
-self.obj[4] = scr_marker(107, 145, spr_smalldesk)
-self.obj[5] = scr_marker(158, 145, spr_smalldesk)
-self.obj[6] = scr_marker(208, 145, spr_smalldesk)
-self.obj[7] = scr_marker(49, 179, spr_toyblock)
-self.obj[8] = scr_marker(261, 183, spr_godthrone)
-for (self.i = 0; self.i < 9; self.i += 1)
+var fruit = spr_lw_classroom_apple
+if (global.chapter == 2)
+    fruit = spr_lw_classroom_orange
+var desk_fruit = scr_marker(200, 75, fruit)
+obj[0] = scr_marker(126, 63, spr_torieldesk)
+obj[1] = scr_marker(107, 116, spr_smalldesk)
+obj[2] = scr_marker(158, 116, spr_smalldesk)
+obj[3] = scr_marker(208, 116, spr_smalldesk)
+obj[4] = scr_marker(107, 145, spr_smalldesk)
+obj[5] = scr_marker(158, 145, spr_smalldesk)
+obj[6] = scr_marker(208, 145, spr_smalldesk)
+if (global.chapter == 1)
+    obj[8] = scr_marker(261, 183, spr_godthrone)
+if (global.chapter == 2)
+    obj[8] = scr_marker(261, 173, spr_lw_classroom_godthrone)
+for (i = 0; i < 9; i += 1)
 {
-    with (self.obj[self.i])
+    with (obj[i])
         scr_depth()
 }
-self.sunset = scr_marker(0, 0, spr_torielclass_sunsetoverlay)
-with (self.sunset)
+desk_fruit.depth = (obj[0].depth - 10)
+if (global.plot >= 100)
 {
-    self.image_alpha = 0.4
-    self.depth = 2000
+    sunset = scr_marker(0, 0, spr_torielclass_sunsetoverlay)
+    with (sunset)
+    {
+        image_alpha = 0.4
+        depth = 2000
+    }
 }

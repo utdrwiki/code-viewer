@@ -1,112 +1,108 @@
-self.myinteract = 0
-self.talked = 0
-self.image_speed = 0
-self.itemflag = 104
-self.itemtype = "armor"
-self.t_itemid = 4
-self.close = 0
-self.extratext = 0
-if (self.room == room_field_maze)
-    self.extratext = 1
-if (self.room == room_field_secret1)
+myinteract = 0
+talked = false
+image_speed = 0
+itemflag = 104
+itemtype = "armor"
+itemidchest = 4
+close = 0
+extratext = 0
+extraevent = 0
+if (global.darkzone == true)
 {
-    self.itemflag = 117
-    self.itemtype = "key"
-    self.t_itemid = 7
-    self.extratext = 0
+    image_xscale = 2
+    image_yscale = 2
 }
-if (self.room == room_forest_dancers1)
+if (room == room_dw_cyber_battle_maze_1)
 {
-    self.itemflag = 107
-    self.itemtype = "item"
-    self.t_itemid = 2
-    self.extratext = 1
-    if (self.x >= (self.room_width / 2))
-    {
-        self.itemflag = 116
-        self.itemtype = "key"
-        self.t_itemid = 6
-        self.extratext = 0
-    }
+    itemidchest = 10
+    itemtype = "armor"
+    itemflag = 118
 }
-if (self.room == room_forest_area2A)
+if (room == room_dw_cyber_keyboard_puzzle_1)
 {
-    self.itemflag = 108
-    self.itemtype = "weapon"
-    self.t_itemid = 9
-    self.extratext = 1
+    itemidchest = 18
+    itemtype = "weapon"
+    itemflag = 119
 }
-if (self.room == room_forest_area3A)
+if (room == room_dw_cyber_maze_tasque)
 {
-    self.itemflag = 109
-    self.itemtype = "armor"
-    self.t_itemid = 2
-    self.extratext = 1
+    itemidchest = 10
+    itemtype = "armor"
+    itemflag = 120
+    extraevent = 1
 }
-if (self.room == room_forest_area4)
+if (room == room_dw_cyber_maze_queenscreen)
 {
-    if (self.y <= (self.room_height / 2))
-    {
-        self.itemflag = 110
-        self.itemtype = "gold"
-        self.t_itemid = 40
-        self.extratext = 1
-    }
-    else
-    {
-        self.itemflag = 111
-        self.itemtype = "item"
-        self.t_itemid = 2
-        self.extratext = 1
-    }
+    itemidchest = 27
+    itemtype = "item"
+    itemflag = 122
 }
-if (self.room == room_cc_prison_prejoker)
+if (room == room_dw_cyber_viro_ring)
 {
-    if (global.flag[112] == 1)
-        instance_destroy()
-    if (global.flag[242] == 0)
-        instance_destroy()
-    else
-    {
-        if (global.flag[242] == 1)
-        {
-            self.itemflag = 112
-            self.itemtype = "weapon"
-            self.t_itemid = 7
-        }
-        if (global.flag[242] == 2)
-        {
-            self.itemflag = 112
-            self.itemtype = "armor"
-            self.t_itemid = 7
-        }
-    }
+    itemidchest = 2
+    itemtype = "item"
+    itemflag = 123
 }
-if (self.room == room_cc_2f)
+if (room == room_dw_mansion_bridges)
 {
-    self.itemflag = 113
-    self.itemtype = "item"
-    self.t_itemid = 11
+    itemidchest = 30
+    itemtype = "item"
+    itemflag = 125
 }
-if (self.room == room_cc_4f)
+if (room == room_dw_cyber_teacup_final)
 {
-    self.itemflag = 114
-    self.itemtype = "item"
-    self.t_itemid = 2
-    self.extratext = 1
+    itemidchest = 19
+    itemtype = "weapon"
+    itemflag = 129
 }
-if (self.room == room_forest_secret1)
+if (room == room_dw_city_big_3)
 {
-    self.itemflag = 116
-    self.itemtype = "key"
-    self.t_itemid = 6
-    self.extratext = 0
+    itemidchest = 14
+    itemtype = "weapon"
+    itemflag = 130
 }
-if (global.darkzone == 1)
+if (room == room_dw_mansion_b_west_1f_b)
 {
-    self.image_xscale = 2
-    self.image_yscale = 2
+    itemtype = "money"
+    itemflag = 133
+    itemidchest = 1
 }
-if (global.flag[self.itemflag] == 1)
-    self.image_index = 1
+if (room == room_dw_city_treasure)
+{
+    itemflag = 134
+    itemtype = "armor"
+    itemidchest = 3
+}
+if (room == room_dw_city_cheesemaze)
+{
+    itemidchest = 16
+    itemtype = "item"
+    itemflag = 135
+}
+if (room == room_dw_mansion_east_1f_secret)
+{
+    itemidchest = 1
+    itemtype = "item"
+    itemflag = 136
+}
+if (room == room_dw_mansion_bridges)
+{
+    itemflag = 137
+    itemidchest = 30
+    itemtype = "item"
+}
+if (room == room_dw_mansion_east_2f_c_a)
+{
+    itemidchest = 3
+    itemtype = "item"
+    itemflag = 139
+}
+if (room == room_dw_mansion_east_1f_e)
+{
+    itemidchest = 11
+    itemtype = "armor"
+    itemflag = 141
+}
+if (global.flag[itemflag] == 1)
+    image_index = 1
 scr_depth()

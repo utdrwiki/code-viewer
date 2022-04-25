@@ -1,44 +1,44 @@
-if (self.dont == 0)
+if (dont == 0)
 {
-    if (self.active == 0)
+    if (active == false)
     {
-        draw_sprite_ext(self.sprite_index, 0, self.x, self.y, (3 - (self.image_alpha * 2)), (3 - (self.image_alpha * 2)), 0, 0x00FFFFFF, self.image_alpha)
-        if (self.image_alpha < 1)
+        draw_sprite_ext(sprite_index, 0, x, y, (3 - (image_alpha * 2)), (3 - (image_alpha * 2)), 0, c_white, image_alpha)
+        if (image_alpha < 1)
         {
-            self.image_alpha += 0.1
-            if (self.type == 1)
+            image_alpha += 0.1
+            if (type == 1)
             {
-                self.vspeed = 3
-                self.gravity = -0.5
+                vspeed = 3
+                gravity = -0.5
             }
         }
         else
         {
-            if (self.type == 0)
+            if (type == 0)
             {
-                if ((obj_heart.y + 8) < self.y)
+                if ((obj_heart.y + 8) < y)
                 {
-                    self.vspeed = 1
-                    self.gravity = -0.2
+                    vspeed = 1
+                    gravity = -0.2
                 }
                 else
                 {
-                    self.vspeed = -2
-                    self.gravity = 1
+                    vspeed = -2
+                    gravity = 1
                 }
             }
-            self.active = 1
+            active = true
         }
     }
-    draw_sprite_ext(self.sprite_index, 0, self.x, self.y, (2 - self.image_alpha), (2 - self.image_alpha), 0, 0x00FFFFFF, self.image_alpha)
-    if (self.type == 0)
+    draw_sprite_ext(sprite_index, 0, x, y, (2 - image_alpha), (2 - image_alpha), 0, c_white, image_alpha)
+    if (type == 0)
     {
-        if (self.speed > 8)
-            self.speed = 8
+        if (speed > 8)
+            speed = 8
     }
-    if (self.y > (__view_get(1, 0) + 500))
+    if (y > (__view_get((1 << 0), 0) + 500))
         instance_destroy()
-    if (self.y < (__view_get(1, 0) - 20))
+    if (y < (__view_get((1 << 0), 0) - 20))
         instance_destroy()
 }
-self.dont = 0
+dont = 0

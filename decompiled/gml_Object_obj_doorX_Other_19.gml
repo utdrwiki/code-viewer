@@ -1,7 +1,8 @@
 global.interact = 3
 instance_create(0, 0, obj_fadeout)
-if (self.touched == 0)
+if (touched == false)
 {
-    self.alarm[2] = 8
-    self.touched = 1
+    alarm[2] = 8
+    event_user(8)
+    touched = true
 }

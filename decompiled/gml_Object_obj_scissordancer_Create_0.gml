@@ -1,32 +1,32 @@
-self.image_speed = 0
-self.sndcon = 0
-self.sndtimer = 0
-self.dancetimer = (0 - (instance_number(self.object_index) * 2))
-self.image_xscale = 2
-self.image_yscale = 2
-global.charinstance[0] = 326
+image_speed = 0
+sndcon = 0
+sndtimer = 0
+dancetimer = (0 - (instance_number(object_index) * 2))
+image_xscale = 2
+image_yscale = 2
+global.charinstance[0] = obj_mainchara
 global.charinstance[1] = global.cinstance[0]
 global.charinstance[2] = global.cinstance[1]
-self.con = 0
-self.vspeed = -6
-self.specturn = 0
-if (self.room == room_cc_4f)
+con = 0
+vspeed = -6
+specturn = 0
+if (room == room_cc_4f)
 {
-    self.specturn = 1
-    self.vspeed = 0
-    self.hspeed = 6
+    specturn = 1
+    vspeed = 0
+    hspeed = 6
 }
-self.bullet = instance_create(self.x, self.y, obj_overworldbulletparent)
-self.bullet.sprite_index = spr_scissordancer_precise
-with (self.bullet)
+bullet = instance_create(x, y, obj_overworldbulletparent)
+bullet.sprite_index = spr_scissordancer_precise
+with (bullet)
 {
-    self.active = 1
-    self.target = 3
-    self.damage = 15
-    self.visible = 0
-    self.image_blend = 0x000000FF
-    self.image_alpha = 1
-    self.image_xscale = 2
-    self.image_yscale = 2
+    active = true
+    target = 3
+    damage = 15
+    visible = false
+    image_blend = c_red
+    image_alpha = 1
+    image_xscale = 2
+    image_yscale = 2
 }
-self.myinteract = 0
+myinteract = 0

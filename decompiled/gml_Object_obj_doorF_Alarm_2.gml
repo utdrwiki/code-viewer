@@ -1,3 +1,4 @@
-global.entrance = 7
+global.entrance = 6
 instance_create(0, 0, obj_persistentfadein)
-room_goto(room_previous(room_previous(room_previous(self.room))))
+event_user(7)
+room_goto(room_previous(room_previous(room_previous(room))))

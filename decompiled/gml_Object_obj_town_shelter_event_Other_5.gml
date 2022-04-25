@@ -1,1 +1,1 @@
-snd_stop(self.dk)
+snd_stop(dk)

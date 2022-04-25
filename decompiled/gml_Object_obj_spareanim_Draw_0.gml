@@ -1,67 +1,67 @@
-if ((self.t >= 6) && (self.t <= 26))
+if (t >= 6 && t <= 26)
 {
-    self.afterimage += 1
-    d3d_set_fog(1, 16777215, 0, 1)
-    draw_sprite_ext(self.sprite_index, self.image_index, (self.x + (self.afterimage * 4)), self.y, self.image_xscale, self.image_yscale, 0, self.image_blend, (0.7 - (self.afterimage / 25)))
-    draw_sprite_ext(self.sprite_index, self.image_index, (self.x + (self.afterimage * 8)), self.y, self.image_xscale, self.image_yscale, 0, self.image_blend, (0.4 - (self.afterimage / 30)))
-    d3d_set_fog(0, 0, 0, 0)
+    afterimage += 1
+    d3d_set_fog(true, c_white, 0, 1)
+    draw_sprite_ext(sprite_index, image_index, (x + (afterimage * 4)), y, image_xscale, image_yscale, 0, image_blend, (0.7 - (afterimage / 25)))
+    draw_sprite_ext(sprite_index, image_index, (x + (afterimage * 8)), y, image_xscale, image_yscale, 0, image_blend, (0.4 - (afterimage / 30)))
+    d3d_set_fog(false, c_black, 0, 0)
 }
-if (self.t < 6)
+if (t < 6)
 {
-    if (self.t < 5)
-        draw_sprite_ext(self.sprite_index, self.image_index, self.x, self.y, self.image_xscale, self.image_yscale, 0, self.image_blend, (1 - (self.neotone / 4)))
-    d3d_set_fog(1, 16777215, 0, 1)
-    self.maxwhite = (self.t / 5)
-    if (self.maxwhite > 1)
-        self.maxwhite = 1
-    draw_sprite_ext(self.sprite_index, self.image_index, self.x, self.y, self.image_xscale, self.image_yscale, 0, self.image_blend, (self.maxwhite - (self.tone / 5)))
-    d3d_set_fog(0, 0, 0, 0)
+    if (t < 5)
+        draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, 0, image_blend, (1 - (neotone / 4)))
+    d3d_set_fog(true, c_white, 0, 1)
+    maxwhite = (t / 5)
+    if (maxwhite > 1)
+        maxwhite = 1
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, 0, image_blend, (maxwhite - (tone / 5)))
+    d3d_set_fog(false, c_black, 0, 0)
 }
-if ((self.t >= 1) && (self.t <= 5))
+if (t >= 1 && t <= 5)
 {
-    for (self.i = 0; self.i < 2; self.i += 1)
+    for (i = 0; i < 2; i += 1)
     {
-        self.star[self.starcount] = instance_create((self.x + random(self.sprite_width)), (self.y + random(self.sprite_height)), obj_marker)
-        with (self.star[self.starcount])
+        star[starcount] = instance_create((x + random(sprite_width)), (y + random(sprite_height)), obj_marker)
+        with (star[starcount])
         {
-            self.image_xscale = 2
-            self.image_yscale = 2
-            self.sprite_index = spr_sparestar_anim
-            self.image_alpha = 2
-            self.image_speed = 0.25
-            self.hspeed = -3
-            self.gravity = 0.5
-            self.gravity_direction = 0
+            image_xscale = 2
+            image_yscale = 2
+            sprite_index = spr_sparestar_anim
+            image_alpha = 2
+            image_speed = 0.25
+            hspeed = -3
+            gravity = 0.5
+            gravity_direction = 0
         }
-        self.starcount += 1
+        starcount += 1
     }
 }
-if ((self.t >= 5) && (self.t <= 30))
+if (t >= 5 && t <= 30)
 {
-    for (self.i = 0; self.i < self.starcount; self.i += 1)
+    for (i = 0; i < starcount; i += 1)
     {
-        with (self.star[self.i])
+        with (star[i])
         {
-            self.image_angle += 10
-            self.image_alpha -= 0.1
-            if (self.image_alpha <= 0)
+            image_angle += 10
+            image_alpha -= 0.1
+            if (image_alpha <= 0)
                 instance_destroy()
         }
     }
 }
-if ((self.t >= 5) && (self.t < 10))
-    self.tone += 1
-if (self.t >= 9)
+if (t >= 5 && t < 10)
+    tone += 1
+if (t >= 9)
 {
-    self.neotone += 1
-    if (self.neotone >= 30)
+    neotone += 1
+    if (neotone >= 30)
     {
-        for (self.i = 0; self.i < self.starcount; self.i += 1)
+        for (i = 0; i < starcount; i += 1)
         {
-            with (self.star[self.i])
+            with (star[i])
                 instance_destroy()
         }
         instance_destroy()
     }
 }
-self.t += 1
+t += 1

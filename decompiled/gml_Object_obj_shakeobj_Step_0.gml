@@ -1,13 +1,13 @@
-if (self.active == 0)
+if (active == false)
     instance_destroy()
-if (self.active == 1)
+if (active == true)
 {
-    if instance_exists(self.target)
+    if i_ex(target)
     {
-        self.shakeamt -= self.shakereduct
-        self.on *= -1
-        self.target.x = (self.nowx + (self.shakeamt * self.on))
-        if (self.shakeamt <= 0)
+        shakeamt -= shakereduct
+        on *= -1
+        target.x = (nowx + (shakeamt * on))
+        if (shakeamt <= 0)
             instance_destroy()
     }
     else

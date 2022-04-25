@@ -1,46 +1,63 @@
-self.image_speed = 0
-self.open = 0
-self.siner = 0
-self.xsin = 0
-self.con = 0
-if (global.plot < 5)
+image_speed = 0
+open = 0
+siner = 0
+xsin = 0
+con = 0
+if (global.chapter == 1)
 {
-    self.con = 1
-    with (obj_mainchara)
-        self.visible = 0
-    self.k = scr_marker(290, 198, spr_krisu)
-    self.s = scr_marker(310, 190, spr_susieu)
-    global.interact = 1
-    with (self.s)
+    if (global.plot < 5)
     {
-        self.vspeed = -1
-        self.image_speed = 0.2
+        con = 1
+        with (obj_mainchara)
+            visible = false
+        k = scr_marker(290, 198, spr_krisu)
+        s = scr_marker(310, 190, spr_susieu)
+        global.interact = 1
+        with (s)
+        {
+            vspeed = -1
+            image_speed = 0.2
+        }
+        with (k)
+        {
+            vspeed = -1
+            image_speed = 0.2
+        }
+        alarm[4] = 90
     }
-    with (self.k)
+    else
     {
-        self.vspeed = -1
-        self.image_speed = 0.2
+        block = instance_create(280, 100, obj_solidblock)
+        block.image_xscale = 4
+        sunset = scr_marker(0, 0, spr_doorarea_sunsetoverlay)
+        with (sunset)
+        {
+            image_alpha = 0.4
+            depth = 2000
+        }
     }
-    self.alarm[4] = 90
+    if (global.plot == 250)
+    {
+        with (obj_mainchara)
+        {
+            x = obj_markerD.x
+            y = obj_markerD.y
+        }
+        global.interact = 1
+        con = 40
+    }
 }
-else
+if (global.chapter >= 2)
 {
-    self.block = instance_create(280, 100, obj_solidblock)
-    self.block.image_xscale = 4
-    self.sunset = scr_marker(0, 0, spr_doorarea_sunsetoverlay)
-    with (self.sunset)
+    if (global.plot >= 100)
     {
-        self.image_alpha = 0.4
-        self.depth = 2000
+        sunset = scr_marker(0, 0, spr_doorarea_sunsetoverlay)
+        with (sunset)
+        {
+            image_alpha = 0.4
+            depth = 2000
+        }
+        if (!i_ex(obj_musicer_town))
+            instance_create(0, 0, obj_musicer_town)
     }
-}
-if (global.plot == 250)
-{
-    with (obj_mainchara)
-    {
-        self.x = obj_markerD.x
-        self.y = obj_markerD.y
-    }
-    global.interact = 1
-    self.con = 40
 }

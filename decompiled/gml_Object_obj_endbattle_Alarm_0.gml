@@ -1,20 +1,20 @@
 with (obj_mainchara)
 {
     if (global.specialbattle != 3)
-        self.cutscene = 0
-    self.visible = 1
+        cutscene = false
+    visible = true
 }
 with (obj_caterpillarchara)
-    self.visible = 1
-if ((global.specialbattle == 0) || (global.specialbattle == 3))
+    visible = true
+if (global.specialbattle == 0 || global.specialbattle == 3)
 {
-    for (self.i = 0; self.i < (self.count + 1); self.i += 1)
+    for (i = 0; i < (count + 1); i += 1)
     {
-        with (self.c[self.i])
+        with (c[i])
             instance_destroy()
     }
 }
-if ((global.specialbattle == 0) || (global.specialbattle == 2))
+if (global.specialbattle == 0 || global.specialbattle == 2)
     global.interact = 0
 if (global.flag[9] == 1)
 {

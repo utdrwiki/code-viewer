@@ -1,51 +1,70 @@
-self.myinteract = 0
-self.talked = 0
-self.image_speed = 0.2
-self.depthcancel = 0
-if (global.darkzone == 1)
+myinteract = 0
+talked = false
+image_speed = 0.2
+depthcancel = false
+extflag = 0
+extTrig = 0
+if (global.darkzone == true)
 {
-    self.image_xscale = 2
-    self.image_yscale = 2
+    image_xscale = 2
+    image_yscale = 2
 }
-if (self.room == room_dark1)
+if (room == room_town_mid)
 {
-    self.sprite_index = spr_shine
-    if ((global.time > 14400) || (global.flag[10] == 1))
-        instance_destroy()
-}
-if (self.room == room_town_mid)
-{
-    if (self.x >= 320)
-        self.sprite_index = spr_npc_icemascot_fake
+    if (x >= 320)
+        sprite_index = spr_npc_icemascot_fake
     else
-        self.sprite_index = spr_npc_icemascot2
+        sprite_index = spr_npc_icemascot2
 }
-if (self.room == room_diner)
+if (room == room_diner)
 {
-    self.sprite_index = spr_npc_greenfire
-    self.depth = 4000
-    self.depthcancel = 1
+    sprite_index = spr_npc_greenfire
+    depth = 4000
+    depthcancel = true
 }
-if (self.room == room_cc_clover)
-    self.sprite_index = spr_cc_boombox
-if (self.room == room_cc_6f)
-    self.sprite_index = spr_smallchecker_front
-if (self.room == room_cc_throneroom)
+if (room == room_cc_clover)
+    sprite_index = spr_cc_boombox
+if (room == room_townhall)
+    sprite_index = spr_npc_icee_suit
+if (room == room_lw_icee_pizza)
 {
-    if (global.plot < 240)
+    if (x > 110)
+        sprite_index = spr_npc_warrior
+}
+if (room == room_dw_ralsei_castle_1f)
+    sprite_index = spr_castle_cauldron
+if (room == room_dw_ralsei_castle_front)
+{
+    if (x >= 550 && x <= 650)
+    {
+        if (global.plot >= 200)
+        {
+            sprite_index = spr_npc_trashy
+            x = 590
+            y = 240
+        }
+        else
+            instance_destroy()
+    }
+}
+if (room == room_dw_city_roadblock)
+{
+    sprite_index = spr_npc_swatchling_sweep
+    image_speed = 0.1
+}
+if (room == room_dw_mansion_b_east_b)
+{
+    if (scr_keyitemcheck(10) == 0)
+        sprite_index = spr_shine
+    if (scr_keyitemcheck(10) == 1 || global.flag[309] >= 7)
         instance_destroy()
-    self.sprite_index = spr_smallchecker_front
 }
-if (self.room == room_field_maze)
+if (room == room_town_church)
+    sprite_index = spr_npc_rainykid
+if (room == room_dw_cyber_musical_door)
 {
-    self.sprite_index = spr_jigsawry_clobbered
-    if (global.plot >= 150)
-        instance_destroy()
+    if (extflag == "postSweet")
+        sprite_index = spr_npc_rainykid
 }
-if (self.room == room_forest_savepoint_relax)
-{
-    self.image_speed = 0.1
-    self.sprite_index = spr_diamond_fan
-}
-if (self.depthcancel == 0)
+if (depthcancel == false)
     scr_depth()

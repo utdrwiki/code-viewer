@@ -1,0 +1,6 @@
+draw_self()
+draw_set_blend_mode(0)
+draw_sprite_ext_glow(headsprite, image_index, x, y, image_xscale, image_yscale, 0, c_white, image_alpha, 16777215)
+draw_set_blend_mode(1)
+draw_sprite_ext_glow(headsprite, image_index, x, y, image_xscale, image_yscale, 0, headcolor, image_alpha, 16777215)
+draw_set_blend_mode(0)

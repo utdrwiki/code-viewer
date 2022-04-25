@@ -1,11 +1,20 @@
-if (self.wall_destroy == 1)
+if (wall_destroy == 1)
 {
-    if (self.x < (__view_get(0, 0) - 40))
+    if (x < (__view_get((0 << 0), 0) - 80))
         instance_destroy()
-    if (self.x > (__view_get(0, 0) + 680))
+    if (x > (__view_get((0 << 0), 0) + 760))
         instance_destroy()
-    if (self.y < (__view_get(1, 0) - 40))
+    if (y < (__view_get((1 << 0), 0) - 80))
         instance_destroy()
-    if (self.y > (__view_get(1, 0) + 520))
+    if (y > (__view_get((1 << 0), 0) + 580))
         instance_destroy()
+}
+if (updateimageangle == 1)
+    image_angle = direction
+if (spin == 1)
+    image_angle += spinspeed
+if (bottomfade != 0)
+{
+    if (y > (cameray() + bottomfade))
+        image_alpha *= 0.8
 }

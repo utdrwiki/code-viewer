@@ -1,0 +1,17 @@
+search = 0
+targetstring = "weapon"
+init = false
+image_xscale = 0
+image_yscale = 0
+state = 0
+image_speed = 0
+stringlength = 0
+timer = 0
+typetimer = 0
+childdireciton = 180
+spawndelay = 0
+firsttime = 0
+damage = -1
+target = -1
+quick = 0
+donttypeanything = 0

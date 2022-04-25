@@ -171,7 +171,8 @@
 		$file	= preg_replace('/\n\s*{$/m', ' {', $file);
 
 		//$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)("[@0-9A-F]+\))/mi', "textvar_to_text", $file);
-		$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)(")\)/mi', "textvar_to_text", $file);
+		$file	= preg_replace_callback('/(stringsetloc\(")((?:[^"\\\\]|\\\\.)+)(", "[a-z0-9_-]+"\))/mi', "textvar_to_text", $file);
+		$file	= preg_replace_callback('/(?<=[( ])(")((?:[^"\\\\]|\\\\.)+)(", "[a-z0-9_-]+")/mi', "textvar_to_text", $file);
 		$file	= preg_replace_callback('/(global\.flag\[)([0-9]+)(\])/mi', 'flagcolor', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()([0-9]+)(\))/im', 'keyboard', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()(\'.\'|[0-9]+|vk_[^)]+)(\))/im', 'keyboard', $file);
@@ -181,7 +182,7 @@
 		$file	= preg_replace_callback('/(global\.monstertype\b.*[!=]+\s*)([0-9]+)/mi', 'enemylist', $file);
 
 		#if (!$secondLevel) {
-			$file	= preg_replace_callback('/(\b)(scr_[a-zA-Z0-9_]+)\(/mi', 'functionlink', $file);
+			$file = preg_replace_callback('/(\b)(s?cr?_[a-zA-Z0-9_]+)\(/mi', 'functionlink', $file);
 		#}
 
 		//$file	= preg_replace_callback('/^[ \t]+/m', "unindent", $file);
@@ -190,7 +191,7 @@
 		}
 
 		#if (!$secondLevel) {
-			$file	= preg_replace_callback('/(<div>|^)( *.+)(\.alarm\[([0-9]+)\])( = .*$)/m', 'alarmer', $file);
+			$file = preg_replace_callback('/(<div>|^)( *.+)(alarm\[([0-9]+)\])( = .*$)/m', 'alarmer', $file);
 		#}
 
 		$mangled[$filename]	= $file;
@@ -234,13 +235,14 @@
 		$obj	= explode(".", $objT[0]);
 		$objN	= $obj[0];
 
-		if (count($obj) === 2 && $objN === "self") {
+		$objN = $baseFile; // sorry xkeeper
+		if (count($obj) === 2 && $objN === "self") { // dunno how this is supposed to work but I'll just let it do its non-working thing.
 			$objN	= $baseFile;
 		} elseif (count($obj) == 2) {
 			$objN	= "gml_Object_". $objN;
 		} else {
 			$out	= "<div class='alarmT'><strong>(unknown reference)</strong>\n\nyou're on your own, sorry.\ncheck for 'instance_create' nearby.</div>";
-			return $matches[1] . "<span class='alarmC'><span class='alarmU'>" . $matches[2] ."<span class='alarm'>". $matches[3] ."</span>". $matches[5] ."</span><span class='alarmA'></span>". $out ."</span><span class='c'></span>";
+			//return $matches[1] . "<span class='alarmC'><span class='alarmU'>" . $matches[2] ."<span class='alarm'>". $matches[3] ."</span>". $matches[5] ."</span><span class='alarmA'></span>". $out ."</span><span class='c'></span>";
 		}
 
 		$objF	= "{$objN}_Alarm_$matches[4].gml";
@@ -369,7 +371,7 @@
 		$roomtext	= $matches[2];
 		$roomalt	= null;
 		$roomdesc	= null;
-
+/*
 		if (is_numeric($matches)) {
 			$room		= D_Rooms::getId($matches[2]);
 			if ($room) {
@@ -391,6 +393,8 @@
 		}
 
 		return $matches[1] ."<span class='room'>$roomalt $roomtext <span class='roomdesc'>$roomdesc</span></span>";
+*/
+		return "<span class='room'>$roomtext</span>";
 	}
 
 
@@ -406,7 +410,7 @@
 		//var_dump($lang);
 		//var_dump($matches);
 		//die();
-		$text	= D_Lang::getText($matches[2]);
+		$text	= $matches[2];
 		if ($text) {
 			//return $matches[1] .
 			//	"<span class='langvar'>$matches[2]</span>$matches[3] ".
@@ -438,16 +442,20 @@
 		}
 
 		public static function parseText($text) {
-			$text	= preg_replace('#/#i', '<span class="cc cc-wait">Wait for input</span>', $text);
+			$text	= preg_replace('#(?<!`)/#i', '<span class="cc cc-wait">Wait for input</span>', $text);
 			$text	= preg_replace('#\^([1-9])(.)#i', '\2<span class="cc cc-delay">Delay \1<span>\1</span></span>', $text);
-			$text	= preg_replace('#&#i', '<br>', $text);
-			$text	= preg_replace('#%#i', '<span class="cc cc-close">Close Message</span>', $text);
-			$text	= preg_replace('#\\\\E(.)#', '<span class="cc-face">Face \1</span>', $text);
-			#$text	= preg_replace('#\\\\c(.)#', '(color: \1)', $text);
-			$text	= preg_replace('#\\\\c(.)(.*?)(?=\\\\c|$)#', '<span class="cc-color cc-\1">\2</span>', $text);
-			$text	= preg_replace('#\\\\T(.)#', '<span class="cc-face">Sound \1</span>', $text);
-			$text	= preg_replace('#\\\\F(.)#', '<span class="cc-face">Char \1</span>', $text);
-			$text	= preg_replace('#\\\\C(.)#', '<span class="cc-face">Choice type \1</span>', $text);
+			$text	= preg_replace('#(?<!`)&	?#i', '<br>', $text);
+			$text	= preg_replace('#(?<!`)%#i', '<span class="cc cc-close">Close Message</span>', $text);
+			$text	= preg_replace('#\\\\\\\\[EM](.)#', '<span class="cc-face">Face \1</span>', $text);
+			$text	= preg_replace('#\\\\\\\\m(.)	+\*?#', '<span class="cc-face">Mini face \1</span> ', $text);
+			$text	= preg_replace('#\\\\\\\\f(.)	+\*?#', '<span class="cc-face">Mini text \1</span> ', $text);
+			#$text	= preg_replace('#\\\\\\\\c(.)#', '(color: \1)', $text);
+			$text	= preg_replace('#\\\\\\\\c(.)(.*?)(?=\\\\\\\\c|$)#', '<span class="cc-color cc-\1">\2</span>', $text);
+			$text	= preg_replace('#\\\\\\\\T(.)#', '<span class="cc-face">Sound \1</span>', $text);
+			$text	= preg_replace('#\\\\\\\\F(.)#', '<span class="cc-face">Char \1</span>', $text);
+			$text	= preg_replace('#\\\\\\\\C(.)#', '<span class="cc-face">Choice type \1</span>', $text);
+			$text   = preg_replace('#\\\\"#', '"', $text);
+			$text   = preg_replace('#`(.)#', '\1', $text);
 			return $text;
 		}
 

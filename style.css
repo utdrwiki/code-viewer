@@ -401,3 +401,11 @@ input {
 hr {
 	border-color: #666;
 	}
+
+.code tr td:first-child {
+	user-select: none;
+}
+
+.code .selected {
+	background-color: #333;
+}

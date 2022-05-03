@@ -33,9 +33,14 @@
 </div>
 
 <h1>decompiled <del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</h1>
-<strong>
-	<a href="/">&larr; back to main script listing</a></strong>
-	<br>(etc: <a href="data/enemy.txt">enemy ids (deltarune)</a> - <a href="data/rooms.txt">room list (deltarune)</a> - <a href="data/flags.txt">flag names (deltarune)</a>)
+<?php
+	if (isset($_GET['f'])) {
+?>
+	<strong><a href="..">&larr; back to main script listing</a></strong><br>
+<?php
+	}
+?>
+	(etc: <a href="data/enemy.txt">enemy ids (deltarune)</a> - <a href="data/rooms.txt">room list (deltarune)</a> - <a href="data/flags.txt">flag names (deltarune)</a>)
 <?php
 
 	error_reporting(E_ALL);

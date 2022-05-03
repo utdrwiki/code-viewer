@@ -29,7 +29,7 @@
 	<br>ported for personal use on Windows by Grossley
 	<br>made into a static website by Jacky720 and KockaAdmiralac.
 	<br>source on <a href="https://github.com/KockaAdmiralac/deltarune-viewer">github</a>
-	<br>links: <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>, <a href="https://tcrf.net/Deltarune">tcrf</a>
+	<br>links: <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>, <a href="https://tcrf.net/Deltarune">tcrf</a>, <a href="https://deltarune.fandom.com">wiki</a>
 </div>
 
 <h1>decompiled <del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</h1>

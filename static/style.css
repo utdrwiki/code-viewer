@@ -409,3 +409,11 @@ hr {
 .code .selected {
 	background-color: #333;
 }
+
+.hidden {
+	display: none;
+}
+
+#search-list .no-results {
+	font-style: italic;
+}

@@ -5,12 +5,10 @@ output_dir="$1"
 script_name="$2"
 if [ -z "$output_dir" ]
 then
-    echo "Please specify an output directory as the first argument."
-    exit 1
+    output_dir=out
 fi
 
-cp style.css "$output_dir"
-cp script.js "$output_dir"
+cp static/* "$output_dir"
 if [ -z "$script_name" ]
 then
     echo "Rebuilding entire site."

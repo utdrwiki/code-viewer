@@ -37,7 +37,7 @@
     "bugs": {
         "url": "https://github.com/KockaAdmiralac/deltarune-viewer/issues"
     },
-    "homepage": "https://github.com/KockaAdmiralac/deltarune-viewer#readme",
+    "homepage": "https://deltarune.kocka.tech",
     "dependencies": {
         "algoliasearch": "4.13.0",
         "dotenv": "16.0.0"

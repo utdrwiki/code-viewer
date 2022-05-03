@@ -15,6 +15,7 @@ fi
 
 cp static/* "$output_dir"
 cp -r data "$output_dir"
+cp -r decompiled "$output_dir"
 cp node_modules/algoliasearch/dist/algoliasearch-lite.umd.js "$output_dir"
 if [ -z "$script_name" ]
 then

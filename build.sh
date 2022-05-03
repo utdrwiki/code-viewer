@@ -8,12 +8,18 @@ then
     output_dir=out
 fi
 
+if [ -f .env ]
+then
+    source .env
+fi
+
 cp static/* "$output_dir"
+cp node_modules/algoliasearch/dist/algoliasearch-lite.umd.js "$output_dir"
 if [ -z "$script_name" ]
 then
     echo "Rebuilding entire site."
     rm -f "$output_dir/*.html"
-    php index.php > "$output_dir/index.html"
+    ALGOLIA_APP="$ALGOLIA_APP" ALGOLIA_KEY_PUBLIC="$ALGOLIA_KEY_PUBLIC" php index.php > "$output_dir/index.html"
 
     files=`find decompiled -name "*.gml"`
     count=`echo "$files" | wc -l`

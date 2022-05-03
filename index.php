@@ -27,7 +27,7 @@
 	<em>this is the <strong><del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</strong></em>
 	<br>by <a href="https://twitter.com/xkeepah">xkeeper</a>
 	<br>ported for personal use on Windows by Grossley
-	<br>made into a yet nonfunctional static website by Jacky720 and KockaAdmiralac.
+	<br>made into a static website by Jacky720 and KockaAdmiralac.
 	<br>source on <a href="https://github.com/KockaAdmiralac/deltarune-viewer">github</a>
 	<br>links: <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>, <a href="https://tcrf.net/Deltarune">tcrf</a>
 </div>
@@ -47,9 +47,28 @@
 	}
 
 	if (!isset($_GET['f'])) {
-
-
-		print "<h2>script listing</h2><form action='' method='get'>search (does not work): <input type='text' name='s' size='20'> <input type='submit' value='go'></form><br>";
+		$algolia_key = isset($_SERVER['ALGOLIA_KEY_PUBLIC']) ? $_SERVER['ALGOLIA_KEY_PUBLIC'] : false;
+		$algolia_app = isset($_SERVER['ALGOLIA_APP']) ? $_SERVER['ALGOLIA_APP'] : false;
+		if ($algolia_key && $algolia_app) {
+?>
+	<form method="GET" id="search-form">
+		<label for="search">search:</label>
+		<input type="text" name="search" size="20"></input>
+		<input type="hidden" name="key" value="<?php echo $algolia_key; ?>"></input>
+		<input type="hidden" name="app" value="<?php echo $algolia_app; ?>"></input>
+		<input type="submit" value="go"></input>
+	</form>
+	<section class="hidden" id="search-results">
+		<h2>search results</h2>
+		<ul id="search-list"></ul>
+	</section>
+	<script src="algoliasearch-lite.umd.js"></script>
+	<script src="search.js"></script>
+<?php
+		}
+?>
+	<h2>script listing</h2>
+<?php
 		$a = scandir("./decompiled/");
 		$lastseg	= "";
 /* 		$junkfiles	= "";

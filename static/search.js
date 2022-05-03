@@ -27,7 +27,7 @@
                 // TODO: Implement search result preview.
                 const result = document.createElement('li');
                 const resultLink = document.createElement('a');
-                resultLink.href = `/${file.replace(/\.gml$/, '.html')}`;
+                resultLink.href = file.replace(/\.gml$/, '.html');
                 resultLink.textContent = file;
                 result.appendChild(resultLink);
                 searchList.appendChild(result);

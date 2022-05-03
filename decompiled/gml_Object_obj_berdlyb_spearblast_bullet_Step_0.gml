@@ -11,7 +11,7 @@ if (spawnrate >= 0)
 {
     if (spawntimer == spawnrate)
     {
-        d = scr_childbullet(x, y, 489)
+        d = scr_childbullet(x, y, 491)
         d.grazepoints = childgraze
         d.image_angle = direction
         spawntimer = 0
@@ -26,7 +26,7 @@ if (spawnchild >= 1)
     {
         for (i = 0; i < spawnchild; i++)
         {
-            d = scr_childbullet(x, y, 490)
+            d = scr_childbullet(x, y, 492)
             d.grazepoints = childgraze
             d.direction = (direction + childOffset)
             if (spawnchild == 2)

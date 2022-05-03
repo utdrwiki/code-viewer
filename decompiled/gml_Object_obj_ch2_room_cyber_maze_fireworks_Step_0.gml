@@ -154,7 +154,7 @@ if (fireworks_con == 4)
                 is_active = true
         }
     }
-    if (timer == 90)
+    if (timer >= 90)
     {
         global.interact = 0
         global.facing = 0

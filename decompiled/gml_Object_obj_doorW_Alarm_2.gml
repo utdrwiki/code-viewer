@@ -298,11 +298,6 @@ if (room == room_dw_city_dog_traffic)
 }
 if (room == room_dw_city_traffic_4)
 {
-    if (x > 3100 && y > 400)
-    {
-        global.entrance = 23
-        room_goto(room_dw_city_spamton_alley)
-    }
     if (x > 4500)
     {
         global.entrance = 24

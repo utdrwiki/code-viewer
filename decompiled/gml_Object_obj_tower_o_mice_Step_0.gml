@@ -1,8 +1,10 @@
 if (con == 0)
 {
     if instance_exists(obj_noelle_scared)
+    {
         x = ((obj_noelle_scared.x + 23) - 5)
-    y = (obj_noelle_scared.y + 80)
+        y = (obj_noelle_scared.y + 80)
+    }
 }
 if (con == 1)
 {

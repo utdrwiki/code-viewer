@@ -34,7 +34,7 @@ if (timer <= 0 && mausqueue > 0)
     }
     if (dontcreatemouse == 0)
     {
-        d = scr_childbullet(xx, yy, 470)
+        d = scr_childbullet(xx, yy, 472)
         if (nexthole < 4)
             d.direction += (90 * side)
         else if (side > 0)

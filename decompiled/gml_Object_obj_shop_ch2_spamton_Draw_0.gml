@@ -789,7 +789,7 @@ if (menu == 4)
 }
 if down_p()
 {
-    if (menu != 11 && menu != 12 && menu != 13)
+    if (menu != 11 && menu != 12 && menu != 13 && greybg != 1)
     {
         menuc[menu] += 1
         if (menuc[menu] > menumax)
@@ -798,7 +798,7 @@ if down_p()
 }
 if up_p()
 {
-    if (menu != 11 && menu != 12 && menu != 13)
+    if (menu != 11 && menu != 12 && menu != 13 && greybg != 1)
     {
         menuc[menu] -= 1
         if (menuc[menu] < 0)

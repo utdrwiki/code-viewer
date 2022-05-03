@@ -600,7 +600,7 @@ if (EVENT == 67)
         if (FN_2 == "GASTER" || FN_2 == "がすたー" || FN_2 == "ガスター")
         {
             snd_free_all_ch1()
-            game_restart()
+            game_restart_true_ch1()
         }
     }
     else
@@ -656,7 +656,7 @@ if (EVENT == 71)
         if (FN_3 == "GASTER" || FN_3 == "がすたー" || FN_3 == "ガスター")
         {
             snd_free_all_ch1()
-            game_restart()
+            game_restart_true_ch1()
         }
     }
     else

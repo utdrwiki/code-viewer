@@ -23,3 +23,5 @@ remx = x
 hurtalpha = 0
 instance_create(x, y, obj_sneo_lastattack_hitbox)
 endattack = 0
+with (obj_wreckpausespew)
+    image_index = 2

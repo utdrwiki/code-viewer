@@ -173,7 +173,7 @@ scr_tb_pattern = function() //gml_Script_scr_tb_pattern
     {
         switch _pattern
         {
-            case 19:
+            case 20:
                 scr_tb_make(500, 90, 0, 3, 0)
                 scr_tb_make(600, 120, 0, 3, 0)
                 scr_tb_make(700, 150, 0, 3, 0)
@@ -196,7 +196,7 @@ scr_tb_pattern = function() //gml_Script_scr_tb_pattern
                     scr_tb_make((2700 + (i * 20)), (180 + (i * 10)), 0, 0, 1)
                 }
                 break
-            case 88:
+            case 89:
                 _spacing = 74
                 _distance = 440
                 _bullets = (_distance div _spacing)
@@ -209,7 +209,7 @@ scr_tb_pattern = function() //gml_Script_scr_tb_pattern
                         bullet.boostAmount = 8
                 }
                 break
-            case 174:
+            case 175:
                 var _angle = [30, 150, 270]
                 lasti = 2
                 for (i = 0; i <= lasti; i++)
@@ -222,7 +222,7 @@ scr_tb_pattern = function() //gml_Script_scr_tb_pattern
                 scr_tb_make_split(2100, 0, 0, 4, 4)
                 scr_tb_make_split(2400, 45, 0, 4, 4)
                 break
-            case 177:
+            case 178:
                 scr_tb_make_split(650, 0, -3, 3, 0)
                 scr_tb_make_split(840, 30, 3, 3, 0)
                 scr_tb_make_split(1030, 60, -3, 3, 0)
@@ -233,7 +233,7 @@ scr_tb_pattern = function() //gml_Script_scr_tb_pattern
                 scr_tb_make_split(1980, 90, 6, 3, 0)
                 scr_tb_make_split(2170, 90, 6, 3, 0)
                 break
-            case 176:
+            case 177:
                 scr_tb_make_split(650, 90, 6, 3, 0)
                 scr_tb_make_split(700, 90, 6, 3, 0)
                 scr_tb_make_split(750, 90, 6, 3, 0)
@@ -245,7 +245,7 @@ scr_tb_pattern = function() //gml_Script_scr_tb_pattern
                 scr_tb_make_split(1450, 90, 6, 3, 0)
                 scr_tb_make_split(1500, 90, 6, 3, 3)
                 break
-            case 175:
+            case 176:
                 scr_tb_make_split(640, 70, -3, 2, 4)
                 scr_tb_make_split(900, 180, 3, 2, 4)
                 scr_tb_make(1100, 0, -4, 3, 0)
@@ -254,7 +254,7 @@ scr_tb_pattern = function() //gml_Script_scr_tb_pattern
                 scr_tb_make(1960, 120, 4, 3, 0)
                 scr_tb_make(1960, 240, 4, 3, 0)
                 break
-            case 184:
+            case 185:
                 var aa = 300
                 for (var ii = 0; ii < 10; ii++)
                     scr_tb_make_split(((aa + 950) + (ii * 40)), 90, 10, 3, 0)

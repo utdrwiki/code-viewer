@@ -1,8 +1,9 @@
 scr_get_input_name_ch1 = function(argument0) //gml_Script_scr_get_input_name_ch1
 {
+    var _control = "[?]"
     if (global.is_console || obj_gamecontroller.gamepad_active)
     {
-        var _control = global.input_g[argument0]
+        _control = global.input_g[argument0]
         if (_control == gp_padr)
             return "\\*D  ";
         if (_control == gp_padl)
@@ -14,11 +15,13 @@ scr_get_input_name_ch1 = function(argument0) //gml_Script_scr_get_input_name_ch1
         if (_control == global.button2)
             return "\\*C  ";
     }
+    var left_bracket = (global.lang == "en" ? "[" : "[")
+    var right_bracket = (global.lang == "en" ? "]" : "]")
+    _control = ((left_bracket + global.asc_def[global.input_k[argument0]]) + right_bracket)
+    if (!is_string(_control))
+        _control = "[?]"
     else
-    {
-        _control = (("[" + global.asc_def[global.input_k[argument0]]) + "]")
         return _control;
-    }
     return;
 }
 

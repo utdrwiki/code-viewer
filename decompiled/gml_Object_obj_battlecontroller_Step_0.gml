@@ -283,7 +283,7 @@ if (global.myfight == 0)
         with (obj_smallface)
             depth = 10
         thischar = global.charturn
-        if right_p()
+        if (right_p() || left_p())
         {
             cango = true
             spellcoord = global.bmenucoord[2][global.charturn]
@@ -302,18 +302,6 @@ if (global.myfight == 0)
                 cango = false
             }
             if (cango == true)
-            {
-                if ((spellcoord % 2) == 0)
-                    global.bmenucoord[2][global.charturn] += 1
-                else
-                    global.bmenucoord[2][global.charturn] -= 1
-            }
-        }
-        if left_p()
-        {
-            cango = true
-            spellcoord = global.bmenucoord[2][global.charturn]
-            if (global.battlespell[thischar][1] != 0)
             {
                 if ((spellcoord % 2) == 0)
                     global.bmenucoord[2][global.charturn] += 1
@@ -964,7 +952,6 @@ if scr_debug()
                 health_count = 10
             with (o_boxinghud)
                 sub_healthbar_count = 0
-            scr_debug_print("GIGA QUEEN AT 1 HP")
         }
         else
             scr_wincombat()
@@ -974,15 +961,9 @@ if scr_debug()
     if scr_debug_keycheck(vk_f8)
         scr_weaken_party(1)
     if scr_debug_keycheck(vk_f9)
-    {
         global.tension = 0
-        scr_debug_print("TP set to 0%")
-    }
     if scr_debug_keycheck(vk_f10)
-    {
         global.tension = 250
-        scr_debug_print("TP maxed out!!")
-    }
     if (scr_debug_keycheck(ord("M")) && (!instance_exists(obj_queen_enemy)) && (!instance_exists(obj_spamton_neo_enemy)))
     {
         if audio_is_playing(global.batmusic[1])

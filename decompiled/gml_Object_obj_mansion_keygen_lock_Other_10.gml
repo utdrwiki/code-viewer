@@ -2,7 +2,10 @@ if (unlocked == 0)
 {
     scr_speaker("no_name")
     if (scr_keyitemcheck(12) == 0)
+    {
         msgsetloc(0, "* It has a lock that seems impossible to open./%", "obj_mansion_keygen_lock_slash_Other_10_gml_5_0")
+        myinteract = 3
+    }
     if (scr_keyitemcheck(12) == 1)
     {
         unlocked = 1
@@ -11,7 +14,6 @@ if (unlocked == 0)
         global.flag[309] = 4
         con = 1
     }
-    myinteract = 3
     global.interact = 1
     mydialoguer = instance_create(0, 0, obj_dialoguer)
 }

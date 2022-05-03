@@ -39,6 +39,11 @@ scr_keyiteminfo_ch1 = function(argument0) //gml_Script_scr_keyiteminfo_ch1
             tempkeyitemdesc = scr_84_get_lang_string_ch1("scr_keyiteminfo_slash_scr_keyiteminfo_gml_39_0")
             tempkeyitemname = scr_84_get_lang_string_ch1("scr_keyiteminfo_slash_scr_keyiteminfo_gml_40_0")
             break
+        case 13:
+            tempkeyitemusable = true
+            tempkeyitemdesc = scr_84_get_lang_string_ch1("scr_keyiteminfo_slash_scr_keyiteminfo_gml_41_0")
+            tempkeyitemname = scr_84_get_lang_string_ch1("scr_keyiteminfo_slash_scr_keyiteminfo_gml_42_0")
+            break
     }
 
     return;

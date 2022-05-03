@@ -1,3 +1,5 @@
+if (blockbuffer > 0)
+    blockbuffer--
 if (global.monster[myself] == true)
 {
     if (scr_isphase("enemytalk") && talked == false)
@@ -257,6 +259,16 @@ if (global.myfight == 3)
     {
         with (obj_poppup_enemy)
         {
+            for (var __i = 1; __i < 3; __i++)
+            {
+                if (global.actingtarget[__i] == myself && global.char[__i] > 0)
+                {
+                    global.acting[__i] = false
+                    global.actingsimul[__i] = false
+                    global.actingsingle[__i] = false
+                    global.faceaction[__i] = 0
+                }
+            }
             scr_mercyadd(myself, 100)
             scr_spare(myself)
         }
@@ -296,8 +308,9 @@ if (global.myfight == 3)
             popupscreated++
             poppupwait = 1
         }
-        if button3_p()
+        if (button3_p() && blockbuffer == 0)
         {
+            blockbuffer = 2
             if (blockTimer == 0)
             {
                 blockTimer = 1

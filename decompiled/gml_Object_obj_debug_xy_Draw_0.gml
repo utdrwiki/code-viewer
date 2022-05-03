@@ -205,7 +205,7 @@ if (!old_right_click)
 if i_ex(selected_object)
 {
     so = selected_object
-    if (object_get_parent(so.object_index) == 390)
+    if (object_get_parent(so.object_index) == 392)
     {
         if enable_mouse_wheel
         {

@@ -124,7 +124,7 @@ if (vaseCrackedCon == 0)
         timer = 0
         vaseCrackedCon++
     }
-    if (instance_exists(obj_caterpillarchara) && enemySwatch.x <= ((obj_caterpillarchara.x + obj_caterpillarchara.sprite_width) + 8))
+    else if (instance_exists(obj_caterpillarchara) && enemySwatch.x <= ((obj_caterpillarchara.x + obj_caterpillarchara.sprite_width) + 8))
     {
         global.interact = 1
         enemySwatch.x = ((obj_caterpillarchara.x + obj_caterpillarchara.sprite_width) + 8)

@@ -38,6 +38,7 @@ scr_84_load_ini_ch1 = function() //gml_Script_scr_84_load_ini_ch1
                 var room_offset = room_index
                 if (room_index < ROOM_INITIALIZE_ch1)
                     room_offset = (ROOM_INITIALIZE_ch1 + room_index)
+                room_offset = scr_get_valid_room(PLACE_DOGCHECK2, room_offset)
                 PLACE[i] = scr_roomname_ch1(room_offset)
                 TIME[i] = ini_read_real(("G" + string(i)), "Time", 0)
                 NAME[i] = ini_read_string(("G" + string(i)), "Name", "------")

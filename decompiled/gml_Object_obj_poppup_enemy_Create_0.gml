@@ -12,6 +12,7 @@ staticOwner = 0
 staticPoppup = 0
 animspeed = 0.16666666666666666
 clonedirection = 210
+blockbuffer = 0
 for (var i = 0; i < 3; i++)
 {
     for (var j = 0; j < 6; j++)

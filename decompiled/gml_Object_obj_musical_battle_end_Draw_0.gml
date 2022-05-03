@@ -7,6 +7,11 @@ if (con == 0)
     song1 = snd_init("cyber_battle_end.ogg")
     song2 = mus_play(song1)
     marker[0] = scr_dark_marker(xx, (yy - 200), spr_kris_dance)
+    if (global.hp[1] < 1)
+    {
+        marker[0].sprite_index = spr_kris_fallen_dark
+        marker[0].y -= 2
+    }
     marker[1] = scr_dark_marker(xx, (yy - 200), spr_susie_dance)
     marker[2] = scr_dark_marker(xx, (yy - 200), spr_ralsei_dance)
     marker[3] = instance_create(xx, (yy - 200), obj_sweet_npc)
@@ -32,6 +37,8 @@ if (con == 0)
     }
     markeroffsetx[0] = 6
     markeroffsety[0] = 24
+    if (global.hp[1] < 0)
+        markeroffsety[0] = 12
     markeroffsety[4] = -36
     markeroffsetx[4] = -40
     markeroffsetx[5] = -12
@@ -45,6 +52,8 @@ if (con == 10 || con == 11 || con == 12)
         marker[i].y = -200
     marker[(con - 10)].y = (cy + markeroffsety[(con - 10)])
     marker[(con - 10)].x = (((cx - 140) + (sin((siner / 8)) * 10)) + markeroffsetx[(con - 10)])
+    if (global.hp[1] < 0 && con == 10)
+        marker[(con - 10)].x = (((cx - 140) + 0) + markeroffsetx[(con - 10)])
     marker[((con - 10) + 3)].y = (cy + markeroffsety[((con - 10) + 3)])
     marker[((con - 10) + 3)].x = (((cx + 80) + (sin((siner / 8)) * 10)) + markeroffsetx[((con - 10) + 3)])
 }
@@ -113,8 +122,11 @@ if (con == 18)
 {
     if (jumped[0] < 3)
     {
-        marker[0].sprite_index = spr_kris_pose
-        marker[0].y -= 18
+        if (global.hp[1] > 0)
+        {
+            marker[0].sprite_index = spr_kris_pose
+            marker[0].y -= 18
+        }
         marker[1].sprite_index = spr_susie_pose
         marker[2].sprite_index = spr_ralsei_pose
         for (i = 0; i < 20; i++)
@@ -163,7 +175,8 @@ if (con >= 19)
     marker[3].musicalnotetimer = 0
     marker[4].musicalnotetimer = 0
     marker[5].musicalnotetimer = 0
-    marker[0].sprite_index = spr_kris_pose
+    if (global.hp[1] > 0)
+        marker[0].sprite_index = spr_kris_pose
     marker[1].sprite_index = spr_susie_pose
     marker[2].sprite_index = spr_ralsei_pose
 }

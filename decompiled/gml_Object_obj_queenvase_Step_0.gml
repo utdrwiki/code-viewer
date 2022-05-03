@@ -7,7 +7,7 @@ if (place_meeting(x, y, obj_caterpillarchara) || place_meeting(x, y, obj_maincha
     if instance_exists(obj_controller_dw_mansion_east_1f_a)
         obj_controller_dw_mansion_east_1f_a.triggered = 1
     image_index = 1
-    snd_play(choose(164, 165))
+    snd_play(choose(165, 166))
     brokenpot = scr_dark_marker(x, y, sprite_index)
     brokenpot.image_index = 1
     brokenpot.depth = 800000

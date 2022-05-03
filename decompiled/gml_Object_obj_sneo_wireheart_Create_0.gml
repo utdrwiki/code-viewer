@@ -30,6 +30,7 @@ targetx = 0
 type = 0
 shottype = 0
 bighearttype = 0
+special = false
 preset = -1
 altbiter = 1
 hpos = (5 + random(1.5))

@@ -222,12 +222,12 @@ if scr_debug()
 {
     draw_set_color(c_white)
     if (global.mnfight == 7)
-        draw_text((x - 200), y, "BUILDING???")
+        draw_text((x - 200), y, "")
     if instance_exists(obj_battletester)
     {
-        var debugstring = "[V] turn thrash debug on/off"
+        var debugstring = ""
         if (thrash.dbselect == true)
-            debugstring += "#up/down/shift: change thrash parts#1-3/Numpad7-9 for specific attacks#4/Numpad 5 for random attack#M/Numpad 0 for random machine"
+            debugstring += ""
         scr_debug_print_persistent(debugstring)
     }
     if keyboard_check_pressed(ord("B"))

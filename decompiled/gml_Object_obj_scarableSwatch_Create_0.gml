@@ -1,4 +1,4 @@
-if (global.flag[382] == 1 && 216)
+if (global.flag[382] == 1 && 217)
     instance_destroy()
 dir = 0
 init = false

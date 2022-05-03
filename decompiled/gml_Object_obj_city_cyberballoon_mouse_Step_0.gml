@@ -29,7 +29,7 @@ if (falling == 1)
             depth = (obj_kris_headobj.depth - 100)
     }
     var boxcheck = instance_place(x, y, obj_kris_headobj)
-    if (boxcheck >= obj_npc_rudy)
+    if (boxcheck >= obj_npc_police)
     {
         var qualify = 0
         var xpush = 0

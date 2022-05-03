@@ -81,6 +81,8 @@ scr_spellinfo = function(argument0) //gml_Script_scr_spellinfo
             spellnameb = stringsetloc("ACT", "scr_spellinfo_slash_scr_spellinfo_gml_87_0")
             spelldescb = stringsetloc("Use#action", "scr_spellinfo_slash_scr_spellinfo_gml_88_0")
             spelldesc = stringsetloc("Do all sorts of things.#It isn't magic.", "scr_spellinfo_slash_scr_spellinfo_gml_89_0")
+            if (global.chapter == 2)
+                spelldesc = stringsetloc("You can do many things.#Don't confuse it with magic.", "scr_spellinfo_slash_scr_spellinfo_gml_93_0")
             spelltarget = 0
             cost = 0
             spellusable = false

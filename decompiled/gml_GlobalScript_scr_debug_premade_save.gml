@@ -133,7 +133,7 @@ scr_debug_premade_save = function() //gml_Script_scr_debug_premade_save
     }
     file_text_write_real(myfileid, 251)
     file_text_writeln(myfileid)
-    file_text_write_real(myfileid, 27)
+    file_text_write_real(myfileid, 28)
     file_text_writeln(myfileid)
     file_text_write_real(myfileid, 14400)
     file_text_close(myfileid)
@@ -142,7 +142,7 @@ scr_debug_premade_save = function() //gml_Script_scr_debug_premade_save
     ini_write_real(("G" + string(filechoice)), "Level", 1)
     ini_write_real(("G" + string(filechoice)), "Love", 1)
     ini_write_real(("G" + string(filechoice)), "Time", 14400)
-    ini_write_real(("G" + string(filechoice)), "Room", 27)
+    ini_write_real(("G" + string(filechoice)), "Room", 28)
     ini_write_real(("G" + string(filechoice)), "InitLang", global.flag[912])
     ossafe_ini_close()
     return;

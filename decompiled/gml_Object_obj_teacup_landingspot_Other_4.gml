@@ -1,5 +1,5 @@
 if (teacupTarget == self)
-    teacupTarget = 1088
+    teacupTarget = 1091
 with (teacupTarget)
 {
     if (other.rideEnd == 1)

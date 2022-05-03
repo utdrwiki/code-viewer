@@ -12,7 +12,6 @@ scr_load_ch1 = function() //gml_Script_scr_load_ch1
         obj_loadscreen_ch1.save_loaded = true
     global.truename = ossafe_file_text_read_string_ch1(myfileid)
     ossafe_file_text_readln_ch1(myfileid)
-    show_debug_message(("*** loaded global.truename : " + string(global.truename)))
     if global.is_console
     {
         var othername_list = scr_ds_list_read_ch1(myfileid)
@@ -273,15 +272,15 @@ scr_load_ch1 = function() //gml_Script_scr_load_ch1
         global.flag[279] = 1
         var room_index = global.currentroom
         var room_offset = room_index
-        show_debug_message(("trying to load : " + string(room_get_name(room_index))))
         if (room_index < ROOM_INITIALIZE_ch1)
-        {
             room_offset = (ROOM_INITIALIZE_ch1 + room_index)
-            show_debug_message(("offset added : " + string(room_get_name(room_offset))))
-        }
         global.currentroom = room_offset
     }
+    if (global.filechoice != 9)
+        global.currentroom = scr_get_valid_room(global.chapter, global.currentroom)
     __loadedroom = global.currentroom
+    if (__loadedroom == room_forest_savepoint3_ch1 && global.plot >= 130)
+        __loadedroom = room_forest_fightsusie_ch1
     if scr_dogcheck_ch1()
         __loadedroom = PLACE_DOG_ch1
     room_goto(__loadedroom)

@@ -857,6 +857,7 @@ if (type == 12)
         face = instance_create((camerax() + 424), (cameray() + 100), obj_sneo_faceattack)
         face.target = target
         face.damage = damage
+        face.special = hellmode
         if (obj_spamton_neo_enemy.faceattackcount == 1)
             face.first_time = 1
         with (face)

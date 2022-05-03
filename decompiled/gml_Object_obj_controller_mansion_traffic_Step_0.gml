@@ -134,8 +134,11 @@ if (victory == true)
         con++
     }
 }
-if keyboard_check_pressed(vk_space)
+if scr_debug()
 {
-    obj_mainchara.x = 1143
-    obj_mainchara.y = 360
+    if keyboard_check_pressed(vk_space)
+    {
+        obj_mainchara.x = 1143
+        obj_mainchara.y = 360
+    }
 }

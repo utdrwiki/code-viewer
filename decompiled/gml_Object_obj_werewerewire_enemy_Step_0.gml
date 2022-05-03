@@ -52,7 +52,7 @@ if (global.monster[myself] == true)
             global.typer = 6
             global.fc = 0
             if (global.mercymod[myself] >= global.mercymax[myself])
-                global.battlemsg[0] = stringsetloc("* Werewerewire's wire is loose!", "obj_werewerewire_enemy_slash_Step_0_gml_97_0")
+                global.battlemsg[0] = stringsetloc("* Werewerewire's wire is loose^1!&* ... well^1, it would be.", "obj_werewerewire_enemy_slash_Step_0_gml_97_0")
             else
             {
                 rr = choose(0, 1, 2, 3, 4)

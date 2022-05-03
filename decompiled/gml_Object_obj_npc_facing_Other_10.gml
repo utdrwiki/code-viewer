@@ -9,7 +9,8 @@ image_speed = 0.2
 if (global.darkzone == true)
     image_speed = 0.1
 global.msg[0] = stringsetloc("* Is that a cut on your face^1, or part of your eye?/%", "obj_npc_facing_slash_Other_10_gml_12_0")
-global.msg[0] = stringset("* [NO TEXT] (obj_npc_facing)/%")
+if scr_debug()
+    global.msg[0] = stringset("* [NO TEXT] (obj_npc_facing)/%")
 if (room == room_alphysclass)
 {
     if (utsprite == spr_noelle_walk_up_lw)

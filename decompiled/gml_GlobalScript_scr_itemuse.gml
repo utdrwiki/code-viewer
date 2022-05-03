@@ -501,7 +501,7 @@ scr_itemuse = function(argument0) //gml_Script_scr_itemuse
             }
             break
         case 313:
-            if (global.flag[952] == 0)
+            if (room >= room_dw_cyber_intro_1 && global.flag[952] == 0)
             {
                 global.flag[952] = 1
                 scr_speaker("no_name")

@@ -16,7 +16,7 @@ with (other)
     instance_create((x + 25), (y + 34), obj_saucerTable_knocked)
     instance_destroy()
 }
-if (room == 1193)
+if (room == 1196)
     vspeed *= 0.75
 if (instance_number(obj_saucer) == (targ - 1) && i_ex(obj_controller_dining3))
 {

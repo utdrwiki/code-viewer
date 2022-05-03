@@ -1,9 +1,21 @@
+var _tex_array = texturegroup_get_textures("chapter_select")
+for (var i = 0; i < array_length(_tex_array); i++)
+    texture_prefetch(_tex_array[i])
 global.is_console = (os_type == os_switch || os_type == os_ps4)
 global.chapter_debug_init = 0
 global.savedata_async_id = -1
 global.savedata_async_load = 0
 global.savedata_error = 0
 global.savedata_debuginfo = ""
+global.savedata_pause = 0
+global.version = "1.10"
+if (os_type == os_switch)
+    global.version = "1.06"
+if (os_type == os_ps4)
+    global.version = "1.06"
+init_loaded = 0
+chapter_is_loading = 0
+reload_textures = 1
 window_set_caption("DELTARUNE Chapter 1&2")
 if instance_exists(obj_time_ch1)
 {
@@ -23,17 +35,15 @@ if instance_exists(obj_debugcontroller_ch1)
 if variable_global_exists("chapter_return")
 {
     global.lang_loaded = ""
-    var load_chapter = global.chapter_return
-    global.chapter_return = -1
-    snd_free_all()
-    if (load_chapter == 1)
+    reload_textures = global.chapter != global.chapter_return
+    chaptertoload_temp = global.chapter_return
+    if (chaptertoload_temp >= 0)
     {
-        room_goto(ROOM_INITIALIZE_ch1)
-        return;
-    }
-    else if (load_chapter == 2)
-    {
-        room_goto(ROOM_INITIALIZE)
+        global.chapter_return = -1
+        snd_free_all()
+        alarm[2] = 5
+        if reload_textures
+            alarm[3] = 1
         return;
     }
 }
@@ -46,7 +56,6 @@ if (os_type == os_switch && (!variable_global_exists("switchlogin")))
     switch_accounts_open_user(global.switchlogin)
 }
 first_time = global.is_console
-init_loaded = 0
 display_height = display_get_height()
 display_width = display_get_width()
 window_size_multiplier = 1
@@ -65,7 +74,7 @@ if global.is_console
     application_surface_enable(true)
     application_surface_draw_enable(false)
 }
-global.debug = true
+global.debug = false
 con = "init"
 file_found = 0
 highestUncompletedChapter = 0
@@ -103,6 +112,7 @@ spr_aftereffect = 0
 confirm_choice_index = 0
 move_noise = 0
 select_noise = 0
+old_savedata_check = 0
 for (i = 0; i < 10; i += 1)
 {
     global.input_pressed[i] = false

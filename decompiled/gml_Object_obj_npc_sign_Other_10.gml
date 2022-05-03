@@ -6,7 +6,8 @@ global.fc = 0
 global.fe = 0
 global.interact = 1
 global.msg[0] = stringsetloc("* You can't read these symbols...&* Or maybe it's the handwriting./%", "obj_npc_sign_slash_Other_10_gml_10_0")
-global.msg[0] = stringset("* [NO TEXT] (obj_npc_sign)/%")
+if scr_debug()
+    global.msg[0] = stringset("* [NO TEXT] (obj_npc_sign)/%")
 if (room == room_cutscene_tester)
 {
     scr_smallface(0, "susie", 6, "left", "bottom", stringsetloc("BottomLeft", "obj_npc_sign_slash_Other_10_gml_15_0"))

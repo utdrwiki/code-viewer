@@ -16,6 +16,7 @@ scr_gamestart_chapter_override = function() //gml_Script_scr_gamestart_chapter_o
         }
     }
     global.flag[911] = ch1_egg_check
+    global.flag[281] = 0
     scr_litemremove(1)
     scr_litemremove(4)
     scr_litemremove(8)
@@ -30,6 +31,7 @@ scr_gamestart_chapter_override = function() //gml_Script_scr_gamestart_chapter_o
     scr_itemremove(4)
     if (global.chapter == 2)
     {
+        global.darkzone = false
         global.flag[7] = 0
         global.flag[9] = 1
         global.flag[10] = 1
@@ -72,6 +74,13 @@ scr_gamestart_chapter_override = function() //gml_Script_scr_gamestart_chapter_o
         global.at[4] = 3
         global.mag[4] = 11
         global.df[4] = 1
+        if (global.flag[241] >= 6)
+        {
+            if (scr_keyitemcheck(13) == 0)
+                scr_keyitemget(13)
+            if (scr_litemcheck(11) == 0)
+                scr_litemget(11)
+        }
     }
     return;
 }

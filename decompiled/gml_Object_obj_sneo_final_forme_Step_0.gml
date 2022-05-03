@@ -71,6 +71,8 @@ if (state < 2)
             snd_pitch(snd_sneo_overpower, 0.1)
             snd_pitch_time(snd_sneo_overpower, 1, 90)
             snd_volume(snd_sneo_overpower, 0.75, 0)
+            wreck = instance_create(x, y, obj_wreckpausespew)
+            wreck.depth = (depth - 1)
         }
         effecttimer++
         if ((effecttimer % 6) == 0)
@@ -100,6 +102,8 @@ if (state < 2)
     }
     else if (state == 1 && formtimer >= 45)
     {
+        with (obj_wreckpausespew)
+            image_index = 1
         with (obj_sneo_dollar)
             fade = 1
         state++
@@ -263,11 +267,12 @@ else if (state == 11)
         fakeheart.y = (y + mouthy)
         fakeheart.state = 2
         image_index = 5
-        scr_debug_print("spitting heart")
     }
 }
 else if (state == 12)
 {
+    with (obj_wreckpausespew)
+        image_index = 1
     if (movetimer < 1)
     {
         movetimer += (1 / moveframes)

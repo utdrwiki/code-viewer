@@ -41,7 +41,7 @@ if (con == 10)
                 me.sprite_index = spr_ralsei_wave_start
                 me.image_speed = 0.2
                 with (me)
-                    scr_script_delayed(gml_Script_scr_var, 15, "sprite_index", 800)
+                    scr_script_delayed(gml_Script_scr_var, 15, "sprite_index", 801)
             }
         }
     }

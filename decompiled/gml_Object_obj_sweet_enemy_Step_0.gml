@@ -44,7 +44,7 @@ if (global.monster[myself] == true)
         scr_blconskip(15)
         if scr_isphase("bullets")
         {
-            if ((instance_exists(obj_sweet_enemy) && global.monsterhp[obj_sweet_enemy.myself] <= 2) || (instance_exists(obj_kk_enemy) && global.monsterhp[obj_kk_enemy.myself] <= 2) || (instance_exists(obj_hatguy_enemy) && global.monsterhp[obj_hatguy_enemy.myself] <= 2))
+            if ((instance_exists(obj_sweet_enemy) && global.monsterhp[obj_sweet_enemy.myself] < 2) || (instance_exists(obj_kk_enemy) && global.monsterhp[obj_kk_enemy.myself] < 2) || (instance_exists(obj_hatguy_enemy) && global.monsterhp[obj_hatguy_enemy.myself] < 2))
             {
                 if (obj_musical_controller.scon == 0)
                     obj_musical_controller.scon = 1
@@ -97,6 +97,8 @@ if (global.monster[myself] == true)
                 global.monsterattackname[myself] = "musical bullets"
                 if (!instance_exists(obj_musicalbullet_controller))
                 {
+                    if (turns == 0 || turns == 2 || turns == 4)
+                        mytarget = 0
                     dc = instance_create(x, y, obj_musicalbullet_controller)
                     dc.damage = (global.monsterat[myself] * 5)
                     dc.target = mytarget
@@ -120,7 +122,7 @@ if (global.monster[myself] == true)
                 else
                     obj_musicalbullet_controller.enemy_count += 1
             }
-            scr_turntimer(235)
+            global.turntimer = 235
             turns += 1
             global.typer = 6
             global.fc = 0

@@ -5,6 +5,7 @@ var room_index = ini_read_real(("G" + string(MENUCOORD[2])), "Room", 0)
 var room_offset = room_index
 if (room_index < ROOM_INITIALIZE_ch1)
     room_offset = (ROOM_INITIALIZE_ch1 + room_index)
+room_offset = scr_get_valid_room(PLACE_DOGCHECK2, room_offset)
 _NEWROOM = room_offset
 _NEWLEVEL = ini_read_real(("G" + string(MENUCOORD[2])), "Level", 0)
 _NEWINITLANG = ini_read_real(("G" + string(MENUCOORD[2])), "InitLang", 0)
@@ -24,8 +25,8 @@ TIME_STRING[MENUCOORD[3]] = TIME_STRING[MENUCOORD[2]]
 if (!global.is_console)
 {
     file_copy(("filech1_" + string(MENUCOORD[2])), ("filech1_" + string(MENUCOORD[3])))
-    if file_exists((("config_" + string(MENUCOORD[2])) + ".ini"))
-        file_copy((("config_" + string(MENUCOORD[2])) + ".ini"), (("config_" + string(MENUCOORD[3])) + ".ini"))
+    if file_exists((("keyconfig_" + string(MENUCOORD[2])) + ".ini"))
+        file_copy((("keyconfig_" + string(MENUCOORD[2])) + ".ini"), (("keyconfig_" + string(MENUCOORD[3])) + ".ini"))
 }
 else
 {
@@ -35,9 +36,9 @@ else
     ds_map_set(new_file, "data", file_to_copy)
     ossafe_file_text_close_ch1(new_file)
     ossafe_savedata_save_ch1()
-    if ossafe_file_exists_ch1((("config_" + string(MENUCOORD[2])) + ".ini"))
+    if ossafe_file_exists_ch1((("keyconfig_" + string(MENUCOORD[2])) + ".ini"))
     {
-        ossafe_ini_open_ch1((("config_" + string(MENUCOORD[2])) + ".ini"))
+        ossafe_ini_open_ch1((("keyconfig_" + string(MENUCOORD[2])) + ".ini"))
         var copy_border = ini_read_string("BORDER", "TYPE", global.screen_border_id)
         var copy_controls_list = []
         var shoulder_reassign = obj_gamecontroller.gamepad_shoulderlb_reassign
@@ -45,7 +46,7 @@ else
             copy_controls_list[i] = ini_read_real("GAMEPAD_CONTROLS", string(i), global.input_g[i])
         shoulder_reassign = ini_read_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", obj_gamecontroller.gamepad_shoulderlb_reassign)
         ossafe_ini_close_ch1()
-        ossafe_ini_open_ch1((("config_" + string(MENUCOORD[3])) + ".ini"))
+        ossafe_ini_open_ch1((("keyconfig_" + string(MENUCOORD[3])) + ".ini"))
         ini_write_string("BORDER", "TYPE", copy_border)
         for (i = 0; i < 10; i += 1)
             ini_write_real("GAMEPAD_CONTROLS", string(i), copy_controls_list[i])

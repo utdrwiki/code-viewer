@@ -18,7 +18,7 @@ else if (timer > followindexmax)
 }
 heartposx[followindex] = obj_heart.x
 heartposy[followindex] = obj_heart.y
-bul_trail = scr_childbullet(x, y, 468)
+bul_trail = scr_childbullet(x, y, 470)
 bul_trail.image_blend = image_blend
 bul_trail.damage = damage
 bul_trail.target = target

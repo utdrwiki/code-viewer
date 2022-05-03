@@ -1,11 +1,13 @@
 iniwrite = ossafe_ini_open("dr.ini")
 _NEWNAME = ini_read_string(scr_ini_chapter(global.chapter, MENUCOORD[2]), "Name", "------")
 _NEWTIME = ini_read_real(scr_ini_chapter(global.chapter, MENUCOORD[2]), "Time", 0)
-_NEWROOM = ini_read_real(scr_ini_chapter(global.chapter, MENUCOORD[2]), "Room", 0)
+var room_index = scr_get_valid_room(global.chapter, ini_read_real(scr_ini_chapter(global.chapter, MENUCOORD[2]), "Room", 0))
+_NEWROOM = room_index
 _NEWLEVEL = ini_read_real(scr_ini_chapter(global.chapter, MENUCOORD[2]), "Level", 0)
 _NEWDATE = ini_read_real(scr_ini_chapter(global.chapter, MENUCOORD[2]), "Date", 0)
 _NEWINITLANG = ini_read_real(scr_ini_chapter(global.chapter, MENUCOORD[2]), "InitLang", 0)
 _NEWURABOSS = ini_read_real(scr_ini_chapter(global.chapter, MENUCOORD[2]), "UraBoss", 0)
+_NEWVERSION = ini_read_string(scr_ini_chapter(global.chapter, MENUCOORD[2]), "Version", "0")
 ini_write_string(scr_ini_chapter(global.chapter, MENUCOORD[3]), "Name", _NEWNAME)
 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[3]), "Time", _NEWTIME)
 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[3]), "Room", _NEWROOM)
@@ -13,6 +15,7 @@ ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[3]), "Level", _NEWLEVEL
 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[3]), "Date", _NEWDATE)
 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[3]), "InitLang", _NEWINITLANG)
 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[3]), "UraBoss", _NEWURABOSS)
+ini_write_string(scr_ini_chapter(global.chapter, MENUCOORD[3]), "Version", _NEWVERSION)
 ossafe_ini_close()
 FILE[MENUCOORD[3]] = 1
 PLACE[MENUCOORD[3]] = PLACE[MENUCOORD[2]]
@@ -25,8 +28,8 @@ var CH = string(global.chapter)
 if (!global.is_console)
 {
     file_copy(((("filech" + CH) + "_") + string(MENUCOORD[2])), ((("filech" + CH) + "_") + string(MENUCOORD[3])))
-    if file_exists((("config_" + string(MENUCOORD[2])) + ".ini"))
-        file_copy((("config_" + string(MENUCOORD[2])) + ".ini"), (("config_" + string(MENUCOORD[3])) + ".ini"))
+    if file_exists((("keyconfig_" + string(MENUCOORD[2])) + ".ini"))
+        file_copy((("keyconfig_" + string(MENUCOORD[2])) + ".ini"), (("keyconfig_" + string(MENUCOORD[3])) + ".ini"))
 }
 else
 {
@@ -36,9 +39,9 @@ else
     ds_map_set(new_file, "data", file_to_copy)
     ossafe_file_text_close(new_file)
     ossafe_savedata_save()
-    if ossafe_file_exists((("config_" + string(MENUCOORD[2])) + ".ini"))
+    if ossafe_file_exists((("keyconfig_" + string(MENUCOORD[2])) + ".ini"))
     {
-        ossafe_ini_open((("config_" + string(MENUCOORD[2])) + ".ini"))
+        ossafe_ini_open((("keyconfig_" + string(MENUCOORD[2])) + ".ini"))
         var copy_border = ini_read_string("BORDER", "TYPE", global.screen_border_id)
         var copy_controls_list = []
         var shoulder_reassign = obj_gamecontroller.gamepad_shoulderlb_reassign
@@ -46,7 +49,7 @@ else
             copy_controls_list[i] = ini_read_real("GAMEPAD_CONTROLS", string(i), global.input_g[i])
         shoulder_reassign = ini_read_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", obj_gamecontroller.gamepad_shoulderlb_reassign)
         ossafe_ini_close()
-        ossafe_ini_open((("config_" + string(MENUCOORD[3])) + ".ini"))
+        ossafe_ini_open((("keyconfig_" + string(MENUCOORD[3])) + ".ini"))
         ini_write_string("BORDER", "TYPE", copy_border)
         for (i = 0; i < 10; i += 1)
             ini_write_real("GAMEPAD_CONTROLS", string(i), copy_controls_list[i])

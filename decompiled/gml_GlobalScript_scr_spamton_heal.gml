@@ -22,6 +22,7 @@ scr_spamton_heal = function(argument0) //gml_Script_scr_spamton_heal
                 _healpower = 1
             else
                 _healpower = 0
+            _healpower = ceil(_healpower)
             scr_heal(i, _healpower)
             with (global.charinstance[i])
             {

@@ -1340,7 +1340,7 @@ scr_monstersetup = function() //gml_Script_scr_monstersetup
             global.canact[myself][1] = true
             global.actname[myself][1] = stringsetloc("X-Slash", "scr_monstersetup_slash_scr_monstersetup_gml_1643_0")
             global.actdesc[myself][1] = stringsetloc("Physical#damage", "scr_monstersetup_slash_scr_monstersetup_gml_1644_0")
-            global.actcost[myself][1] = 62.5
+            global.actcost[myself][1] = 62
             global.canact[myself][2] = true
             global.actname[myself][2] = stringsetloc("FriedPipis", "scr_monstersetup_slash_scr_monstersetup_gml_1649_0")
             global.actdesc[myself][2] = stringsetloc("Heals#120 HP", "scr_monstersetup_slash_scr_monstersetup_gml_1650_0")
@@ -1372,7 +1372,7 @@ scr_monstersetup = function() //gml_Script_scr_monstersetup
             global.canactral[myself][1] = true
             global.actnameral[myself][1] = stringsetloc("FluffyGuard", "scr_monstersetup_slash_scr_monstersetup_gml_1703_0")
             global.actdescral[myself][1] = stringsetloc("Orbiting#shield", "scr_monstersetup_slash_scr_monstersetup_gml_1701_0")
-            global.actcostral[myself][1] = 80
+            global.actcostral[myself][1] = 40
         }
     }
     if (global.monstertype[myself] == 51)
@@ -1412,7 +1412,7 @@ scr_monstersetup = function() //gml_Script_scr_monstersetup
         global.canact[myself][1] = true
         global.actname[myself][1] = stringsetloc("TurboDodge", "scr_monstersetup_slash_scr_monstersetup_gml_1738_0")
         global.actdesc[myself][1] = stringsetloc("Better#dodge", "scr_monstersetup_slash_scr_monstersetup_gml_1739_0")
-        global.actcost[myself][1] = 62.5
+        global.actcost[myself][1] = 62
         global.canact[myself][2] = true
         global.actname[myself][2] = stringsetloc("SELF-FIX", "scr_monstersetup_slash_scr_monstersetup_gml_1743_0")
         global.actdesc[myself][2] = stringsetloc("Heals#100HP", "scr_monstersetup_slash_scr_monstersetup_gml_1744_0")

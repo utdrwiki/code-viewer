@@ -47,6 +47,24 @@ scr_litemuseb_ch1 = function(argument0, argument1) //gml_Script_scr_litemuseb_ch
             snd_play_ch1(snd_egg_ch1)
             scr_writetext_ch1(0, "x", 0, 0)
             break
+        case 11:
+            if (global.flag[281] == 0)
+            {
+                global.flag[281] = 1
+                global.msg[0] = scr_84_get_lang_string_ch1("scr_litemuseb_slash_scr_litemuseb_gml_95_0")
+                global.msg[1] = scr_84_get_lang_string_ch1("scr_litemuseb_slash_scr_litemuseb_gml_96_0")
+                global.msg[2] = scr_84_get_lang_string_ch1("scr_litemuseb_slash_scr_litemuseb_gml_97_0")
+            }
+            else if (global.flag[281] == 1)
+            {
+                global.flag[281] = 2
+                global.msg[0] = scr_84_get_lang_string_ch1("scr_litemuseb_slash_scr_litemuseb_gml_98_0")
+                global.msg[1] = scr_84_get_lang_string_ch1("scr_litemuseb_slash_scr_litemuseb_gml_99_0")
+            }
+            else
+                global.msg[0] = scr_84_get_lang_string_ch1("scr_litemuseb_slash_scr_litemuseb_gml_100_0")
+            scr_writetext_ch1(0, "x", 0, 0)
+            break
         case 201:
             tempsaid = 0
             snd_play_ch1(snd_phone_ch1)

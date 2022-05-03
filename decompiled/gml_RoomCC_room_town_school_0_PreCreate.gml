@@ -1,3 +1,3 @@
 doorEntrance = 24
-doorRoom = 59
+doorRoom = 60
 doorFadeMusic = global.plot < 200

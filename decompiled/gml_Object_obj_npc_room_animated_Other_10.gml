@@ -6,7 +6,8 @@ global.fc = 0
 global.fe = 0
 global.interact = 1
 global.msg[0] = stringsetloc("* The pain itself is reason why./%", "obj_npc_room_animated_slash_Other_10_gml_8_0")
-global.msg[0] = stringset("* [NO TEXT] (obj_npc_room_animated)/%")
+if scr_debug()
+    global.msg[0] = stringset("* [NO TEXT] (obj_npc_room_animated)/%")
 if (room == room_town_mid)
 {
     if (sprite_index == spr_npc_icemascot2)

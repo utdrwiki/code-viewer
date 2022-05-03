@@ -43,6 +43,3 @@ if (intro != 0)
         image_blend = c_white
     }
 }
-if (intro != 0)
-    return;
-draw_sprite(playback_sprite, max(0, (state - 1)), 20, 400)

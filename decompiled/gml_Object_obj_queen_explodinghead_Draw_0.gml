@@ -16,7 +16,7 @@ if (scale < 1)
     image_xscale = scale
     image_yscale = scale
     image_angle = (scale * 360)
-    af = scr_custom_afterimage(545)
+    af = scr_custom_afterimage(547)
     af.image_alpha = 0.5
 }
 if (timer > 0)

@@ -1,4 +1,6 @@
 scr_depth()
+if i_ex(obj_dogtable_controlled)
+    myinteract = 0
 if (mode == 0 || mode == 3)
 {
     if (con == 0 && myinteract == 1)

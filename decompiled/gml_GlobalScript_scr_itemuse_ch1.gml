@@ -186,6 +186,33 @@ scr_itemuse_ch1 = function(argument0) //gml_Script_scr_itemuse_ch1
             global.msg[0] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_237_0")
             instance_create_ch1(0, 0, obj_dialoguer_ch1)
             break
+        case 313:
+            global.interact = 6
+            with (obj_darkcontroller_ch1)
+                charcon = 0
+            global.menuno = -1
+            charcon = 0
+            global.fc = 0
+            global.fe = 0
+            global.typer = 6
+            if (global.flag[280] == 0)
+            {
+                global.flag[280] = 1
+                global.msg[0] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_238_0")
+                global.msg[1] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_239_0")
+                global.msg[2] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_240_0")
+                global.msg[3] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_241_0")
+            }
+            else if (global.flag[280] == 1)
+            {
+                global.flag[280] = 2
+                global.msg[0] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_242_0")
+                global.msg[1] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_243_0")
+            }
+            else
+                global.msg[0] = scr_84_get_lang_string_ch1("scr_itemuse_slash_scr_itemuse_gml_244_0")
+            instance_create_ch1(0, 0, obj_dialoguer_ch1)
+            break
     }
 
     return;

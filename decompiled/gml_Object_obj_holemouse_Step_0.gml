@@ -200,6 +200,8 @@ if (con == 5)
             y = bounceTargetY
             x = bounceTargetX
             con = 1
+            if (room == room_dw_city_mice)
+                nointeract = 0
             direction = bounceTargetDir
         }
     }

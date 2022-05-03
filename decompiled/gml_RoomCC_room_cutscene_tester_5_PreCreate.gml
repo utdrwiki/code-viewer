@@ -1,4 +1,4 @@
-doorRoom = 28
+doorRoom = 29
 doorEntrance = "A"
 doorFacing = 2
 doorSound = snd_dooropen

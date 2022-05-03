@@ -1,4 +1,3 @@
-show_debug_message(("***** Event = " + ds_map_find_value(async_load, "event_type")))
 switch ds_map_find_value(async_load, "event_type")
 {
     case "gamepad discovered":
@@ -8,7 +7,6 @@ switch ds_map_find_value(async_load, "event_type")
             gamepad_active = true
             gamepad_id = pad
             gamepad_type = gamepad_get_description(gamepad_id) == "Sony DualShock 4"
-            show_debug_message(("***** GAMEPAD DESCRIPTION: = " + gamepad_get_description(gamepad_id)))
         }
         break
     case "gamepad lost":

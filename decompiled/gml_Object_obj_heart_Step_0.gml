@@ -27,7 +27,19 @@ if canmove
         py = wspeed
     if (press_u == 1)
         py = (-wspeed)
+    if (button2_h() && global.flag[22] == 0)
+    {
+        if (disableslow == 0)
+        {
+            px = ceil((px * 0.5))
+            py = ceil((py * 0.5))
+        }
+    }
+    else
+        disableslow = 0
 }
+if (color == c_black)
+    remove_slow_z_buffer += 0.5
 xmeet = 0
 ymeet = 0
 xymeet = 0
@@ -262,6 +274,8 @@ if (color == 0x000001)
         snd_pitch(chargeshot_sound, (0.1 + ((z_hold - 20) / 20)))
     if (z_hold >= 40)
         image_index = 2
+    if (z_charge < 15)
+        chargeshotcount = 0
     if (z_hold >= 40 && button1_r())
     {
         snd_stop(chargeshot_sound)
@@ -277,6 +291,12 @@ if (color == 0x000001)
         z_hold = 0
         chargeshot_delay = 5
         image_index = 0
+        chargeshotcount++
+        if (chargeshotcount > 1)
+        {
+            with (obj_spamton_neo_enemy)
+                event_user(4)
+        }
         if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy))
             obj_spamton_neo_enemy.bigshotused = 1
         if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.bigshotcount > 0)

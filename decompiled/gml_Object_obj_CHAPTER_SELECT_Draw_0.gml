@@ -1,3 +1,12 @@
+if global.is_console
+{
+    if chapter_is_loading
+    {
+        draw_set_font(fnt_mainbig)
+        draw_set_halign(fa_center)
+        draw_text(320, 250, "LOADING...")
+    }
+}
 if (!audio_group_is_loaded(1))
     return;
 if (!init_loaded)
@@ -83,9 +92,9 @@ if (con == "nofile")
         draw_set_color(c_white)
     draw_text_transformed(xx, ((((20 * scale) + yy) - fadescaled) + (mspace * 1)), no, scale, scale, 0)
     if (mpos == 0)
-        draw_sprite_ext(spr_heart, 0, ((xx - ((string_width(yes) / 2) * scale)) - (13 * scale)), (((((20 * scale) + yy) - fadescaled) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
+        draw_sprite_ext(spr_heart_launcher, 0, ((xx - ((string_width(yes) / 2) * scale)) - (13 * scale)), (((((20 * scale) + yy) - fadescaled) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
     if (mpos == 1)
-        draw_sprite_ext(spr_heart, 0, ((xx - ((string_width(no) / 2) * scale)) - (13 * scale)), (((((20 * scale) + yy) - fadescaled) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
+        draw_sprite_ext(spr_heart_launcher, 0, ((xx - ((string_width(no) / 2) * scale)) - (13 * scale)), (((((20 * scale) + yy) - fadescaled) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
     if up_p()
     {
         mpos--
@@ -161,9 +170,9 @@ if (con == "startNextChapter")
     var select_text = (global.lang == "en" ? "Chapter Select" : "チャプター選択")
     draw_text_transformed(xx, ((yy - fadescaled) + (mspace * 2)), select_text, scale, scale, 0)
     if (mpos == 0)
-        draw_sprite_ext(spr_heart, 0, ((xx - ((string_width(stringset2) / 2) * scale)) - (13 * scale)), (((yy - fadescaled) + (mspace * 1)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
+        draw_sprite_ext(spr_heart_launcher, 0, ((xx - ((string_width(stringset2) / 2) * scale)) - (13 * scale)), (((yy - fadescaled) + (mspace * 1)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
     if (mpos == 1)
-        draw_sprite_ext(spr_heart, 0, ((xx - ((string_width(select_text) / 2) * scale)) - (13 * scale)), (((yy - fadescaled) + (mspace * 2)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
+        draw_sprite_ext(spr_heart_launcher, 0, ((xx - ((string_width(select_text) / 2) * scale)) - (13 * scale)), (((yy - fadescaled) + (mspace * 2)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
     if up_p()
     {
         mpos--
@@ -227,9 +236,9 @@ if (con == "continueChapter")
         draw_set_color(c_white)
     draw_text_transformed(xx, ((yy - fadescaled) + (mspace * 2)), no, scale, scale, 0)
     if (mpos == 0)
-        draw_sprite_ext(spr_heart, 0, ((xx - ((string_width(yes) / 2) * scale)) - (13 * scale)), ((((yy - fadescaled) + (mspace * 1)) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
+        draw_sprite_ext(spr_heart_launcher, 0, ((xx - ((string_width(yes) / 2) * scale)) - (13 * scale)), ((((yy - fadescaled) + (mspace * 1)) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
     if (mpos == 1)
-        draw_sprite_ext(spr_heart, 0, ((xx - ((string_width(no) / 2) * scale)) - (13 * scale)), ((((yy - fadescaled) + (mspace * 1)) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
+        draw_sprite_ext(spr_heart_launcher, 0, ((xx - ((string_width(no) / 2) * scale)) - (13 * scale)), ((((yy - fadescaled) + (mspace * 1)) + (mspace * mpos)) + (4 * scale)), (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
     if up_p()
     {
         mpos--
@@ -328,7 +337,7 @@ if (con == "chapterselect")
         heart_ypos -= (5 * scale)
         heart_xpos = (130 * scale)
     }
-    draw_sprite_ext(spr_heart, 0, heart_xpos, heart_ypos, (scale / 2), (scale / 2), 1, c_white, ((fademax - fade) / fademax))
+    draw_sprite_ext(spr_heart_launcher, 0, heart_xpos, heart_ypos, (scale / 2), (scale / 2), 1, c_white, ((fademax - fade) / fademax))
     if (!console)
     {
         mycolor = c_white
@@ -383,7 +392,7 @@ else if (con == "gameloadConfirm")
     if (global.lang == "ja")
         heart_xpos = ((106 * scale) + ((confirm_choice_index * 95) * scale))
     heart_ypos = ((yy + (7 * scale)) + ((mpos * 30) * scale))
-    draw_sprite_ext(spr_heart, 0, heart_xpos, heart_ypos, (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
+    draw_sprite_ext(spr_heart_launcher, 0, heart_xpos, heart_ypos, (scale / 2), (scale / 2), 0, c_white, ((fademax - fade) / fademax))
     max_options = 7
     for (i = 0; i < max_options; i++)
     {
@@ -471,6 +480,7 @@ if (con == "gameload")
         chaptertoload_temp = chaptertoload
         chaptertoload = 0
         alarm[2] = 60
+        alarm[3] = 50
     }
     draw_sprite_ext(spr_aftereffect, 0, (room_width / 2), yy, xscale, yscale, 0, c_white, fadeout)
     fadeout = lerp(fadeout, 0, 0.125)

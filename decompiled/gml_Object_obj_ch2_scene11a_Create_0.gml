@@ -12,7 +12,7 @@ with (tiled_wall)
     total_width = (sprite_get_width(sprite_index) * 16)
     depth = 5000
 }
-var tiled_wall_end = instance_create(590, 437, obj_cyber_wall_lights_right)
+var tiled_wall_end = instance_create(591, 437, obj_cyber_wall_lights_right)
 with (tiled_wall_end)
     depth = 4900
 coaster_entry_shadow = scr_dark_marker(-35, -22, bg_dw_city_coaster_entry_shadow)

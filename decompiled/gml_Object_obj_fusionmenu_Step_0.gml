@@ -254,7 +254,7 @@ if (init == false)
         if (subtype == 2 || subtype == 1)
         {
             if (subtype == 1)
-                scr_recruit_info_all("either")
+                scr_recruit_info_all("total")
             if (subtype == 2)
                 scr_recruit_info_all("either", 2)
             alternateMenu = 1
@@ -365,7 +365,7 @@ if (init == false)
                 optionText[_n][j] = " "
                 if (global.is_console || obj_gamecontroller.gamepad_active)
                 {
-                    optionTopComment[_n][j] = stringsetloc("   Place       Return", "obj_fusionmenu_slash_Step_0_gml_462_0")
+                    optionTopComment[_n][j] = stringsetloc("      Place                 Return", "obj_fusionmenu_slash_Step_0_gml_462_0")
                     display_buttons = 1
                 }
                 else

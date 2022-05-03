@@ -140,6 +140,13 @@ scr_litemuseb = function(argument0, argument1) //gml_Script_scr_litemuseb
                 msgnextloc("* But when you moved the glass away^1,/", "scr_litemuseb_slash_scr_litemuseb_gml_171_0_b")
                 msgnextloc("* You see her looking at you^1, smiling and making a rude gesture./%", "scr_litemuseb_slash_scr_litemuseb_gml_172_0_b")
             }
+            else if ((!scr_havechar(2)) && global.flag[281] == 0)
+            {
+                global.flag[281] = 1
+                msgsetloc(0, "* You looked through the glass./", "scr_litemuseb_slash_scr_litemuseb_gml_168_0_b")
+                msgnextloc("* For some strange reason^1, for just a brief moment.../", "scr_litemuseb_slash_scr_litemuseb_gml_169_0")
+                msgnextloc("* You thought you saw through your hand./%", "scr_litemuseb_slash_scr_litemuseb_gml_182_0_b")
+            }
             else if (global.flag[951] == 0)
             {
                 global.flag[951] = 1

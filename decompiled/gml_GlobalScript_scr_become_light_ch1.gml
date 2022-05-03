@@ -7,6 +7,13 @@ scr_become_light_ch1 = function() //gml_Script_scr_become_light_ch1
         if (scr_litemcheck_ch1(8) == 0)
             scr_litemget_ch1(8)
     }
+    if scr_keyitemcheck_ch1(13)
+    {
+        if (scr_litemcheck_ch1(11) == 0)
+            scr_litemget_ch1(11)
+    }
+    else
+        scr_litemremove_ch1(11)
     global.lhp = (ceil((global.hp[1] / global.maxhp[1])) * global.lmaxhp)
     if (global.lhp < 1)
         global.lhp = 1

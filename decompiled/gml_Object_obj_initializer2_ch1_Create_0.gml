@@ -9,6 +9,7 @@ global.savedata_async_id = -1
 global.savedata_async_load = 0
 global.savedata_error = 0
 global.savedata_debuginfo = ""
+old_savedata_check = 0
 if global.is_console
     ossafe_savedata_load_ch1()
 else

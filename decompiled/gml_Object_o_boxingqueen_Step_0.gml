@@ -178,7 +178,7 @@ if (state == 1)
         else if audio_is_playing(snd_queen_laugh_0)
             audio_stop_sound(snd_queen_laugh_0)
     }
-    if (times_hit_in_a_row > 1 && health_count > 0 && o_boxingcontroller.wireframe_boxing == 1)
+    if (times_hit_in_a_row > 1 && health_count > 0 && phase_transition < 1 && o_boxingcontroller.wireframe_boxing == 1)
     {
         invincible_l = 1
         invincible_r = 1

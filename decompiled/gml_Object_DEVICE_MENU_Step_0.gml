@@ -57,9 +57,9 @@ if (MENU_NO == 1 || MENU_NO == 4 || MENU_NO == 6 || MENU_NO == 7 || MENU_NO == 1
                     f = instance_create(0, 0, obj_persistentfadein)
                     f.image_xscale = 1000
                     f.image_yscale = 1000
-                    if ossafe_file_exists((("config_" + string(global.filechoice)) + ".ini"))
+                    if ossafe_file_exists((("keyconfig_" + string(global.filechoice)) + ".ini"))
                     {
-                        ossafe_ini_open((("config_" + string(global.filechoice)) + ".ini"))
+                        ossafe_ini_open((("keyconfig_" + string(global.filechoice)) + ".ini"))
                         for (i = 0; i < 10; i += 1)
                         {
                             readval = ini_read_real("KEYBOARD_CONTROLS", string(i), -1)
@@ -175,10 +175,11 @@ if (MENU_NO == 1 || MENU_NO == 4 || MENU_NO == 6 || MENU_NO == 7 || MENU_NO == 1
                 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Room", 0)
                 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Date", 0)
                 ini_write_real(scr_ini_chapter(global.chapter, MENUCOORD[5]), "UraBoss", 0)
+                ini_write_string(scr_ini_chapter(global.chapter, MENUCOORD[5]), "Version", "0")
                 ossafe_ini_close()
                 ossafe_savedata_save()
-                if ossafe_file_exists((("config_" + string(MENUCOORD[5])) + ".ini"))
-                    ossafe_file_delete((("config_" + string(MENUCOORD[5])) + ".ini"))
+                if ossafe_file_exists((("keyconfig_" + string(MENUCOORD[5])) + ".ini"))
+                    ossafe_file_delete((("keyconfig_" + string(MENUCOORD[5])) + ".ini"))
                 TEMPCOMMENT = stringsetloc("IT WAS AS IF IT WAS NEVER THERE AT ALL.", "DEVICE_MENU_slash_Step_0_gml_126_0")
                 if (TYPE == 1)
                     TEMPCOMMENT = stringsetloc("Erase complete.", "DEVICE_MENU_slash_Step_0_gml_127_0")
@@ -505,7 +506,10 @@ if (MENU_NO == 0 || MENU_NO == 10)
         if (MENUCOORD[M] == 8 && CANQUIT)
         {
             SELNOISE = true
-            ossafe_game_end()
+            if global.is_console
+                ossafe_game_end()
+            else
+                game_end()
         }
     }
     if (button2_p() && TWOBUFFER < 0)

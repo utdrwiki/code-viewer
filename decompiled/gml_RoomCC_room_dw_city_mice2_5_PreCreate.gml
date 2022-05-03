@@ -1,3 +1,3 @@
 targetX = 320
-collisionObject = 80
+collisionObject = 82
 useTargetX = 1

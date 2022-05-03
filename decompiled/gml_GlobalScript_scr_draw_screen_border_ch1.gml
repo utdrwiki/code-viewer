@@ -20,9 +20,9 @@ scr_draw_screen_border_ch1 = function(argument0) //gml_Script_scr_draw_screen_bo
             obj_time_ch1.border_fade_value = 0.025
             var room_id = room
             var _border_image = (global.darkzone ? border_dark_ch1 : border_light_ch1)
-            if (room_id == room_legend_ch1 || room_id == 1638 || room_id == PLACE_MENU_ch1 || room_id == PLACE_LOGO_ch1)
+            if (room_id == room_legend_ch1 || room_id == 1642 || room_id == PLACE_MENU_ch1 || room_id == PLACE_LOGO_ch1)
                 _border_image = border_dark_ch1
-            if (room_id == PLACE_CONTACT_ch1 || room_id == 1634 || room_id == PLACE_MENU_ch1 || room_id == room_splashscreen_ch1 || room_id == room_gameover_ch1 || room_id == PLACE_DOG_ch1 || room_id == room_dark1a_ch1 || room_id == room_dark_eyepuzzle_ch1)
+            if (room_id == PLACE_CONTACT_ch1 || room_id == 1638 || room_id == PLACE_MENU_ch1 || room_id == room_splashscreen_ch1 || room_id == room_gameover_ch1 || room_id == PLACE_DOG_ch1 || room_id == room_dark1a_ch1 || room_id == room_dark_eyepuzzle_ch1)
                 obj_time_ch1.border_alpha = false
             else if (room_id == room_insidecloset_ch1 || room_id == room_cc_fountain_ch1)
                 obj_time_ch1.border_fade_out = obj_time_ch1.border_alpha > false
@@ -65,7 +65,7 @@ scr_draw_screen_border_ch1 = function(argument0) //gml_Script_scr_draw_screen_bo
                 game_won = true
             if ossafe_file_exists_ch1("filech1_5")
                 game_won = true
-            if ((room_id == room_legend_ch1 || room_id == 1638 || room_id == PLACE_MENU_ch1) && game_won == true)
+            if ((room_id == room_legend_ch1 || room_id == 1642 || room_id == PLACE_MENU_ch1) && game_won == true)
             {
                 _border_image = border_dark_ch1
                 obj_time_ch1.border_alpha = true

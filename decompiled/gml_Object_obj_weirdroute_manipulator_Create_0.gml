@@ -424,6 +424,8 @@ if (phase == 3)
             instance_destroy()
         with (obj_projector_footage)
             instance_destroy()
+        with (obj_readable_room1)
+            instance_destroy()
         instance_create(255, 287, obj_chaseenemy)
     }
     if (room == room_dw_mansion_east_4f_b)

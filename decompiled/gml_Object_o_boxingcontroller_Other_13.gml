@@ -24,3 +24,10 @@ if (instance_exists(obj_heart) || instance_exists(obj_returnheart))
         gigaqueentimer = 0
     }
 }
+with (obj_gigaqueen_enemy)
+{
+    missleattack = 0
+    breathattack = 0
+}
+with (o_boxingqueen)
+    finalbaseballused = false

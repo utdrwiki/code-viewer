@@ -163,7 +163,7 @@ if (weird == false)
         c_wait(24)
         c_wait(3)
         c_sel(no)
-        c_actortoobject(1290)
+        c_actortoobject(1293)
         c_var_instance(id, "con", 6)
         c_actortocaterpillar()
         c_actortokris()
@@ -761,6 +761,16 @@ if (weird == false)
             con++
         }
     }
+    if (con == 39)
+    {
+        if instance_exists(obj_musicer_city)
+        {
+            with (obj_musicer_city)
+                instance_destroy()
+        }
+        instance_create(x, y, obj_musicer_city)
+        con++
+    }
     if (con == 38 && (!d_ex()))
     {
         snd_free_all()
@@ -776,12 +786,6 @@ if (weird == false)
             instance_destroy()
         with (forcefield)
             instance_destroy()
-        if instance_exists(obj_musicer_city)
-        {
-            with (obj_musicer_city)
-                instance_destroy()
-        }
-        instance_create(x, y, obj_musicer_city)
         con++
         tempsave = instance_create(480, 40, obj_savepoint)
         scr_tempsave()

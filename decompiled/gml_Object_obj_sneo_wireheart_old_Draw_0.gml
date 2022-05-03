@@ -70,8 +70,8 @@ if (destroyed == 1)
         with (piece)
         {
             scr_script_delayed(gml_Script_scr_afterimage_cut, (i * 2))
-            scr_script_delayed(gml_Script_snd_play, (i * 2), 141)
-            scr_script_delayed(gml_Script_snd_volume, (i * 2), 141, 0.5, 0)
+            scr_script_delayed(gml_Script_snd_play, (i * 2), 142)
+            scr_script_delayed(gml_Script_snd_volume, (i * 2), 142, 0.5, 0)
             scr_doom(id, ((i * 2) + 1))
         }
     }

@@ -208,10 +208,7 @@ scr_jevil_check = function() //gml_Script_scr_jevil_check
                     for (i = 0; i < 242; i += 1)
                     {
                         if (i == 241)
-                        {
                             jevil_status[k] = ds_list_find_value(flag_list, i)
-                            show_debug_message(((string(k) + " file jevil status : ") + string(jevil_status[k])))
-                        }
                     }
                     ds_list_destroy(flag_list)
                     ossafe_file_text_readln(myfileid)
@@ -231,7 +228,6 @@ scr_jevil_check = function() //gml_Script_scr_jevil_check
                         {
                             jevil_status[k] = file_text_read_real(myfileid)
                             file_text_readln(myfileid)
-                            show_debug_message(((string(k) + " file jevil status : ") + string(jevil_status[k])))
                         }
                         else
                         {

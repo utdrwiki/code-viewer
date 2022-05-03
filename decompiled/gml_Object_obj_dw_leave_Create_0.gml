@@ -15,7 +15,7 @@ kris_x = (x - 24)
 kris_y = (y - 80)
 sus_x = (x - 60)
 sus_y = (y - 94)
-nextroom = 61
+nextroom = 62
 if scr_havechar(2)
 {
     kris_only = 0

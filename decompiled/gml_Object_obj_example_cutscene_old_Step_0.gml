@@ -1,7 +1,7 @@
 if keyboard_check_pressed(ord("J"))
 {
     with (obj_mainchara)
-        scr_jump_to_point_sprite((x + random_range(-200, 200)), (y + random_range(-30, 30)), 10, 15, 649, 648)
+        scr_jump_to_point_sprite((x + random_range(-200, 200)), (y + random_range(-30, 30)), 10, 15, 650, 649)
 }
 if (con == 0 && obj_mainchara.x >= x && global.interact == 0)
 {
@@ -38,8 +38,8 @@ if (con == 1)
     c_delayfacing(60, "r")
     c_delayfacing(75, "r")
     c_delaywalkdirect(95, 757, 193, 20)
-    c_delaycmd(116, "sprite", 995)
-    c_delaycmd(116, "soundplay", 185)
+    c_delaycmd(116, "sprite", 996)
+    c_delaycmd(116, "soundplay", 186)
     c_sel(kr)
     c_walk("l", 3, 15)
     c_wait(15)

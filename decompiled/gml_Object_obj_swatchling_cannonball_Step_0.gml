@@ -78,7 +78,7 @@ else if (phase == 2)
         {
             for (i = 0; i < 4; i++)
             {
-                d = scr_childbullet(x, (y + 10), 439)
+                d = scr_childbullet(x, (y + 10), 441)
                 d.grazepoints = childgraze
                 d.sprite_index = spr_swatchling_bluestar
                 d.speed = 5

@@ -5,3 +5,6 @@ dumpster = instance_create(300, 120, obj_npc_dumpster)
 with (dumpster)
     scr_depth()
 dumpster_con = ((scr_sideb_get_phase() == 0 || (!scr_havechar(4))) ? 0 : 10)
+play_song = 0
+play_power = 0
+play_stop = 0

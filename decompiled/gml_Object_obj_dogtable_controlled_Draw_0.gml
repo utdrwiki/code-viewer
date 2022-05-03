@@ -31,7 +31,7 @@ if (drawtype == 0)
     }
     if (drawcustom == false)
     {
-        krspr = 650
+        krspr = 651
         suspr = spr_susie_sheeh
         raspr = spr_ralsei_surprised_down
     }

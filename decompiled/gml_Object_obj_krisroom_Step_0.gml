@@ -168,7 +168,13 @@ if (global.chapter == 1)
         {
             _remfilechoice = global.filechoice
             global.filechoice += 3
-            scr_save()
+            var is_valid = scr_save()
+            if (!is_valid)
+            {
+                var error_message = instance_create(0, 0, obj_savedata_error)
+                error_message.type = "auto"
+                error_message.error_type = "save_failed"
+            }
             global.filechoice = _remfilechoice
             mus_volume(global.currentsong[1], 0, 100)
             fade = instance_create(0, 0, obj_fadeout)
@@ -234,7 +240,7 @@ if (global.chapter == 2)
     if (con == 2)
     {
         talkedtimes = 0
-        global.flag[6] = 1
+        global.flag[6] = global.tempflag[39] == 0
         scr_speaker("toriel")
         con = 3
         alarm[4] = 50
@@ -389,5 +395,54 @@ if (global.chapter == 2)
         scr_tempsave()
         if (global.plot < 1)
             global.plot = 1
+    }
+    if (con >= 100 && con < 150)
+    {
+        global.tempflag[38] = 1
+        global.interact = 1
+        global.facing = 1
+        if (con == 100 && (!d_ex()))
+        {
+            if (scr_keyitemcheck(8) == 0)
+                scr_keyitemget(8)
+            if (scr_litemcheck(5) == 0)
+                scr_litemget(5)
+            if (scr_litemcheck(9) == 0)
+                scr_litemget(9)
+            global.flag[302] = 2
+            global.flag[432] = 1
+            mus_volume(global.currentsong[1], 0, 50)
+            fade = instance_create(0, 0, obj_fadeout)
+            with (fade)
+            {
+                fadespeed = 0.02
+                depth = 10000
+            }
+            con = 101
+            alarm[4] = 50
+        }
+        if (con == 102)
+        {
+            snd_free_all()
+            con = 103
+            alarm[4] = 50
+        }
+        if (con == 104)
+        {
+            scr_windowcaption(" ")
+            global.typer = 5
+            global.fc = 0
+            global.msg[0] = stringsetloc("* (But^1, when you opened your eyes...)/%", "obj_krisroom_slash_Step_0_gml_283_0")
+            instance_create(0, 0, obj_dialoguer)
+            con = 105
+        }
+        if (con == 105 && (!d_ex()))
+        {
+            instance_create(0, 0, obj_persistentfadein)
+            scr_windowcaption(stringsetloc("THE DARK", "obj_krisroom_slash_Step_0_gml_293_0"))
+            global.plot = 49
+            scr_become_dark()
+            room_goto(room_dw_cyber_intro_1)
+        }
     }
 }

@@ -7,8 +7,7 @@ image_yscale = 2
 small = 0
 if (floor(random(12)) == 0)
 {
-    sprite_index = spr_traffic_car_side_legs_small_left
-    image_xscale = -2
+    sprite_index = spr_traffic_car_side_legs_small_right
     small = 1
     image_speed *= 2
 }

@@ -675,15 +675,18 @@ if (menu == 99)
         if is_playing
             previous_song = string(obj_fusionmenu.songPlaying)
     }
-    else
+    else if (audio_timer == 1)
     {
         if (!is_playing)
         {
             global.currentsong[0] = snd_init(previous_song)
             global.currentsong[1] = mus_loop_ext(global.currentsong[0], 1, 1)
         }
+        audio_timer = 0
         menu = 0
     }
+    else
+        audio_timer++
 }
 onebuffer -= 1
 twobuffer -= 1

@@ -1,3 +1,4 @@
+image_blend = merge_color(c_red, c_white, (hp / hpmax))
 if (hp < 1)
 {
     if (active == true)
@@ -12,12 +13,16 @@ if instance_exists(obj_heart)
 {
     rotator_target = obj_heart
     depth = (obj_heart.depth - 1)
-    var extra_speed = (obj_heart.z_hold / 2)
+    if (button2_h() && xhold < 9)
+        xhold++
+    else if (xhold > 0)
+        xhold--
+    var extra_speed = xhold
     if (extra_speed > 8)
         extra_speed = 8
     myspeed = (8 - extra_speed)
-    x = (rotator_target.x + lengthdir_x(length, place))
-    y = (rotator_target.y + lengthdir_y(length, place))
+    x = ((rotator_target.x + 10) + lengthdir_x(length, place))
+    y = ((rotator_target.y + 10) + lengthdir_y(length, place))
     place += myspeed
 }
 if (!instance_exists(obj_heart))

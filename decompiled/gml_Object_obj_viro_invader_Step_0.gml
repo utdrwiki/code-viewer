@@ -6,7 +6,7 @@ if (shotready && ((!caralert) || (xrelative >= 12 && xrelative <= 23)))
     else
     {
         shotready = false
-        d = scr_childbullet(x, y, 411)
+        d = scr_childbullet(x, y, 413)
         d.speed = (bigshot ? 6 : 4)
         d.grazepoints = grazepoints
         if bigshot

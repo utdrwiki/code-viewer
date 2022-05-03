@@ -424,9 +424,7 @@ if (victory == false)
             {
                 snd_free_all()
                 musicer = instance_create(x, y, obj_musicer_city)
-                global.interact = 0
-                icon = 3
-                weird = false
+                icon = 1000
                 if i_ex(obj_cybercity_mousesign)
                 {
                     with (obj_cybercity_mousesign)
@@ -434,6 +432,16 @@ if (victory == false)
                         start = 1
                         fade_in = 1
                     }
+                }
+            }
+            if (icon == 1000)
+            {
+                if (!d_ex())
+                {
+                    weird = false
+                    global.interact = 0
+                    icon = 3
+                    global.facing = 0
                 }
             }
         }

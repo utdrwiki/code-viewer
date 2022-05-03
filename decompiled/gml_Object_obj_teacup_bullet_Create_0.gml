@@ -30,4 +30,4 @@ damage = 6
 if (room == room_dw_mansion_b_west_2f)
     damage = 5
 if (master == -1)
-    master = 1088
+    master = 1091

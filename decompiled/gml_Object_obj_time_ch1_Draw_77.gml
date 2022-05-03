@@ -29,7 +29,7 @@ if (os_type == os_switch || os_type == os_ps4)
         var room_id = global.currentroom
         if instance_exists(obj_savepoint_ch1)
             global.disable_border = false
-        if (room_id == PLACE_CONTACT_ch1 || room_id == 1634 || room_id == PLACE_MENU_ch1 || room_id == room_splashscreen_ch1 || room_id == room_gameover_ch1 || room_id == PLACE_DOG_ch1 || room_id == room_dark1a_ch1 || room_id == room_dark_eyepuzzle_ch1)
+        if (room_id == PLACE_CONTACT_ch1 || room_id == 1638 || room_id == PLACE_MENU_ch1 || room_id == room_splashscreen_ch1 || room_id == room_gameover_ch1 || room_id == PLACE_DOG_ch1 || room_id == room_dark1a_ch1 || room_id == room_dark_eyepuzzle_ch1)
             global.disable_border = true
     }
     if ((!paused) && os_is_paused())

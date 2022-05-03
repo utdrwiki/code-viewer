@@ -16,7 +16,7 @@ if (sweat == 1)
     draw_sprite(spr_defeatsweat, 0, (x - 6), (y - 6))
 if ((t > 0 && t <= 20) || g == 19)
 {
-    d = scr_custom_afterimage(1309)
+    d = scr_custom_afterimage(1312)
     d.sprite_index = spr_launchsmoke
     var sidelen = random_range(-10, 10)
     d.x += ((sprite_width / 2) + lengthdir_x(sidelen, (direction + 90)))

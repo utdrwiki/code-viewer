@@ -1,3 +1,11 @@
+if (button3_h() && button2_h())
+{
+}
+else
+{
+    with (obj_mainchara)
+        roomenterfreezeend = 1
+}
 if (doorPreset > 0)
 {
     if (doorPreset == 1)

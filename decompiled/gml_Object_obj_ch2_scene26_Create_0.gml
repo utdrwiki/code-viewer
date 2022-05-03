@@ -5,6 +5,7 @@ glowvalue = 0
 skipbattle = 0
 drawx = 0
 extra_con = 0
+noelle_depth = 0
 if (!snd_is_playing(global.currentsong[1]))
 {
     global.currentsong[0] = snd_init("wind_highplace.ogg")

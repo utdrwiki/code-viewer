@@ -8,7 +8,7 @@ if (init && image_alpha < 1 && firstwave <= 0)
 xflip = 1
 if (flipTimer < 0)
     xflip = -1
-flipTimer += scr_remapvalue(0, 4, speed, 1, 2)
+flipTimer += 1
 if (flipTimer >= flipSpeed)
     flipTimer -= (flipSpeed * 2)
 draw_sprite_ext(sprite_index, 0, x, y, xflip, 1, 0, image_blend, image_alpha)

@@ -165,7 +165,6 @@ if (con == 23)
         {
             victorySprite = spr_keyboard_puzzle_bluecheck
             global.interact = 0
-            show_debug_message("yep")
             checkscreen = instance_create((monitorx + 40), 80, obj_queenscreen)
             checkscreen.extflag = 4
             checkscreen.image_index = 10

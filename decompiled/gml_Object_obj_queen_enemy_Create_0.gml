@@ -72,3 +72,6 @@ changesimulorder = 0
 wintimer = 0
 extracon = 0
 extratimer = 0
+krismaxhp = global.maxhp[1]
+susiemaxhp = global.maxhp[2]
+ralseimaxhp = global.maxhp[3]

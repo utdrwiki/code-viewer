@@ -7,7 +7,7 @@ finalY = 0
 remFinalX = 0
 remFinalY = 0
 remCurrentView = 0
-remTargetObject = 80
+remTargetObject = 82
 lerpProgress = 0
 startLerpX = 0
 startLerpY = 0
@@ -52,7 +52,7 @@ for (i = 0; i < maxViews; i++)
     panLimitBottom[i] = (room_height - cameraheight())
     ignoreFreezeArea[i] = -2
 }
-targetObject[0] = 80
+targetObject[0] = 82
 if (global.darkzone == false)
 {
     targetObjectCenter[0] = 0

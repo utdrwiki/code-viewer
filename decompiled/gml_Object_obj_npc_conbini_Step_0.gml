@@ -1,7 +1,8 @@
 if (con == -1 && obj_mainchara.x < 130)
     con = 0
-if (con == 0 && obj_mainchara.x > 140)
+if (con == 0 && obj_mainchara.x > 140 && global.interact == 0 && (!d_ex()))
 {
+    global.interact = 1
     cutscene_master = scr_cutscene_make()
     to = 0
     to_actor = instance_create(365, 250, obj_actor)
@@ -18,7 +19,6 @@ if (con == 0 && obj_mainchara.x > 140)
     sa_actor.auto_depth = 0
     sa_actor.depth = (counter.depth + 10)
     sans.visible = false
-    global.interact = 1
     con = 1
 }
 if (con == 1)

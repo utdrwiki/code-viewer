@@ -43,14 +43,7 @@ if (global.darkzone == false)
     if i_ex(writergod)
     {
         if (finished == true && getrid == 0)
-        {
-            with (writergod)
-            {
-                if (halt == false)
-                    halt = true
-            }
             finished = 2
-        }
     }
     else
         instance_destroy()

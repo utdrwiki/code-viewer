@@ -25,7 +25,7 @@ scr_array_sort = function(argument0, argument1) //gml_Script_scr_array_sort
         }
     }
     if (_emergencyStop >= 100)
-        scr_debug_print("EMERGENCY STOP HAD TO BE CALLED (BAD)")
+        scr_debug_print("")
     return _array;
 }
 

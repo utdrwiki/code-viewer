@@ -35,7 +35,8 @@ scr_84_load_ini = function() //gml_Script_scr_84_load_ini
         {
             if (FILE[i] == 1)
             {
-                PLACE[i] = scr_roomname(ini_read_real(scr_ini_chapter(global.chapter, i), "Room", 0))
+                var room_index = scr_get_valid_room(global.chapter, ini_read_real(scr_ini_chapter(global.chapter, i), "Room", 0))
+                PLACE[i] = scr_roomname(room_index)
                 TIME[i] = ini_read_real(scr_ini_chapter(global.chapter, i), "Time", 0)
                 NAME[i] = ini_read_string(scr_ini_chapter(global.chapter, i), "Name", "------")
                 LEVEL[i] = 1

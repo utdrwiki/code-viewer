@@ -166,4 +166,7 @@ if (timer >= 1400)
 if (timer == 1860)
     snd_free(song0)
 if (timer == 1880)
+{
+    global.chapter_return = -1
     game_restart_true()
+}

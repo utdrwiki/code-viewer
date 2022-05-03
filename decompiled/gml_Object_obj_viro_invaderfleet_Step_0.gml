@@ -23,15 +23,15 @@ if (init == false)
     if (fleetsize == 2)
     {
         boys[0].x += 16
-        boys[1] = scr_childbullet((x - 16), y, 420)
+        boys[1] = scr_childbullet((x - 16), y, 422)
         boys[1].target = targetB
         boys[1].grazepoints = grazepoints
     }
     else if (fleetsize == 3)
     {
         boys[0].x += 32
-        boys[1] = scr_childbullet(x, y, 420)
-        boys[2] = scr_childbullet((x - 32), y, 420)
+        boys[1] = scr_childbullet(x, y, 422)
+        boys[2] = scr_childbullet((x - 32), y, 422)
         boys[1].target = targetB
         boys[1].grazepoints = grazepoints
         boys[2].grazepoints = grazepoints

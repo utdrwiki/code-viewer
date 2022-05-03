@@ -252,7 +252,8 @@ if (con == 21 || (con == 21 && forcend == 1))
     scr_weaponget(21)
     if (noroom == true)
         global.flag[468] = 2
-    scr_keyitemget(13)
+    if (scr_keyitemcheck(13) == 0)
+        scr_keyitemget(13)
 }
 if (con == 23 && (!d_ex()))
 {

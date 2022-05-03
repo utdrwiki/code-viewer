@@ -196,7 +196,9 @@ scr_saveprocess_ch1 = function(argument0) //gml_Script_scr_saveprocess_ch1
     ossafe_file_text_write_real_ch1(myfileid, global.currentroom)
     ossafe_file_text_writeln_ch1(myfileid)
     ossafe_file_text_write_real_ch1(myfileid, global.time)
-    ossafe_file_text_close_ch1(myfileid)
-    return;
+    if scr_debug()
+        gml_Script_scr_add_valid_room(global.chapter, global.currentroom, global.plot)
+    var is_valid = ossafe_file_text_close_ch1(myfileid)
+    return is_valid;
 }
 

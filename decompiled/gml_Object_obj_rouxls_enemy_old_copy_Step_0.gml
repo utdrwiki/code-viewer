@@ -196,33 +196,17 @@ if scr_debug()
         keytestmode = (1 - keytestmode)
         if (keytestmode == 1)
             keyboard_lastchar = ""
-        scr_debug_print(("Keycheck mode " + (keytestmode ? "enabled" : "disabled")))
     }
     if (keytestmode && keyboard_lastchar != "")
-    {
-        scr_debug_print((((("Last key pressed was " + string(keyboard_lastchar)) + " (") + string(keyboard_lastkey)) + ")"))
         keyboard_lastchar = ""
-    }
     if (keyboard_check_pressed(vk_numpad7) || keyboard_check_pressed(ord("1")))
-    {
         bulletoverride = 0
-        scr_debug_print("ROUXLS' NEXT ATTACK SHALL BE OF THE HEAD")
-    }
     if (keyboard_check_pressed(vk_numpad8) || keyboard_check_pressed(ord("2")))
-    {
         bulletoverride = 1
-        scr_debug_print("ROUXLS' NEXT ATTACK SHALL BE OF THE FOOT")
-    }
     if (keyboard_check_pressed(vk_numpad9) || keyboard_check_pressed(ord("3")))
-    {
         bulletoverride = 2
-        scr_debug_print("ROUXLS' NEXT ATTACK SHALL BE OF THE BLOCKS")
-    }
     if (keyboard_check_pressed(vk_numpad5) || keyboard_check_pressed(ord("4")))
-    {
         bulletoverride = -1
-        scr_debug_print("ROUXLS' NEXT ATTACK... COULD BE ANYTHING!! PREPARE THINE ASS")
-    }
     if keyboard_check_pressed(ord("N"))
     {
         if instance_exists(obj_power_up_fx)

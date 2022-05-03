@@ -36,6 +36,10 @@ scr_litemdesc_ch1 = function(argument0) //gml_Script_scr_litemdesc_ch1
         case 8:
             global.msg[0] = scr_84_get_lang_string_ch1("scr_litemdesc_slash_scr_litemdesc_gml_36_0")
             break
+        case 11:
+            global.msg[0] = scr_84_get_lang_string_ch1("scr_litemdesc_slash_scr_litemdesc_gml_37_0")
+            global.msg[1] = scr_84_get_lang_string_ch1("scr_litemdesc_slash_scr_litemdesc_gml_38_0")
+            break
     }
 
     return;

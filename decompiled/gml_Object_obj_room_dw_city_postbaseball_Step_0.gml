@@ -81,7 +81,7 @@ if (room == room_dw_city_postbaseball_1)
         scr_smallface(0, "noelle", 15, "mid", "bottommid", small_text)
         c_talk_wait()
         c_sel(no)
-        c_actortoobject(101)
+        c_actortoobject(103)
         c_actortocaterpillar()
         c_terminatekillactors()
     }

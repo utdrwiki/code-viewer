@@ -600,9 +600,7 @@ if (con == 50 && (!i_ex(obj_cutscene_master)))
     with (obj_caterpillarchara)
         visible = false
     snd_free_all()
-    global.currentsong[0] = snd_init("cybercity.ogg")
-    global.currentsong[1] = mus_loop_ext(global.currentsong[0], 0.8, 0.97)
-    audio_sound_gain(global.currentsong[1], 1, 30)
+    alarm[1] = 1
 }
 if (con == 55 && (!noellelost) && (obj_mainchara.x != 1100 || obj_mainchara.y != 233))
 {

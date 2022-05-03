@@ -30,7 +30,7 @@ if ((!spawning) && spawnVirus == true)
     if (virus_timer >= 3)
     {
         spawnVirus = false
-        d = scr_childbullet(x, y, 417)
+        d = scr_childbullet(x, y, 419)
         d.speed = 0.1
         d.friction = -0.1
         d.direction = point_direction(x, y, obj_heart.x, obj_heart.y)

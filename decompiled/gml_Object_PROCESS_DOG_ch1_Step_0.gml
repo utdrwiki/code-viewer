@@ -14,4 +14,4 @@ if start_timer
     restart_timer++
 }
 if (restart_timer == 200)
-    game_restart()
+    game_restart_true_ch1()

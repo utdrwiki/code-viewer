@@ -580,7 +580,7 @@ if (EVENT == 67)
     {
         global.name = CHOICE.NAMESTRING
         if (global.name == "GASTER")
-            game_restart()
+            game_restart_true()
     }
     else
     {

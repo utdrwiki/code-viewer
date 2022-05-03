@@ -1,4 +1,3 @@
-scr_debug_print((("Car done did a hit " + string(carhit)) + " times!"))
 if (carhit == 0 && hitcheck == 1)
 {
     with (obj_omawaroid_enemy)

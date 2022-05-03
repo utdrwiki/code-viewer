@@ -32,7 +32,9 @@ if (other.graze_only == 0)
         {
             if (other.final_attack == 1)
             {
-                if (defend == 0)
+                if (global.hp[1] <= 10)
+                    global.hp[1] -= 10
+                else if (defend == 0)
                     global.hp[1] -= floor((global.hp[1] / 2))
                 else
                     global.hp[1] -= floor(((global.hp[1] / 2) * 0.75))

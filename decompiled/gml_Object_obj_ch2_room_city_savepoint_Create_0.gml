@@ -1,4 +1,6 @@
 con = -1
+if (global.plot < 75)
+    global.plot = 75
 if (global.plot < 100)
 {
     capntalked = false

@@ -738,10 +738,7 @@ else if (type == 20)
 else if (type == 21)
 {
     if (init == true)
-    {
         init = 2
-        scr_debug_print("Transmitting VERY EVIL computer virus to dataminer's house and room...")
-    }
 }
 else if (type == 22)
 {
@@ -800,12 +797,12 @@ else if (type >= 23 && type <= 25)
             instance_create(obj_growtangle.x, obj_growtangle.y, obj_spamton_warped_box)
         if (type == 23)
         {
-            d.bullettype = 583
+            d.bullettype = 586
             d.firingspeed = 10
         }
         else if (type == 24)
         {
-            d.bullettype = 584
+            d.bullettype = 587
             d.firingspeed = 28
             btimer = 10
         }

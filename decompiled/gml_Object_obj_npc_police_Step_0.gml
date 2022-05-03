@@ -5,7 +5,7 @@ if i_ex(bars)
         if (global.flag[317] == 0)
             bars.depth = 100000000
         else
-            bars.depth = (obj_mainchara.y > 60 ? 100000000 : 0)
+            bars.depth = (obj_mainchara.y > 60 ? 100000000 : 5000)
     }
     else
     {
@@ -428,6 +428,7 @@ if (napstacon == 10 && global.flag[317] == 1)
     c_wait(15)
     c_wait(5)
     c_mus("free_all")
+    c_wait(5)
     c_mus2("initloop", "napsta_alarm.ogg", 0)
     c_wait(5)
     c_var_lerp("y", 64, 84, 15)

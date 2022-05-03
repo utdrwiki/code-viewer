@@ -115,7 +115,7 @@ if (global.myfight == 3)
     }
     if (acting == 2 && actcon == 0)
     {
-        scr_act_charsprite("kris", choose(1425, 1424), 0, false)
+        scr_act_charsprite("kris", choose(1427, 1426), 0, false)
         if (global.mercymod[myself] < global.mercymax[myself])
             scr_mercyadd(myself, 100)
         msgsetloc(0, "* You treated Virovirokun with care! It's no longer infectious!/%", "obj_virovirokun_enemy_slash_Step_0_gml_163_0")
@@ -126,7 +126,7 @@ if (global.myfight == 3)
     {
         if (noelle_special == 0)
         {
-            scr_act_charsprite("kris", choose(1425, 1424), 0, false)
+            scr_act_charsprite("kris", choose(1427, 1426), 0, false)
             if (!scr_havechar(4))
             {
                 scr_act_charsprite("ralsei", spr_ralseib_virokun, 0, false)

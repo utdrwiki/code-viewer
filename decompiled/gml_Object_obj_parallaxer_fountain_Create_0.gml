@@ -8,7 +8,7 @@ if (room == room_dw_mansion_acid_tunnel_exit)
     ypos = 260
 if (room == room_dw_city_traffic_4)
     xpos = x
-var layersprites = [3141]
+var layersprites = [3144]
 for (var i = 0; i < array_length_1d(layersprites); i++)
 {
     var bglayer = instance_create(xpos, ypos, obj_parallaxer_layer)

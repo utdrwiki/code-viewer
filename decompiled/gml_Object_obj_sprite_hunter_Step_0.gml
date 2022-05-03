@@ -11,5 +11,5 @@ if (scr_debug() && keyboard_check_pressed(vk_f11) && spriteID != -4)
         }
     }
     if (!other.otherfound)
-        scr_debug_print("didn't find anything...?")
+        scr_debug_print("")
 }

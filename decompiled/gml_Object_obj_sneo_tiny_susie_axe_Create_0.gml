@@ -3,7 +3,7 @@ image_blend = c_yellow
 image_alpha = 0.5
 image_xscale = 0.4
 image_yscale = 0.4
-target = 694
+target = 697
 var dist = 9999
 if instance_exists(obj_pipis_bullet)
 {

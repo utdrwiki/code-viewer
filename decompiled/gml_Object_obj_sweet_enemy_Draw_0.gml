@@ -1,3 +1,4 @@
+draw_text(80, 10, global.turntimer)
 if (hurtstate2 == 1)
 {
     draw_sprite_ext(spr_sweet_hurt, 0, x, y, 2, 2, 0, c_white, 1)

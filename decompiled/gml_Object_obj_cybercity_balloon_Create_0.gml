@@ -7,7 +7,7 @@ blend = 1
 scr_depth()
 breakable = 0
 attached = 0
-attachedobj = 348
+attachedobj = 350
 balloonid = -1
 if (room == room_dw_city_postbaseball_3)
 {

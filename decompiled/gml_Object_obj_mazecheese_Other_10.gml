@@ -43,5 +43,7 @@ if (global.interact == 0)
         myinteract = 3
         global.interact = 1
         mydialoguer = instance_create(0, 0, obj_dialoguer)
+        if (room == room_dw_city_cheesemaze && obj_mainchara.x < 700)
+            mydialoguer.free = 1
     }
 }

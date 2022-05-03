@@ -8,4 +8,4 @@ else if (timer > 0.75)
     alpha = (1 - ((timer - 0.75) * 4))
 else
     alpha = 1
-draw_sprite_ext(sprite_index, image_index, x, 747, scale, scale, 0, c_lime, alpha)
+draw_sprite_ext(sprite_index, image_index, x, 750, scale, scale, 0, c_lime, alpha)

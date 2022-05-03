@@ -10,10 +10,7 @@ if (init == false)
 if scr_debug()
 {
     if keyboard_check_pressed(ord("B"))
-    {
         dbselect = (!dbselect)
-        scr_debug_print(("Thrash machine piece debug " + (dbselect ? "enabled." : "disabled.")))
-    }
     if (keyboard_check_pressed(ord("0")) || keyboard_check_pressed(vk_numpad0))
     {
         part[0] = irandom(3)
@@ -21,12 +18,8 @@ if scr_debug()
         part[1] = irandom(3)
         randomise()
         part[2] = irandom(3)
-        scr_debug_print("Thrash machine randomized.")
         if (part[0] == 3 && part[1] == 3 && part[2] == 3)
-        {
-            scr_debug_print("Your random machine has made you lose points.")
             duckmode = true
-        }
         else
             duckmode = false
     }
@@ -35,15 +28,9 @@ if scr_debug()
     if dbselect
     {
         if keyboard_check_pressed(vk_decimal)
-        {
-            scr_debug_print("Thrash machine pieces reset to defaults.")
             init = false
-        }
         if (dbselect && (!duckmode) && part[0] == 3 && part[1] == 3 && part[2] == 3)
-        {
-            scr_debug_print("Debug mode won't prevent you from losing points.")
             duckmode = true
-        }
         else if (duckmode && (!((part[0] == 3 && part[1] == 3 && part[2] == 3))))
             duckmode = false
     }

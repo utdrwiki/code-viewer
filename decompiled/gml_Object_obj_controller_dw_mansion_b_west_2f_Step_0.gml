@@ -7,6 +7,7 @@ if (instance_exists(obj_mainchara) && obj_mainchara.x <= 1920 && global.flag[373
     forcefield.canttalk = 1
     layer_set_visible("TILES_Edge_Hidden", 1)
     con = 1
+    scr_tempsave()
 }
 if (con == 1)
 {

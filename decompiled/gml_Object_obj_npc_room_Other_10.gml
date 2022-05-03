@@ -9,7 +9,8 @@ image_speed = 0.2
 if (global.darkzone == true)
     image_speed = 0.2
 global.msg[0] = stringsetloc("* The gash weaves down as if you cry./%", "obj_npc_room_slash_Other_10_gml_13_0")
-global.msg[0] = stringset("* [NO TEXT] (obj_npc_room)/%")
+if scr_debug()
+    global.msg[0] = stringset("* [NO TEXT] (obj_npc_room)/%")
 if (room == room_krisroom)
 {
     if (global.chapter == 1)
@@ -200,7 +201,7 @@ if (room == room_dw_castle_area_2)
         scr_anyface_next("susie", "0")
         msgnextloc("\\E0* The hell you even have a Ralsei statue anyway?/", "obj_npc_room_slash_Other_10_gml_220_0")
         scr_anyface_next("ralsei", 1)
-        msgnextloc("\\E1* Susie wants to practice hugging too? \\f1 ^3 /%", "obj_npc_room_slash_Other_10_gml_222_0")
+        msgnextloc("\\E1* Susie wants to practice hugging too? \\f1 ^1 /%", "obj_npc_room_slash_Other_10_gml_222_0")
         scr_smallface(1, "susie", 17, "mid", "bottom", stringsetloc("KRIS HURRY UP ALREADY!", "obj_npc_room_slash_Other_10_gml_223_0"))
     }
 }
@@ -1397,6 +1398,12 @@ if (room == room_dw_castle_area_2_transformed)
                 scr_speaker("no_name")
                 msgsetloc(0, "* This guy always seems like he's enjoying life more than me./", "obj_npc_room_slash_Other_10_gml_1535_0")
                 msgnextloc("* Maybe it's because he's a higher level...?/%", "obj_npc_room_slash_Other_10_gml_1536_0")
+                if (global.plot < 200 && global.flag[248] == 1)
+                {
+                    scr_speaker("no_name")
+                    msgsetloc(0, "* Is this guy seriously sucking up to you already^1? Even though you hurt us?/", "obj_npc_room_slash_Other_10_gml_1574_0_b")
+                    msgnextloc("* He could at least wait until later today!/%", "obj_npc_room_slash_Other_10_gml_1575_0_b")
+                }
             }
         }
     }
@@ -1404,18 +1411,21 @@ if (room == room_dw_castle_area_2_transformed)
     {
         if (global.plot < 200 || scr_get_total_recruits(2) < 4)
         {
+            scr_speaker("no_name")
+            msgsetloc(0, "* (Seems like Hathy likes this place.)/", "obj_npc_room_slash_Other_10_gml_1560_0")
+            msgnextloc("* (She hopes you'll like it too.)/%", "obj_npc_room_slash_Other_10_gml_1561_0")
+            if (global.plot < 200 && global.flag[248] == 1)
+            {
+                scr_speaker("no_name")
+                msgsetloc(0, "* (Seems like Hathy likes this place.)/", "obj_npc_room_slash_Other_10_gml_1594_0")
+                msgnextloc("* (You feel an aura of forgiveness...)/%", "obj_npc_room_slash_Other_10_gml_1595_0_b")
+            }
             if (global.flag[252] == 1)
             {
                 scr_speaker("no_name")
                 msgsetloc(0, "* (Seems Hathy likes this place.)/", "obj_npc_room_slash_Other_10_gml_1554_0")
                 msgnextloc("* (She hopes you'll find enough beds to inspect.)/", "obj_npc_room_slash_Other_10_gml_1555_0")
                 msgnextloc("* (You'll lose your bed inspector title if you don't inspect enough beds.)/%", "obj_npc_room_slash_Other_10_gml_1556_0")
-            }
-            else
-            {
-                scr_speaker("no_name")
-                msgsetloc(0, "* (Seems like Hathy likes this place.)/", "obj_npc_room_slash_Other_10_gml_1560_0")
-                msgnextloc("* (She hopes you'll like it too.)/%", "obj_npc_room_slash_Other_10_gml_1561_0")
             }
         }
         else

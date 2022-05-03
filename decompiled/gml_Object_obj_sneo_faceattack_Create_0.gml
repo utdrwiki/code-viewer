@@ -25,3 +25,4 @@ first_time = 0
 smashspeed = 25
 growtangle_x = 0
 heart_recoil = 0
+special = false

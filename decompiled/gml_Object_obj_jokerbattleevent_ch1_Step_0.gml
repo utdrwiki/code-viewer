@@ -346,9 +346,16 @@ if (con == 31 && (!d_ex_ch1()))
 }
 if (con == 33)
 {
+    con = 34
     snd_play_ch1(snd_joker_laugh0_ch1)
     global.typer = 35
     global.fc = 0
+    scr_keyitemget_ch1(13)
+    global.msg[0] = scr_84_get_lang_string_ch1("obj_jokerbattleevent_slash_Step_0_gml_362_0")
+    instance_create_ch1(0, 0, obj_dialoguer_ch1)
+}
+if (con == 34 && (!d_ex_ch1()))
+{
     if (global.flag[241] == 6)
     {
         scr_weaponget_ch1(7)
@@ -371,22 +378,22 @@ if (con == 33)
             global.flag[242] = 2
         }
     }
-    con = 34
+    con = 35
     instance_create_ch1(0, 0, obj_dialoguer_ch1)
 }
-if (con == 34 && (!d_ex_ch1()))
+if (con == 35 && (!d_ex_ch1()))
 {
     fade = instance_create_ch1(0, 0, obj_fadeout_ch1)
     fade.fadespeed = 0.02
-    con = 35
+    con = 36
     alarm[4] = 60
 }
-if (con == 36)
+if (con == 37)
 {
     global.entrance = 2
     global.interact = 3
     global.facing = 3
     instance_create_ch1(0, 0, obj_persistentfadein_ch1)
     room_goto(room_cc_prison_prejoker_ch1)
-    con = 37
+    con = 38
 }

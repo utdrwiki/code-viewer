@@ -43,9 +43,20 @@ if (room == room_dw_castle_area_2_transformed)
     else
     {
         nodialogue = 0
-        scr_speaker("no_name")
-        msgsetloc(0, "* After a long day^1, the town has grown once again./", "obj_savepoint_slash_Other_10_gml_50_0")
-        msgnextloc("* You are filled with a certain power.../%", "obj_savepoint_slash_Other_10_gml_51_0")
+        if (global.flag[469] == 0)
+        {
+            global.flag[469] = 1
+            scr_speaker("no_name")
+            msgsetloc(0, "* (You touched the light...)/", "obj_savepoint_slash_Other_10_gml_59_0")
+            msgnextloc("* (You thought about how you \\cRcan't go back to the Cyber World\\cW anymore.)/", "obj_savepoint_slash_Other_10_gml_60_0_b")
+            msgnextloc("* (You considered this carefully!)/%", "obj_savepoint_slash_Other_10_gml_61_0_b")
+        }
+        else
+        {
+            scr_speaker("no_name")
+            msgsetloc(0, "* After a long day^1, the town has grown once again./", "obj_savepoint_slash_Other_10_gml_50_0")
+            msgnextloc("* You are filled with a certain power.../%", "obj_savepoint_slash_Other_10_gml_51_0")
+        }
     }
 }
 if (room == room_dw_cyber_savepoint)

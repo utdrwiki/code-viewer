@@ -186,19 +186,22 @@ if (global.myfight == 3)
             actcon = 1
         }
     }
-    if (actcon == 30 && (!instance_exists(obj_writer)))
+    if (actcon == 30)
     {
-        tasquemarker = scr_dark_marker((camerax() + 800), y, spr_tasque_idle)
-        tasquemarker.image_speed = 0.16666666666666666
-        tasquemarker.depth = depth
-        var currentX = (x - 80)
-        var currentY = (y - 15)
-        image_xscale = -2
-        scr_move_to_point_over_time((camerax() + 800), global.monstermakey[myself], 30)
-        with (tasquemarker)
-            scr_move_to_point_over_time(currentX, currentY, 30)
-        actcon = 31
-        alarm[4] = 30
+        if (!i_ex(battlewriter))
+        {
+            tasquemarker = scr_dark_marker((camerax() + 800), y, spr_tasque_idle)
+            tasquemarker.image_speed = 0.16666666666666666
+            tasquemarker.depth = depth
+            var currentX = (x - 80)
+            var currentY = (y - 15)
+            image_xscale = -2
+            scr_move_to_point_over_time((camerax() + 800), global.monstermakey[myself], 30)
+            with (tasquemarker)
+                scr_move_to_point_over_time(currentX, currentY, 30)
+            actcon = 31
+            alarm[4] = 30
+        }
     }
     if (actcon == 32)
     {
@@ -351,11 +354,21 @@ if (global.myfight == 3)
             newtasque = scr_monster_change(myself, 32, obj_tasque_enemy)
             with (tasquemarker)
                 instance_destroy()
-            if (global.char[2] == 3)
+            var acttriggered = 0
+            for (var __i = 1; __i < 3; __i++)
             {
-                if (global.actingtarget[2] == myself)
-                    scr_nextact()
+                if (global.actingtarget[__i] == myself && global.char[__i] > 0)
+                {
+                    if (global.char[__i] == 3)
+                        acttriggered = 1
+                    global.acting[__i] = false
+                    global.actingsimul[__i] = false
+                    global.actingsingle[__i] = false
+                    global.faceaction[__i] = 0
+                }
             }
+            if acttriggered
+                scr_nextact()
             instance_destroy()
         }
         if (basket != noone)

@@ -291,7 +291,7 @@ if (con == 1)
         for (var _n = 0; _n < 12; _n++)
         {
             c_delaycmd((19 + (_n * 16)), "shakeobj", 0)
-            c_delaycmd((19 + (_n * 16)), "soundplay", 166)
+            c_delaycmd((19 + (_n * 16)), "soundplay", 167)
         }
     }
     else
@@ -304,7 +304,7 @@ if (con == 1)
             if (_n == 6)
                 n_offset = -3
             c_delaycmd(((19 + (_n * 12)) + n_offset), "shakeobj", 0)
-            c_delaycmd(((19 + (_n * 12)) + n_offset), "soundplay", 166)
+            c_delaycmd(((19 + (_n * 12)) + n_offset), "soundplay", 167)
         }
     }
     c_speaker("noelle")

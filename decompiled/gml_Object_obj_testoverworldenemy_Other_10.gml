@@ -7,6 +7,13 @@ if (encountered == 0)
         global.flag[9] = 1
         if (global.chapter == 2)
         {
+            if (room == room_dw_mansion_potBalance)
+            {
+                with (obj_chaseenemy)
+                    encountered = 1
+                with (obj_testoverworldenemy)
+                    encountered = 1
+            }
             var roomrange = 0
             if ((room >= room_dw_mansion_krisroom && room < room_dw_mansion_b_entrance) || (room >= room_dw_mansion_east_2f_a && room < room_dw_mansion_acid_tunnel) || room == room_dw_mansion_dininghall || room == room_dw_mansion_east_2f_c || room == room_dw_mansion_dining3)
                 roomrange = 1

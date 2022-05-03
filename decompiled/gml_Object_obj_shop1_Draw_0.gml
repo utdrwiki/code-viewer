@@ -626,6 +626,8 @@ if (menu == 4)
                 if show_jevil
                 {
                     global.flag[954] = 1
+                    scr_keyitemremove(13)
+                    took_crystal = 1
                     msgnextloc("\\E1* ..^1. Oh? What's that? It seems like he gave something to you./", "obj_shop1_slash_Draw_0_gml_584_0")
                     msgnextloc("\\E0* That's right..^1. You must not have noticed it./", "obj_shop1_slash_Draw_0_gml_585_0")
                     msgnextloc("\\E3* That Crystal..^1. It's nearly invisible^1, but you've been holding it this whole time./", "obj_shop1_slash_Draw_0_gml_586_0")

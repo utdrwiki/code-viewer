@@ -20,7 +20,7 @@ if (broken == 0)
 draw_self()
 if (bufferstate == 0)
 {
-    var _af = scr_custom_afterimage(545)
+    var _af = scr_custom_afterimage(547)
     _af.image_alpha = 0.5
 }
 draw_set_color(c_aqua)

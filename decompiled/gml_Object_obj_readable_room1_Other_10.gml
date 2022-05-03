@@ -9,7 +9,8 @@ global.interact = 1
 with (obj_darkcontroller)
     charcon = 0
 global.msg[0] = stringsetloc("* Suddenly^1, your body seizes up^1.&* What are you looking at?/%", "obj_readable_room1_slash_Other_10_gml_13_0")
-global.msg[0] = stringset("* [NO TEXT] (obj_readable_room1)/%")
+if scr_debug()
+    global.msg[0] = stringset("* [NO TEXT] (obj_readable_room1)/%")
 if (room == room_krisroom)
 {
     if (y < 150)
@@ -81,6 +82,14 @@ if (room == room_krisroom)
             if (global.plot >= 250)
             {
                 global.msc = 400
+                scr_text(global.msc)
+            }
+        }
+        if (global.chapter == 2)
+        {
+            if (global.tempflag[39] == 1 && global.plot < 10)
+            {
+                global.msc = 402
                 scr_text(global.msc)
             }
         }
@@ -252,7 +261,7 @@ if (room == room_torbathroom)
         }
         if (x >= 160 && x <= 190)
         {
-            if (global.plot == 210)
+            if (global.plot >= 210)
             {
                 scr_speaker("no_name")
                 msgsetloc(0, "* (No need for it.)/%", "obj_readable_room1_slash_Other_10_gml_367_0")
@@ -576,11 +585,6 @@ if (global.chapter == 1)
 }
 if (room == room_cc_clover)
 {
-    if (x < 90)
-    {
-        if (global.flag[412] == 0)
-            global.flag[412] = 1
-    }
     global.msg[0] = stringsetloc("* (It's a bed for three people^1, or one three-headed person.)/%", "obj_readable_room1_slash_Other_10_gml_662_0")
     if (x > (room_width / 2))
     {
@@ -1864,6 +1868,8 @@ if (room == room_dw_castle_east_door)
 }
 if (room == room_dw_castle_dojo)
 {
+    if (global.flag[412] == 0)
+        global.flag[412] = 1
     scr_speaker("no_name")
     global.msg[0] = stringsetloc("* (It's a bed for three people^1, or one three-headed person.)/%", "obj_readable_room1_slash_Other_10_gml_2177_0")
 }
@@ -2235,46 +2241,53 @@ if (room == room_dw_city_spamton_alley)
         }
     }
 }
-if (room == room_dw_city_mice || room == room_dw_city_mice2)
+if (room == room_dw_city_mice)
 {
-    if (extflag == "tutorial" && room == room_dw_city_mice)
+    scr_speaker("no_name")
+    if (x == 320 && y == 180)
     {
-        scr_speaker("no_name")
+        if (global.plot < 72)
+            msgsetloc(0, "* (It's a hole for mice to enter into.)/%", "obj_readable_room1_slash_Other_10_gml_2665_0")
+        else
+            msgsetloc(0, "* (There are mice inside scampering pleasingly.)/%", "obj_readable_room1_slash_Other_10_gml_2670_0")
+    }
+    if (x == 254 && y == 151)
+    {
         msgsetloc(0, "* (Mice will rotate 90 degrees when they collide with the block.)/", "obj_readable_room1_slash_Other_10_gml_2633_0_b")
         msgnextloc("* (Citizens must push blocks to get mice in the holes. Use the bell to reset.)/%", "obj_readable_room1_slash_Other_10_gml_2634_0_b")
     }
-    if (extflag == "tutorial" && room == room_dw_city_mice2)
+    if (x == 200)
     {
-        scr_speaker("no_name")
+        if (global.plot < 72)
+            msgsetloc(0, "* (It's a hole for mice to come from.)/%", "obj_readable_room1_slash_Other_10_gml_2651_0")
+        else
+            msgsetloc(0, "* (The hole is empty.)/%", "obj_readable_room1_slash_Other_10_gml_2656_0")
+    }
+}
+if (room == room_dw_city_mice2)
+{
+    scr_speaker("no_name")
+    if (x == 758)
+    {
         msgsetloc(0, "* (It's a citizen's duty to properly rotate and release mice using the traffic signs.)/", "obj_readable_room1_slash_Other_10_gml_2640_0")
         msgnextsubloc("* ~1: Engage and Disengage.&* ~2 ~3: Rotate.&* ~4: Release./%", scr_get_input_name(4), scr_get_input_name(3), scr_get_input_name(1), scr_get_input_name(0), "obj_readable_room1_slash_Other_10_gml_2641_0")
     }
-    if (extflag == "mousehole_generator")
+    else if (x == 524)
     {
-        if ((room == room_dw_city_mice && global.plot < 72) || (room == room_dw_city_mice2 && global.plot < 77))
-        {
-            scr_speaker("no_name")
+        if (global.plot < 77 || i_ex(obj_forcefield))
             msgsetloc(0, "* (It's a hole for mice to come from.)/%", "obj_readable_room1_slash_Other_10_gml_2651_0")
-        }
         else
-        {
-            scr_speaker("no_name")
             msgsetloc(0, "* (The hole is empty.)/%", "obj_readable_room1_slash_Other_10_gml_2656_0")
-        }
     }
-    if (extflag == "mousehole_goal")
+    else if (x == 684)
     {
-        if ((room == room_dw_city_mice && global.plot < 72) || (room == room_dw_city_mice2 && global.flag[368] == 0))
-        {
-            scr_speaker("no_name")
+        if (global.flag[368] == 0)
             msgsetloc(0, "* (It's a hole for mice to enter into.)/%", "obj_readable_room1_slash_Other_10_gml_2665_0")
-        }
         else
-        {
-            scr_speaker("no_name")
             msgsetloc(0, "* (There are mice inside scampering pleasingly.)/%", "obj_readable_room1_slash_Other_10_gml_2670_0")
-        }
     }
+    else
+        skip = true
 }
 if (room == room_dw_mansion_dining3)
 {

@@ -1,6 +1,5 @@
 if (con == 1 && (!d_ex()))
 {
-    global.interact = 1
     snd_play(snd_weirdeffect)
     con++
 }

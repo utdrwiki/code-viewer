@@ -224,6 +224,18 @@ if (type == 0 || type == 9 || type == 8)
         if (made == 1)
             made = 3
     }
+    else if (special == 99)
+    {
+        d = instance_create(xx, yy, obj_queen_search_window_bday)
+        if (made == -2)
+            d.search = 3
+        else
+            d.search = 4
+        d.damage = damage
+        d.target = target
+        if (made == 1)
+            made = 3
+    }
     else if ((special % 2) == false)
     {
         d = instance_create(xx, yy, obj_queen_search_window)
@@ -927,7 +939,4 @@ else if (type == 116)
     }
 }
 else if (init == true)
-{
-    scr_debug_print((("Queen doesn't have an attack with an ID of " + string(type)) + " yet."))
     init = 2
-}

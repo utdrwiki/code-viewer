@@ -2342,7 +2342,7 @@ scr_text = function(argument0) //gml_Script_scr_text
             global.choicemsg[2] = stringsetloc(" ", "scr_text_slash_scr_text_gml_2662_0_b")
             global.choicemsg[3] = stringsetloc(" ", "scr_text_slash_scr_text_gml_2663_0")
             global.msg[0] = stringsetloc("* (It's your bed.)/", "scr_text_slash_scr_text_gml_2662_0")
-            global.msg[1] = stringsetloc("* (If you go to back to sleep^1, \\cYyou may miss a lot of important things\\cW.)/", "scr_text_slash_scr_text_gml_2665_0_b")
+            global.msg[1] = stringsetloc("* (If you go back to sleep^1, \\cYyou may miss a lot of important things\\cW.)/", "scr_text_slash_scr_text_gml_2665_0_b")
             global.msg[2] = stringsetloc("* (Will you go to bed?)/", "scr_text_slash_scr_text_gml_2664_0")
             global.msg[3] = stringsetloc("\\C2 ", "scr_text_slash_scr_text_gml_2665_0")
             break
@@ -3189,7 +3189,7 @@ scr_text = function(argument0) //gml_Script_scr_text
             global.choicemsg[3] = stringsetloc(" ", "scr_text_slash_scr_text_gml_3623_0")
             scr_speaker("no_name")
             msgsetloc(0, "\\M0* ..^1. hey!!/", "scr_text_slash_scr_text_gml_3625_0")
-            var myname = (global.flag[259] == 1 ? stringsetloc("Hyper-Potato-Mouse!", "scr_text_slash_scr_text_gml_3626_0") : stringsetloc("Crisper!!", "scr_text_slash_scr_text_gml_3626_1"))
+            var myname = (global.flag[259] == 2 ? stringsetloc("Hyper-Potato-Mouse!", "scr_text_slash_scr_text_gml_3626_0") : stringsetloc("Crisper!!", "scr_text_slash_scr_text_gml_3626_1"))
             msgnextsubloc("\\M1* ~1^1!/", myname, "scr_text_slash_scr_text_gml_3627_0")
             msgnextloc("\\M2* I missed you^1, y'hear!? Hahaha!^1! Missed you all day!!/", "scr_text_slash_scr_text_gml_3628_0")
             msgnextloc("\\M0* Didja miss..^1. me?/", "scr_text_slash_scr_text_gml_3629_0")
@@ -3234,7 +3234,7 @@ scr_text = function(argument0) //gml_Script_scr_text
                     onionname = stringsetloc("Asriel II", "scr_text_slash_scr_text_gml_3670_0")
                 msgnextsubloc("* ~1 is on the case!/", onionname, "scr_text_slash_scr_text_gml_3672_0")
                 msgnextloc("\\M3* (That's my name^1, right?)/", "scr_text_slash_scr_text_gml_3673_0")
-                myname = (global.flag[259] == 1 ? stringsetloc("Mouse!!", "scr_text_slash_scr_text_gml_3674_0") : stringsetloc("Kiss!", "scr_text_slash_scr_text_gml_3674_1"))
+                myname = (global.flag[259] == 2 ? stringsetloc("Mouse!!", "scr_text_slash_scr_text_gml_3674_0") : stringsetloc("Kiss!", "scr_text_slash_scr_text_gml_3674_1"))
                 msgnextsubloc("\\M0* See you^1, ~1^1!/%", myname, "scr_text_slash_scr_text_gml_3675_0")
             }
             else
@@ -3512,7 +3512,7 @@ scr_text = function(argument0) //gml_Script_scr_text
                 msgnextloc("* Originally a smith by trade^1, he began writing history.../", "scr_text_slash_scr_text_gml_3973_0")
                 msgnextloc("* And made a turn into telling stories^1,/", "scr_text_slash_scr_text_gml_3974_0")
                 msgnextloc("* As a means to entertain his children./", "scr_text_slash_scr_text_gml_3975_0")
-                msgnextloc("* That such a story^1, created for a such a simple purpose^1,/", "scr_text_slash_scr_text_gml_3976_0")
+                msgnextloc("* That such a story^1, created for such a simple purpose^1,/", "scr_text_slash_scr_text_gml_3976_0")
                 msgnextloc("* Could blossom into such a large^1, wonderful^1, world-changing thing.../", "scr_text_slash_scr_text_gml_3977_0")
                 msgnextloc("* That is the majesty of words^1, Kris./", "scr_text_slash_scr_text_gml_3978_0")
                 msgnextloc("* .../", "scr_text_slash_scr_text_gml_3979_0")
@@ -4954,6 +4954,7 @@ scr_text = function(argument0) //gml_Script_scr_text
         case 1134:
             if (global.choice == 0)
             {
+                scr_tempsave()
                 scr_speaker("no_name")
                 msgsetloc(0, "* (You put the disk into the broken down mechanism.)/", "scr_text_slash_scr_text_gml_5662_0")
                 msgnextloc("* (...)/", "scr_text_slash_scr_text_gml_5663_0")
@@ -4966,7 +4967,6 @@ scr_text = function(argument0) //gml_Script_scr_text
                 with (obj_readable_room1)
                     read = 0
                 global.flag[309] = 8
-                scr_tempsave()
             }
             if (global.choice == 1)
                 msgsetloc(0, "%%", "scr_text_slash_scr_text_gml_5676_0")
@@ -6302,7 +6302,7 @@ scr_text = function(argument0) //gml_Script_scr_text
             break
         case 1218:
             snd_play(snd_dooropen)
-            scr_script_delayed(gml_Script_snd_play, 10, 62)
+            scr_script_delayed(gml_Script_snd_play, 10, 63)
             scr_speaker("susie")
             msgsetloc(0, "\\E2\\M0* Hey^1, Kris^1! Let's beat it already./", "scr_text_slash_scr_text_gml_7317_0")
             msgnextloc("\\E0* Man^1, he kept telling me about Noelle^1, like.../", "scr_text_slash_scr_text_gml_7318_0")
@@ -6635,10 +6635,15 @@ scr_text = function(argument0) //gml_Script_scr_text
                         global.flag[241] = 7
                     if (global.tempflag[36] == 2)
                         global.flag[241] = 6
+                    var get_crystal = scr_keyitemcheck(13) == 0
+                    if get_crystal
+                        scr_keyitemget(13)
                     global.tempflag[36] = 3
                     global.flag[460] = 1
                     scr_speaker("no_name")
                     msgsetloc(0, "* (You reached inside and found something alongside a strange piece of glass...)/", "scr_text_slash_scr_text_gml_7648_0")
+                    if get_crystal
+                        msgnextloc("* (You got ShadowCrystal.)/", "scr_text_slash_scr_text_gml_7658_0")
                     msgnext(itemgetstring)
                     if i_ex(obj_npc_castle_cliff)
                     {

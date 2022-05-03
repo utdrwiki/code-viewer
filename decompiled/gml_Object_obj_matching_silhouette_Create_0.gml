@@ -1,4 +1,4 @@
-target_char = 80
+target_char = 82
 copy_sprite = 0
 lsprite = spr_krisl
 rsprite = spr_krisr

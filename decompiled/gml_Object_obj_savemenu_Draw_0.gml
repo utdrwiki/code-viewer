@@ -170,24 +170,34 @@ else if (menuno == 1)
                 menuno = 2
                 global.filechoice = mpos
                 snd_play(snd_save)
-                scr_save()
-                saved = 1
-                xcoord = 2
-                buffer = 3
-                if (d == 2)
+                var is_valid = scr_save()
+                if is_valid
                 {
-                    name = global.truename
-                    love = global.llv
+                    menuno = 2
+                    saved = 1
+                    xcoord = 2
+                    buffer = 3
+                    if (d == 2)
+                    {
+                        name = global.truename
+                        love = global.llv
+                    }
+                    scr_roomname(room)
+                    level = global.lv
+                    time = global.time
+                    minutes = floor((time / 1800))
+                    seconds = round((((time / 1800) - minutes) * 60))
+                    if (seconds == 60)
+                        seconds = 59
+                    if (seconds < 10)
+                        seconds = ("0" + string(seconds))
                 }
-                scr_roomname(room)
-                level = global.lv
-                time = global.time
-                minutes = floor((time / 1800))
-                seconds = round((((time / 1800) - minutes) * 60))
-                if (seconds == 60)
-                    seconds = 59
-                if (seconds < 10)
-                    seconds = ("0" + string(seconds))
+                else
+                {
+                    save_data_error = 1
+                    var error_message = instance_create(0, 0, obj_savedata_error)
+                    error_message.error_type = "save_failed"
+                }
             }
         }
         if (button2_p() && buffer < 0)
@@ -255,34 +265,45 @@ else if (menuno == 1)
             draw_set_color(c_white)
         draw_text((xx + 350), (((yy + 300) + 12) + 12), string_hash_to_newline(returntxt))
         if (overcoord == 0)
-            draw_sprite(heartsprite, 0, 142, (324 + (string_height(savetxt) / 4)))
+            draw_sprite(heartsprite, 0, (((xx + 170) - 32) + 4), (((yy + 300) + 24) + (string_height(savetxt) / 4)))
         else
-            draw_sprite(heartsprite, 0, 322, (324 + (string_height(returntxt) / 4)))
+            draw_sprite(heartsprite, 0, (((xx + 350) - 32) + 4), (((yy + 300) + 24) + (string_height(returntxt) / 4)))
         if (button1_p() && buffer < 0)
         {
+            if save_data_error
+                return;
             if (overcoord == 0)
             {
                 menuno = 2
                 global.filechoice = mpos
                 snd_play(snd_save)
-                script_execute(gml_Script_scr_save)
-                saved = 1
-                xcoord = 2
-                buffer = 3
-                if (d == 2)
+                is_valid = script_execute(gml_Script_scr_save)
+                if is_valid
                 {
-                    name = global.truename
-                    love = global.llv
+                    saved = 1
+                    xcoord = 2
+                    buffer = 3
+                    if (d == 2)
+                    {
+                        name = global.truename
+                        love = global.llv
+                    }
+                    scr_roomname(room)
+                    level = global.lv
+                    time = global.time
+                    minutes = floor((time / 1800))
+                    seconds = round((((time / 1800) - minutes) * 60))
+                    if (seconds == 60)
+                        seconds = 59
+                    if (seconds < 10)
+                        seconds = ("0" + string(seconds))
                 }
-                scr_roomname(room)
-                level = global.lv
-                time = global.time
-                minutes = floor((time / 1800))
-                seconds = round((((time / 1800) - minutes) * 60))
-                if (seconds == 60)
-                    seconds = 59
-                if (seconds < 10)
-                    seconds = ("0" + string(seconds))
+                else
+                {
+                    save_data_error = 1
+                    error_message = instance_create(0, 0, obj_savedata_error)
+                    error_message.error_type = "save_failed"
+                }
             }
             else
             {
@@ -293,6 +314,8 @@ else if (menuno == 1)
         }
         if (button2_p() && buffer < 0)
         {
+            if save_data_error
+                return;
             overwrite = 0
             buffer = 3
             saved = 0
@@ -303,6 +326,18 @@ else if (menuno == 1)
 }
 else if (menuno == 2)
 {
+    if save_data_error
+    {
+        if (!instance_exists(obj_savedata_error))
+        {
+            save_data_error = 0
+            global.interact = 0
+            with (obj_mainchara)
+                onebuffer = 3
+            instance_destroy()
+        }
+        return;
+    }
     draw_set_color(c_black)
     draw_set_alpha(0.8)
     draw_rectangle((xx - 10), (yy - 10), ((xx + 640) + 10), ((yy + 480) + 10), false)

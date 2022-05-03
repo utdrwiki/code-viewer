@@ -1,3 +1,3 @@
-doorRoom = 166
+doorRoom = 167
 doorEntrance = 21
 doorFadeMusic = 1

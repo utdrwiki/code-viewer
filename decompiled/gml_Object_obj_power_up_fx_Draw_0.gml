@@ -40,7 +40,7 @@ if (effecttimer >= effectPause)
 {
     if ((timer + 15) >= poweruptime)
     {
-        d = scr_custom_afterimage(203)
+        d = scr_custom_afterimage(205)
         d.depth = (depth + 1)
         d.image_alpha = max(0.1, __alpha)
         d.reverse = 1
@@ -48,7 +48,7 @@ if (effecttimer >= effectPause)
         d.pivotx = pivotx
         d.pivoty = pivoty
         d.use_pivot = use_pivot
-        d = scr_custom_afterimage(203)
+        d = scr_custom_afterimage(205)
         d.image_alpha = max(0.1, __alpha)
         d.fade = 0.1
         d.image_blend = image_blend

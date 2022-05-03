@@ -351,9 +351,6 @@ if (con == 5 && (!d_ex()))
 }
 if ((con == 10 && (!d_ex())) || scr_cutscene_loaded())
 {
-    global.filechoice += 3
-    scr_save()
-    global.filechoice -= 3
     susie_snore = 0
     con = 40
     if (debug_skip == 0)
@@ -403,7 +400,8 @@ if ((con == 10 && (!d_ex())) || scr_cutscene_loaded())
         c_mus("free")
         c_wait(110)
         c_var_instance(id, "susie_snore", 1)
-        c_var_instance(id, "end_game", 1)
+        if (os_type != os_ps4)
+            c_var_instance(id, "end_game", 1)
         c_speaker("no_name")
         c_msgsetloc(0, "* (... Susie fell asleep.)/%", "obj_ch2_scene32_slash_Step_0_gml_530_0")
         c_talk_wait()
@@ -543,7 +541,7 @@ if ((con == 10 && (!d_ex())) || scr_cutscene_loaded())
     c_imageindex(15)
     c_walkdirect(430, 167, 2)
     c_soundplay(snd_grab)
-    c_instance(460, 177, 365)
+    c_instance(460, 177, 367)
     c_wait(45)
     c_imagespeed(0)
     c_imageindex(15)
@@ -651,6 +649,8 @@ if ((con == 10 && (!d_ex())) || scr_cutscene_loaded())
     c_var_instance(tvstatic, "depth", 5)
     c_var_lerp_instance(tvstatic, "image_alpha", 0, 1, 180)
     c_wait(240)
+    if (os_type == os_ps4)
+        c_var_instance(id, "end_game", 1)
     c_var_lerp_instance(tvsmile, "image_alpha", 0, 1, 180)
     c_var_instance(id, "fade_out_deep", 1)
     c_mus2("initloop", "tv_noise.ogg", 0)
@@ -760,6 +760,12 @@ if end_game
     end_game = false
     _remfilechoice = global.filechoice
     global.filechoice += 3
-    scr_save()
+    var is_valid = scr_save()
+    if (!is_valid)
+    {
+        var error_message = instance_create(0, 0, obj_savedata_error)
+        error_message.type = "auto"
+        error_message.error_type = "save_failed"
+    }
     global.filechoice = _remfilechoice
 }

@@ -74,7 +74,7 @@ if (instance_exists(obj_gamecontroller) && obj_gamecontroller.gamepad_active == 
             global.input_held[j] = false
         }
     }
-    for (var k = obj_afterimage_anim; k < obj_gigaqueen_intro_fight; k++)
+    for (var k = obj_sneo_smoke; k < obj_dw_city_mice3Fence; k++)
     {
         if (keyboard_check(global.input_k[k]) || gamepad_button_check(obj_gamecontroller.gamepad_id, global.input_g[k]))
         {
@@ -124,5 +124,15 @@ else if border_fade_in
         border_alpha += border_fade_value
         if (border_alpha >= 1)
             border_alpha = 1
+    }
+}
+if scr_debug_ch1()
+{
+    if keyboard_check_pressed(ord("À"))
+    {
+        if (room_speed == 30)
+            room_speed = (150 - (140 * keyboard_check(vk_control)))
+        else
+            room_speed = 30
     }
 }

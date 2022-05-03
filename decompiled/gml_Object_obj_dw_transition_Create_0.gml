@@ -30,7 +30,7 @@ quick_mode = 0
 soundtimer = 0
 soundcon = 0
 linesfxtimer = 0
-nextroom = 69
+nextroom = 70
 skiprunback = 0
 if (global.plot == 9)
-    nextroom = 70
+    nextroom = 71

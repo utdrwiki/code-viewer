@@ -47,7 +47,7 @@ if (state == 3)
 {
     for (var i = 0; i < partySize; i += 1)
     {
-        var _sprites = [2548, 2548, 2559, 2555]
+        var _sprites = [2552, 2552, 2563, 2559]
         cup_char[i].sprite_index = _sprites[global.char[i]]
         with (cup_char[i])
         {
@@ -332,7 +332,7 @@ if (state == 7)
         snd_play(snd_jump)
         for (i = 0; i < partySize; i++)
         {
-            _sprites = [544, 544, 542, 3338]
+            _sprites = [544, 544, 542, 3341]
             var _charaDest = (reverse ? startPos[i] : endPos[i])
             jumpMarker[i] = instance_create(cup_char[i].x, cup_char[i].y, obj_marker)
             with (jumpMarker[i])
@@ -363,7 +363,7 @@ if (state == 8)
     {
         for (i = 0; i < partySize; i++)
         {
-            _sprites = [648, 648, 548, 2558]
+            _sprites = [649, 649, 548, 2562]
             var _longestAnim = 0
             var _animSpeed = 0.25
             with (jumpMarker[i])
@@ -523,11 +523,11 @@ for (i = 0; i < 3; i++)
     cupx = lengthdir_x(cupDistanceFromCenter, _charSpin)
     cupy = lengthdir_y((cupDistanceFromCenter * 0.5), _charSpin)
     var _cupDepth = ((depth - depthSeparation) - cupy)
-    var _spritesTea = [2552, 2549, 2549, 2556]
+    var _spritesTea = [2556, 2553, 2553, 2560]
     if (teaFilled > 0.1 && global.char[i] != 2)
     {
         if (teaFilled >= 1)
-            _spritesTea = [2554, 2550, 2549, 2557]
+            _spritesTea = [2558, 2554, 2553, 2561]
         if ((state == 5 || state == 6) && i < partySize)
             cup_char[i].sprite_index = _spritesTea[global.char[i]]
         else

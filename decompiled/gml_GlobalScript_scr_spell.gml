@@ -392,22 +392,28 @@ scr_spell = function(argument0, argument1) //gml_Script_scr_spell
             healamount = 10
             for (var __j = 0; __j < 3; __j++)
             {
-                healamount = 10
-                star = __j
-                if (global.hp[global.char[star]] <= 0)
-                    healamount = (ceil((global.maxhp[global.char[star]] / 4)) + abs(global.hp[global.char[star]]))
-                scr_healitemspell(healamount)
+                if (global.char[__j] > 0)
+                {
+                    healamount = 10
+                    star = __j
+                    if (global.hp[global.char[star]] <= 0)
+                        healamount = (ceil((global.maxhp[global.char[star]] / 4)) + abs(global.hp[global.char[star]]))
+                    scr_healitemspell(healamount)
+                }
             }
             break
         case 231:
             healamount = 50
             for (__j = 0; __j < 3; __j++)
             {
-                healamount = 50
-                star = __j
-                if (global.hp[global.char[star]] <= 0)
-                    healamount = 999
-                scr_healitemspell(healamount)
+                if (global.char[__j] > 0)
+                {
+                    healamount = 50
+                    star = __j
+                    if (global.hp[global.char[star]] <= 0)
+                        healamount = 999
+                    scr_healitemspell(healamount)
+                }
             }
             break
         case 232:

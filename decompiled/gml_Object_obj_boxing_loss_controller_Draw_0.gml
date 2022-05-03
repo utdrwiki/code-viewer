@@ -8,12 +8,16 @@ if (state == 1)
 {
     if (image_alpha > 2.2)
     {
-        if (button1_p() || button2_p() || button3_p() || down_p() || right_p() || left_p())
+        if (button1_p() || button2_p() || button3_p())
         {
             state = 2
             instance_create(x, y, o_bq_whitefade)
             o_bq_whitefade.depth = -150
         }
+        if right_p()
+            con = 1
+        if left_p()
+            con = 0
     }
     else
         image_alpha += 0.02
@@ -21,7 +25,12 @@ if (state == 1)
 if (state == 2)
 {
     image_alpha += 0.01
-    if (image_alpha > 2.6)
+    if (image_alpha > 2.6 && con == 1)
+    {
+        gameend = instance_create(0, 0, DEVICE_FAILURE)
+        gameend.EVENT = 8
+    }
+    if (image_alpha > 2.6 && con == 0)
     {
         for (j = 0; j < 13; j += 1)
             global.item[j] = obj_gigaqueen_enemy.items[j]
@@ -44,6 +53,10 @@ if (state == 2)
             playerhasntdodged = 0
             playerhasntdodgedorder = 0
             init = false
+            didntcounterthisturn = 0
+            didntpunchthisturn = 0
+            didntdodgethisturn = 0
+            recentphasetransition = 0
         }
         with (o_boxingcontroller)
         {
@@ -155,3 +168,11 @@ if (o_boxingcontroller.headsprite == spr_bhero_head_d)
     draw_sprite(spr_bhero_head_d, 9, 321, 300)
 draw_set_halign(fa_left)
 draw_set_alpha(1)
+if (con == 0)
+    draw_sprite_ext(spr_acrade_fightagain, 1, 190, 400, 1, 1, 0, c_white, image_alpha)
+else
+    draw_sprite_ext(spr_acrade_fightagain, 0, 190, 400, 1, 1, 0, c_white, image_alpha)
+if (con == 1)
+    draw_sprite_ext(scr_84_get_sprite("spr_acrade_retire"), 1, 370, 400, 1, 1, 0, c_white, image_alpha)
+else
+    draw_sprite_ext(scr_84_get_sprite("spr_acrade_retire"), 0, 370, 400, 1, 1, 0, c_white, image_alpha)

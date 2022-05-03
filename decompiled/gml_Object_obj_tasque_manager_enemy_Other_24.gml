@@ -282,24 +282,12 @@ if scr_debug()
     if keyboard_check_pressed(ord("B"))
     {
         if (overrideAttack == 0)
-        {
             overrideAttack = 1
-            scr_debug_print("You've selected QUIZZLER")
-        }
         else
-        {
             overrideAttack = 0
-            scr_debug_print("Next attack will be random")
-        }
     }
     if (keyboard_check_pressed(ord("Q")) && quizDifficulty > 0)
-    {
         quizDifficulty--
-        scr_debug_print(("Quiz difficulty = " + string(quizDifficulty)))
-    }
     if (keyboard_check_pressed(ord("W")) && quizDifficulty < 5)
-    {
         quizDifficulty++
-        scr_debug_print(("Quiz difficulty = " + string(quizDifficulty)))
-    }
 }

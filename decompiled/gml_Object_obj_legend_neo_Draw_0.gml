@@ -1,7 +1,10 @@
-if keyboard_check_pressed(vk_backspace)
+if scr_debug()
 {
-    snd_free_all()
-    room_restart()
+    if keyboard_check_pressed(vk_backspace)
+    {
+        snd_free_all()
+        room_restart()
+    }
 }
 if (drawpic == 1)
 {

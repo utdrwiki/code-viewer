@@ -85,7 +85,7 @@ if (timer == 0)
             _shotspread = ((i % 2) == 0 ? 3 : 1)
             _bullet = obj_queen_bufferbullet
             if (i == banana && abs(angle_difference(_shotdir, point_direction(x, y, obj_growtangle.x, obj_growtangle.y))) <= 45)
-                _bullet = 524
+                _bullet = 526
             d = instance_create((x + lengthdir_x(_shotspread, _shotdir)), (y + lengthdir_y(_shotspread, _shotdir)), _bullet)
             d.direction = _shotdir
             d.speed = (buffer ? 12 : (7 + random(4)))

@@ -19,7 +19,7 @@ if (!return_title)
             global.currentroom = room
         var room_id = room
         _border_image = (global.darkzone ? border_dw_castletown : border_lw_town)
-        if (room_id == room_legend || room_id == 883 || room_id == PLACE_MENU || room_id == PLACE_LOGO)
+        if (room_id == room_legend || room_id == 886 || room_id == PLACE_MENU || room_id == PLACE_LOGO)
             _border_image = border_dw_castletown
         if (room_id >= room_dw_cyber_intro_1 && room_id < room_dw_city_spamton_shop_exterior)
             _border_image = border_dw_cyber
@@ -36,7 +36,7 @@ if (!return_title)
             _border_image = border_dw_mansion
         if (room_id == room_shop_ch2_spamton)
             _border_image = border_dw_city
-        if (room_id == PLACE_CONTACT || room_id == 878 || room_id == PLACE_MENU || room_id == room_gameover || room_id == PLACE_DOG || room_id == room_title_placeholder || room_id == room_intro_ch2)
+        if (room_id == PLACE_CONTACT || room_id == 881 || room_id == PLACE_MENU || room_id == room_gameover || room_id == PLACE_DOG || room_id == room_title_placeholder || room_id == room_intro_ch2)
             border_alpha = false
         else if (room_id == room_insidecloset || room_id == room_cc_fountain)
             border_fade_out = border_alpha > false
@@ -245,7 +245,7 @@ if (!return_title)
                     border_alpha = false
             }
         }
-        if ((room_id == room_legend || room_id == 883 || room_id == PLACE_MENU) && global.game_won == true)
+        if ((room_id == room_legend || room_id == 886 || room_id == PLACE_MENU) && global.game_won == true)
         {
             _border_image = border_dw_castletown
             border_alpha = true

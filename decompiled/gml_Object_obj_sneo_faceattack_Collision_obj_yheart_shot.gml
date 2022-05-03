@@ -25,12 +25,15 @@ if (other.big == 0)
 }
 else
 {
+    var takedamageamount = 4
+    if (obj_spamton_neo_enemy.hellmode == 1)
+        takedamageamount = 2
     if (type == 1)
-        obj_spamton_neo_enemy.eyeshp -= 4
+        obj_spamton_neo_enemy.eyeshp -= takedamageamount
     if (type == 2)
-        obj_spamton_neo_enemy.nosehp -= 4
+        obj_spamton_neo_enemy.nosehp -= takedamageamount
     if (type == 3)
-        obj_spamton_neo_enemy.mouthhp -= 4
+        obj_spamton_neo_enemy.mouthhp -= takedamageamount
 }
 snd_play(snd_damage)
 invincibilitytimer = 10

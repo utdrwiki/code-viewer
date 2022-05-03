@@ -1,4 +1,4 @@
-scr_kana_check = function() //gml_Script_scr_kana_check
+scr_kana_check = function(argument0) //gml_Script_scr_kana_check
 {
     var kanafound = 0
     var ___stringlength = string_length(argument0)

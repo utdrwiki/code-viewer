@@ -273,15 +273,17 @@ scr_load = function() //gml_Script_scr_load
     ossafe_file_text_close(myfileid)
     global.lastsavedtime = global.time
     global.lastsavedlv = global.lv
-    scr_tempsave()
     audio_group_set_gain(1, global.flag[15], 0)
     audio_set_master_gain(0, global.flag[17])
+    if (global.filechoice != 9)
+        global.currentroom = scr_get_valid_room(global.chapter, global.currentroom)
     __loadedroom = global.currentroom
-    debug_message(string(__loadedroom))
-    debug_message(string(232))
+    if (__loadedroom == room_dw_castle_area_2 && global.plot >= 11)
+        __loadedroom = room_dw_castle_area_2_transformed
     if scr_dogcheck()
-        __loadedroom = choose(232, 0)
+        __loadedroom = choose(233, 1)
     room_goto(__loadedroom)
-    return;
+    var is_valid = scr_tempsave()
+    return is_valid;
 }
 

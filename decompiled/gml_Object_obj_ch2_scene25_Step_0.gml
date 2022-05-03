@@ -460,7 +460,7 @@ if ((con == 24 && global.fighting == false && berdly_full_spare) || (con == 24 &
         c_sprite(spr_queen_chair_2)
         c_wait_talk()
         c_sprite(spr_queen_raise_glass)
-        c_var_lerp_instance(573, "gravity", 0, -2.5, 15)
+        c_var_lerp_instance(576, "gravity", 0, -2.5, 15)
         c_wait(30)
         c_sel(kr)
         c_autowalk(false)

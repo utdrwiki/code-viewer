@@ -5,6 +5,7 @@ image_yscale = 2
 invulnerable = 0
 fall = 0
 gulped = 0
+nointeract = 0
 snd_play(snd_mouse)
 timer = 0
 emergetimer = 0

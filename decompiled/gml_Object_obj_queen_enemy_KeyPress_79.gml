@@ -16,12 +16,10 @@ if scr_debug()
             shieldbrokecon = 1
             sprite_index = spr_queen_drunk
         }
-        scr_debug_print("Shield Destroyed")
     }
     else
     {
         bardlymercy = 100
         global.monsterhp[myself] -= 100
-        scr_debug_print(("Queen health = " + string(global.monsterhp[myself])))
     }
 }

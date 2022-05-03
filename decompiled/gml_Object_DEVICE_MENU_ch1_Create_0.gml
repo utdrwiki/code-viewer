@@ -65,9 +65,5 @@ TWOBUFFER = 0
 THREAT = 0
 TEMPMESSAGE = " "
 MESSAGETIMER = 0
-version_text = ""
-if (os_type == os_switch)
-    version_text = "1.03a "
-if (os_type == os_ps4)
-    version_text = "1.02 "
+version_text = (global.version + " ")
 scr_84_load_ini_ch1()

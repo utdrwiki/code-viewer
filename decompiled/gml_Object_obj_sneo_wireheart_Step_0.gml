@@ -175,6 +175,8 @@ if (con == 2 || con == 3 || con == 10)
                         scr_bullet_init()
                     radialshot.sprite_index = spr_diamondbullet
                     radialshot.direction = ((((i / radial) * 180) + 110) + dir)
+                    if (special == true)
+                        radialshot.direction += random_range(-10, 10)
                     radialshot.image_angle = radialshot.direction
                     radialshot.active = true
                     radialshot.speed = 1

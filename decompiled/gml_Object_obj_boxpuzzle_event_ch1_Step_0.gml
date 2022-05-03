@@ -146,6 +146,7 @@ if (con == 15 && d_ex_ch1() == 0)
     con = 20
     boxcon = 1
     leavecon = 1
+    instance_activate_object(obj_doorB_ch1)
 }
 if (leavecon == 1 && global.interact == 0)
 {

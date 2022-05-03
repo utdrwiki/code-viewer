@@ -497,6 +497,7 @@ if (con == 9 && (!i_ex(obj_battlecontroller)))
 }
 if (con == 20)
 {
+    global.spell[4][3] = 0
     con = 49
     alarm[0] = 30
     c_sel(no)

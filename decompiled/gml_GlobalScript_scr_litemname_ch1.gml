@@ -21,6 +21,8 @@ scr_litemname_ch1 = function() //gml_Script_scr_litemname_ch1
             global.litemname[i] = scr_84_get_lang_string_ch1("scr_litemname_slash_scr_litemname_gml_12_0")
         if (itemid == 8)
             global.litemname[i] = scr_84_get_lang_string_ch1("scr_litemname_slash_scr_litemname_gml_13_0")
+        if (itemid == 11)
+            global.litemname[i] = scr_84_get_lang_string_ch1("scr_litemname_slash_scr_litemname_gml_14_0")
     }
     return;
 }

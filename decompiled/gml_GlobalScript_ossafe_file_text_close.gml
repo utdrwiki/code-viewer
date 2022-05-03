@@ -1,7 +1,8 @@
 ossafe_file_text_close = function(argument0) //gml_Script_ossafe_file_text_close
 {
+    var is_valid = 1
     if (!global.is_console)
-        return file_text_close(argument0);
+        file_text_close(argument0)
     else
     {
         var handle = argument0
@@ -9,6 +10,6 @@ ossafe_file_text_close = function(argument0) //gml_Script_ossafe_file_text_close
             ds_map_set(global.savedata, ds_map_find_value(handle, "filename"), ds_map_find_value(handle, "data"))
         ds_map_destroy(handle)
     }
-    return;
+    return is_valid;
 }
 

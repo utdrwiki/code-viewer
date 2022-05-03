@@ -57,8 +57,6 @@ if (global.monster[myself] == true)
                 ballooncon = 2
             }
         }
-        scr_debug_print(("ballooncount = " + string(ballooncount)))
-        scr_debug_print(("hasplayerplacedhouses = " + string(hasplayerplacedhouses)))
         if (ballooncount == 3 && hasplayerplacedhouses == 1)
             msgsetloc(0, "STOP!!! STOP&BUILDINGETH HOUSES!!!&I HAVE TO WIN!!!/%", "obj_rouxls_enemy_slash_Step_0_gml_57_0")
         ballooncount++
@@ -350,25 +348,13 @@ if (global.myfight == 3)
 if scr_debug()
 {
     if (keyboard_check_pressed(vk_numpad7) || keyboard_check_pressed(ord("1")))
-    {
         bulletoverride = 0
-        scr_debug_print("ROUXLS' NEXT ATTACK SHALL BE OF THE HEAD")
-    }
     if (keyboard_check_pressed(vk_numpad8) || keyboard_check_pressed(ord("2")))
-    {
         bulletoverride = 1
-        scr_debug_print("ROUXLS' NEXT ATTACK SHALL BE OF THE FOOT")
-    }
     if (keyboard_check_pressed(vk_numpad9) || keyboard_check_pressed(ord("3")))
-    {
         bulletoverride = 2
-        scr_debug_print("ROUXLS' NEXT ATTACK SHALL BE OF THE BLOCKSE")
-    }
     if (keyboard_check_pressed(vk_numpad5) || keyboard_check_pressed(ord("4")))
-    {
         bulletoverride = -1
-        scr_debug_print("ROUXLS' NEXT ATTACK... COULD BE ANYTHINGE!! PREPAREST THINE ASS")
-    }
     if keyboard_check_pressed(ord("H"))
     {
         if instance_exists(obj_power_up_fx)

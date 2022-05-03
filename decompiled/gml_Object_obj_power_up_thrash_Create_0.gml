@@ -9,4 +9,4 @@ pivotx = -999
 pivoty = -999
 flashtimer = 0
 flashspeed = 30
-thrash = 727
+thrash = 730

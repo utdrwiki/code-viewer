@@ -42,7 +42,7 @@ else
     var room_id = global.currentroom
     if instance_exists(obj_savepoint)
         global.disable_border = false
-    if (room_id == PLACE_CONTACT || room_id == 878 || room_id == PLACE_MENU || room_id == room_gameover || room_id == PLACE_DOG || room_id == ROOM_INITIALIZE || room_id == room_title_placeholder || room_id == room_intro_ch2)
+    if (room_id == PLACE_CONTACT || room_id == 881 || room_id == PLACE_MENU || room_id == room_gameover || room_id == PLACE_DOG || room_id == ROOM_INITIALIZE || room_id == room_title_placeholder || room_id == room_intro_ch2)
         global.disable_border = true
 }
 draw_enable_alphablend(false)

@@ -20,6 +20,11 @@ else if (global.plot >= 165)
 }
 else
 {
+    with (obj_mainchara)
+    {
+        x = 26
+        y = 246
+    }
     if (global.tempflag[31] == 1)
         shortened = 1
     berdlynpc = instance_create(895, 228, obj_npc_sign)

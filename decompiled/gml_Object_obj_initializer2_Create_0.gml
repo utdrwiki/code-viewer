@@ -11,6 +11,7 @@ global.savedata_error = 0
 global.savedata_debuginfo = ""
 global.game_won = false
 global.chapter = 2
+old_savedata_check = 0
 if instance_exists(obj_time_ch1)
 {
     with (obj_time_ch1)

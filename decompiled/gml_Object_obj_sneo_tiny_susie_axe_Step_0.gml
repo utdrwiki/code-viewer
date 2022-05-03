@@ -17,7 +17,7 @@ if (target == obj_spamton_neo_enemy)
 }
 move_towards_point(target.x, target.y, 22)
 image_angle = direction
-target = 694
+target = 697
 var dist = 9999
 if instance_exists(obj_pipis_bullet)
 {

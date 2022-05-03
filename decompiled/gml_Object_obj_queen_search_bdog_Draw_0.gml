@@ -41,9 +41,9 @@ lasty = y
 lastangle = image_angle
 if (bufferstate == 0 && loading == 0)
 {
-    var _af = scr_custom_afterimage(545)
+    var _af = scr_custom_afterimage(547)
     _af.image_alpha = 0.5
-    _af = scr_custom_afterimage(545)
+    _af = scr_custom_afterimage(547)
     _af.image_alpha = 0.5
     _af.image_index = 3
     _af.x = hatx

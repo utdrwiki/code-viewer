@@ -1,2 +1,2 @@
-doorRoom = 206
+doorRoom = 207
 doorEntrance = 2

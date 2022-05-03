@@ -267,7 +267,7 @@ scr_gamestart_ch1 = function() //gml_Script_scr_gamestart_ch1
         global.input_held[i] = false
         global.input_released[i] = false
     }
-    global.currentroom = PLACE_DOGCHECK2
+    global.currentroom = room_restart_true
     global.disable_border = false
     return;
 }

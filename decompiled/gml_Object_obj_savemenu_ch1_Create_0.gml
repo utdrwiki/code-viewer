@@ -7,8 +7,9 @@ name = scr_84_get_lang_string_ch1("obj_savemenu_slash_Create_0_gml_7_0")
 level = 1
 love = 1
 time = 0
-roome = PLACE_DOGCHECK2
+roome = room_restart_true
 endme = 0
+save_data_error = 0
 global.interact = 1
 if ossafe_file_exists_ch1("dr.ini")
 {
@@ -22,6 +23,7 @@ if ossafe_file_exists_ch1("dr.ini")
     var room_offset = room_index
     if (room_index < ROOM_INITIALIZE_ch1)
         room_offset = (ROOM_INITIALIZE_ch1 + room_index)
+    room_offset = scr_get_valid_room(PLACE_DOGCHECK2, room_offset)
     roome = room_offset
     ossafe_ini_close_ch1()
     ossafe_savedata_save_ch1()

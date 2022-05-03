@@ -43,7 +43,7 @@ if (state == 1)
         var _character = (i == 0 ? obj_mainchara : global.cinstance[(i - 1)])
         var _cup = cup_char[i]
         var _jumpInDuration = jumpInDuration
-        var _rollSprites = [544, 544, 542, 3338]
+        var _rollSprites = [544, 544, 542, 3341]
         var _rideToRide = rideToRide
         _rideToRide = 1
         with (_character)
@@ -72,7 +72,7 @@ if (state == 1)
 if (state == 999 && global.interact == 0)
 {
     var nearobj = instance_nearest(x, y, obj_readable_room1)
-    if (nearobj > obj_npc_rudy)
+    if (nearobj > obj_npc_police)
     {
         with (nearobj)
             event_user(0)

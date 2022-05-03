@@ -4,6 +4,15 @@ scr_gameover = function() //gml_Script_scr_gameover
     {
         if (room == room_dw_mansion_b_west_2f)
             global.tempflag[33] = (global.tempflag[33] + 1)
+        if (room == room_dw_mansion_east_4f_d && i_ex(obj_queen_enemy))
+        {
+            global.hp[1] = global.maxhp[1]
+            global.hp[2] = global.maxhp[2]
+            global.hp[3] = global.maxhp[3]
+            scr_tempsave()
+        }
+        if i_ex(obj_spamton_neo_enemy)
+            global.tempflag[37] = (global.tempflag[37] + 1)
     }
     if (global.flag[35] == 0)
     {

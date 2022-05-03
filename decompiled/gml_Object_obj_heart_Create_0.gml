@@ -17,3 +17,8 @@ f = 2
 z_hold_f = 0
 chargeshot_delay = 0
 superchargetimer = 0
+chargeshotcount = 0
+disableslow = 0
+if button2_h()
+    disableslow = 1
+remove_slow_z_buffer = 40

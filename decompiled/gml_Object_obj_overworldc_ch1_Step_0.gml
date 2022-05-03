@@ -22,9 +22,15 @@ if (global.interact == 5)
             if (global.menucoord[5] == 2)
             {
                 dontthrow = 0
+                dontthrowtype = 0
                 global.menuno = 9
                 if (global.litem[global.menucoord[1]] == 5)
                     dontthrow = 1
+                if (global.litem[global.menucoord[1]] == 11)
+                {
+                    dontthrow = 1
+                    dontthrowtype = 2
+                }
                 if (dontthrow == 0)
                 {
                     i = round(random(30))
@@ -50,9 +56,18 @@ if (global.interact == 5)
                 }
                 if (dontthrow == 1)
                 {
-                    global.msc = 10
-                    scr_text_ch1(global.msc)
-                    script_execute(gml_Script_scr_writetext_ch1, 10, "x", 0, 0)
+                    if (dontthrowtype == 0)
+                    {
+                        global.msc = 10
+                        scr_text_ch1(global.msc)
+                        script_execute(gml_Script_scr_writetext_ch1, 10, "x", 0, 0)
+                    }
+                    else if (dontthrowtype == 2)
+                    {
+                        global.msg[0] = scr_84_get_lang_string_ch1("obj_overworldc_slash_Step_0_gml_42_0")
+                        global.msg[1] = scr_84_get_lang_string_ch1("obj_overworldc_slash_Step_0_gml_43_0")
+                        script_execute(gml_Script_scr_writetext_ch1, 0, "x", 0, 0)
+                    }
                 }
             }
         }

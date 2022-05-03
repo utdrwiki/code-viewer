@@ -20,6 +20,7 @@ if instance_exists(obj_npc_butler)
             eraser = true
             noAlertSound = true
             frozen = false
+            offscreen_frozen = false
         }
         instance_destroy()
     }

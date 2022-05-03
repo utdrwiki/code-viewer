@@ -18,8 +18,6 @@ if (con == 1)
     if (timer == 12)
         con = 0
 }
-if keyboard_check_pressed(ord("P"))
-    audio_sound_set_track_position(global.batmusic[1], 57)
 if (global.flag[54] == 0)
 {
     debug_message("battle ended")

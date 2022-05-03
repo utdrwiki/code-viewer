@@ -33,34 +33,9 @@ if (menuno == 0)
     {
         if button1_p()
         {
-            if (type == 0)
-            {
-                snd_play(snd_save)
-                scr_save()
-                saved = 1
-                xcoord = 2
-                buffer = 3
-                if (d == 2)
-                {
-                    name = global.truename
-                    love = global.llv
-                }
-                scr_roomname(room)
-                level = global.lv
-                time = global.time
-                minutes = floor((time / 1800))
-                seconds = round((((time / 1800) - minutes) * 60))
-                if (seconds == 60)
-                    seconds = 59
-                if (seconds < 10)
-                    seconds = ("0" + string(seconds))
-            }
-            else
-            {
-                menuno = 1
-                buffer = 3
-                snd_play(snd_select)
-            }
+            menuno = 1
+            buffer = 3
+            snd_play(snd_select)
         }
     }
     if (button1_p() && xcoord == 1 && ycoord == 0 && buffer < 0)

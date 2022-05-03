@@ -5,11 +5,16 @@ if (state == 0)
     if (image_xscale >= 5)
     {
         state = 1
-        alarm[0] = 60
+        alarm[0] = 52
     }
 }
 if (state == 1)
 {
     sprite_index = spr_bqueen_giant_head_laughing_wireframe
     image_speed = 0.5
+    if (playsound == false)
+    {
+        playsound = true
+        snd_play(snd_queen_laugh_0_bc)
+    }
 }

@@ -141,31 +141,15 @@ if scr_debug()
             bodymode = 0
             headpiece.x = -999
         }
-        scr_debug_print("Spamton body mode changed")
     }
     if keyboard_check_pressed(ord("N"))
-    {
         bodyadvance = 1
-        scr_debug_print("Toggled Spamton's DISGUISTING mouth")
-    }
     if keyboard_check_pressed(ord("1"))
-    {
         bulletoverride = 0
-        scr_debug_print("Attack override set to 0 (1)")
-    }
     if keyboard_check_pressed(ord("2"))
-    {
         bulletoverride = 1
-        scr_debug_print("Attack override set to 1 (2)")
-    }
     if keyboard_check_pressed(ord("3"))
-    {
         bulletoverride = 2
-        scr_debug_print("Attack override set to 2 (3)")
-    }
     if keyboard_check_pressed(ord("0"))
-    {
         bulletoverride = -1
-        scr_debug_print("Attack override disabled")
-    }
 }

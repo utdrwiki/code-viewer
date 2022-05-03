@@ -56,6 +56,11 @@ scr_monsterdefeat = function() //gml_Script_scr_monsterdefeat
                 global.flag[50] = 2
             if (_violenced > 0)
                 global.flag[50] = 1
+            if (_frozened > 0)
+            {
+                if (_pacified > 0 || _violenced > 0 || _spared > 0)
+                    global.flag[50] = 1
+            }
             if (global.flag[50] == 6)
                 global.flag[926] = (global.flag[926] + 1)
             if (global.flag[54] != 0)

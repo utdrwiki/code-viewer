@@ -19,7 +19,7 @@ if (movecon == 0 || movecon == 1)
         flipchance = choose(0, 1, 2)
         if (flipchance == 2)
         {
-            sprite_index = choose(dsprite, 1291)
+            sprite_index = choose(dsprite, 1292)
             image_speed = 0.25
         }
     }
@@ -36,7 +36,7 @@ if (movecon == 0 || movecon == 1)
         if (stop == 1)
         {
             hspeed = 0
-            sprite_index = choose(dsprite, dsprite, 1291)
+            sprite_index = choose(dsprite, dsprite, 1292)
             image_speed = 0.25
             alarm[0] = 30
             con = 2

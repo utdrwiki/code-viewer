@@ -194,7 +194,7 @@ scr_getbuttonsprite = function(argument0, argument1) //gml_Script_scr_getbuttons
     {
         button_sprite = button_xbox_share
         if is_dualshock
-            return 2516;
+            return 2520;
         if (os_type == os_switch)
             button_sprite = button_switch_plus_0
         return button_sprite;

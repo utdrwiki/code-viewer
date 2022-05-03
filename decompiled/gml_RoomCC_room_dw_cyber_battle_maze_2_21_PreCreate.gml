@@ -1,3 +1,3 @@
 rideEnd = 1
 partyMember = 1
-teacupTarget = 102166
+teacupTarget = 102168

@@ -151,7 +151,7 @@ if (con == 2 && (!instance_exists(obj_cutscene_master)))
     {
         finaly = 60
         skiprunback = 1
-        nextroom = 83
+        nextroom = 84
     }
     con = 3
 }

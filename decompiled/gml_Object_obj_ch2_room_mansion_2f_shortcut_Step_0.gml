@@ -101,8 +101,11 @@ if (global.flag[346] == 0)
     }
     if make_forcefield
     {
-        forcefield_right = scr_forcefield(520, 240, 2, 8, true, false)
-        forcefield_right.depth = 80000
+        if (!i_ex(obj_forcefield))
+        {
+            forcefield_right = scr_forcefield(520, 240, 2, 8, true, false)
+            forcefield_right.depth = 80000
+        }
         make_forcefield = 0
     }
 }

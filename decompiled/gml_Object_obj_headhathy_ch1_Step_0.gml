@@ -6,7 +6,7 @@ if (global.monster[myself] == true)
         if (!instance_exists(obj_darkener_ch1))
             instance_create_ch1(0, 0, obj_darkener_ch1)
         hb = instance_create_ch1((x - 100), y, obj_heartblcon_ch1)
-        hb.sprite_index = choose(3994, 3995)
+        hb.sprite_index = choose(3999, 4000)
         if (acting == 2)
             hb.sprite_index = spr_heartblcon_2_ch1
         if (acting == 3)

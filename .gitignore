@@ -1,6 +1,2 @@
-junk/
-*.zip
-*.rar
-*.7z
-*.tar.gz
-
+.env
+node_modules

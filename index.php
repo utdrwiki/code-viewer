@@ -40,7 +40,7 @@
 <?php
 	}
 ?>
-	(etc: <a href="data/enemy.txt">enemy ids (deltarune)</a> - <a href="data/rooms.txt">room list (deltarune)</a> - <a href="data/flags.txt">flag names (deltarune)</a>)
+	(etc: <a href="data/enemy.txt">enemy ids</a> - <a href="data/rooms.txt">room list</a> - <a href="data/flags.txt">flag names</a>)
 <?php
 
 	error_reporting(E_ALL);
@@ -421,7 +421,7 @@
 
 		return $matches[1] ."<span class='room'>$roomalt $roomtext <span class='roomdesc'>$roomdesc</span></span>";
 */
-		return "<span class='room'>$roomtext</span>";
+		return $matches[1] ."<span class='room'>$roomtext</span>";
 	}
 
 

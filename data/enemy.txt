@@ -5,7 +5,7 @@
 4	Ralsei
 5	Rudinn
 6	Hathy
-7	Clover (old/unused?)
+7	Clover (old/unused)
 8	Pippins
 9	C.Round
 10	K.Round
@@ -20,8 +20,31 @@
 19	Susie (w/ Lancer)
 20	JEVIL
 21	K.Round 2
-22	Rudinn Rangers
+22	Rudinn Ranger
 23	Head Hathy
 24	(NOT DEFINED)
 25	King
-
+30	Ambyu-Lance
+31	Poppup
+32	Tasque
+33	Werewire
+34	Maus
+35	Virovirokun
+36	Swatchling
+37	Cap'n
+38	K_K
+39	Sweet
+40	Werewerewire
+41	GrazeTest (dojo?)
+42	Tasque Manager
+43	Berdly (coaster)
+44	Mauswheel
+45	Rouxls (w/ Thrash)
+46	Berdly (City)
+47	Clover (rematch)
+48	Queen
+49	Spamton
+50	Spamton NEO
+51	GIGA Queen
+52	Jigsaw Joe
+53	Pipis

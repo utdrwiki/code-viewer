@@ -135,7 +135,7 @@
 			$file		= mangleFile($f);
 
 
-			print "<h2>$f</h2><small>(<a href='decompiled/$f'>view raw script w/o annotations or w/e</a>)</small><hr>";
+			print "<h2>$f</h2><small>(<a href='https://github.com/KockaAdmiralac/deltarune-viewer/blob/master/decompiled/$f'>view raw script w/o annotations or w/e</a>)</small><hr>";
 			//print "option: <a href='/". $_GET['f'] ."&amp;x=1'>disable with(...){...} collapsing</a>\n-----------------------------------------\n\n";
 
 			$lines = explode("\n", $file);

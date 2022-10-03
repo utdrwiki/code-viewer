@@ -200,6 +200,7 @@
 		//$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)("[@0-9A-F]+\))/mi', "textvar_to_text", $file);
 		$file	= preg_replace_callback('/(stringsetloc\(")((?:[^"\\\\]|\\\\.)+)(", "[a-z0-9_-]+"\))/mi', "textvar_to_text", $file);
 		$file	= preg_replace_callback('/(?<=[( ])(")((?:[^"\\\\]|\\\\.)+)(", "[a-z0-9_-]+")/mi', "textvar_to_text", $file);
+		$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)(")\)/mi', "textvar_to_text_ch1", $file);
 		$file	= preg_replace_callback('/(global\.flag\[)([0-9]+)(\])/mi', 'flagcolor', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()([0-9]+)(\))/im', 'keyboard', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()(\'.\'|[0-9]+|vk_[^)]+)(\))/im', 'keyboard', $file);
@@ -447,6 +448,21 @@
 				"<div class='langvar'>". $matches[1] . $matches[2] . $matches[3] ."</div>" .
 				"</div>" .
 				""; //$matches[3];
+		} else {
+			return $matches[1] .
+					"<span class='langvar'>$matches[2]<span>$matches[3]".
+					"<span class='langtexterror'>(MISSING)</span>";
+		}
+	}
+
+
+
+	function textvar_to_text_ch1($matches) {
+		$text	= D_Lang::getText($matches[2]);
+		if ($text) {
+			return  "<div class='langtext'><span>". D_Lang::parseText($text) . "</span>".
+				"<div class='langvar'>". $matches[1] . $matches[2] . $matches[3] ."</div>" .
+				"</div>";
 		} else {
 			return $matches[1] .
 					"<span class='langvar'>$matches[2]<span>$matches[3]".

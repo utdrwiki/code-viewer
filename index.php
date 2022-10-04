@@ -27,13 +27,18 @@
 	<em>this is the <strong><del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</strong></em>
 	<br>by <a href="https://twitter.com/xkeepah">xkeeper</a>
 	<br>ported for personal use on Windows by Grossley
-	<br>made into a static website by Jacky720 and KockaAdmiralac.
+	<br>updated for chapter 2 decompilation by Jacky720
+	<br>made into a static website by KockaAdmiralac.
 	<br>source on <a href="https://github.com/KockaAdmiralac/deltarune-viewer">github</a>
 	<br>links: <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>, <a href="https://tcrf.net/Deltarune">tcrf</a>, <a href="https://deltarune.fandom.com">wiki</a>
 </div>
 
 <h1>decompiled <del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</h1>
 <?php
+	if (v($argv[1])) {
+		$_GET['f']	= $argv[1];
+	}
+	
 	if (isset($_GET['f'])) {
 ?>
 	<strong><a href="..">&larr; back to main script listing</a></strong><br>
@@ -47,9 +52,6 @@
 
 	$secondLevelR	= 0;
 
-	if (v($argv[1])) {
-		$_GET['f']	= $argv[1];
-	}
 
 	if (!isset($_GET['f'])) {
 		$algolia_key = isset($_SERVER['ALGOLIA_KEY_PUBLIC']) ? $_SERVER['ALGOLIA_KEY_PUBLIC'] : false;

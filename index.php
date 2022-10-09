@@ -77,50 +77,45 @@
 	<h2>script listing</h2>
 <?php
 		$a = scandir("./decompiled/");
-		$lastseg	= "";
-/* 		$junkfiles	= "";
- 
- 		$sums		= getSums();
-		$junksums	= getJunkSums();
- */
+		$lastseg = "";
+		$junksums = getJunkSums();
+		$junkfiles = [];
+
 		foreach ($a as $file) {
-			if (substr($file, -4) === ".gml") {
-				$size	= filesize("decompiled/". $file);
-				$class	= "";
-/* 				if (isset($junksums[$sums[$file]])) {
-					$class	= " class='junk'";
-					$jsum	= $sums[$file];
-				}
- */
-				$replaced = str_replace(".gml", ".html", $file);
-				$temp	= sprintf("<pre><a href='/%s'%s>%-60s</a>  %10d</pre>", $replaced, $class, $file, $size);
+			if (substr($file, -4) !== ".gml") {
+				continue;
+			}
+			$filename = "decompiled/$file";
+			$size = filesize($filename);
+			$class = "";
+			$sum = hash_file("sha256", $filename);
+			if (isset($junksums[$sum])) {
+				$class	= " class='junk'";
+			}
+			$replaced = str_replace(".gml", ".html", $file);
+			$temp = sprintf("<pre><a href='/%s'%s>%-60s</a>  %10d</pre>", $replaced, $class, $file, $size);
 
- 				if ($class === "") {
-					$segs	= explode("_", $file);
-					array_pop($segs);
-					array_pop($segs);
-					$seg	= implode("_", $segs);
-//					if ($segs[1] === "Object" && $seg !== $lastseg) {
-					if ($seg !== $lastseg) {
-						print "<br>";
-						$lastseg	= $seg;
-					}
-					print $temp;
-				} 
-/*
-				else {
-					$junksums[$jsum][1][]	= $temp;
+			if ($class === "") {
+				$segs	= explode("_", $file);
+				array_pop($segs);
+				array_pop($segs);
+				$seg	= implode("_", $segs);
+				if ($seg !== $lastseg) {
+					print "<br>";
+					$lastseg	= $seg;
 				}
- */			}
+				print $temp;
+			} else {
+				$junkfiles[$sum][] = $temp;
+			}
 		}
-/*
-		print "\n========================================================================\nduplicated or common scripts\n";
 
- 		foreach ($junksums as $junko) {
-			print "\n------------------------------------------------------------------------\n$junko[0]\n";;
-			print implode("", $junko[1]);
+		print "\n========================================================================\nduplicated or common scripts<br>";
+
+ 		foreach ($junksums as $junksum => $junkdesc) {
+			print "\n------------------------------------------------------------------------\n$junkdesc\n";
+			print implode("", $junkfiles[$junksum]);
 		}
- */
 	} else {
 
 
@@ -580,58 +575,17 @@
 	}
 
 
-/* 	function getSums() {
-		// get file list
-		$sumA		= explode("\n", file_get_contents("data/sums.txt"));
-		$sums		= array();
-		foreach ($sumA as $sum) {
-			$sumx	= explode("  ", $sum);
-			$sums[$sumx[1]]	= $sumx[0];
-		}
-
-		return $sums;
-	}
-
 	function getJunkSums() {
-
-		$junksums	= array(
-'01f59b2c92905b4a93005292d1d6226e5bf008f78e892df71d0f76d5649907f3' => array('doors, fade-out', array()),
-'ab2d29f8421cfa1f586d54fb07f47866c612b039fc1acd1d6aa6db28e6963a33' => array('doors, music fade', array()),
-'af3208f9a243fdaf84af4a33df239237b678a0cebbbf4e971eb1d349291e9182' => array('doors, frees current song', array()),
-'934e7cbed2a10a0a83a7b30a1f2795a8b9a6058cf82b89a7d5f537d712dc62e5' => array('doors, interactable?', array()),
-'d755696a11b77ac971ca72025b2337611f68886448241260ff9e26e59157214c' => array('door: go +1 room, ent 1', array()),
-'40a65190d977f13bba6b0dc220bbb629f11bf1c573ed18cab90d074af74078c0' => array('door: go +3 rooms, ent 4', array()),
-'d49881a8ea574d2523f9fd976210168a5a4016bc061df041d2395d8e7aea8cb5' => array('door: go -2 rooms, ent 5', array()),
-'0b659f93e3b839f3f9698cbb9cb003e276e7175a9f42fef53b929da3fa4fbeee' => array('fade-ins 1', array()),
-'6c0cf3710a4ec1b3bd28541111226c63075115f5bb0a6f8686337b5bc5d504f3' => array('fade-ins 2', array()),
-'133db2c19331736a00c1bd048e393ebc4c79098546a56142ba6b09303bae76ab' => array('interact == 0 then image index/speed = 0', array()),
-'1c46a4174c9b44f1b007ff994f2c3c07b26999415bd61989771897e24ac35466' => array('free all sounds', array()),
-'86f8d2a2d49a3a7dc59dead12eab5691156e2c6b533f6eeb961d7d0e326ec935' => array('enable choice-making', array()),
-'9fd0b0723ef1c36e5f2a75449bddbc613aff37c1421c0bd297a819c63121c54a' => array('call event_user(0)', array()),
-'f2667d8fc0f045fd4e848ddf99ffd5cf793b47173260218a0dc866ba2da995f3' => array('DEVICE draw stuff', array()),
-'f539a166f911d309f14985fc9abf4ddd8c8e8c667e6332638e5ad3b503e650c1' => array('spawns smth w/ slightly random offset', array()),
-'f71dc7a6d29d4be285295998df5e2c5ada6928da23eff421d6fb858e8213faca' => array('DEVICE event advance', array()),
-'f8999039cbb56ece49825ecb4c43318114c7a420ed9bb45d0ccf50f4cc17088d' => array('some battle drawer thing', array()),
-'fa778d0c18b7d1195caff5591a4dc665a4775032a02faa71117e2a620ccc0f47' => array('shop things', array()),
-'6367709d3bdf8492c2d36deefff202a809518c1384ff6b64934c9b367ea7d781' => array('interactable solids', array()),
-'c7a94b2176e4b10549384fe696e4b87a28fefece2876ec907469399813ea77d8' => array('call scr_depth()', array()),
-'59dcec304deeec35fce9c040532f4ff706cfefb561d596ba8d74ad8dbb928b53' => array('call event_user(7)', array()),
-'8f43ace6ca37d249967ad74c3456f918bdccc71902b0124ecf2bae80bfac3524' => array('? something w/ enemies, rooms 51/52, flag 50/500/501', array()),
-'279561762a9eb97742fa8407f9c0c74ae9979fa659d7d4370beb01ad7574ffd3' => array('calls draw_self()', array()),
-'8c7d578ba9271d04587c5ea7dad14cf9d267c927018b3b0bea64c2355658fa0c' => array('calls instance_destroy()', array()),
-'66f3a1538435e035ccef6e5dd491c002f905c210230499acf810f5f68c570040' => array('increments self.actcon', array()),
-
-'6949b0505b082f250041fa0dfb8805b054c2468fe7d7785e5c4c1bc212abc8ba' => array('monster sprite shrink', array()),
-'1df51eb5a4e586655c318075f401ff659ed410398edbdca932119ccb74538405' => array('self.touched = 0', array()),
-'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' => array('(empty)', array()),
-'8de5edc189874547448d83439e90830430829e054768e4594b37db2fe9e07064' => array('self.con = (self.con + 1)', array()),
-'9f05d2cd4fe053804bf99aa9662b1101535bc0ae7f9fade5c7583bedfd01a179' => array('event_inherited()', array()),
-		);
-
+		$junksums = [];
+		foreach (explode("\n", file_get_contents("data/sums.yml")) as $line) {
+			$parts = explode(": ", $line);
+			if (count($parts) !== 2) {
+				continue;
+			}
+			$junksums[$parts[0]] = $parts[1];
+		}
 		return $junksums;
-
 	}
- */
 
 
 	function v(&$var, $d = null) {

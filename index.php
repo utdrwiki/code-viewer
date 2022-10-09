@@ -26,9 +26,9 @@
 <div id="yrstruly">
 	<em>this is the <strong><del>deltarune</del> <del>undertalemodtool</del> deltarune script viewer</strong></em>
 	<br>by <a href="https://twitter.com/xkeepah">xkeeper</a>
-	<br>ported for personal use on Windows by Grossley
-	<br>updated for chapter 2 decompilation by Jacky720
-	<br>made into a static website by KockaAdmiralac.
+	<br>ported for personal use on Windows by <a href="https://github.com/Grossley">Grossley</a>
+	<br>updated for chapter 2 decompilation by <a href="https://github.com/Jacky720">Jacky720</a>
+	<br>made into a static website by <a href="https://kocka.tech">KockaAdmiralac</a>.
 	<br>source on <a href="https://github.com/KockaAdmiralac/deltarune-viewer">github</a>
 	<br>links: <a href="https://www.reddit.com/r/Underminers/">r/underminers</a>, <a href="https://tcrf.net/Deltarune">tcrf</a>, <a href="https://deltarune.fandom.com">wiki</a>
 </div>

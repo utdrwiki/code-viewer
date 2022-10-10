@@ -201,7 +201,7 @@
 		ini_set('pcre.jit', '0');
 		$file	= preg_replace_callback('/(?<=[( ])(")((?:[^"\\\\]|\\\\.)+)(", "[a-z0-9_-]+")/mi', "textvar_to_text", $file);
 		ini_set('pcre.jit', $jit_old);
-		$file	= preg_replace_callback('/(scr_84_get_lang_string\(")([a-zA-Z0-9_-]+)(")\)/mi', "textvar_to_text_ch1", $file);
+		$file	= preg_replace_callback('/(scr_84_get_lang_string_ch1\(")([a-zA-Z0-9_-]+)(")\)/mi', "textvar_to_text_ch1", $file);
 		$file	= preg_replace_callback('/(global\.flag\[)([0-9]+)(\])/mi', 'flagcolor', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()([0-9]+)(\))/im', 'keyboard', $file);
 		$file	= preg_replace_callback('/(keyboard_check(?:_pressed)?\()(\'.\'|[0-9]+|vk_[^)]+)(\))/im', 'keyboard', $file);

@@ -336,6 +336,12 @@ a.junk {
 	border-color: #f88;
 	}
 
+.alarmPre {
+	float: left;
+	width: 100%;
+	height: 1em;
+	}
+
 .c {
 	clear: left;
 	}

@@ -139,7 +139,14 @@
 			$line_index = 1;
 			echo '<table class="code">';
 			foreach ($lines as $line) {
-				echo "\n<tr>\n\t<td id=\"L$line_index\"><a href=\"#L$line_index\">$line_index</a></td>\n\t<td><pre>$line</pre></td>\n</tr>";
+				$fixed_line_breaks = str_replace("\r", "\n", $line);
+				//if (str_contains($line, "<span class='alarmC'>")) {
+				if (strpos($line, "<span class='alarmC'>") !== FALSE) {
+					$class_for_pre = " class='alarmPre'";
+				} else {
+					$class_for_pre = "";
+				}
+				echo "\n<tr>\n\t<td id=\"L$line_index\"><a href=\"#L$line_index\">$line_index</a></td>\n\t<td><pre$class_for_pre>$fixed_line_breaks</pre></td>\n</tr>";
 				$line_index++;
 			}
 			echo "</table><script src=\"script.js\"></script>";
@@ -302,7 +309,8 @@
 			return $matches[1] . "" . $matches[2] ."<a class='alarm' href='/$replaced' title='$objF'>". $matches[3] ."</a>". $matches[5] ."";
 
 		} else {
-			return $matches[1] . "<span class='alarmC'><span class='alarmU'>" . $matches[2] ."<a href='/$replaced' title='$objF' class='alarm'>". $matches[3] ."</a>". $matches[5] ."</span><span class='alarmA'></span>". $out ."</span><span class='c'></span>";
+			$ret = $matches[1] . "<span class='alarmC'><span class='alarmU'>" . $matches[2] ."<a href='/$replaced' title='$objF' class='alarm'>". $matches[3] ."</a>". $matches[5] ."</span><span class='alarmA'></span>". $out ."</span><span class='c'></span>";
+			return str_replace("\n", "\r", $ret);
 		}
 
 	}

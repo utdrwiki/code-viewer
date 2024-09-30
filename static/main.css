@@ -1,0 +1,78 @@
+:root {
+	--background: #111;
+    --secondary-background: #080808;
+	--text-color: #CCC;
+	--link-color: #8AD;
+	--link-hover-color: #ADF;
+    --border-color: #999;
+
+	--junk-text-color: #666;
+}
+
+body {
+	background: var(--background);
+	padding: 1em 2em;
+}
+
+body, pre {
+	font-family: Consolas, Ubuntu Mono, monospace;
+	font-size: 12pt;
+	color: var(--text-color);
+	margin: 0;
+}
+
+p {
+	margin: 0;
+}
+
+ul {
+	margin: 0;
+	padding-left: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: var(--link-color);
+}
+
+a:hover {
+	color: var(--link-hover-color);
+}
+
+.hidden {
+	display: none;
+}
+
+#yrstruly {
+	position: relative;
+	right: -1em;
+	float: right;
+	background: var(--secondary-background);
+	padding: 1em 2em;
+	border: 1px solid var(--border-color);
+}
+
+.comma-list {
+	padding-left: 0;
+}
+
+.comma-list li {
+	display: inline;
+}
+
+.comma-list li:not(:last-child):after {
+	content: "  \00b7  ";
+}
+
+@media screen and (max-width: 720px) {
+	#yrstruly {
+		float: none;
+	}
+	table {
+		display: block;
+		overflow-x: auto;
+	}
+	table td {
+		min-width: 200px;
+	}
+}

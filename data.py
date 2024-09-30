@@ -1,0 +1,78 @@
+from dataclasses import dataclass
+import json
+import hashlib
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from util import get_script_path
+
+@dataclass
+class Room:
+    name: str
+    description: str
+
+class Data:
+    def __init__(self):
+        self.enemies: Optional[List[str]] = None
+        self.flags: Optional[Dict[int, str]] = None
+        self.rooms: Optional[List[Room]] = None
+        self.sums: Optional[Dict[str, str]] = None
+        self.lang: Optional[Dict[str, str]] = None
+
+    @staticmethod
+    def load_json(filename: str) -> Any:
+        script_dir = get_script_path()
+        with open(script_dir / 'data' / f'{filename}.json', 'r') as file:
+            return json.load(file)
+
+    def load_enemies(self) -> List[str]:
+        return self.load_json('enemies')
+
+    def load_flags(self) -> Dict[int, str]:
+        flags: Dict[str, str] = self.load_json('flags')
+        return {int(k): v for k, v in flags.items()}
+
+    def load_rooms(self) -> List[Room]:
+        rooms: List[Dict[str, str]] = self.load_json('rooms')
+        return [Room(**room) for room in rooms]
+
+    def load_sums(self) -> Dict[str, str]:
+        return self.load_json('sums')
+
+    def load_lang(self) -> Dict[str, str]:
+        return self.load_json('lang_en')
+
+    def get_enemy(self, enemy_id: int) -> str:
+        if self.enemies is None:
+            self.enemies = self.load_enemies()
+        return self.enemies[enemy_id]
+
+    def get_flag(self, flag_id: int) -> Optional[str]:
+        if self.flags is None:
+            self.flags = self.load_flags()
+        return self.flags.get(flag_id, None)
+
+    def get_room_by_id(self, room_id: int) -> Room:
+        if self.rooms is None:
+            self.rooms = self.load_rooms()
+        return self.rooms[room_id]
+
+    def get_room_by_name(self, room_name: str) -> Optional[Room]:
+        if self.rooms is None:
+            self.rooms = self.load_rooms()
+        for room in self.rooms:
+            if room.name == room_name:
+                return room
+        return None
+
+    def classify_junk(self, filename: Path) -> Optional[str]:
+        if self.sums is None:
+            self.sums = self.load_sums()
+        with open(filename, 'rb') as file:
+            hash = hashlib.sha256(file.read()).hexdigest()
+            return self.sums.get(hash, None)
+
+    def get_localized_string_ch1(self, key: str) -> str:
+        if self.lang is None:
+            self.lang = self.load_lang()
+        return self.lang[key]

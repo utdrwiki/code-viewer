@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{{ game }} script viewer - {{ script_name }}</title>
+    {% include 'partials/head.html' %}
+    <link rel="stylesheet" href="static/script.css" />
+    <script src="static/script.js"></script>
+</head>
+<body>
+<h1>{{ game }} script viewer</h1>
+
+{% include 'partials/info.html' %}
+
+<strong><a href="index.html">&larr; back to main script listing</a></strong><br>
+
+<h2>{{ script_name }}</h2>
+<small>(<a href="raw/{{ script_name }}.txt">view raw script w/o annotations or w/e</a>)</small>
+
+<table class="code">
+    {% for line in lines %}
+    <tr>
+        <td id="L{{ loop.index }}"><a href="#L{{ loop.index }}">{{ loop.index }}</a></td>
+        <td><pre>{{ line | safe }}</pre></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

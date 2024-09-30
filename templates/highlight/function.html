@@ -1,0 +1,11 @@
+{{ before_function }}<!--
+--><span class="funcC"><!--
+    --><a class="func {% if script_name == 'gml_GlobalScript_scr_debug' %}debug{% endif %}" href="{{ script_name }}.html">{{ function_name }}</a><!--
+    -->{% if script_content %}<!--
+        --><div class='funcCode'><!--
+            --><strong><a href='{{ script_name }}.html'>{{ function_name }}</a></strong><!--
+            --><br><br><!--
+            -->{{ script_content | safe }}<!--
+        --></div><!--
+    -->{% endif %}<!--
+--></span>(

@@ -1,0 +1,14 @@
+<aside id="yrstruly">
+    <p>This is the {{ game }} script viewer, brought to you by:</p>
+    <ul>
+        <li><a href="https://twitter.com/xkeepah">xkeeper</a>: Original creator</li>
+        <li><a href="https://github.com/Grossley">Grossley</a></li>
+        <li><a href="https://github.com/Jacky720">Jacky720</a></li>
+        <li><a href="https://kocka.tech">KockaAdmiralac</a></li>
+    </ul>
+    <ul class="comma-list">
+        {% for text, link in links.items() %}
+        <li><a href="{{ link }}">{{ text }}</a></li>
+        {% endfor %}
+    </ul>
+</aside>

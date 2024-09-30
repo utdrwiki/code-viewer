@@ -1,0 +1,1710 @@
+[
+    {
+        "name": "room_restart_true",
+        "description": ""
+    },
+    {
+        "name": "PLACE_DOGCHECK2",
+        "description": ""
+    },
+    {
+        "name": "room_intro_ch2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_fountain",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_prefountain",
+        "description": ""
+    },
+    {
+        "name": "room_debug_choicer_light",
+        "description": ""
+    },
+    {
+        "name": "room_debug_smallface",
+        "description": ""
+    },
+    {
+        "name": "room_debug_battleBalloon",
+        "description": ""
+    },
+    {
+        "name": "room_debug_smallface_dark",
+        "description": ""
+    },
+    {
+        "name": "room_debug_choicer_dark",
+        "description": ""
+    },
+    {
+        "name": "room_gms_debug_failsafe",
+        "description": ""
+    },
+    {
+        "name": "ROOM_INITIALIZE",
+        "description": ""
+    },
+    {
+        "name": "room_title_placeholder",
+        "description": ""
+    },
+    {
+        "name": "room_battletest",
+        "description": ""
+    },
+    {
+        "name": "room_cutscene_tester",
+        "description": ""
+    },
+    {
+        "name": "room_sound_tester",
+        "description": ""
+    },
+    {
+        "name": "room_sprite_tester",
+        "description": ""
+    },
+    {
+        "name": "room_gif_tester",
+        "description": ""
+    },
+    {
+        "name": "room_bullettest",
+        "description": ""
+    },
+    {
+        "name": "room_teacup_demoauto",
+        "description": ""
+    },
+    {
+        "name": "room_teacup_demobullets",
+        "description": ""
+    },
+    {
+        "name": "room_shaun_puzzle",
+        "description": ""
+    },
+    {
+        "name": "room_GMS2_test",
+        "description": ""
+    },
+    {
+        "name": "room_cutscene_tester_b",
+        "description": ""
+    },
+    {
+        "name": "room_debug_color",
+        "description": ""
+    },
+    {
+        "name": "room_debug_battle",
+        "description": ""
+    },
+    {
+        "name": "room_debug_loc",
+        "description": ""
+    },
+    {
+        "name": "PLACE_CONTACT",
+        "description": ""
+    },
+    {
+        "name": "room_krisroom",
+        "description": ""
+    },
+    {
+        "name": "room_krishallway",
+        "description": ""
+    },
+    {
+        "name": "room_torroom",
+        "description": ""
+    },
+    {
+        "name": "room_torhouse",
+        "description": ""
+    },
+    {
+        "name": "room_torbathroom",
+        "description": ""
+    },
+    {
+        "name": "room_town_krisyard",
+        "description": ""
+    },
+    {
+        "name": "room_town_northwest",
+        "description": ""
+    },
+    {
+        "name": "room_town_north",
+        "description": ""
+    },
+    {
+        "name": "room_beach",
+        "description": ""
+    },
+    {
+        "name": "room_town_mid",
+        "description": ""
+    },
+    {
+        "name": "room_town_apartments",
+        "description": ""
+    },
+    {
+        "name": "room_town_south",
+        "description": ""
+    },
+    {
+        "name": "room_town_school",
+        "description": ""
+    },
+    {
+        "name": "room_town_church",
+        "description": ""
+    },
+    {
+        "name": "room_graveyard",
+        "description": ""
+    },
+    {
+        "name": "room_town_shelter",
+        "description": ""
+    },
+    {
+        "name": "room_hospital_lobby",
+        "description": ""
+    },
+    {
+        "name": "room_hospital_hallway",
+        "description": ""
+    },
+    {
+        "name": "room_hospital_rudy",
+        "description": ""
+    },
+    {
+        "name": "room_hospital_room2",
+        "description": ""
+    },
+    {
+        "name": "room_diner",
+        "description": ""
+    },
+    {
+        "name": "room_townhall",
+        "description": ""
+    },
+    {
+        "name": "room_flowershop_1f",
+        "description": ""
+    },
+    {
+        "name": "room_flowershop_2f",
+        "description": ""
+    },
+    {
+        "name": "room_library",
+        "description": ""
+    },
+    {
+        "name": "room_alphysalley",
+        "description": ""
+    },
+    {
+        "name": "room_lw_computer_lab",
+        "description": ""
+    },
+    {
+        "name": "room_lw_library_upstairs",
+        "description": ""
+    },
+    {
+        "name": "room_lw_police",
+        "description": ""
+    },
+    {
+        "name": "room_lw_conbini",
+        "description": ""
+    },
+    {
+        "name": "room_lw_icee_pizza",
+        "description": ""
+    },
+    {
+        "name": "room_torielclass",
+        "description": ""
+    },
+    {
+        "name": "room_schoollobby",
+        "description": ""
+    },
+    {
+        "name": "room_alphysclass",
+        "description": ""
+    },
+    {
+        "name": "room_schooldoor",
+        "description": ""
+    },
+    {
+        "name": "room_insidecloset",
+        "description": ""
+    },
+    {
+        "name": "room_school_unusedroom",
+        "description": ""
+    },
+    {
+        "name": "room_castle_town",
+        "description": ""
+    },
+    {
+        "name": "room_castle_tutorial",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_west_cliff_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_east_door",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_west_cliff",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_area_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_area_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_area_2_transformed",
+        "description": ""
+    },
+    {
+        "name": "room_dw_ralsei_castle_front",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_restaurant",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_cafe",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_dojo",
+        "description": ""
+    },
+    {
+        "name": "room_dw_ralsei_castle_1f",
+        "description": ""
+    },
+    {
+        "name": "room_dw_ralsei_castle_2f",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_dungeon",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_rooms_hallway",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_rooms_kris",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_rooms_susie",
+        "description": ""
+    },
+    {
+        "name": "room_dw_castle_rooms_lancer",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_intro_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_intro_connector",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_intro_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_rhythm_slide",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_savepoint",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_battle_maze_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_music_bullet",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_tasque_battle",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_keyboard_puzzle_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_queen_boxing",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_musical_door",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_maze_virokun",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_keyboard_puzzle_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_battle_maze_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_music_final",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_musical_shop",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_teacup_final",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_rollercoaster",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_maze_fireworks",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_maze_tasque",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_maze_queenscreen",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_viro_ring",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_post_music_boss_slide",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_keyboard_puzzle_3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_battle_maze_3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_teacup_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_shaunsmusicalbullettunnel",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_maze_rhythm",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_escalator_slide",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_nuberts_treasure",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_music_fight",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_keyboardexample",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_prototype_01",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_prototype_02",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_spamton_shop_exterior",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_spamton_house",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_intro",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_split",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_entrance",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_roadblock",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_hacker",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_mice",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_big_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_big_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_queen_drunk",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_savepoint",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_big_3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_mice2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_cheesemaze",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_mice3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_poppup",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_berdly",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_4",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_spamton_alley",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_monologue",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_baseball",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_postbaseball_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_postbaseball_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_postbaseball_3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_mansion_front",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_susie_ralsei_fun_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_mirrorfriend",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_treasure",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_dog_traffic",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_man",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_moss",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_big_3_backup_2exits",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_3_2Entrances",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_cheese",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_carnival",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_noelle_fight_intro",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_spamton_shop_interior",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_monologue_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_krisroom",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_susieroom",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_lightner_hallway",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_darkbulb_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_darkbulb_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_darkbulb_3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_dining_a",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_entrance",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_fire_paintings",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_single_pot",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_potBalance",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_tasquePaintings",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_traffic",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_1f_e",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_1f_secret",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_teacup",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_teacup_4",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_teacup_3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_teacup_2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_entrance",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_stairs",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_central",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_west_1f",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_west_1f_a",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_west_1f_b",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_west_2f",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_east",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_east_a",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_east_b",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_b_east_transformed",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_a",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_transformed_new",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_shortcut",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_kitchen",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_c",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_c_a",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_d",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_3f",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_3f_projection",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_3f_toilet",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_acid_tunnel",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_acid_tunnel_puzzle_entrance",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_acid_tunnel_loop_rouxls",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_acid_tunnel_exit",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_4f_b",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_4f_c",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_4f_d",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_top",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_top_post",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_ferris_wheel",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_ferris_wheel_post",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_noelle_room",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_bridges",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_bridges_funny",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_mouseLottery",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_hands",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_dining3",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_dininghall",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_dining_storage",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_1f_b",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_c_b",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_traffic_original",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_1f_a",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_teacup",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_4f_e",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_4f_a",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_ufo_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_1f_d",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_1f_c",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_sparks",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_acid_tunnel_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_top_post_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_elevator",
+        "description": ""
+    },
+    {
+        "name": "PLACE_DOG",
+        "description": ""
+    },
+    {
+        "name": "room_legend",
+        "description": ""
+    },
+    {
+        "name": "room_legend_neo",
+        "description": ""
+    },
+    {
+        "name": "room_shop1",
+        "description": ""
+    },
+    {
+        "name": "room_shop_ch2_music",
+        "description": ""
+    },
+    {
+        "name": "room_shop_ch2_swatch",
+        "description": ""
+    },
+    {
+        "name": "room_shop_ch2_spamton",
+        "description": ""
+    },
+    {
+        "name": "room_gameover",
+        "description": ""
+    },
+    {
+        "name": "PLACE_LOGO",
+        "description": ""
+    },
+    {
+        "name": "PLACE_FAILURE",
+        "description": ""
+    },
+    {
+        "name": "PLACE_NAMING_JIKKEN",
+        "description": ""
+    },
+    {
+        "name": "PLACE_MENU",
+        "description": ""
+    },
+    {
+        "name": "room_ed",
+        "description": ""
+    },
+    {
+        "name": "room_empty",
+        "description": ""
+    },
+    {
+        "name": "room_DARKempty",
+        "description": ""
+    },
+    {
+        "name": "room_DARKbase_GMS2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_battle_maze_2_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_keyboard_puzzle_1_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_tasque_battle_og",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_savepoint_original",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_battle_maze_1_Original",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_music_bullet_original",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_maze_virokun_backuo",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_battle_maze_2_toby",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_big_1_original",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_2_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_big_2_OG",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_mice2_og",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_teacup_4_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_teacup_1",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_viromaze2",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_5_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_dining_storage_old",
+        "description": ""
+    },
+    {
+        "name": "room_dw_cyber_virovirokun_fight",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_east_2f_d_backup",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_traffic_3_backup",
+        "description": ""
+    },
+    {
+        "name": "room_cc_lancer",
+        "description": ""
+    },
+    {
+        "name": "room_cc_clover",
+        "description": ""
+    },
+    {
+        "name": "room_cc_fountain",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_big_3_og",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_bridgesold",
+        "description": ""
+    },
+    {
+        "name": "room_dw_city_sidewayscars",
+        "description": ""
+    },
+    {
+        "name": "room_transformation_sequence",
+        "description": ""
+    },
+    {
+        "name": "room_dw_mansion_gigaqueen",
+        "description": ""
+    },
+    {
+        "name": "room_musical_sync_test",
+        "description": ""
+    },
+    {
+        "name": "room_chapter_continue_ch1",
+        "description": ""
+    },
+    {
+        "name": "PLACE_CHAPTER_SELECT_2x",
+        "description": ""
+    },
+    {
+        "name": "PLACE_CHAPTER_SELECT",
+        "description": ""
+    },
+    {
+        "name": "ROOM_INITIALIZE_ch1",
+        "description": ""
+    },
+    {
+        "name": "PLACE_CONTACT_ch1",
+        "description": "Intro sequence (Goner Maker)"
+    },
+    {
+        "name": "room_krisroom_ch1",
+        "description": "Toriel's House - Kris's Bedroom"
+    },
+    {
+        "name": "room_krishallway_ch1",
+        "description": "Toriel's House - House Hallway"
+    },
+    {
+        "name": "room_torroom_ch1",
+        "description": "Toriel's House - Toriel's Room (Empty)"
+    },
+    {
+        "name": "room_torhouse_ch1",
+        "description": "Toriel's House - Living Room and kitchen"
+    },
+    {
+        "name": "room_torbathroom_ch1",
+        "description": "Toriel's House - Bathroom"
+    },
+    {
+        "name": "room_town_krisyard_ch1",
+        "description": "Toriel's House - Outside"
+    },
+    {
+        "name": "room_town_northwest_ch1",
+        "description": "Light world - Northwest Town (Empty)"
+    },
+    {
+        "name": "room_town_north_ch1",
+        "description": "Light world - North Town (w/ Catty and Bratty house)"
+    },
+    {
+        "name": "room_beach_ch1",
+        "description": "Light world - Beach (with guards)"
+    },
+    {
+        "name": "room_town_mid_ch1",
+        "description": "Light world - Middle of Town (w/ sans)"
+    },
+    {
+        "name": "room_town_apartments_ch1",
+        "description": "Light world - Inside Apartments (Black Room)"
+    },
+    {
+        "name": "room_town_south_ch1",
+        "description": "Light world - South Town (w/ Librarby)"
+    },
+    {
+        "name": "room_town_school_ch1",
+        "description": "Light world - Town (School Entry)"
+    },
+    {
+        "name": "room_town_church_ch1",
+        "description": "Light world - Town (w/ town hall, church)"
+    },
+    {
+        "name": "room_graveyard_ch1",
+        "description": "Light world - Graveyard"
+    },
+    {
+        "name": "room_town_shelter_ch1",
+        "description": "Light world - Shelter (mysterious door)"
+    },
+    {
+        "name": "room_hospital_lobby_ch1",
+        "description": "Light world - Town (w/ hospital)"
+    },
+    {
+        "name": "room_hospital_hallway_ch1",
+        "description": "Light world - Hospital Lobby"
+    },
+    {
+        "name": "room_hospital_rudy_ch1",
+        "description": "Light world - Hospital Room 1"
+    },
+    {
+        "name": "room_hospital_room2_ch1",
+        "description": "Light world - Hospital Room 2"
+    },
+    {
+        "name": "room_diner_ch1",
+        "description": "Light world - QC's Diner Interior"
+    },
+    {
+        "name": "room_townhall_ch1",
+        "description": "Light world -Town hall Interior"
+    },
+    {
+        "name": "room_flowershop_1f_ch1",
+        "description": "Light world - Asgore's Flower Shop Ground Floor"
+    },
+    {
+        "name": "room_flowershop_2f_ch1",
+        "description": "Light world - Asgore's Flower Shop Basement (crashes on warp)"
+    },
+    {
+        "name": "room_library_ch1",
+        "description": "Light world - Librarby interior"
+    },
+    {
+        "name": "room_alphysalley_ch1",
+        "description": "Light world - Alphys in Back Alley"
+    },
+    {
+        "name": "room_torielclass_ch1",
+        "description": "Light world - Toriel's Classroom"
+    },
+    {
+        "name": "room_schoollobby_ch1",
+        "description": "Light world - South School Halls"
+    },
+    {
+        "name": "room_alphysclass_ch1",
+        "description": "Light world - Alphys' Classroom"
+    },
+    {
+        "name": "room_schooldoor_ch1",
+        "description": "Light world - North School Halls"
+    },
+    {
+        "name": "room_insidecloset_ch1",
+        "description": "Light world - School Closet"
+    },
+    {
+        "name": "room_school_unusedroom_ch1",
+        "description": "Light world - \"Unused\" classroom; Dark World exit scene"
+    },
+    {
+        "name": "room_dark1_ch1",
+        "description": "Cavern - First dark world room"
+    },
+    {
+        "name": "room_dark1a_ch1",
+        "description": "Cavern - First SAVE point (???????? in save file)"
+    },
+    {
+        "name": "room_dark2_ch1",
+        "description": "Cavern - First squeaking flower room"
+    },
+    {
+        "name": "room_dark3_ch1",
+        "description": "Cavern - Branching room"
+    },
+    {
+        "name": "room_dark3a_ch1",
+        "description": "Cavern - Glowshard room"
+    },
+    {
+        "name": "room_dark_wobbles_ch1",
+        "description": "Cavern - First Overworld SOUL mechanics room"
+    },
+    {
+        "name": "room_dark_eyepuzzle_ch1",
+        "description": "Cavern - Eye Puzzle (SAVE point)"
+    },
+    {
+        "name": "room_dark7_ch1",
+        "description": "Cavern - First time encountering Susie in hero outfit"
+    },
+    {
+        "name": "room_dark_chase1_ch1",
+        "description": "Cavern - First Lancer Encounter"
+    },
+    {
+        "name": "room_dark_chase2_ch1",
+        "description": "Cavern - Long Slide Room"
+    },
+    {
+        "name": "room_castle_outskirts_ch1",
+        "description": "Cavern - Slide Landing room"
+    },
+    {
+        "name": "room_castle_town_ch1",
+        "description": "Cavern - Closed Shops (SAVE point)"
+    },
+    {
+        "name": "room_castle_front_ch1",
+        "description": "Cavern - Dark Castle gate (Ralsei party-join scene, first Lancer fight)"
+    },
+    {
+        "name": "room_castle_tutorial_ch1",
+        "description": "Cavern - Training dummy room"
+    },
+    {
+        "name": "room_castle_darkdoor_ch1",
+        "description": "Cavern - Great Door"
+    },
+    {
+        "name": "room_field_start_ch1",
+        "description": "Field - Great Door"
+    },
+    {
+        "name": "room_field_forest_ch1",
+        "description": "Field - Connecting Corridor 1"
+    },
+    {
+        "name": "room_field1_ch1",
+        "description": "Field - First encounter"
+    },
+    {
+        "name": "room_field2_ch1",
+        "description": "Field - Lancer sending 3 Hathys at you"
+    },
+    {
+        "name": "room_field2A_ch1",
+        "description": "Field - Dark Candy tree 1"
+    },
+    {
+        "name": "room_field_topchef_ch1",
+        "description": "Field - Spin Pizzamaker"
+    },
+    {
+        "name": "room_field_puzzle1_ch1",
+        "description": "Field - Timer Puzzle 1"
+    },
+    {
+        "name": "room_field_maze_ch1",
+        "description": "Field - \"Maze Of Death\" (SAVE point)"
+    },
+    {
+        "name": "room_field_puzzle2_ch1",
+        "description": "Field - Timer Puzzle 2"
+    },
+    {
+        "name": "room_field_getsusie_ch1",
+        "description": "Field - Closed door / Checkers Pawn \"fight\""
+    },
+    {
+        "name": "room_field_shop1_ch1",
+        "description": "Field - In front of first open Shop"
+    },
+    {
+        "name": "room_field_puzzletutorial_ch1",
+        "description": "Field - Tutorial Fedora-adorned Puzzle Pieces room"
+    },
+    {
+        "name": "room_field3_ch1",
+        "description": "Field - Door room"
+    },
+    {
+        "name": "room_field_boxpuzzle_ch1",
+        "description": "Field - Vandalised box-button puzzle"
+    },
+    {
+        "name": "room_field4_ch1",
+        "description": "Field - Great board entrance (Broken Key Piece)"
+    },
+    {
+        "name": "room_field_secret1_ch1",
+        "description": "Great Board - First Corridor"
+    },
+    {
+        "name": "room_field_checkers4_ch1",
+        "description": "Great Board - Light Puzzle 1"
+    },
+    {
+        "name": "room_field_checkers2_ch1",
+        "description": "Great Board - Bent Corridor 1"
+    },
+    {
+        "name": "room_field_checkers6_ch1",
+        "description": "Great Board - Light Puzzle 2"
+    },
+    {
+        "name": "room_field_checkers3_ch1",
+        "description": "Great Board - SAVE room 1"
+    },
+    {
+        "name": "room_field_checkers1_ch1",
+        "description": "Great Board - Light Puzzle 3"
+    },
+    {
+        "name": "room_field_checkers5_ch1",
+        "description": "Great Board - Bent Corridor 2"
+    },
+    {
+        "name": "room_field_checkers7_ch1",
+        "description": "Great Board - SAVE room 2"
+    },
+    {
+        "name": "room_field_checkersboss_ch1",
+        "description": "Great Board - First Checkers King Fight (Susie leaves party scene)"
+    },
+    {
+        "name": "room_forest_savepoint1_ch1",
+        "description": "Forest - Entrance (door)"
+    },
+    {
+        "name": "room_forest_area0_ch1",
+        "description": "Forest - First Dust Bunny bush"
+    },
+    {
+        "name": "room_forest_area1_ch1",
+        "description": "Forest - Salsa Stump Room"
+    },
+    {
+        "name": "room_forest_area2_ch1",
+        "description": "Forest - First circling bullet laser towers"
+    },
+    {
+        "name": "room_forest_area2A_ch1",
+        "description": "Forest - Chest room (quiet ball monster)"
+    },
+    {
+        "name": "room_forest_puzzle1_ch1",
+        "description": "Forest - First Suit puzzle"
+    },
+    {
+        "name": "room_forest_beforeclover_ch1",
+        "description": "Forest - Bloxer room with ragger puzzle"
+    },
+    {
+        "name": "room_forest_area3A_ch1",
+        "description": "Forest - Ragger chest"
+    },
+    {
+        "name": "room_forest_area3_ch1",
+        "description": "Forest - Suit Puzzle w/ Clover boss fight"
+    },
+    {
+        "name": "room_forest_savepoint2_ch1",
+        "description": "Forest - Bakesale"
+    },
+    {
+        "name": "room_forest_smith_ch1",
+        "description": "Forest - Blacksmith"
+    },
+    {
+        "name": "room_forest_area4_ch1",
+        "description": "Forest - 2 bloxers w/ hidden path"
+    },
+    {
+        "name": "room_forest_dancers1_ch1",
+        "description": "Forest - Star dancers (Broken key piece)"
+    },
+    {
+        "name": "room_forest_secret1_ch1",
+        "description": "Forest - Dust Bunny ambush room"
+    },
+    {
+        "name": "room_forest_thrashmaker_ch1",
+        "description": "Forest - Thrasher designing room"
+    },
+    {
+        "name": "room_forest_starwalker_ch1",
+        "description": "Forest - Starwalker and bell room"
+    },
+    {
+        "name": "room_forest_area5_ch1",
+        "description": "Forest - Darkness Puzzle room"
+    },
+    {
+        "name": "room_forest_savepoint_relax_ch1",
+        "description": "Forest - Before maze"
+    },
+    {
+        "name": "room_forest_maze1_ch1",
+        "description": "Maze - Following only Lancer - Placeholder sprite is present."
+    },
+    {
+        "name": "room_forest_maze_deadend_ch1",
+        "description": "Maze - Lancer dead end"
+    },
+    {
+        "name": "room_forest_maze_susie_ch1",
+        "description": "Maze - Intro"
+    },
+    {
+        "name": "room_forest_maze2_ch1",
+        "description": "Maze - following both Susie and Lancer - Placeholder sprite is present."
+    },
+    {
+        "name": "room_forest_maze_deadend2_ch1",
+        "description": "Maze - Dead end room (seems to link to the room where you first find susie in the maze)"
+    },
+    {
+        "name": "room_forest_savepoint3_ch1",
+        "description": "Maze - Exit (SAVE point)"
+    },
+    {
+        "name": "room_forest_fightsusie_ch1",
+        "description": "Forest - Door room"
+    },
+    {
+        "name": "room_forest_afterthrash2_ch1",
+        "description": "Forest - First room with lancer in team"
+    },
+    {
+        "name": "room_forest_afterthrash3_ch1",
+        "description": "Forest - Dark candy tree 2"
+    },
+    {
+        "name": "room_forest_afterthrash4_ch1",
+        "description": "Forest - Connecting Corridor 2"
+    },
+    {
+        "name": "room_forest_castleview_ch1",
+        "description": "Forest - Lancer Fleeing Scene"
+    },
+    {
+        "name": "room_forest_chase1_ch1",
+        "description": "Forest - Guard Dodge 1"
+    },
+    {
+        "name": "room_forest_chase2_ch1",
+        "description": "Forest - Guard Dodge 2"
+    },
+    {
+        "name": "room_forest_castlefront_ch1",
+        "description": "Forest - Before Castle (Capture Scene)"
+    },
+    {
+        "name": "room_cc_prison_cells_ch1",
+        "description": "Castle - B1 - Prison (in wall)"
+    },
+    {
+        "name": "room_cc_prisonlancer_ch1",
+        "description": "Castle - B1 - Corridor with puzzle"
+    },
+    {
+        "name": "room_cc_prison_to_elevator_ch1",
+        "description": "Castle - B1 - Elevator room"
+    },
+    {
+        "name": "room_cc_prison2_ch1",
+        "description": "Castle - B1 - Lion jail room with kings"
+    },
+    {
+        "name": "room_cc_prisonelevator_ch1",
+        "description": "Castle - Top floor Elevator"
+    },
+    {
+        "name": "room_cc_elevator_ch1",
+        "description": "Castle - Prison elevator"
+    },
+    {
+        "name": "room_cc_prison_prejoker_ch1",
+        "description": "Castle - Room before Jevil fight. (SAVE point)"
+    },
+    {
+        "name": "room_cc_joker_ch1",
+        "description": "Castle? - Jevil fight (only background if beaten already)"
+    },
+    {
+        "name": "room_cc_entrance_ch1",
+        "description": "Castle - Entrance corridor"
+    },
+    {
+        "name": "room_cc_1f_ch1",
+        "description": "Castle - 1F"
+    },
+    {
+        "name": "room_cc_rudinn_ch1",
+        "description": "Castle - Diamond room - 1F"
+    },
+    {
+        "name": "room_cc_2f_ch1",
+        "description": "Castle - 2F"
+    },
+    {
+        "name": "room_cc_rurus1_ch1",
+        "description": "Castle - 2F - First puzzle"
+    },
+    {
+        "name": "room_cc_3f_ch1",
+        "description": "Castle - 3F"
+    },
+    {
+        "name": "room_cc_hathy_ch1",
+        "description": "Castle - 3F Heart room with 2 Hathys"
+    },
+    {
+        "name": "room_cc_4f_ch1",
+        "description": "Castle - 4F"
+    },
+    {
+        "name": "room_cc_rurus2_ch1",
+        "description": "Castle - 4F - Second puzzle"
+    },
+    {
+        "name": "room_cc_clover_ch1",
+        "description": "Castle - Clover party room w/ stereo"
+    },
+    {
+        "name": "room_cc_5f_ch1",
+        "description": "Castle - 5F (SAVE point)"
+    },
+    {
+        "name": "room_cc_lancer_ch1",
+        "description": "Castle - 5F - Lancer's room"
+    },
+    {
+        "name": "room_cc_6f_ch1",
+        "description": "Castle - Second Checkers King bossfight"
+    },
+    {
+        "name": "room_cc_throneroom_ch1",
+        "description": "Castle - Throne room (SAVE point)"
+    },
+    {
+        "name": "room_cc_preroof_ch1",
+        "description": "Castle - Connecting Corridor 3"
+    },
+    {
+        "name": "room_cc_kingbattle_ch1",
+        "description": "Castle - King bossroom"
+    },
+    {
+        "name": "room_cc_prefountain_ch1",
+        "description": "Castle - Room before the Fountain"
+    },
+    {
+        "name": "room_cc_fountain_ch1",
+        "description": "Castle - Fountain (Final Room)"
+    },
+    {
+        "name": "PLACE_DOG_ch1",
+        "description": "Dogcheck"
+    },
+    {
+        "name": "room_legend_ch1",
+        "description": "Story sequence / post-ending intro"
+    },
+    {
+        "name": "room_shop1_ch1",
+        "description": "Field - Seam's Shop"
+    },
+    {
+        "name": "room_shop2_ch1",
+        "description": "Castle - Rouxls Kaard's Shop"
+    },
+    {
+        "name": "room_gameover_ch1",
+        "description": "Game Over screen? (crashes)"
+    },
+    {
+        "name": "room_myroom_dark_ch1",
+        "description": "Ending Cutscene"
+    },
+    {
+        "name": "PLACE_LOGO_ch1",
+        "description": "\"deltarune\" logo"
+    },
+    {
+        "name": "PLACE_FAILURE_ch1",
+        "description": "Game Over screen"
+    },
+    {
+        "name": "PLACE_MENU_ch1",
+        "description": "Save listing (?)"
+    },
+    {
+        "name": "room_ed_ch1",
+        "description": "Ending Credits"
+    },
+    {
+        "name": "room_empty_ch1",
+        "description": "Empty room (room_empty)"
+    },
+    {
+        "name": "room_man_ch1",
+        "description": "Forest - Egg Room (room_man)"
+    },
+    {
+        "name": "room_DARKempty_ch1",
+        "description": "Empty room"
+    },
+    {
+        "name": "room_battletest_ch1",
+        "description": "Battle Test Room (probably no longer functions)"
+    },
+    {
+        "name": "room_splashscreen_ch1",
+        "description": ""
+    }
+]

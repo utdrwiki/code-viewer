@@ -11,10 +11,6 @@ input {
     clear: right;
 }
 
-#search-list .no-results {
-	font-style: italic;
-}
-
 #search-form fieldset {
     border-color: var(--border-color);
     width: fit-content;

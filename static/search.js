@@ -3,7 +3,6 @@
 
     const HIT_LIMIT = 100;
     const REFRESH_LIMIT = 100;
-    const CACHE_VERSION = 1;
 
     function escapeRegExp(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

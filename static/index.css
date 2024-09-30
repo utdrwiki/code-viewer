@@ -1,0 +1,37 @@
+input {
+	background: var(--secondary-background);
+	padding: 0.1em 0.5em;
+	font-family: monospace;
+	color: var(--text-color);
+	border: 1px solid var(--border-color);
+	font-size: inherit;
+}
+
+#search-results {
+    clear: right;
+}
+
+#search-list .no-results {
+	font-style: italic;
+}
+
+#search-form fieldset {
+    border-color: var(--border-color);
+    width: fit-content;
+}
+
+table th {
+	padding: 0 1em;
+}
+
+.table-subsection-header td {
+	font-weight: bold;
+}
+
+.table-subsection-content td {
+	padding-left: 1em;
+}
+
+.junk .table-subsection-content td, .junk .table-subsection-content td a {
+	color: var(--junk-text-color);
+}

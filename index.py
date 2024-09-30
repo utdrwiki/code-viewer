@@ -79,19 +79,14 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
         index.text[name] = lines
     return index
 
-def write_index(index: ScriptIndex, output_dir: Path) -> None:
+def write_index(index: ScriptIndex, data: Data, output_dir: Path) -> None:
     with open(output_dir / 'index.html', 'w', encoding='utf-8') as f:
         env = Environment(loader=FileSystemLoader('templates'))
         f.write(env.get_template('index.html').render(
             sections=index.sections,
-            game='Deltarune',
-            links={
-                'Source code': 'https://github.com/KockaAdmiralac/deltarune-viewer',
-                'r/Underminers': 'https://www.reddit.com/r/Underminers/',
-                'TCRF': 'https://tcrf.net/Deltarune',
-                'Wiki': 'https://deltarune.fandom.com/',
-            },
-            cache_version=1
+            game=data.get_game_name(),
+            links=data.get_game_links(),
+            cache_version=data.get_cache_version()
         ))
     with open(output_dir / 'index.json', 'w', encoding='utf-8') as f:
         json.dump(index.text, f, separators=(',', ':'))
@@ -102,4 +97,4 @@ if __name__ == '__main__':
     decompiled_dir = script_dir / 'decompiled'
     output_dir = script_dir / 'out'
     os.makedirs(output_dir, exist_ok=True)
-    write_index(process_scripts(data, decompiled_dir), output_dir)
+    write_index(process_scripts(data, decompiled_dir), data, output_dir)

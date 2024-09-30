@@ -194,13 +194,8 @@ def render_script(script_name: str, text: Dict[str, List[str]], data: Data) -> s
     return env.get_template('script_page.html').render(
         script_name=script_name,
         lines=lines,
-        game='Deltarune',
-        links={
-            'Source code': 'https://github.com/KockaAdmiralac/deltarune-viewer',
-            'r/Underminers': 'https://www.reddit.com/r/Underminers/',
-            'TCRF': 'https://tcrf.net/Deltarune',
-            'Wiki': 'https://deltarune.fandom.com/',
-        },
+        game=data.get_game_name(),
+        links=data.get_game_links(),
     )
 
 def write_script(output: str, script_name: str, output_dir: Path):

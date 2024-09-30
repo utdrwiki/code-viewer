@@ -11,6 +11,12 @@ class Room:
     name: str
     description: str
 
+@dataclass
+class Config:
+    game: str
+    links: Dict[str, str]
+    cache: int
+
 class Data:
     def __init__(self):
         self.enemies: Optional[List[str]] = None
@@ -18,6 +24,7 @@ class Data:
         self.rooms: Optional[List[Room]] = None
         self.sums: Optional[Dict[str, str]] = None
         self.lang: Optional[Dict[str, str]] = None
+        self.config: Optional[Config] = None
 
     @staticmethod
     def load_json(filename: str) -> Any:
@@ -41,6 +48,9 @@ class Data:
 
     def load_lang(self) -> Dict[str, str]:
         return self.load_json('lang_en')
+
+    def load_config(self) -> Config:
+        return Config(**self.load_json('config'))
 
     def get_enemy(self, enemy_id: int) -> str:
         if self.enemies is None:
@@ -76,3 +86,18 @@ class Data:
         if self.lang is None:
             self.lang = self.load_lang()
         return self.lang[key]
+
+    def get_game_name(self) -> str:
+        if self.config is None:
+            self.config = self.load_config()
+        return self.config.game
+
+    def get_game_links(self) -> Dict[str, str]:
+        if self.config is None:
+            self.config = self.load_config()
+        return self.config.links
+
+    def get_cache_version(self) -> int:
+        if self.config is None:
+            self.config = self.load_config()
+        return self.config.cache

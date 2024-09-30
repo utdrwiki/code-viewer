@@ -39,6 +39,10 @@ a:hover {
 	color: var(--link-hover-color);
 }
 
+h2 {
+	word-break: break-all;
+}
+
 .hidden {
 	display: none;
 }
@@ -72,7 +76,7 @@ a:hover {
 		display: block;
 		overflow-x: auto;
 	}
-	table td {
+	table:not(.code) td {
 		min-width: 200px;
 	}
 }

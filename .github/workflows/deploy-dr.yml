@@ -1,8 +1,8 @@
-name: Deploy to Netlify
+name: Deploy to Netlify (Deltarune)
 on:
   push:
     branches:
-      - master
+      - deltarune
   workflow_dispatch:
 
 # Allow one concurrent deployment
@@ -16,10 +16,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Download steamcmd
+        run: |
+          sudo add-apt-repository multiverse
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          echo steam steam/question select "I AGREE" | sudo debconf-set-selections
+          echo steam steam/license note '' | sudo debconf-set-selections
+          sudo apt install -y steamcmd
+      - name: Download Deltarune
+        run: |
+          mkdir -p ~/.local/share/Steam/config
+          echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
+          steamcmd +@ShutdownOnFailedCommand +@sSteamCmdForcePlatformType windows +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 1690940 validate +quit
+        env:
+          STEAM_VDF: ${{ secrets.STEAM_VDF }}
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
       - name: Checkout UTMT
         uses: actions/checkout@v4
         with:
-          repository: krzys-h/UndertaleModTool
+          repository: UnderminersTeam/UndertaleModTool
           path: utmt
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -31,6 +47,10 @@ jobs:
         run: dotnet build utmt/UndertaleModCli --no-restore
       - name: Publish UTMT CLI
         run: dotnet publish utmt/UndertaleModCli -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=false --output utmtcli
+      - name: Extract Deltarune's code
+        run: |
+          ./utmtcli/UndertaleModCli load game/data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          mv game/Export_Code decompiled
       - name: Setup Python
         uses: actions/setup-python@v5
         with:

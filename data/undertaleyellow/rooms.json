@@ -1,0 +1,1150 @@
+[
+    {
+        "name": "rm_intro",
+        "description": "Introduction sequence"
+    },
+    {
+        "name": "rm_logos",
+        "description": "'UNDERTALE YELLOW' logo"
+    },
+    {
+        "name": "rm_mmfirst",
+        "description": "Main menu when there is no save"
+    },
+    {
+        "name": "rm_mainmenu",
+        "description": "Main menu"
+    },
+    {
+        "name": "rm_mainmenu_debug",
+        "description": "Debug menu"
+    },
+    {
+        "name": "rm_live_buffer",
+        "description": "Live buffer?"
+    },
+    {
+        "name": "rm_ruins00",
+        "description": "Ruins - Flower Pile"
+    },
+    {
+        "name": "rm_ruins01",
+        "description": "Ruins - Froggit Spot"
+    },
+    {
+        "name": "rm_ruins02",
+        "description": "Ruins - Entrance"
+    },
+    {
+        "name": "rm_ruins03",
+        "description": "Ruins - Toriel stepping Tile Puzzle"
+    },
+    {
+        "name": "rm_ruins04",
+        "description": "Ruins - Switch Room"
+    },
+    {
+        "name": "ruins_outro",
+        "description": "Ruins - After Falling"
+    },
+    {
+        "name": "rm_darkruinsintro",
+        "description": "Dark Ruins - Intro"
+    },
+    {
+        "name": "rm_darkruins_01",
+        "description": "Dark Ruins - Flower Pile"
+    },
+    {
+        "name": "rm_darkruins_02",
+        "description": "Dark Ruins - Bridge to Entrance"
+    },
+    {
+        "name": "rm_darkruins_03",
+        "description": "Dark Ruins - Entrance [SAVE]"
+    },
+    {
+        "name": "rm_darkruins_04",
+        "description": "Dark Ruins - Switch Puzzle"
+    },
+    {
+        "name": "rm_darkruins_05",
+        "description": "Dark Ruins - Straight Pillar Room"
+    },
+    {
+        "name": "rm_darkruins_06",
+        "description": "Dark Ruins - Glowing Boxes Puzzle"
+    },
+    {
+        "name": "rm_darkruins_07",
+        "description": "Dark Ruins - Dalv Intro"
+    },
+    {
+        "name": "rm_darkruins_08",
+        "description": "Dark Ruins - Atrium [SAVE]"
+    },
+    {
+        "name": "rm_darkruins_08b",
+        "description": "Dark Ruins - Lemonade Stand"
+    },
+    {
+        "name": "rm_darkruins_09",
+        "description": "Dark Ruins - Corn Field"
+    },
+    {
+        "name": "rm_darkruins_09b",
+        "description": "Dark Ruins - Pebbles"
+    },
+    {
+        "name": "rm_darkruins_10",
+        "description": "Dark Ruins - Cliff [SAVE]"
+    },
+    {
+        "name": "rm_darkruins_11",
+        "description": "Dark Ruins - Decibat"
+    },
+    {
+        "name": "rm_darkruins_12",
+        "description": "Dark Ruins - Puzzle [SAVE]"
+    },
+    {
+        "name": "rm_darkruins_13",
+        "description": "Dark Ruins - Cave Entrance"
+    },
+    {
+        "name": "rm_darkruins_14",
+        "description": "Dark Ruins - Cave"
+    },
+    {
+        "name": "rm_darkruins_14b",
+        "description": "Dark Ruins - Micro Froggit"
+    },
+    {
+        "name": "rm_darkruins_15",
+        "description": "Dark Ruins - Bridge to Dalv"
+    },
+    {
+        "name": "rm_darkruins_16",
+        "description": "Dark Ruins - Hall [SAVE]"
+    },
+    {
+        "name": "rm_darkruins_16b",
+        "description": "Dark Ruins - Passage"
+    },
+    {
+        "name": "rm_darkruins_17",
+        "description": "Dark Ruins - Corn Storage"
+    },
+    {
+        "name": "rm_darkruins_18",
+        "description": "Dark Ruins - Dalv's House Entrance"
+    },
+    {
+        "name": "rm_darkruins_19",
+        "description": "Dark Ruins - Exit"
+    },
+    {
+        "name": "rm_dalvhallway",
+        "description": "Dark Ruins - Hall to Dalv's House Exit"
+    },
+    {
+        "name": "rm_dalvshouse",
+        "description": "Dark Ruins - Dalv's House"
+    },
+    {
+        "name": "rm_dalvsroom",
+        "description": "Dark Ruins - Dalv's Room"
+    },
+    {
+        "name": "rm_dalvroomhall",
+        "description": "Dark Ruins - Hall to Dalv's Room"
+    },
+    {
+        "name": "rm_dalvExit",
+        "description": "Dark Ruins - Dalv's House Exit (Neutral Route)"
+    },
+    {
+        "name": "rm_dalvExit_pacifist",
+        "description": "Dark Ruins - Dalv's House Exit (Pacifist Route)"
+    },
+    {
+        "name": "rm_dalvExit_genocide",
+        "description": "Dark Ruins - Dalv's House Exit (Genocide Route)"
+    },
+    {
+        "name": "rm_snowdin_01_yellow",
+        "description": "Snowdin - Dark Ruins Exit"
+    },
+    {
+        "name": "rm_snowdin_02_yellow",
+        "description": "Snowdin - Path to Delta Rock"
+    },
+    {
+        "name": "rm_snowdin_03_yellow",
+        "description": "Snowdin - Delta Rock [SAVE]"
+    },
+    {
+        "name": "rm_snowdin_03b_yellow",
+        "description": "Snowdin - Rock in front of a cave"
+    },
+    {
+        "name": "rm_snowdin_04_yellow",
+        "description": "Snowdin - Fishing Hole"
+    },
+    {
+        "name": "rm_snowdin_05_yellow",
+        "description": "Snowdin - Tree Covered Passage"
+    },
+    {
+        "name": "rm_snowdin_06_yellow",
+        "description": "Snowdin - Molten Rock Puzzle"
+    },
+    {
+        "name": "rm_snowdin_07_yellow",
+        "description": "Snowdin - Slurpy Pole"
+    },
+    {
+        "name": "rm_snowdin_08_yellow",
+        "description": "Snowdin - Ruined Shack [SAVE]"
+    },
+    {
+        "name": "rm_snowdin_08b_yellow",
+        "description": "Snowdin - Old Tree"
+    },
+    {
+        "name": "rm_snowdin_09_yellow",
+        "description": "Snowdin - Mo Stand"
+    },
+    {
+        "name": "rm_snowdin_10_yellow",
+        "description": "Snowdin - Snowcastles"
+    },
+    {
+        "name": "rm_snowdin_10b_yellow",
+        "description": "Snowdin - Ice Wolf"
+    },
+    {
+        "name": "rm_snowdin_11_yellow",
+        "description": "Snowdin - UGPS Station"
+    },
+    {
+        "name": "rm_snowdin_12_yellow",
+        "description": "Snowdin - Pathway [SAVE]"
+    },
+    {
+        "name": "rm_snowdin_13_yellow",
+        "description": "Snowdin - Honeydew Resort Entrance"
+    },
+    {
+        "name": "rm_snowdin_14_yellow",
+        "description": "Snowdin - Resort [SAVE]"
+    },
+    {
+        "name": "rm_snowdin_14b_yellow",
+        "description": "Snowdin - Honeydew Cabin"
+    },
+    {
+        "name": "rm_snowdin_14c_yellow",
+        "description": "Snowdin - Path to Hot Springs"
+    },
+    {
+        "name": "rm_snowdin_14d_yellow",
+        "description": "Snowdin - Hot Springs"
+    },
+    {
+        "name": "rm_snowdin_14e_yellow",
+        "description": "Snowdin - Micro Froggits"
+    },
+    {
+        "name": "rm_snowdin_15_yellow",
+        "description": "Snowdin - Honeydew Resort Exit"
+    },
+    {
+        "name": "rm_snowdin_16_yellow",
+        "description": "Snowdin - Bridge Puzzle"
+    },
+    {
+        "name": "rm_snowdin_16b_yellow",
+        "description": "Snowdin - Below Bridge Puzzle"
+    },
+    {
+        "name": "rm_snowdin_17_yellow",
+        "description": "Snowdin - Three Signs"
+    },
+    {
+        "name": "rm_snowdin_18_yellow",
+        "description": "Snowdin - Coffee Barrel"
+    },
+    {
+        "name": "rm_snowdin_19_yellow",
+        "description": "Snowdin - Molten Rock Puzzle 2"
+    },
+    {
+        "name": "rm_snowdin_20_yellow",
+        "description": "Snowdin - Corridor [SAVE]"
+    },
+    {
+        "name": "rm_snowdin_21_yellow",
+        "description": "Snowdin - Martlet Station"
+    },
+    {
+        "name": "rm_snowdin_22_yellow",
+        "description": "Snowdin - Docks"
+    },
+    {
+        "name": "rm_waterfall_og",
+        "description": "Waterfall Ride"
+    },
+    {
+        "name": "rm_hotland",
+        "description": "Hotland Ride"
+    },
+    {
+        "name": "rm_lava_tubes",
+        "description": "Lava Tubes Ride (Crash)"
+    },
+    {
+        "name": "rm_wildeast_cave",
+        "description": "Wild East - Cave"
+    },
+    {
+        "name": "rm_dunes_01",
+        "description": "Dunes - Fall"
+    },
+    {
+        "name": "rm_dunes_02",
+        "description": "Dunes - Cave [SAVE]"
+    },
+    {
+        "name": "rm_dunes_03",
+        "description": "Dunes - West Mines Entrance"
+    },
+    {
+        "name": "rm_dunes_04",
+        "description": "Dunes - Dimensional Box"
+    },
+    {
+        "name": "rm_dunes_05",
+        "description": "Dunes - UGPS Station"
+    },
+    {
+        "name": "rm_dunes_06",
+        "description": "Dunes - Sandstorm 1"
+    },
+    {
+        "name": "rm_dunes_06b",
+        "description": "Dunes - Micro Froggit Cave"
+    },
+    {
+        "name": "rm_dunes_07",
+        "description": "Dunes - Sandstorm 2"
+    },
+    {
+        "name": "rm_dunes_08",
+        "description": "Dunes - Tree [SAVE]"
+    },
+    {
+        "name": "rm_dunes_08b",
+        "description": "Dunes - Mo Stand"
+    },
+    {
+        "name": "rm_dunes_09",
+        "description": "Dunes - Falling Tumbleweed"
+    },
+    {
+        "name": "rm_dunes_10",
+        "description": "Dunes - Falling Tumbleweeds"
+    },
+    {
+        "name": "rm_dunes_11",
+        "description": "Dunes - East Mines Entrance"
+    },
+    {
+        "name": "rm_dunes_12",
+        "description": "Mines - Equipment Room"
+    },
+    {
+        "name": "rm_dunes_12b",
+        "description": "Mines - Two Miners"
+    },
+    {
+        "name": "rm_dunes_13",
+        "description": "Mines - Broken Elevator"
+    },
+    {
+        "name": "rm_dunes_elevator",
+        "description": "Mines - Inside Elevator"
+    },
+    {
+        "name": "rm_dunes_14",
+        "description": "Mines - Elevator [SAVE]"
+    },
+    {
+        "name": "rm_dunes_15",
+        "description": "Mines - Bowll"
+    },
+    {
+        "name": "rm_dunes_16",
+        "description": "Mines - Minecart Puzzle 1"
+    },
+    {
+        "name": "rm_dunes_17",
+        "description": "Mines - Before Rockfall"
+    },
+    {
+        "name": "rm_dunes_18",
+        "description": "Dunes - Rockfall"
+    },
+    {
+        "name": "rm_dunes_19",
+        "description": "Mines - Reception"
+    },
+    {
+        "name": "rm_dunes_19B",
+        "description": "Mines - Gemstone Conveyor Belt"
+    },
+    {
+        "name": "rm_dunes_20",
+        "description": "Mines - Minecart [SAVE]"
+    },
+    {
+        "name": "rm_dunes_21",
+        "description": "Mines - Minecart Ride"
+    },
+    {
+        "name": "rm_dunes_22",
+        "description": "Mines - Minecart Puzzle 2"
+    },
+    {
+        "name": "rm_dunes_23",
+        "description": "Mines - Trash Can"
+    },
+    {
+        "name": "rm_dunes_24",
+        "description": "Dunes - Elevator to Mountaintop"
+    },
+    {
+        "name": "rm_dunes_25",
+        "description": "Dunes - Mountaintop [SAVE]"
+    },
+    {
+        "name": "rm_dunes_25b",
+        "description": "Dunes - Rock Throwers"
+    },
+    {
+        "name": "rm_dunes_26",
+        "description": "Dunes - El Bailador"
+    },
+    {
+        "name": "rm_dunes_27",
+        "description": "Dunes - Elevator Down"
+    },
+    {
+        "name": "rm_dunes_28",
+        "description": "Dunes - Playground [SAVE]"
+    },
+    {
+        "name": "rm_dunes_28b",
+        "description": "Dunes - Gift Shop Entrance"
+    },
+    {
+        "name": "rm_dunes_28c",
+        "description": "Dunes - Gift Shop"
+    },
+    {
+        "name": "rm_dunes_29",
+        "description": "Dunes - Flower Girls"
+    },
+    {
+        "name": "rm_dunes_29b",
+        "description": "Dunes - Martlet Reunion"
+    },
+    {
+        "name": "rm_dunes_30_old",
+        "description": "Oasis Valley (Old)"
+    },
+    {
+        "name": "rm_dunes_30b",
+        "description": "Dunes - Mansion Gate"
+    },
+    {
+        "name": "rm_dunes_30_house_1",
+        "description": "Oasis Valley - Plant House"
+    },
+    {
+        "name": "rm_dunes_30_house_2",
+        "description": "Oasis Valley - Plant"
+    },
+    {
+        "name": "rm_dunes_30_house_3",
+        "description": "Oasis Valley - Fortune Teller"
+    },
+    {
+        "name": "rm_dunes_31",
+        "description": "Oasis Valley - Exit"
+    },
+    {
+        "name": "rm_dunes_32",
+        "description": "Dunes - Outside Oasis Valley"
+    },
+    {
+        "name": "rm_dunes_33",
+        "description": "Dunes - Girlboss"
+    },
+    {
+        "name": "rm_dunes_34",
+        "description": "Dunes - Well [SAVE]"
+    },
+    {
+        "name": "rm_dunes_35",
+        "description": "Dunes - Cafe Dune (Old)"
+    },
+    {
+        "name": "rm_dunes_35b",
+        "description": "Oasis Valley - Cafe Dune"
+    },
+    {
+        "name": "rm_dunes_36",
+        "description": "Wild East - Entrance"
+    },
+    {
+        "name": "rm_dunes_37",
+        "description": "Wild East - Town [SAVE]"
+    },
+    {
+        "name": "rm_dunes_37_saloon",
+        "description": "Wild East - Saloon"
+    },
+    {
+        "name": "rm_dunes_37_feistyhouse",
+        "description": "Wild East - House"
+    },
+    {
+        "name": "rm_dunes_37_barn",
+        "description": "Wild East - Barn"
+    },
+    {
+        "name": "rm_dunes_37_jail",
+        "description": "Wild East - Jail"
+    },
+    {
+        "name": "rm_dunes_37_hospital",
+        "description": "Wild East - Hospital"
+    },
+    {
+        "name": "rm_dunes_38",
+        "description": "Wild East - Town (East)"
+    },
+    {
+        "name": "rm_dunes_39",
+        "description": "Wild East - Outskirts [SAVE]"
+    },
+    {
+        "name": "rm_dunes_40",
+        "description": "Wild East - Starlo Battle"
+    },
+    {
+        "name": "rm_dunes_41",
+        "description": "Wild East - Sunnyside [SAVE]"
+    },
+    {
+        "name": "rm_dunes_42",
+        "description": "Wild East - Sunnyside Farm"
+    },
+    {
+        "name": "rm_dunes_42_b",
+        "description": "Wild East - Starlo House"
+    },
+    {
+        "name": "rm_dunes_42_c",
+        "description": "Wild East - Starlo House (Second Floor)"
+    },
+    {
+        "name": "rm_dunes_43",
+        "description": "Dunes - Steamworks Entrance"
+    },
+    {
+        "name": "rm_steamworks_01",
+        "description": "Steamw. - Entrance Hallway"
+    },
+    {
+        "name": "rm_steamworks_02",
+        "description": "Steamw. - Entrance Hallway 2"
+    },
+    {
+        "name": "rm_steamworks_03",
+        "description": "Steamw. - Entrance Door"
+    },
+    {
+        "name": "rm_steamworks_04",
+        "description": "Steamw. - Engine Room"
+    },
+    {
+        "name": "rm_steamworks_04_transition_b",
+        "description": "Steamw. - Engine Room West Hallway"
+    },
+    {
+        "name": "rm_steamworks_04b",
+        "description": "Steamw. - Engine Room West Puzzle"
+    },
+    {
+        "name": "rm_steamworks_04_transition_c",
+        "description": "Steamw. - Engine Room East Hallway"
+    },
+    {
+        "name": "rm_steamworks_04c",
+        "description": "Steamw. - Engine Room East Puzzle"
+    },
+    {
+        "name": "rm_steamworks_05",
+        "description": "Steamw. - Generator [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_05b",
+        "description": "Steamw. - Laundry Room"
+    },
+    {
+        "name": "rm_steamworks_05c",
+        "description": "Steamw. - Robots Room"
+    },
+    {
+        "name": "rm_steamworks_05d",
+        "description": "Steamw. - Generator Switch"
+    },
+    {
+        "name": "rm_steamworks_06",
+        "description": "Steamw. - Acid Lake Entrance"
+    },
+    {
+        "name": "rm_steamworks_07",
+        "description": "Steamw. - Vents (Old)"
+    },
+    {
+        "name": "rm_steamworks_08",
+        "description": "Steamw. - Stairs"
+    },
+    {
+        "name": "rm_steamworks_09",
+        "description": "Steamw. - Raised Path [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_10",
+        "description": "Steamw. - Building Entrance"
+    },
+    {
+        "name": "rm_steamworks_11",
+        "description": "Steamw. - Awards"
+    },
+    {
+        "name": "rm_steamworks_12",
+        "description": "Steamw. - Axis"
+    },
+    {
+        "name": "rm_steamworks_13",
+        "description": "Steamw. - Basement"
+    },
+    {
+        "name": "rm_steamworks_13b",
+        "description": "Steamw. - Basement Exit Hallway"
+    },
+    {
+        "name": "rm_steamworks_14",
+        "description": "Steamw. - Escaped Axis"
+    },
+    {
+        "name": "rm_steamworks_15",
+        "description": "Steamw. - Lake [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_16",
+        "description": "Steamw. - Jandroid"
+    },
+    {
+        "name": "rm_steamworks_17",
+        "description": "Steamw. - Big Lake (South)"
+    },
+    {
+        "name": "rm_steamworks_17b_old",
+        "description": "Steamw. - Gate Control (Old)"
+    },
+    {
+        "name": "rm_steamworks_18",
+        "description": "Steamw. - Big Lake (North)"
+    },
+    {
+        "name": "rm_steamworks_18b",
+        "description": "Steamw. - Mo Stand"
+    },
+    {
+        "name": "rm_steamworks_19",
+        "description": "Steamw. - Offices [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_20",
+        "description": "Steamw. - Pre-Axis Chase"
+    },
+    {
+        "name": "rm_steamworks_21",
+        "description": "Steamw. - Axis Chase"
+    },
+    {
+        "name": "rm_steamworks_21b",
+        "description": "Steamw. - Security Station"
+    },
+    {
+        "name": "rm_steamworks_22",
+        "description": "Steamw. - Axis Chase 2"
+    },
+    {
+        "name": "rm_steamworks_23",
+        "description": "Steamw. - Commons [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_24",
+        "description": "Steamw. - UGPS Station 1"
+    },
+    {
+        "name": "rm_steamworks_25",
+        "description": "Steamw. - Path around Greenhouse"
+    },
+    {
+        "name": "rm_steamworks_26",
+        "description": "Steamw. - Greenhouse Entrance"
+    },
+    {
+        "name": "rm_score_room",
+        "description": "Score room"
+    },
+    {
+        "name": "rm_mew_mew",
+        "description": "Mew Mew Love Blaster"
+    },
+    {
+        "name": "rm_battle",
+        "description": "Battle room"
+    },
+    {
+        "name": "rm_config",
+        "description": "Config screen"
+    },
+    {
+        "name": "rm_death_screen",
+        "description": "Death screen"
+    },
+    {
+        "name": "rm_debug",
+        "description": "Debug cutscene"
+    },
+    {
+        "name": "rm_credits",
+        "description": "Neutral Route credits"
+    },
+    {
+        "name": "rm_shop",
+        "description": "Shop screen"
+    },
+    {
+        "name": "rm_build_ending",
+        "description": "Build ending?"
+    },
+    {
+        "name": "rm_steamworks_27",
+        "description": "Greenhouse - Fountain"
+    },
+    {
+        "name": "rm_steamworks_31",
+        "description": "Steamw. - Factory/Lab Entrance"
+    },
+    {
+        "name": "rm_steamworks_28",
+        "description": "Greenhouse - Signs"
+    },
+    {
+        "name": "rm_steamworks_30",
+        "description": "Steamw. - Crossroads [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_29",
+        "description": "Greenhouse [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_factory_01",
+        "description": "Factory - Lobby [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_chem_01",
+        "description": "Steamw. - Chemistry Lab Entrance"
+    },
+    {
+        "name": "rm_game",
+        "description": "Steamworks ID game"
+    },
+    {
+        "name": "rm_steamworks_chem_02",
+        "description": "Steamw. - Chemistry Lab Hallway"
+    },
+    {
+        "name": "rm_steamworks_chem_03",
+        "description": "Steamw. - Laboratory [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_chem_hermit",
+        "description": "Steamw. - Hermit"
+    },
+    {
+        "name": "rm_steamworks_chem_04",
+        "description": "Steamw. - Storage Cabinets"
+    },
+    {
+        "name": "rm_steamworks_chem_06",
+        "description": "Steamw. - Botany Hall [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_chem_07",
+        "description": "Steamw. - Chemistry Lab Exit"
+    },
+    {
+        "name": "rm_steamworks_chem_05",
+        "description": "Steamw. - Acid Lab"
+    },
+    {
+        "name": "rm_steamworks_32",
+        "description": "Steamw. - UGPS Station 2"
+    },
+    {
+        "name": "rm_steamworks_34",
+        "description": "The Furnace [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_35",
+        "description": "The Furnace - Inside"
+    },
+    {
+        "name": "rm_steamworks_33",
+        "description": "Steamw. - Robot Control Room"
+    },
+    {
+        "name": "rm_steamworks_36",
+        "description": "A Road Ahead [SAVE]"
+    },
+    {
+        "name": "rm_steamworks_37",
+        "description": "Steamw. - Ceroba Cutscene"
+    },
+    {
+        "name": "rm_steamworks_38",
+        "description": "Steamw. - Elevator to Hotland"
+    },
+    {
+        "name": "rm_steamworks_factory_elevator",
+        "description": "Factory - Elevator"
+    },
+    {
+        "name": "rm_hotland_01",
+        "description": "Hotland - Elevator"
+    },
+    {
+        "name": "rm_hotland_02",
+        "description": "Hotland - Crossroads"
+    },
+    {
+        "name": "rm_hotland_03",
+        "description": "Apt. Complex - Entrance"
+    },
+    {
+        "name": "rm_hotland_03b",
+        "description": "Apt. Complex - Alley"
+    },
+    {
+        "name": "rm_hotland_02b",
+        "description": "Hotland - Dance Floor"
+    },
+    {
+        "name": "rm_hotland_02c",
+        "description": "Hotland - House"
+    },
+    {
+        "name": "rm_hotland_02d",
+        "description": "Hotland - Spider Construction"
+    },
+    {
+        "name": "rm_hotland_complex_1",
+        "description": "Apt. Complex [SAVE]"
+    },
+    {
+        "name": "rm_hotland_complex_1b",
+        "description": "Apt. Complex - Dining Room"
+    },
+    {
+        "name": "rm_hotland_complex_1c",
+        "description": "Apt. Complex - Rooms"
+    },
+    {
+        "name": "rm_steamworks_17c",
+        "description": "Steamw. - Clock Room"
+    },
+    {
+        "name": "rm_hotland_roof",
+        "description": "Apt. Complex - Roof"
+    },
+    {
+        "name": "rm_flashback_01",
+        "description": "Flowey - Ruins Flashback"
+    },
+    {
+        "name": "rm_flashback_02",
+        "description": "Flowey - Toriel Flashback"
+    },
+    {
+        "name": "rm_flashback_03",
+        "description": "Flowey - Death Flashback"
+    },
+    {
+        "name": "rm_battle_flowey",
+        "description": "Flowey - Phase 1 Battle Room"
+    },
+    {
+        "name": "rm_battle_flashback_01",
+        "description": "Flowey - Ruins"
+    },
+    {
+        "name": "rm_battle_flashback_02",
+        "description": "Flowey - Dark Ruins"
+    },
+    {
+        "name": "rm_battle_flashback_03",
+        "description": "Flowey - Waterfall"
+    },
+    {
+        "name": "rm_battle_flashback_04",
+        "description": "Flowey - Dunes"
+    },
+    {
+        "name": "rm_battle_flashback_05",
+        "description": "Flowey - Hotland"
+    },
+    {
+        "name": "rm_battle_flashback_06",
+        "description": "Flowey - Steamworks"
+    },
+    {
+        "name": "rm_battle_flashback_final",
+        "description": "Flowey - Ruins Long Hall"
+    },
+    {
+        "name": "rm_battle_flashback_07",
+        "description": "Flowey - Snowdin with Martlet"
+    },
+    {
+        "name": "rm_battle_flashback_final_2",
+        "description": "Flowey - Withered"
+    },
+    {
+        "name": "rm_battle_flowey_phase_2",
+        "description": "Flowey - Phase 2 Battle Room"
+    },
+    {
+        "name": "rm_summary",
+        "description": "Summary room"
+    },
+    {
+        "name": "rm_steamworks_factory_02",
+        "description": "Factory - First Floor (Mr. Screen)"
+    },
+    {
+        "name": "rm_steamworks_factory_03",
+        "description": "Factory - Second Floor (Furnaces)"
+    },
+    {
+        "name": "rm_steamworks_factory_shaft",
+        "description": "Factory - Shaft"
+    },
+    {
+        "name": "rm_steamworks_factory_04",
+        "description": "Factory - Offices [SAVE]"
+    },
+    {
+        "name": "rm_mansion_entrance",
+        "description": "Estate [SAVE]"
+    },
+    {
+        "name": "rm_mansion_kotatsu",
+        "description": "Estate - Kotatsu"
+    },
+    {
+        "name": "rm_mansion_hallway_west",
+        "description": "Estate - West Hallway"
+    },
+    {
+        "name": "rm_mansion_hallway_east",
+        "description": "Estate - East Hallway"
+    },
+    {
+        "name": "rm_mansion_hallway_east_2",
+        "description": "Estate - Kitchen"
+    },
+    {
+        "name": "rm_mansion_bedroom",
+        "description": "Estate - Bedroom"
+    },
+    {
+        "name": "rm_mansion_hallway_west_2",
+        "description": "Estate - Rooms"
+    },
+    {
+        "name": "rm_mansion_office",
+        "description": "Estate - Office"
+    },
+    {
+        "name": "rm_mansion_kanakos_room",
+        "description": "Estate - Kanako's Room"
+    },
+    {
+        "name": "rm_mansion_study",
+        "description": "Estate - Study"
+    },
+    {
+        "name": "rm_dunes_30c",
+        "description": "Dunes - Mansion"
+    },
+    {
+        "name": "rm_mansion_chujins_grave",
+        "description": "Estate - Chujin's Grave"
+    },
+    {
+        "name": "rm_newhome_01",
+        "description": "New Home - Entrance"
+    },
+    {
+        "name": "rm_newhome_02",
+        "description": "New Home [SAVE]"
+    },
+    {
+        "name": "rm_newhome_03",
+        "description": "New Home [SAVE]"
+    },
+    {
+        "name": "rm_joystickconfig",
+        "description": "Joystick Config screen"
+    },
+    {
+        "name": "rm_newhome_02b",
+        "description": "New Home - Elevator to Castle"
+    },
+    {
+        "name": "rm_dunes_30d",
+        "description": "Dunes - Mansion Backside"
+    },
+    {
+        "name": "rm_hotland_elevator",
+        "description": "New Home - Elevator from Hotland"
+    },
+    {
+        "name": "rm_snowdin_martlets_house",
+        "description": "Snowdin - Martlet's House"
+    },
+    {
+        "name": "rm_hotland_lab_entrance",
+        "description": "Hotland - Lab Entrance (Cutscene)"
+    },
+    {
+        "name": "rm_hotland_lab",
+        "description": "Hotland - Lab (Cutscene)"
+    },
+    {
+        "name": "rm_castle_01",
+        "description": "New Home - Castle"
+    },
+    {
+        "name": "rm_castle_02",
+        "description": "New Home - Judgement Hall"
+    },
+    {
+        "name": "rm_castle_03",
+        "description": "New Home - Hallway"
+    },
+    {
+        "name": "rm_castle_04",
+        "description": "New Home - Staircase"
+    },
+    {
+        "name": "rm_castle_05",
+        "description": "New Home - Coffin Room"
+    },
+    {
+        "name": "rm_castle_throne_room",
+        "description": "New Home - Throne Room"
+    },
+    {
+        "name": "rm_castle_barrier",
+        "description": "New Home - Barrier"
+    },
+    {
+        "name": "rm_credits_geno",
+        "description": "Genocide Route credits"
+    },
+    {
+        "name": "rm_credits_paci",
+        "description": "Pacifist Route credits"
+    },
+    {
+        "name": "rm_credits_paci_intermission",
+        "description": "Pacifist Route credits scene"
+    },
+    {
+        "name": "rm_castle_pre_barrier",
+        "description": "New Home - Pre-Barrier"
+    },
+    {
+        "name": "rm_menu_flowey",
+        "description": "Ending menu (Flowey)"
+    },
+    {
+        "name": "rm_steamworks_macro_froggit_room",
+        "description": "Steamw. - ??? [SAVE]"
+    },
+    {
+        "name": "rm_dunes_30",
+        "description": "Oasis Valley"
+    },
+    {
+        "name": "rm_steamworks_06_b",
+        "description": "Steamw. - Sign"
+    },
+    {
+        "name": "rm_steamworks_07_v2",
+        "description": "Steamw. - Vents"
+    },
+    {
+        "name": "rm_steamworks_17b",
+        "description": "Steamw. - Gate Control"
+    },
+    {
+        "name": "rm_steamworks_25_b",
+        "description": "Steamw. - Vents before Greenhouse"
+    },
+    {
+        "name": "rm_steamworks_30_b",
+        "description": "Steamw. - Telly-Vis"
+    },
+    {
+        "name": "rm_battle_flasback_parent",
+        "description": "Battle flashback room?"
+    },
+    {
+        "name": "rm_dunes_42_d",
+        "description": "Wild East - Starlo Room"
+    },
+    {
+        "name": "rm_snowdin_secret_to_everybody",
+        "description": "Snowdin - Secret Room"
+    },
+    {
+        "name": "rm_dunes_secret",
+        "description": "Dunes - Gerson Room"
+    },
+    {
+        "name": "rm_intro_flowey",
+        "description": "Flowey - Intro Room"
+    }
+]

@@ -1,0 +1,48 @@
+name: Deploy to Netlify
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+# Allow one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Checkout UTMT
+        uses: actions/checkout@v4
+        with:
+          repository: krzys-h/UndertaleModTool
+          path: utmt
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore UTMT dependencies
+        run: dotnet restore utmt/UndertaleModCli
+      - name: Build UTMT CLI
+        run: dotnet build utmt/UndertaleModCli --no-restore
+      - name: Publish UTMT CLI
+        run: dotnet publish utmt/UndertaleModCli -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=false --output utmtcli
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Build
+        run: ./build.sh
+      - name: Publish
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=out --prod
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DR }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import argparse
 import os
 import re
 import sys
@@ -277,10 +278,19 @@ def write_script(output: str, script_name: str, output_dir: Path):
 
 
 if __name__ == '__main__':
-    data = Data()
+    parser = argparse.ArgumentParser(
+        description='Generates the code viewer website.'
+    )
+    parser.add_argument(
+        'game',
+        type=str,
+        help='game for which to generate the website'
+    )
+    args = parser.parse_args()
+    data = Data(args.game)
     script_name = sys.argv[1]
     script_dir = get_script_path()
-    decompiled_dir = script_dir / 'decompiled'
+    decompiled_dir = script_dir / f'decompiled-{args.game}'
     output_dir = script_dir / 'out'
     os.makedirs(output_dir, exist_ok=True)
     index = process_scripts(data, decompiled_dir)

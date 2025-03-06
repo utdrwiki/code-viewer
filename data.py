@@ -21,7 +21,8 @@ class Config:
 
 
 class Data:
-    def __init__(self):
+    def __init__(self, game: str):
+        self.game = game
         self.enemies: Optional[List[str]] = None
         self.flags: Optional[Dict[int, str]] = None
         self.rooms: Optional[List[Room]] = None
@@ -29,10 +30,10 @@ class Data:
         self.lang: Optional[Dict[str, str]] = None
         self.config: Optional[Config] = None
 
-    @staticmethod
-    def load_json(filename: str) -> Any:
+    def load_json(self, filename: str) -> Any:
         script_dir = get_script_path()
-        with open(script_dir / 'data' / f'{filename}.json', 'r') as file:
+        json_file = script_dir / 'data' / self.game / f'{filename}.json'
+        with open(json_file, 'r') as file:
             return json.load(file)
 
     def load_enemies(self) -> List[str]:

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import argparse
 import os
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -9,9 +10,18 @@ from script import render_script, write_script
 from util import get_script_path
 
 if __name__ == '__main__':
-    data = Data()
+    parser = argparse.ArgumentParser(
+        description='Generates the code viewer website.'
+    )
+    parser.add_argument(
+        'game',
+        type=str,
+        help='game for which to generate the website'
+    )
+    args = parser.parse_args()
+    data = Data(args.game)
     script_dir = get_script_path()
-    decompiled_dir = script_dir / 'decompiled'
+    decompiled_dir = script_dir / f'decompiled-{args.game}'
     output_dir = script_dir / 'out'
     os.makedirs(output_dir, exist_ok=True)
     env = Environment(

@@ -1,21 +1,24 @@
-from dataclasses import dataclass
-import json
 import hashlib
+import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from util import get_script_path
+
 
 @dataclass
 class Room:
     name: str
     description: str
 
+
 @dataclass
 class Config:
     game: str
     links: Dict[str, str]
     cache: int
+
 
 class Data:
     def __init__(self):
@@ -79,8 +82,8 @@ class Data:
         if self.sums is None:
             self.sums = self.load_sums()
         with open(filename, 'rb') as file:
-            hash = hashlib.sha256(file.read()).hexdigest()
-            return self.sums.get(hash, None)
+            hash_sum = hashlib.sha256(file.read()).hexdigest()
+            return self.sums.get(hash_sum, None)
 
     def get_localized_string_ch1(self, key: str) -> str:
         if self.lang is None:

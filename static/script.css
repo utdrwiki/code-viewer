@@ -1,23 +1,23 @@
 .langvar {
-	color: #c7d;
+	color: var(--lang-var-text-color);
 	font-style: italic;
 	display: none;
 	position: absolute;
 	left: 2px;
 	top: -2em;
-	background: black;
+	background: var(--lang-var-background-color);
 	padding: 0.2em 0.5em;
-	border: 1px solid #836;
+	border: 1px solid var(--lang-var-border-color);
 }
 
 .langtext {
 	display: inline-block;
-	color: #fbe;
+	color: var(--lang-text-text-color);
 	padding: 0 0.25em;
-	background: black;
+	background: var(--lang-text-background-color);
 	position: relative;
 	margin-bottom: 0.2em;
-	border: 1px dotted #969;
+	border: 1px dotted var(--lang-text-border-color);
 }
 
 .langtext > span {
@@ -58,13 +58,13 @@
 }
 
 .cc-wait {
-	background: #555;
-	color: #fff;
+	background: var(--wait-background-color);
+	color: var(--wait-text-color);
 }
 
 .cc-delay {
-	background: #111;
-	color: #666;
+	background: var(--delay-background-color);
+	color: var(--delay-text-color);
 }
 
 .cc-delay > span {
@@ -73,7 +73,7 @@
 	bottom: 0.1em;
 	display: inline-block;
 	font-size: 70%;
-	color: #aaa;
+	color: var(--delay-collapsed-text-color);
 	text-indent: 0;
 	font-style: italic;
 }
@@ -83,15 +83,15 @@
 }
 
 .cc-close {
-	background: #844;
-	color: #fff;
+	background: var(--close-background-color);
+	color: var(--close-text-color);
 }
 
 .cc-face {
-	background: #252;
+	background: var(--face-background-color);
 	font-style: italic;
 	font-size: 80%;
-	color: #8c8;
+	color: var(--face-text-color);
 	padding: 0 0.2em;
 }
 
@@ -141,38 +141,38 @@
 }
 
 .flag {
-	color: #ec6;
+	color: var(--flag-not-found-text-color);
 }
 
 .flagn {
-	color: #fd8;
-	background: black;
+	color: var(--flag-found-text-color);
+	background: var(--flag-found-background-color);
 }
 
 .flagd {
-	color: #ca4;
+	color: var(--flag-description-text-color);
 	font-style: italic;
 }
 
 .room {
-	color: #8f8;
-	background: #000;
-	padding: 0 .5em;
+	color: var(--room-text-color);
+	background: var(--room-background-color);
+	padding: 0 0.5em;
 }
 
 .roomdesc {
-	color: #494;
+	color: var(--room-description-text-color);
 	font-style: italic;
 }
 
 .alarm {
-	color: #faa;
-	text-decoration: underline dotted #a66;
+	color: var(--alarm-link-text-color);
+	text-decoration: underline dotted var(--alarm-link-underline-color);
 	position: relative;
 }
 
 .alarm:hover {
-	color: white;
+	color: var(--alarm-link-text-color--hover);
 }
 
 .alarmT {
@@ -183,10 +183,9 @@
 	max-width: 500px;
 	margin: 0 1em 1em 1em;
 	padding: 0.5em 1em;
-	border: 1px solid #888;
-	box-shadow: 6px 6px 0 2px black;
-	background: #222;
-	color: #ccc;
+	border: 1px solid var(--alarm-box-border-color);
+	background: var(--alarm-box-background-color);
+	color: var(--text-color);
 	z-index: 10000;
 	top: -1.8em;
 	box-sizing: border-box;
@@ -194,8 +193,9 @@
 }
 
 .alarmU {
+	float: left;
 	position: relative;
-	margin-right: .4em;
+	margin-right: 0.4em;
 }
 
 .alarmA {
@@ -204,7 +204,7 @@
 	top: 0.5em;
 	margin: 0 100px 0 0;
 	height: 2px;
-	border-top: 1px dashed #444;
+	border-top: 1px dashed var(--alarm-connection-line-color);
 	z-index: 10;
 	overflow: hidden;
 }
@@ -213,11 +213,11 @@
 .alarmC:hover .alarmU,
 .alarmC:hover .alarmA,
 .alarmC:hover .alarmT {
-	background: #400;
-	border-color: #f88;
+	background: var(--alarm-background-color--hover);
+	border-color: var(--alarm-border-color--hover);
 }
 
-.alarmPre {
+.code pre:has(.alarmC) {
 	float: left;
 	width: 100%;
 	height: 1em;
@@ -228,8 +228,8 @@
 }
 
 .func {
-	color: #8f8;
-	text-decoration: underline dotted #292;
+	color: var(--function-link-text-color);
+	text-decoration: underline dotted var(--function-link-underline-color);
 }
 
 .funcC .funcCode {
@@ -237,8 +237,8 @@
 }
 
 .funcC:hover .func {
-	background: #272;
-	color: white;
+	background: var(--function-link-background-color--hover);
+	color: var(--function-link-text-color--hover);
 }
 
 .funcC:hover .funcCode {
@@ -247,21 +247,14 @@
 	max-width: 1000px;
 	margin: 0 1em 1em 1em;
 	padding: 0.5em 1em;
-	border: 1px solid #8f8;
-	box-shadow: 6px 6px 0 2px black;
-	background: rgba(30, 50, 30, .9);
-	color: #ccc;
+	border: 1px solid var(--function-box-border-color);
+	background: var(--function-box-background-color);
+	color: var(--text-color);
 	z-index: 1000000;
 	top: 1em;
 	left: 2em;
 	box-sizing: border-box;
 	overflow-x: auto;
-}
-
-.sr {
-	color: #8f8;
-	background: #000;
-	font-weight: bold;
 }
 
 .code {
@@ -273,5 +266,5 @@
 }
 
 .code .selected {
-	background-color: #333;
+	background-color: var(--selected-line-background-color);
 }

@@ -1,0 +1,1346 @@
+[
+    {
+       "name": "room_start",
+       "description": "Initializer [Dogchecked]"
+    },
+    {
+       "name": "room_introstory",
+       "description": "Introduction [Dogchecked]"
+    },
+    {
+       "name": "room_introimage",
+       "description": "Title [Dogchecked]"
+    },
+    {
+       "name": "room_intromenu",
+       "description": "Menu [Dogchecked]"
+    },
+    {
+       "name": "room_area1",
+       "description": "Ruins - Starting point"
+    },
+    {
+       "name": "room_area1_2",
+       "description": "Ruins - Flowey spot"
+    },
+    {
+       "name": "room_ruins1",
+       "description": "Ruins - Entrance [SAVE]"
+    },
+    {
+       "name": "room_ruins2",
+       "description": "Ruins - Toriel stepping tile puzzle"
+    },
+    {
+       "name": "room_ruins3",
+       "description": "Ruins - Switch puzzle"
+    },
+    {
+       "name": "room_ruins4",
+       "description": "Ruins - Dummy room"
+    },
+    {
+       "name": "room_ruins5",
+       "description": "Ruins - Spike puzzle"
+    },
+    {
+       "name": "room_ruins6",
+       "description": "Ruins - Long corridor"
+    },
+    {
+       "name": "room_ruins7",
+       "description": "Ruins - Leaf Pile [SAVE]"
+    },
+    {
+       "name": "room_ruins7A",
+       "description": "Ruins - Candy pillar"
+    },
+    {
+       "name": "room_ruins8",
+       "description": "Ruins - Mandatory fall trapdoor"
+    },
+    {
+       "name": "room_ruins9",
+       "description": "Ruins - First stone pushing puzzle"
+    },
+    {
+       "name": "room_ruins10",
+       "description": "Ruins - Trapdoor corridor puzzle"
+    },
+    {
+       "name": "room_ruins11",
+       "description": "Ruins - Talkback rock"
+    },
+    {
+       "name": "room_ruins12A",
+       "description": "Ruins - Mouse Hole [SAVE]"
+    },
+    {
+       "name": "room_ruins12",
+       "description": "Ruins - Napstablook"
+    },
+    {
+       "name": "room_ruins12B",
+       "description": "Ruins - Spider Bake Sale"
+    },
+    {
+       "name": "room_ruins13",
+       "description": "Ruins - 2 frogs"
+    },
+    {
+       "name": "room_ruins14",
+       "description": "Ruins - Switch hidden under trapdoor puzzle"
+    },
+    {
+       "name": "room_ruins15A",
+       "description": "Ruins - 3 Pillars room 1"
+    },
+    {
+       "name": "room_ruins15B",
+       "description": "Ruins - 3 Pillars room 2"
+    },
+    {
+       "name": "room_ruins15C",
+       "description": "Ruins - 3 Pillars room 3"
+    },
+    {
+       "name": "room_ruins15D",
+       "description": "Ruins - 3 Pillars room 4"
+    },
+    {
+       "name": "room_ruins15E",
+       "description": "Ruins - Pillars room pit"
+    },
+    {
+       "name": "room_ruins16",
+       "description": "Ruins - 3-way fork"
+    },
+    {
+       "name": "room_ruins17",
+       "description": "Ruins - Toriel gossip frog"
+    },
+    {
+       "name": "room_ruins18OLD",
+       "description": "Ruins - Toy knife room"
+    },
+    {
+       "name": "room_ruins19",
+       "description": "Ruins - Home [SAVE]"
+    },
+    {
+       "name": "room_torhouse1",
+       "description": "Toriel's House: Entrance"
+    },
+    {
+       "name": "room_torhouse2",
+       "description": "Toriel's House: Reading room"
+    },
+    {
+       "name": "room_torhouse3",
+       "description": "Toriel's House: Corridor"
+    },
+    {
+       "name": "room_torielroom",
+       "description": "Toriel's House: Toriel's Room"
+    },
+    {
+       "name": "room_asrielroom",
+       "description": "Toriel's House: Your Room"
+    },
+    {
+       "name": "room_kitchen",
+       "description": "Toriel's House: Kitchen"
+    },
+    {
+       "name": "room_basement1",
+       "description": "Toriel's Basement 1"
+    },
+    {
+       "name": "room_basement2",
+       "description": "Toriel's Basement 2"
+    },
+    {
+       "name": "room_basement3",
+       "description": "Toriel's Basement 3"
+    },
+    {
+       "name": "room_basement4",
+       "description": "Toriel's Basement: Toriel Boss Battle"
+    },
+    {
+       "name": "room_basement5",
+       "description": "Toriel's Basement: Corridor to Flowey"
+    },
+    {
+       "name": "room_ruinsexit",
+       "description": "Toriel's Basement: Flowey"
+    },
+    {
+       "name": "room_tundra1",
+       "description": "Snowdin - Ruin exit"
+    },
+    {
+       "name": "room_tundra2",
+       "description": "Snowdin - Dark forest path"
+    },
+    {
+       "name": "room_tundra3",
+       "description": "Snowdin - Box Road [SAVE]"
+    },
+    {
+       "name": "room_tundra3A",
+       "description": "Snowdin - Fishing rod"
+    },
+    {
+       "name": "room_tundra4",
+       "description": "Snowdin - Papyrus' Sentry Station"
+    },
+    {
+       "name": "room_tundra5",
+       "description": "Snowdin - Doggo"
+    },
+    {
+       "name": "room_tundra6",
+       "description": "Snowdin - Compass sign"
+    },
+    {
+       "name": "room_tundra6A",
+       "description": "Snowdin - Snowman"
+    },
+    {
+       "name": "room_tundra7",
+       "description": "Snowdin - Electricity Maze"
+    },
+    {
+       "name": "room_tundra8",
+       "description": "Snowdin - Snow golf"
+    },
+    {
+       "name": "room_tundra8A",
+       "description": "Snowdin - 2 guard dog houses"
+    },
+    {
+       "name": "room_tundra9",
+       "description": "Snowdin - Monster Kidz Word Search"
+    },
+    {
+       "name": "room_tundra_spaghetti",
+       "description": "Snowdin - Spaghetti [SAVE]"
+    },
+    {
+       "name": "room_tundra_snowpuzz",
+       "description": "Snowdin - Warning: Dog Marriage"
+    },
+    {
+       "name": "room_tundra_xoxosmall",
+       "description": "Snowdin - XO puzzle 1"
+    },
+    {
+       "name": "room_tundra_xoxopuzz",
+       "description": "Snowdin - XO puzzle 2"
+    },
+    {
+       "name": "room_tundra_randoblock",
+       "description": "Snowdin - Color tile puzzle"
+    },
+    {
+       "name": "room_tundra_lesserdog",
+       "description": "Snowdin - Dog House [SAVE]"
+    },
+    {
+       "name": "room_tundra_icehole",
+       "description": "Snowdin - Snow Papyrus & Sans"
+    },
+    {
+       "name": "room_tundra_iceentrance",
+       "description": "Snowdin - Sliding XO puzzle"
+    },
+    {
+       "name": "room_tundra_iceexit_new",
+       "description": "Snowdin - Teleporting Sans"
+    },
+    {
+       "name": "room_tundra_iceexit",
+       "description": "Snowdin - Ice Cave entrance"
+    },
+    {
+       "name": "room_tundra_poffzone",
+       "description": "Snowdin - Snow poffs (Greater Dog)"
+    },
+    {
+       "name": "room_tundra_dangerbridge",
+       "description": "Snowdin - Gauntlet of Deadly Terror"
+    },
+    {
+       "name": "room_tundra_town",
+       "description": "Snowdin - Town [SAVE]"
+    },
+    {
+       "name": "room_tundra_town2",
+       "description": "Snowdin Town: Ice haul wolf"
+    },
+    {
+       "name": "room_tundra_dock",
+       "description": "Snowdin Town: Boat harbor"
+    },
+    {
+       "name": "room_tundra_inn",
+       "description": "Snowdin Town: Inn lobby"
+    },
+    {
+       "name": "room_tundra_inn_2f",
+       "description": "Snowdin Town: Inn bedroom"
+    },
+    {
+       "name": "room_tundra_grillby",
+       "description": "Snowdin Town: Grillby's"
+    },
+    {
+       "name": "room_tundra_library",
+       "description": "Snowdin Town: Library"
+    },
+    {
+       "name": "room_tundra_garage",
+       "description": "Snowdin Town: Papyrus's shed"
+    },
+    {
+       "name": "room_tundra_sanshouse",
+       "description": "Snowdin Town: Papyrus and Sans's house"
+    },
+    {
+       "name": "room_tundra_paproom",
+       "description": "Snowdin Town: Papyrus's room"
+    },
+    {
+       "name": "room_tundra_sansroom",
+       "description": "Snowdin Town: Sans's room [Dogchecked]"
+    },
+    {
+       "name": "room_tundra_sansroom_dark",
+       "description": "Snowdin Town: Sans's room (dark) [Dogchecked]"
+    },
+    {
+       "name": "room_tundra_sansbasement",
+       "description": "Snowdin Town: Sans's basement [Dogchecked]"
+    },
+    {
+       "name": "room_fogroom",
+       "description": "Snowdin - Papyrus Battle"
+    },
+    {
+       "name": "room_water1",
+       "description": "Waterfall - Entrance"
+    },
+    {
+       "name": "room_water2",
+       "description": "Waterfall - Checkpoint [SAVE]"
+    },
+    {
+       "name": "room_water3",
+       "description": "Waterfall - Falling rocks"
+    },
+    {
+       "name": "room_water3A",
+       "description": "Waterfall - Tutu room"
+    },
+    {
+       "name": "room_water4",
+       "description": "Waterfall - Hallway [SAVE]"
+    },
+    {
+       "name": "room_water_bridgepuzz1",
+       "description": "Waterfall - Lily pad bridge"
+    },
+    {
+       "name": "room_water5",
+       "description": "Waterfall - Lily pad vertical bridge"
+    },
+    {
+       "name": "room_water5A",
+       "description": "Waterfall - Quiche room"
+    },
+    {
+       "name": "room_water6",
+       "description": "Waterfall - Telescope"
+    },
+    {
+       "name": "room_water7",
+       "description": "Waterfall - Boat plank"
+    },
+    {
+       "name": "room_water8",
+       "description": "Waterfall - Undyne Spear dodging 1"
+    },
+    {
+       "name": "room_water9",
+       "description": "Waterfall - Bush after spear dodging"
+    },
+    {
+       "name": "room_water_savepoint1",
+       "description": "Waterfall - Crystal [SAVE]"
+    },
+    {
+       "name": "room_water11",
+       "description": "Waterfall - Sans Telescope"
+    },
+    {
+       "name": "room_water_nicecream",
+       "description": "Waterfall - Nice Cream Stand"
+    },
+    {
+       "name": "room_water12",
+       "description": "Waterfall - Split Pathway"
+    },
+    {
+       "name": "room_water_shoe",
+       "description": "Waterfall - Ballet shoes"
+    },
+    {
+       "name": "room_water_bird",
+       "description": "Waterfall - Duck"
+    },
+    {
+       "name": "room_water_onionsan",
+       "description": "Waterfall - Onionsan"
+    },
+    {
+       "name": "room_water14",
+       "description": "Waterfall - Artifact hub"
+    },
+    {
+       "name": "room_water_piano",
+       "description": "Waterfall - Piano"
+    },
+    {
+       "name": "room_water_dogroom",
+       "description": "Waterfall - Legendary Artifact"
+    },
+    {
+       "name": "room_water_statue",
+       "description": "Waterfall - Rainy Statue"
+    },
+    {
+       "name": "room_water_prewaterfall",
+       "description": "Waterfall - Umbrellas"
+    },
+    {
+       "name": "room_water_waterfall",
+       "description": "Waterfall - Rainy Path 1"
+    },
+    {
+       "name": "room_water_waterfall2",
+       "description": "Waterfall - Rainy Path 2"
+    },
+    {
+       "name": "room_water_waterfall3",
+       "description": "Waterfall - Palace View"
+    },
+    {
+       "name": "room_water_waterfall4",
+       "description": "Waterfall - Umbrella ledge"
+    },
+    {
+       "name": "room_water_preundyne",
+       "description": "Waterfall - Bridge [SAVE]"
+    },
+    {
+       "name": "room_water_undynebridge",
+       "description": "Waterfall - Bridge spear dodge"
+    },
+    {
+       "name": "room_water_undynebridgeend",
+       "description": "Waterfall - Bridge fall"
+    },
+    {
+       "name": "room_water_trashzone1",
+       "description": "Waterfall - Trash Zone Flower bed"
+    },
+    {
+       "name": "room_water_trashsavepoint",
+       "description": "Waterfall - Trash Zone [SAVE]"
+    },
+    {
+       "name": "room_water_trashzone2",
+       "description": "Waterfall - Training Dummy revenge"
+    },
+    {
+       "name": "room_water_friendlyhub",
+       "description": "Waterfall - Quiet Area [SAVE]"
+    },
+    {
+       "name": "room_water_undyneyard",
+       "description": "Waterfall - Undyne's house entrance"
+    },
+    {
+       "name": "room_water_undynehouse",
+       "description": "Waterfall - Undyne's house interior"
+    },
+    {
+       "name": "room_water_blookyard",
+       "description": "Waterfall - Twin Ghost houses"
+    },
+    {
+       "name": "room_water_blookhouse",
+       "description": "Waterfall - Napstablook's house interior"
+    },
+    {
+       "name": "room_water_hapstablook",
+       "description": "Waterfall - Hapstablook's house interior"
+    },
+    {
+       "name": "room_water_farm",
+       "description": "Waterfall - Snail Farm"
+    },
+    {
+       "name": "room_water_prebird",
+       "description": "Waterfall - Pre Bird (Unused)"
+    },
+    {
+       "name": "room_water_shop",
+       "description": "Waterfall - Turtle shop"
+    },
+    {
+       "name": "room_water_dock",
+       "description": "Waterfall - River boat"
+    },
+    {
+       "name": "room_water15",
+       "description": "Waterfall - 2 waterfalls"
+    },
+    {
+       "name": "room_water16",
+       "description": "Waterfall - Mushroom maze"
+    },
+    {
+       "name": "room_water_temvillage",
+       "description": "Waterfall - Temmie Village [SAVE]"
+    },
+    {
+       "name": "room_water17",
+       "description": "Waterfall - Lamp maze"
+    },
+    {
+       "name": "room_water18",
+       "description": "Waterfall - Behind you"
+    },
+    {
+       "name": "room_water19",
+       "description": "Waterfall - More flowers"
+    },
+    {
+       "name": "room_water20",
+       "description": "Waterfall - Cave bridge"
+    },
+    {
+       "name": "room_water21",
+       "description": "Waterfall - Cave exit"
+    },
+    {
+       "name": "room_water_undynefinal",
+       "description": "Waterfall - Undyne area"
+    },
+    {
+       "name": "room_water_undynefinal2",
+       "description": "Waterfall - Undyne area + 1"
+    },
+    {
+       "name": "room_water_undynefinal3",
+       "description": "Waterfall - Hotland Welcome"
+    },
+    {
+       "name": "room_fire1",
+       "description": "Hotland - Entrance"
+    },
+    {
+       "name": "room_fire2",
+       "description": "Hotland - Water tank"
+    },
+    {
+       "name": "room_fire_prelab",
+       "description": "Hotland - Laboratory Entrance [SAVE]"
+    },
+    {
+       "name": "room_fire_dock",
+       "description": "Hotland - River boat"
+    },
+    {
+       "name": "room_fire_lab1",
+       "description": "Hotland - Laboratory Hub"
+    },
+    {
+       "name": "room_fire_lab2",
+       "description": "Hotland - Laboratory Upper Floor"
+    },
+    {
+       "name": "room_fire3",
+       "description": "Hotland - Laboratory Exit"
+    },
+    {
+       "name": "room_fire5",
+       "description": "Hotland - Treadmills 1"
+    },
+    {
+       "name": "room_fire6",
+       "description": "Hotland - Magma Chamber [SAVE]"
+    },
+    {
+       "name": "room_fire6A",
+       "description": "Hotland - Burnt Pan"
+    },
+    {
+       "name": "room_fire_lasers1",
+       "description": "Hotland - Lasers 1"
+    },
+    {
+       "name": "room_fire7",
+       "description": "Hotland - Puzzle Gate 1"
+    },
+    {
+       "name": "room_fire8",
+       "description": "Hotland - Left Boz Puzzle Entrance"
+    },
+    {
+       "name": "room_fire_shootguy_2",
+       "description": "Hotland - Left Box Puzzle"
+    },
+    {
+       "name": "room_fire9",
+       "description": "Hotland - Right Box Puzzle Entrance"
+    },
+    {
+       "name": "room_fire_shootguy_1",
+       "description": "Hotland - Right Box Puzzle"
+    },
+    {
+       "name": "room_fire_turn",
+       "description": "Hotland - Arrow bridge"
+    },
+    {
+       "name": "room_fire_cookingshow",
+       "description": "Hotland - Kitchen"
+    },
+    {
+       "name": "room_fire_savepoint1",
+       "description": "Hotland - Core View [SAVE]"
+    },
+    {
+       "name": "room_fire_elevator_r1",
+       "description": "Hotland - Elevator R1"
+    },
+    {
+       "name": "room_fire_elevator_r2",
+       "description": "Hotland - Elevator R2"
+    },
+    {
+       "name": "room_fire_hotdog",
+       "description": "Hotland - Hot Dog Stand"
+    },
+    {
+       "name": "room_fire_walkandbranch",
+       "description": "Hotland - Art Club Entrance"
+    },
+    {
+       "name": "room_fire_sorry",
+       "description": "Hotland - Art Club"
+    },
+    {
+       "name": "room_fire_apron",
+       "description": "Hotland - Stained Apron"
+    },
+    {
+       "name": "room_fire10",
+       "description": "Hotland - Treadmill switch puzzle"
+    },
+    {
+       "name": "room_fire_rpuzzle",
+       "description": "Hotland - Arrow puzzle"
+    },
+    {
+       "name": "room_fire_mewmew2",
+       "description": "Hotland - Bad Opinion Zone [SAVE]"
+    },
+    {
+       "name": "room_fire_boysnightout",
+       "description": "Hotland - Bro guards"
+    },
+    {
+       "name": "room_fire_newsreport",
+       "description": "Hotland - Bombastic News report"
+    },
+    {
+       "name": "room_fire_coreview2",
+       "description": "Hotland - Upper Core View"
+    },
+    {
+       "name": "room_fire_elevator_l2",
+       "description": "Hotland - Elevator L2"
+    },
+    {
+       "name": "room_fire_elevator_l3",
+       "description": "Hotland - Elevator L3"
+    },
+    {
+       "name": "room_fire_spidershop",
+       "description": "Hotland - Spider Bake Sale"
+    },
+    {
+       "name": "room_fire_walkandbranch2",
+       "description": "Hotland - F3 Puzzle Gate"
+    },
+    {
+       "name": "room_fire_conveyorlaser",
+       "description": "Hotland - F3 South Puzzle Entrance"
+    },
+    {
+       "name": "room_fire_shootguy_3",
+       "description": "Hotland - F3 South Puzzle"
+    },
+    {
+       "name": "room_fire_preshootguy4",
+       "description": "Hotland - F3 North Puzzle Entrance"
+    },
+    {
+       "name": "room_fire_shootguy_4",
+       "description": "Hotland - F3 North Puzzle"
+    },
+    {
+       "name": "room_fire_savepoint2",
+       "description": "Hotland - Spider Entrance [SAVE]"
+    },
+    {
+       "name": "room_fire_spider",
+       "description": "Hotland - Spider Room"
+    },
+    {
+       "name": "room_fire_pacing",
+       "description": "Hotland - Mettaton Poster"
+    },
+    {
+       "name": "room_fire_operatest",
+       "description": "Hotland - Theater Stage"
+    },
+    {
+       "name": "room_fire_multitile",
+       "description": "Hotland - Colored Tile Maze 2"
+    },
+    {
+       "name": "room_fire_hotelfront_1",
+       "description": "Hotland - Nice Cream Stand"
+    },
+    {
+       "name": "room_fire_hotelfront_2",
+       "description": "Hotland - Hotel Entrance"
+    },
+    {
+       "name": "room_fire_hotellobby",
+       "description": "Hotland - Hotel Lobby [SAVE]"
+    },
+    {
+       "name": "room_fire_restaurant",
+       "description": "Hotland - Hotel Restaurant"
+    },
+    {
+       "name": "room_fire_hoteldoors",
+       "description": "Hotland - Hotel Cordidor"
+    },
+    {
+       "name": "room_fire_hotelbed",
+       "description": "Hotland - Hotel Alley"
+    },
+    {
+       "name": "room_fire_elevator_r3",
+       "description": "Hotland - Elevator R3"
+    },
+    {
+       "name": "room_fire_precore",
+       "description": "Hotland - Core Entrance"
+    },
+    {
+       "name": "room_fire_core1",
+       "description": "Hotland - Core Elevator"
+    },
+    {
+       "name": "room_fire_core2",
+       "description": "Hotland - Core Pit"
+    },
+    {
+       "name": "room_fire_core3",
+       "description": "Hotland - Core North of Elavator"
+    },
+    {
+       "name": "room_fire_core4",
+       "description": "Hotland - Core Wrong order lasers"
+    },
+    {
+       "name": "room_fire_core5",
+       "description": "Hotland - Core Crossroads"
+    },
+    {
+       "name": "room_fire_core_freebattle",
+       "description": "Hotland - Core Dead End"
+    },
+    {
+       "name": "room_fire_core_laserfun",
+       "description": "Hotland - Core Power Laser Puzzle"
+    },
+    {
+       "name": "room_fire_core_branch",
+       "description": "Hotland - Core Branch [SAVE]"
+    },
+    {
+       "name": "room_fire_core_bottomleft",
+       "description": "Hotland - Core Ice Deposit"
+    },
+    {
+       "name": "room_fire_core_left",
+       "description": "Hotland - Core West Puzzle Entrance"
+    },
+    {
+       "name": "room_fire_core_topleft",
+       "description": "Hotland - Core West Puzzle Entrance + 1"
+    },
+    {
+       "name": "room_fire_core_top",
+       "description": "Hotland - Core West Puzzle Entrance + 2"
+    },
+    {
+       "name": "room_fire_core_topright",
+       "description": "Hotland - Core East Money Trash Bin Entrance"
+    },
+    {
+       "name": "room_fire_core_right",
+       "description": "Hotland - Core End - 3"
+    },
+    {
+       "name": "room_fire_core_bottomright",
+       "description": "Hotland - South of 100G Trash Can"
+    },
+    {
+       "name": "room_fire_core_center",
+       "description": "Hotland - Core End - 4"
+    },
+    {
+       "name": "room_fire_shootguy_5",
+       "description": "Hotland - Core Get Lost"
+    },
+    {
+       "name": "room_fire_core_treasureleft",
+       "description": "Hotland - Core West Puzzle"
+    },
+    {
+       "name": "room_fire_core_treasureright",
+       "description": "Hotland - Core Glamburger Trash Can"
+    },
+    {
+       "name": "room_fire_core_warrior",
+       "description": "Hotland - Core 100G Trash Can"
+    },
+    {
+       "name": "room_fire_core_bridge",
+       "description": "Hotland - Core Battle Bridge"
+    },
+    {
+       "name": "room_fire_core_premett",
+       "description": "Hotland - Core End - 1"
+    },
+    {
+       "name": "room_fire_core_metttest",
+       "description": "Hotland - Core End [SAVE]"
+    },
+    {
+       "name": "room_fire_core_final",
+       "description": "Hotland - Core Mettaton Room"
+    },
+    {
+       "name": "room_fire_elevator",
+       "description": "Hotland - Core Final Elevator Entrance"
+    },
+    {
+       "name": "room_fire_elevator_l1",
+       "description": "Hotland - Elevator L1"
+    },
+    {
+       "name": "room_fire_finalelevator",
+       "description": "Hotland - Core Final Elevator"
+    },
+    {
+       "name": "room_castle_elevatorout",
+       "description": "Castle Elevator [SAVE]"
+    },
+    {
+       "name": "room_castle_precastle",
+       "description": "Castle - Another Elevator"
+    },
+    {
+       "name": "room_castle_hook",
+       "description": "Castle - Dark Path"
+    },
+    {
+       "name": "room_castle_front",
+       "description": "New Home [SAVE]"
+    },
+    {
+       "name": "room_asghouse1",
+       "description": "New Home - Entrance"
+    },
+    {
+       "name": "room_asghouse2",
+       "description": "New Home - Reading Room"
+    },
+    {
+       "name": "room_asghouse3",
+       "description": "New Home - Corridor"
+    },
+    {
+       "name": "room_asgoreroom",
+       "description": "New Home - Asgore's Room"
+    },
+    {
+       "name": "room_asrielroom_final",
+       "description": "New Home - Your Room"
+    },
+    {
+       "name": "room_kitchen_final",
+       "description": "New Home - Kitchen"
+    },
+    {
+       "name": "room_basement1_final",
+       "description": "New Home - Basement 1"
+    },
+    {
+       "name": "room_basement2_final",
+       "description": "New Home - Basement 2"
+    },
+    {
+       "name": "room_basement3_final",
+       "description": "New Home - Basement 3"
+    },
+    {
+       "name": "room_basement4_final",
+       "description": "New Home - Basement 4"
+    },
+    {
+       "name": "room_lastruins_corridor",
+       "description": "New Home - Elevator"
+    },
+    {
+       "name": "room_sanscorridor",
+       "description": "Last Corridor [SAVE]"
+    },
+    {
+       "name": "room_castle_finalshoehorn",
+       "description": "Throne Entrance [SAVE]"
+    },
+    {
+       "name": "room_castle_coffins1",
+       "description": "Throne Entrance - Stairs Down"
+    },
+    {
+       "name": "room_castle_coffins2",
+       "description": "Throne Entrance - Coffins"
+    },
+    {
+       "name": "room_castle_throneroom",
+       "description": "Throne Room [SAVE]"
+    },
+    {
+       "name": "room_castle_prebarrier",
+       "description": "The End [SAVE]"
+    },
+    {
+       "name": "room_castle_barrier",
+       "description": "Barrier"
+    },
+    {
+       "name": "room_castle_exit",
+       "description": "Flowey post-battle"
+    },
+    {
+       "name": "room_undertale_end",
+       "description": "Neutral credits [Dogchecked]"
+    },
+    {
+       "name": "room_castle_trueexit",
+       "description": "Path to outside [Dogchecked]"
+    },
+    {
+       "name": "room_outsideworld",
+       "description": "Outside [Dogchecked]"
+    },
+    {
+       "name": "room_fire_labelevator",
+       "description": "Laboratory Elevator"
+    },
+    {
+       "name": "room_truelab_elevatorinside",
+       "description": "True Lab - Elevator"
+    },
+    {
+       "name": "room_truelab_elevator",
+       "description": "True Lab - Elevator Entrance"
+    },
+    {
+       "name": "room_truelab_hall1",
+       "description": "True Lab - South Corridor"
+    },
+    {
+       "name": "room_truelab_hub",
+       "description": "True Laboratory [SAVE]"
+    },
+    {
+       "name": "room_truelab_hall2",
+       "description": "True Lab - West Corridor 1"
+    },
+    {
+       "name": "room_truelab_operatingroom",
+       "description": "True Lab - West Sinks"
+    },
+    {
+       "name": "room_truelab_redlever",
+       "description": "True Lab - West red key slot"
+    },
+    {
+       "name": "room_truelab_prebed",
+       "description": "True Lab - North Corridor 1"
+    },
+    {
+       "name": "room_truelab_bedroom",
+       "description": "True Lab - Bedroom [SAVE]"
+    },
+    {
+       "name": "room_truelab_mirror",
+       "description": "True Lab - Northeast Corridor"
+    },
+    {
+       "name": "room_truelab_bluelever",
+       "description": "True Lab - Northeast blue key slot"
+    },
+    {
+       "name": "room_truelab_hall3",
+       "description": "True Lab - North Corridor 2"
+    },
+    {
+       "name": "room_truelab_shower",
+       "description": "True Lab - Green key"
+    },
+    {
+       "name": "room_truelab_determination",
+       "description": "True Lab - Northwest skull [SAVE?]"
+    },
+    {
+       "name": "room_truelab_tv",
+       "description": "True Lab - Yellow Key Slot + TV"
+    },
+    {
+       "name": "room_truelab_cooler",
+       "description": "True Lab - Northwest refrigerators"
+    },
+    {
+       "name": "room_truelab_greenlever",
+       "description": "True Lab - Green Key Slot"
+    },
+    {
+       "name": "room_truelab_fan",
+       "description": "True Lab - Fans"
+    },
+    {
+       "name": "room_truelab_castle_elevator",
+       "description": "True Lab - Elevator 2"
+    },
+    {
+       "name": "room_truelab_prepower",
+       "description": "True Lab - Power room corridor"
+    },
+    {
+       "name": "room_truelab_power",
+       "description": "True Lab - Power room"
+    },
+    {
+       "name": "room_gaster",
+       "description": "Gaster Room"
+    },
+    {
+       "name": "room_icecave1",
+       "description": "Snowdin - Ice Cave 1"
+    },
+    {
+       "name": "room_ice_dog",
+       "description": "Snowdin - Developer Room [Dogchecked]"
+    },
+    {
+       "name": "room2",
+       "description": "room2 [Dogchecked]"
+    },
+    {
+       "name": "room_water_fakehallway",
+       "description": "Waterfall - Mysteryman hallway [Dogchecked]"
+    },
+    {
+       "name": "room_mysteryman",
+       "description": "Waterfall - Mysteryman room [Dogchecked]"
+    },
+    {
+       "name": "room_soundtest",
+       "description": "Snowdin - Sound Test Room [Dogchecked]"
+    },
+    {
+       "name": "TESTROOM",
+       "description": "TESTROOM [Dogchecked]"
+    },
+    {
+       "name": "room_water_redacted",
+       "description": "Waterfall - Redacted [Dogchecked]"
+    },
+    {
+       "name": "room_water13",
+       "description": "Waterfall - Cut Bridge Puzzle [Dogchecked]"
+    },
+    {
+       "name": "room_overworld",
+       "description": "room_overworld [Dogchecked]"
+    },
+    {
+       "name": "room_overworld3",
+       "description": "room_overworld3 [Dogchecked]"
+    },
+    {
+       "name": "bullettest",
+       "description": "Bullet Test [Dogchecked]"
+    },
+    {
+       "name": "room_water16A",
+       "description": "room_water16A [Dogchecked]"
+    },
+    {
+       "name": "room_end_castroll",
+       "description": "Pacifist credits [Dogchecked]"
+    },
+    {
+       "name": "room_end_highway",
+       "description": "Pacifist credits - Highway [Dogchecked]"
+    },
+    {
+       "name": "room_end_beach",
+       "description": "Pacifist credits - Beach [Dogchecked]"
+    },
+    {
+       "name": "room_end_metta",
+       "description": "Pacifist credits - Mettaton performance [Dogchecked]"
+    },
+    {
+       "name": "room_end_school",
+       "description": "Pacifist credits - School entrance [Dogchecked]"
+    },
+    {
+       "name": "room_end_mtebott",
+       "description": "Pacifist credits - Mount Ebott [Dogchecked]"
+    },
+    {
+       "name": "room_creditsdodger",
+       "description": "Pacifist credits - Special Thanks [Dogchecked]"
+    },
+    {
+       "name": "room_end_myroom",
+       "description": "Pacifist credits - Bedroom [Dogchecked]"
+    },
+    {
+       "name": "room_end_theend",
+       "description": "Pacifist credits - The End [Dogchecked]"
+    },
+    {
+       "name": "room_spritecheck",
+       "description": "Sprite Test [Dogchecked]"
+    },
+    {
+       "name": "room_joyconfig",
+       "description": "Settings menu [Dogchecked]"
+    },
+    {
+       "name": "room_controltest",
+       "description": "Control test room [Dogchecked]"
+    },
+    {
+       "name": "room_f_start",
+       "description": "Omega Flowey - Initializer [Dogchecked]"
+    },
+    {
+       "name": "room_f_intro",
+       "description": "Omega Flowey - Fake intro [Dogchecked]"
+    },
+    {
+       "name": "room_f_menu",
+       "description": "Omega Flowey - Fake menu [Dogchecked]"
+    },
+    {
+       "name": "room_f_room",
+       "description": "Omega Flowey - Fake save point [Dogchecked] [SAVE?]"
+    },
+    {
+       "name": "room_floweyx",
+       "description": "Omega Flowey [Dogchecked]"
+    },
+    {
+       "name": "room_f_phrase",
+       "description": "Omega Flowey - Respawn mocking [Dogchecked]"
+    },
+    {
+       "name": "room_fire4",
+       "description": "room_fire4 [Dogchecked]"
+    },
+    {
+       "name": "room_fire10_old",
+       "description": "room_fire10_old [Dogchecked]"
+    },
+    {
+       "name": "room_fire10A_old",
+       "description": "room_fire10A_old [Dogchecked]"
+    },
+    {
+       "name": "room_tundra_placeholder",
+       "description": "Snowdin - Ice Puzzle [Dogchecked]"
+    },
+    {
+       "name": "room_ruins12B_old",
+       "description": "Ruins - Rock Candy [Dogchecked]"
+    },
+    {
+       "name": "room_tundra_rollsnow",
+       "description": "Snowdin - Growing snowball [Dogchecked]"
+    },
+    {
+       "name": "room_water7_older",
+       "description": "Waterfall - Torch puzzle [Dogchecked]"
+    },
+    {
+       "name": "room_meetundyne_old",
+       "description": "Waterfall - Meet Undyne (Unused) [Dogchecked]"
+    },
+    {
+       "name": "room_water_mushroom",
+       "description": "Waterfall - Rooted mushroom [Dogchecked]"
+    },
+    {
+       "name": "room_monsteralign_test",
+       "description": "room_monsteralign_test [Dogchecked]"
+    },
+    {
+       "name": "room_battle",
+       "description": "Battle room [Dogchecked]"
+    },
+    {
+       "name": "room_floweybattle",
+       "description": "Flowey battle room [Dogchecked]"
+    },
+    {
+       "name": "room_fastbattle",
+       "description": "\"Fast\" battle room [Dogchecked]"
+    },
+    {
+       "name": "room_storybattle",
+       "description": "New Home - Story battle room [Dogchecked]"
+    },
+    {
+       "name": "room_gameover",
+       "description": "Game Over [Dogchecked]"
+    },
+    {
+       "name": "room_shop1",
+       "description": "Snowdin Town - Shop [Dogchecked]"
+    },
+    {
+       "name": "room_shop2",
+       "description": "Waterfall - Gerson's shop [Dogchecked]"
+    },
+    {
+       "name": "room_shop3",
+       "description": "Hotland - Bratty and Catty [Dogchecked]"
+    },
+    {
+       "name": "room_shop4",
+       "description": "Hotland - Burgerpants [Dogchecked]"
+    },
+    {
+       "name": "room_shop5",
+       "description": "Waterfall - Tem Shop [Dogchecked]"
+    },
+    {
+       "name": "room_riverman_transition",
+       "description": "River person transition room [Dogchecked]"
+    },
+    {
+       "name": "room_papdate",
+       "description": "Papyrus date [Dogchecked]"
+    },
+    {
+       "name": "room_adate",
+       "description": "Alphys date [Dogchecked]"
+    },
+    {
+       "name": "room_flowey_endchoice",
+       "description": "Omega Flowey - Wilting [Dogchecked]"
+    },
+    {
+       "name": "room_flowey_regret",
+       "description": "Flowey's pacifist speech [Dogchecked]"
+    },
+    {
+       "name": "room_empty",
+       "description": "room_empty [Dogchecked]"
+    },
+    {
+       "name": "room_emptywhite",
+       "description": "room_emptywhite [Dogchecked]"
+    },
+    {
+       "name": "room_emptyblack",
+       "description": "room_emptyblack [Dogchecked]"
+    },
+    {
+       "name": "room_nothingness",
+       "description": "Genocide - The Nothingness [Dogchecked]"
+    },
+    {
+       "name": "room_undertale",
+       "description": "Snowdin - Title [Dogchecked]"
+    },
+    {
+       "name": "room_of_dog",
+       "description": "Dogcheck room"
+    },
+    {
+       "name": "room_quizholder",
+       "description": "Hotland - Quiz battle (Unused) [Dogchecked]"
+    },
+    {
+       "name": "room_friendtest",
+       "description": "Pre-Asriel scene (Unused) [Dogchecked]"
+    },
+    {
+       "name": "room_bringitinguys",
+       "description": "Pre-Asriel scene 2 (Unused) [Dogchecked]"
+    },
+    {
+       "name": "room_asrielappears",
+       "description": "Asriel appears [Dogchecked]"
+    },
+    {
+       "name": "room_goodbyeasriel",
+       "description": "Asriel room [Dogchecked]"
+    },
+    {
+       "name": "room_asrielmemory",
+       "description": "Asriel flashbacks [Dogchecked]"
+    },
+    {
+       "name": "room_asrieltest",
+       "description": "Asriel animation test [Dogchecked]"
+    },
+    {
+       "name": "room_afinaltest",
+       "description": "Asriel phase 2 animation test [Dogchecked]"
+    },
+    {
+        "name": "room_dogshrine",
+        "description": "Snowdin - Dog Shrine [Dogchecked]"
+    }
+ ]

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from dataclasses import dataclass, field
 import json
 import os
 import re
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Literal, Tuple
 
@@ -11,6 +11,7 @@ from jinja2 import Environment, FileSystemLoader
 from data import Data
 from util import get_lines, get_script_path
 
+
 @dataclass
 class Entry:
     url: str
@@ -18,17 +19,21 @@ class Entry:
     name: str
     lines: int
 
+
 @dataclass
 class Section:
     name: str
     entries: Dict[str, List[Entry]] = field(default_factory=lambda: {})
 
+
 SectionType = Literal['script', 'object', 'roomcc', 'room', 'junk']
+
 
 @dataclass
 class ScriptIndex:
     sections: Dict[SectionType, Section]
     text: Dict[str, List[str]]
+
 
 def classify(path: Path, data: Data) -> Tuple[SectionType, str]:
     filename = os.path.basename(path)
@@ -39,12 +44,18 @@ def classify(path: Path, data: Data) -> Tuple[SectionType, str]:
     if filename.startswith('gml_Script_'):
         return 'script', 'Scripts'
     if filename.startswith('gml_Object_'):
-        obj_name_match = re.match(r'gml_Object_(.*)_((\w+)_(\d+)|Collision_(.*))\.gml', filename)
+        obj_name_match = re.match(
+            r'gml_Object_(.*)_((\w+)_(\d+)|Collision_(.*))\.gml',
+            filename
+        )
         if obj_name_match is None:
             raise ValueError(f'Failed to find object name: {filename}')
         return 'object', obj_name_match.group(1)
     if filename.startswith('gml_RoomCC_'):
-        room_name_match = re.match(r'gml_RoomCC_(.+)_(\d+)_(\w+)\.gml', filename)
+        room_name_match = re.match(
+            r'gml_RoomCC_(.+)_(\d+)_(\w+)\.gml',
+            filename
+        )
         if room_name_match is None:
             raise ValueError(f'Failed to find room name: {filename}')
         return 'roomcc', room_name_match.group(1)
@@ -55,6 +66,7 @@ def classify(path: Path, data: Data) -> Tuple[SectionType, str]:
         return 'room', room_name_match.group(1)
     raise ValueError(f'Failed to classify: {filename}')
 
+
 def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
     index = ScriptIndex({
         'script': Section('Scripts'),
@@ -63,7 +75,8 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
         'room': Section('Rooms'),
         'junk': Section('Duplicated or common scripts'),
     }, {})
-    for file in sorted(f for f in os.listdir(decompiled_dir) if f.endswith('.gml')):
+    files = sorted(f for f in os.listdir(decompiled_dir) if f.endswith('.gml'))
+    for file in files:
         filename = decompiled_dir / file
         name = file.replace('.gml', '')
         lines = get_lines(filename)
@@ -72,12 +85,13 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
             index.sections[section].entries[segment] = []
         index.sections[section].entries[segment].append(Entry(
             url=file.replace('.gml', '.html'),
-            raw_url=f'raw/{file.replace('.gml', '.txt')}',
+            raw_url=f"raw/{file.replace('.gml', '.txt')}",
             name=name,
             lines=len(lines)
         ))
         index.text[name] = lines
     return index
+
 
 def write_index(index: ScriptIndex, data: Data, output_dir: Path) -> None:
     with open(output_dir / 'index.html', 'w', encoding='utf-8') as f:
@@ -90,6 +104,7 @@ def write_index(index: ScriptIndex, data: Data, output_dir: Path) -> None:
         ))
     with open(output_dir / 'index.json', 'w', encoding='utf-8') as f:
         json.dump(index.text, f, separators=(',', ':'))
+
 
 if __name__ == '__main__':
     data = Data()

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 from typing import Dict, List
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -11,23 +11,60 @@ from data import Data
 from index import process_scripts
 from util import get_script_path
 
-env = Environment(loader=FileSystemLoader('templates'), autoescape=select_autoescape(['html']))
+env = Environment(
+    loader=FileSystemLoader('templates'),
+    autoescape=select_autoescape(['html'])
+)
+
 
 def parse_text(text: str) -> str:
-    text = re.sub(r'(?<!`)/', '<span class="cc cc-wait">Wait for input</span>', text)
-    text = re.sub(r'\^([1-9])(.)', r'\2<span class="cc cc-delay">Delay \1<span>\1</span></span>', text)
+    text = re.sub(
+        r'(?<!`)/',
+        '<span class="cc cc-wait">Wait for input</span>',
+        text
+    )
+    text = re.sub(
+        r'\^([1-9])(.)',
+        r'\2<span class="cc cc-delay">Delay \1<span>\1</span></span>',
+        text
+    )
     text = re.sub(r'(?<!`)&\s*', '<br>', text)
-    text = re.sub(r'(?<!`)%', '<span class="cc cc-close">Close Message</span>', text)
-    text = re.sub(r'\\\\[EM](.)', r'<span class="cc-face">Face \1</span>', text)
-    text = re.sub(r'\\\\m(.)\*?', r'<span class="cc-face">Mini face \1</span> ', text)
-    text = re.sub(r'\\\\f(.)\*?', r'<span class="cc-face">Mini text \1</span> ', text)
-    text = re.sub(r'\\\\c(.)(.*?)(?=\\\\c|$)', r'<span class="cc-color cc-\1">\2</span>', text)
+    text = re.sub(
+        r'(?<!`)%',
+        '<span class="cc cc-close">Close Message</span>',
+        text
+    )
+    text = re.sub(
+        r'\\\\[EM](.)',
+        r'<span class="cc-face">Face \1</span>',
+        text
+    )
+    text = re.sub(
+        r'\\\\m(.)\*?',
+        r'<span class="cc-face">Mini face \1</span> ',
+        text
+    )
+    text = re.sub(
+        r'\\\\f(.)\*?',
+        r'<span class="cc-face">Mini text \1</span> ',
+        text
+    )
+    text = re.sub(
+        r'\\\\c(.)(.*?)(?=\\\\c|$)',
+        r'<span class="cc-color cc-\1">\2</span>',
+        text
+    )
     text = re.sub(r'\\\\T(.)', r'<span class="cc-face">Sound \1</span>', text)
     text = re.sub(r'\\\\F(.)', r'<span class="cc-face">Char \1</span>', text)
-    text = re.sub(r'\\\\C(.)', r'<span class="cc-face">Choice type \1</span>', text)
+    text = re.sub(
+        r'\\\\C(.)',
+        r'<span class="cc-face">Choice type \1</span>',
+        text
+    )
     text = re.sub(r'\\"', '"', text)
     text = re.sub(r'`(.)', r'\1', text)
     return text
+
 
 def highlight_text(matches: re.Match[str]) -> str:
     return env.get_template('highlight/text.html').render(
@@ -37,6 +74,7 @@ def highlight_text(matches: re.Match[str]) -> str:
         parsed_text=parse_text(matches[2])
     )
 
+
 def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
     return env.get_template('highlight/text.html').render(
         before_var=matches[1],
@@ -44,6 +82,7 @@ def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
         after_var=matches[3],
         parsed_text=parse_text(matches[2])
     )
+
 
 def highlight_room(matches: re.Match[str], data: Data) -> str:
     if matches[2].isdigit():
@@ -58,6 +97,7 @@ def highlight_room(matches: re.Match[str], data: Data) -> str:
         room_description=room.description
     )
 
+
 def highlight_enemy(matches: re.Match[str], data: Data) -> str:
     enemy_id = int(matches[2])
     return env.get_template('highlight/enemy.html').render(
@@ -65,6 +105,7 @@ def highlight_enemy(matches: re.Match[str], data: Data) -> str:
         enemy_id=enemy_id,
         enemy_name=data.get_enemy(enemy_id)
     )
+
 
 def highlight_flag(matches: re.Match[str], data: Data) -> str:
     flag_id = int(matches[2])
@@ -83,7 +124,14 @@ def highlight_flag(matches: re.Match[str], data: Data) -> str:
             after_flag=matches[3]
         )
 
-def highlight_function(matches: re.Match[str], script_name: str, text: Dict[str, List[str]], data: Data, resolve_references: bool) -> str:
+
+def highlight_function(
+    matches: re.Match[str],
+    script_name: str,
+    text: Dict[str, List[str]],
+    data: Data,
+    resolve_references: bool
+) -> str:
     function_name = matches[2]
     script_name = f'gml_GlobalScript_{function_name}'
     if script_name not in text:
@@ -92,7 +140,9 @@ def highlight_function(matches: re.Match[str], script_name: str, text: Dict[str,
     if resolve_references:
         script_lines = []
         for num_line, line in enumerate(text[script_name]):
-            script_lines.append(process_line(line, script_name, text, data, False))
+            script_lines.append(
+                process_line(line, script_name, text, data, False)
+            )
             if num_line == 100:
                 script_lines.append('...')
                 break
@@ -106,12 +156,20 @@ def highlight_function(matches: re.Match[str], script_name: str, text: Dict[str,
         script_content=script_content
     )
 
-def highlight_alarm(matches: re.Match[str], script_name: str, text: Dict[str, List[str]], data: Data, resolve_references: bool) -> str:
+
+def highlight_alarm(
+    matches: re.Match[str],
+    script_name: str,
+    text: Dict[str, List[str]],
+    data: Data,
+    resolve_references: bool
+) -> str:
     before_alarm = matches[1]
     alarm_content = matches[2]
     alarm_number = int(matches[3])
     content_rest = matches[4]
-    script_name = f'{'_'.join(script_name.split('_')[:-2])}_Alarm_{alarm_number}'
+    script_prefix = '_'.join(script_name.split('_')[:-2])
+    script_name = f'{script_prefix}_Alarm_{alarm_number}'
     if script_name not in text:
         # We might be in a with block
         return alarm_content
@@ -119,7 +177,9 @@ def highlight_alarm(matches: re.Match[str], script_name: str, text: Dict[str, Li
     if resolve_references:
         script_lines = []
         for num_line, line in enumerate(text[script_name]):
-            script_lines.append(process_line(line, script_name, text, data, False))
+            script_lines.append(
+                process_line(line, script_name, text, data, False)
+            )
             if num_line == 100:
                 script_lines.append('...')
                 break
@@ -134,6 +194,7 @@ def highlight_alarm(matches: re.Match[str], script_name: str, text: Dict[str, Li
         content_rest=content_rest
     )
 
+
 def process_line(
     line: str,
     script_name: str,
@@ -143,7 +204,7 @@ def process_line(
 ) -> str:
     # Highlight localized strings
     line = re.sub(
-        r'([A-Za-z0-9_]+loc\((?:\d+, )?")((?:[^"\\]|\\.)+)(", "[a-z0-9_-]+"\))',
+        r'([A-Za-z0-9_]+loc\((?:\d+, )?")((?:[^"\\]|\\.)+)(", "[a-z0-9_-]+"\))',  # noqa: E501
         highlight_text,
         line,
         flags=re.IGNORECASE
@@ -176,21 +237,31 @@ def process_line(
     # Link to functions and alarms
     line = re.sub(
         r'(\b)(s?cr?_[a-zA-Z0-9_]+)\(',
-        lambda matches: highlight_function(matches, script_name, text, data, resolve_references),
+        lambda matches: highlight_function(matches, script_name, text, data,
+                                           resolve_references),
         line,
         flags=re.IGNORECASE
     )
     line = re.sub(
-        r'(^|\s)(alarm\[(\d+)\])(.*)',
-        lambda matches: highlight_alarm(matches, script_name, text, data, resolve_references),
+        r'(^|\s+)(alarm\[(\d+)\])(.*)',
+        lambda matches: highlight_alarm(matches, script_name, text, data,
+                                        resolve_references),
         line,
         flags=re.IGNORECASE
     )
 
     return line
 
-def render_script(script_name: str, text: Dict[str, List[str]], data: Data) -> str:
-    lines = [process_line(line, script_name, text, data) for line in text[script_name]]
+
+def render_script(
+    script_name: str,
+    text: Dict[str, List[str]],
+    data: Data
+) -> str:
+    lines = [
+        process_line(line, script_name, text, data)
+        for line in text[script_name]
+    ]
     return env.get_template('script_page.html').render(
         script_name=script_name,
         lines=lines,
@@ -198,10 +269,12 @@ def render_script(script_name: str, text: Dict[str, List[str]], data: Data) -> s
         links=data.get_game_links(),
     )
 
+
 def write_script(output: str, script_name: str, output_dir: Path):
     output_path = output_dir / f'{script_name}.html'
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(output)
+
 
 if __name__ == '__main__':
     data = Data()

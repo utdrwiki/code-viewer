@@ -10,13 +10,13 @@ Current version: Deltarune demo 2021 v1.10, itch.io version.
 - [Python](https://python.org/) for generating the website
 
 ## Building
-After installing prerequisites, first install required dependencies of the project using `pip install -r requirements.txt`, then build the site using `./build.sh`. The site is placed by default in the `out` directory. To view the site, (if you have Python installed), run `./dev.sh`. A Bash (or any Linux shell) environment is assumed when running the mentioned commands.
+After installing prerequisites, first install required dependencies of the project using `pip install -r requirements.txt`, then build the site using `./build.sh`. The site is placed by default in the `out` directory. To view the site after building, (if you have Python installed), run `./dev.sh`. A Bash (or any Linux shell) environment is assumed when running the mentioned commands.
 
 ## Disclaimer
 
 This repository is still copyright infringing.
 
-Original data copyright Toby Fox, 8-4, Fangamer, et al. If you wish to have this repository taken down, please email [admin@kocka.tech](mailto:admin@kocka.tech).
+Original data copyright Toby Fox, 8-4, Fangamer, et al. If you wish to have this repository taken down, please email [admin@undertale.wiki](mailto:admin@undertale.wiki).
 
 ## Credits
 
@@ -24,4 +24,4 @@ Original data copyright Toby Fox, 8-4, Fangamer, et al. If you wish to have this
 - [xkeeper](https://github.com/Xkeeper0): Original version
 - [Grossley](https://github.com/Grossley): Adaptation for personal use
 - [Jacky720](https://github.com/Jacky720): Changes to annotations, help with making into a static site
-- [KockaAdmiralac](https://github.com/KockaAdmiralac): Making into a static site
+- [KockaAdmiralac](https://kocka.tech): Making into a static site

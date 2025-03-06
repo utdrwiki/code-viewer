@@ -5,8 +5,45 @@
 	--link-color: #8AD;
 	--link-hover-color: #ADF;
     --border-color: #999;
-
 	--junk-text-color: #666;
+
+	--selected-line-background-color: #333;
+	--lang-var-text-color: #c7d;
+	--lang-var-background-color: black;
+	--lang-var-border-color: #836;
+	--lang-text-text-color: #fbe;
+	--lang-text-background-color: black;
+	--lang-text-border-color: #969;
+	--wait-background-color: #555;
+	--wait-text-color: #fff;
+	--delay-background-color: #111;
+	--delay-text-color: #666;
+	--delay-collapsed-text-color: #aaa;
+	--close-background-color: #844;
+	--close-text-color: #fff;
+	--face-background-color: #252;
+	--face-text-color: #8c8;
+	--flag-not-found-text-color: #ec6;
+	--flag-found-text-color: #fd8;
+	--flag-found-background-color: black;
+	--flag-description-text-color: #ca4;
+	--room-text-color: #8f8;
+	--room-background-color: black;
+	--room-description-text-color: #494;
+	--alarm-link-text-color: #faa;
+	--alarm-link-text-color--hover: white;
+	--alarm-link-underline-color: #a66;
+	--alarm-box-border-color: #888;
+	--alarm-box-background-color: #222;
+	--alarm-connection-line-color: #444;
+	--alarm-background-color--hover: #400;
+	--alarm-border-color--hover: #f88;
+	--function-link-text-color: #8f8;
+	--function-link-underline-color: #292;
+	--function-link-background-color--hover: #272;
+	--function-link-text-color--hover: white;
+	--function-box-border-color: #8f8;
+	--function-box-background-color: rgba(30, 50, 30, 0.9);
 }
 
 body {

@@ -1,8 +1,8 @@
-{{ before_alarm }}<span class="alarmC"><span class="alarmU"><a href="{{ script_name }}.html" class="alarm">{{ alarm_content }}</a></span>{{ content_rest }}<!--
+<span class="alarmC"><span class="alarmU">{{ before_alarm }}<a href="{{ script_name }}.html" class="alarm">{{ alarm_content }}</a>{{ content_rest }}</span><!--
 -->{% if script_content %}<!--
     --><span class="alarmA"></span><!--
     --><div class="alarmT"><!--
-        --><strong><a href="{{ script_name }}.html">{{ alarm_content }}</a></strong><!--
+        --><strong><a href="{{ script_name }}.html">{{ script_name }}.gml</a></strong><!--
         --><br><br><!--
         -->{{ script_content | safe }}<!--
     --></div><!--

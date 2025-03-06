@@ -1,1 +1,11 @@
 jinja2
+flake8
+flake8-builtins
+flake8-isort
+flake8-pep3101
+flake8-quotes
+flake8-string-format
+flake8-tidy-imports
+isort
+pep8-naming
+pyright

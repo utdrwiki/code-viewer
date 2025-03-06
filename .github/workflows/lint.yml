@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+- push
+- workflow_dispatch
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          cache: 'pip'
+          python-version: "3.12"
+      - name: 'Install requirements'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
+      - name: 'Modify Actions PATH'
+        run: echo "$PWD/.venv/bin" >> $GITHUB_PATH
+      - name: 'Lint: Pyright'
+        uses: jakebailey/pyright-action@v2
+        with:
+          version: PATH
+      - name: 'Lint: flake8'
+        uses: py-actions/flake8@v2.3.0
+        with:
+          exclude: .venv

@@ -1,4 +1,4 @@
-name: Deploy to Netlify (Deltarune)
+name: Deploy to Netlify (Undertale)
 on:
   push:
     branches:
@@ -19,11 +19,11 @@ jobs:
           echo steam steam/question select "I AGREE" | sudo debconf-set-selections
           echo steam steam/license note '' | sudo debconf-set-selections
           sudo apt install -y steamcmd
-      - name: Download Deltarune
+      - name: Download Undertale
         run: |
           mkdir -p ~/.local/share/Steam/config
           echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
-          steamcmd +@ShutdownOnFailedCommand +@sSteamCmdForcePlatformType windows +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 1690940 validate +quit
+          steamcmd +@ShutdownOnFailedCommand +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 391540 validate +quit
         env:
           STEAM_VDF: ${{ secrets.STEAM_VDF }}
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
@@ -42,10 +42,10 @@ jobs:
         run: dotnet build utmt/UndertaleModCli --no-restore
       - name: Publish UTMT CLI
         run: dotnet publish utmt/UndertaleModCli -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=false --output utmtcli
-      - name: Extract Deltarune's code
+      - name: Extract Undertale's code
         run: |
-          ./utmtcli/UndertaleModCli load game/data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
-          mv game/Export_Code decompiled-deltarune
+          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          mv game/assets/Export_Code decompiled-undertale
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -53,11 +53,11 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
       - name: Build
-        run: ./build.sh deltarune
+        run: ./build.sh undertale
       - name: Publish
         uses: netlify/actions/cli@master
         with:
           args: deploy --dir=out --prod
         env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DR }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_UT }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

@@ -1,4 +1,4 @@
-name: Deploy to Netlify (Deltarune)
+name: Deploy to Netlify (Undertale Yellow)
 on:
   push:
     branches:
@@ -11,22 +11,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download steamcmd
+      - name: Download Undertale Yellow
         run: |
-          sudo add-apt-repository multiverse
-          sudo dpkg --add-architecture i386
-          sudo apt update
-          echo steam steam/question select "I AGREE" | sudo debconf-set-selections
-          echo steam steam/license note '' | sudo debconf-set-selections
-          sudo apt install -y steamcmd
-      - name: Download Deltarune
-        run: |
-          mkdir -p ~/.local/share/Steam/config
-          echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
-          steamcmd +@ShutdownOnFailedCommand +@sSteamCmdForcePlatformType windows +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 1690940 validate +quit
-        env:
-          STEAM_VDF: ${{ secrets.STEAM_VDF }}
-          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+          wget https://www.indiedb.com/downloads/mirror/262099/122/d7aa3ea4d85321e6582d2805acc04c4c -O game.zip
+          unzip -p game.zip "Undertale Yellow v1_1/data.win" > data.win
       - name: Checkout UTMT
         uses: actions/checkout@v4
         with:
@@ -42,10 +30,10 @@ jobs:
         run: dotnet build utmt/UndertaleModCli --no-restore
       - name: Publish UTMT CLI
         run: dotnet publish utmt/UndertaleModCli -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=false --output utmtcli
-      - name: Extract Deltarune's code
+      - name: Extract Undertale Yellow's code
         run: |
-          ./utmtcli/UndertaleModCli load game/data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
-          mv game/Export_Code decompiled-deltarune
+          ./utmtcli/UndertaleModCli load data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          mv Export_Code decompiled-undertaleyellow
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -53,11 +41,11 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
       - name: Build
-        run: ./build.sh deltarune
+        run: ./build.sh undertaleyellow
       - name: Publish
         uses: netlify/actions/cli@master
         with:
           args: deploy --dir=out --prod
         env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DR }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_UTY }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Download Undertale Yellow
         run: |
-          wget https://www.indiedb.com/downloads/mirror/262099/122/d7aa3ea4d85321e6582d2805acc04c4c -qO game.zip
+          wget $(curl -s https://www.indiedb.com/downloads/start/262099 | grep 'Click to' | sed -re 's|.*<a href="(/downloads/mirror/262099/[^"]+)".*|https://www.indiedb.com\1|') -qO game.zip
           unzip -p game.zip "Undertale Yellow v1_1/data.win" > data.win
       - name: Checkout UTMT
         uses: actions/checkout@v4

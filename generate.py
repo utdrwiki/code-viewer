@@ -22,7 +22,7 @@ if __name__ == '__main__':
     data = Data(args.game)
     script_dir = get_script_path()
     decompiled_dir = script_dir / f'decompiled-{args.game}'
-    output_dir = script_dir / f'out-{args.game}'
+    output_dir = script_dir / 'out'
     os.makedirs(output_dir, exist_ok=True)
     env = Environment(
         loader=FileSystemLoader('templates'),

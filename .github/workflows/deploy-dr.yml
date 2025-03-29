@@ -32,6 +32,11 @@ jobs:
         with:
           repository: UnderminersTeam/UndertaleModTool
           path: utmt
+      - name: Checkout Underanalyzer
+        uses: actions/checkout@v4
+        with:
+          repository: UnderminersTeam/Underanalyzer
+          path: utmt/Underanalyzer
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:

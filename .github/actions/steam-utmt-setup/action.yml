@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: Download steamcmd
+      shell: sh
       run: |
         sudo add-apt-repository multiverse
         sudo dpkg --add-architecture i386
@@ -26,14 +27,18 @@ runs:
       with:
         dotnet-version: 8.0.x
     - name: Restore UTMT dependencies
+      shell: sh
       run: dotnet restore utmt/UndertaleModCli
     - name: Build UTMT CLI
+      shell: sh
       run: dotnet build utmt/UndertaleModCli --no-restore
     - name: Publish UTMT CLI
+      shell: sh
       run: dotnet publish utmt/UndertaleModCli -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=false --output utmtcli
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
     - name: Install Python dependencies
+      shell: sh
       run: pip install -r requirements.txt

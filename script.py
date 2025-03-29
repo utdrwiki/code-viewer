@@ -81,7 +81,7 @@ def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
         before_var=matches[1],
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(matches[2])
+        parsed_text=parse_text(data.get_localized_string_ch1(matches[2]))
     )
 
 

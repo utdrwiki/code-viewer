@@ -1,0 +1,40 @@
+name: 'Steam UTMT Setup'
+description: 'Install steamcmd and UndertaleModCLI'
+runs:
+  using: "composite"
+  runs-on: ubuntu-latest
+  steps:
+    - name: Download steamcmd
+      run: |
+        sudo add-apt-repository multiverse
+        sudo dpkg --add-architecture i386
+        sudo apt update
+        echo steam steam/question select "I AGREE" | sudo debconf-set-selections
+        echo steam steam/license note '' | sudo debconf-set-selections
+        sudo apt install -y steamcmd
+    - name: Checkout UTMT
+      uses: actions/checkout@v4
+      with:
+        repository: UnderminersTeam/UndertaleModTool
+        path: utmt
+    - name: Checkout Underanalyzer
+      uses: actions/checkout@v4
+      with:
+        repository: UnderminersTeam/Underanalyzer
+        path: utmt/Underanalyzer
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore UTMT dependencies
+      run: dotnet restore utmt/UndertaleModCli
+    - name: Build UTMT CLI
+      run: dotnet build utmt/UndertaleModCli --no-restore
+    - name: Publish UTMT CLI
+      run: dotnet publish utmt/UndertaleModCli -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=false --output utmtcli
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt

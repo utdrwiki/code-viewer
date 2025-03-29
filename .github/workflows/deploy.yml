@@ -1,0 +1,128 @@
+name: Deploy to Netlify
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download steamcmd
+        run: |
+          sudo add-apt-repository multiverse
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          echo steam steam/question select "I AGREE" | sudo debconf-set-selections
+          echo steam steam/license note '' | sudo debconf-set-selections
+          sudo apt install -y steamcmd
+          mkdir -p ~/.local/share/Steam/config
+          echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
+      - name: Checkout UTMT
+        uses: actions/checkout@v4
+        with:
+          repository: UnderminersTeam/UndertaleModTool
+          path: utmt
+      - name: Checkout Underanalyzer
+        uses: actions/checkout@v4
+        with:
+          repository: UnderminersTeam/Underanalyzer
+          path: utmt/Underanalyzer
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore UTMT dependencies
+        run: dotnet restore utmt/UndertaleModCli
+      - name: Build UTMT CLI
+        run: dotnet build utmt/UndertaleModCli --no-restore
+      - name: Publish UTMT CLI
+        run: dotnet publish utmt/UndertaleModCli -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=false --output utmtcli
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+  deltarune:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Download Deltarune
+        run: |
+          steamcmd \
+            +@ShutdownOnFailedCommand \
+            +@sSteamCmdForcePlatformType windows \
+            +force_install_dir $(pwd)/game-dr \
+            +login $STEAM_USERNAME \
+            +app_update 1690940 validate \
+            +quit
+        env:
+          STEAM_VDF: ${{ secrets.STEAM_VDF }}
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+      - name: Extract Deltarune's code
+        run: |
+          ./utmtcli/UndertaleModCli load game-dr/data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          mv game-dr/Export_Code decompiled-deltarune
+      - name: Build Deltarune
+        run: ./build.sh deltarune
+      - name: Publish Deltarune
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=out-deltarune --prod
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DR }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  undertale:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Download Undertale
+        run: |
+          steamcmd \
+            +@ShutdownOnFailedCommand \
+            +force_install_dir $(pwd)/game-ut \
+            +login $STEAM_USERNAME \
+            +app_update 391540 validate \
+            +quit
+        env:
+          STEAM_VDF: ${{ secrets.STEAM_VDF }}
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+      - name: Extract Undertale's code
+        run: |
+          ./utmtcli/UndertaleModCli load game-ut/assets/game.unx --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          mv game-ut/assets/Export_Code decompiled-undertale
+      - name: Build Undertale
+        run: ./build.sh undertale
+      - name: Publish Undertale
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=out-undertale --prod
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_UT }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  undertale-yellow:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Download Undertale Yellow
+        run: |
+          wget $(curl -s https://www.indiedb.com/downloads/start/262099 | grep 'Click to' | sed -re 's|.*<a href="(/downloads/mirror/262099/[^"]+)".*|https://www.indiedb.com\1|') -qO game-uty.zip
+          mkdir -p game-uty/
+          unzip -p game-uty.zip "Undertale Yellow v1_1/data.win" > game-uty/data.win
+      - name: Extract Undertale Yellow's code
+        run: |
+          ./utmtcli/UndertaleModCli load game-uty/data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          mv game-uty/Export_Code decompiled-undertaleyellow
+      - name: Build Undertale Yellow
+        run: ./build.sh undertaleyellow
+      - name: Publish Undertale Yellow
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=out-undertaleyellow --prod
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_UTY }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

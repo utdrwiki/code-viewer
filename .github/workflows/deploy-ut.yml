@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-undertale:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +23,7 @@ jobs:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
       - name: Extract Undertale's code
         run: |
-          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts 'scripts/ExportCodeFormatted.csx'
           mv game/assets/Export_Code decompiled-undertale
       - name: Build
         run: ./build.sh undertale

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-deltarune:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +23,7 @@ jobs:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
       - name: Extract Deltarune's code
         run: |
-          ./utmtcli/UndertaleModCli load game/data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          ./utmtcli/UndertaleModCli load game/data.win --scripts 'scripts/ExportCodeFormatted.csx'
           mv game/Export_Code decompiled-deltarune
       - name: Build
         run: ./build.sh deltarune

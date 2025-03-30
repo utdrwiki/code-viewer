@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-undertaleyellow:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,7 +19,7 @@ jobs:
           unzip -p game.zip "Undertale Yellow v1_1/data.win" > data.win
       - name: Extract Undertale Yellow's code
         run: |
-          ./utmtcli/UndertaleModCli load data.win --scripts 'utmt/UndertaleModTool/Scripts/Resource Unpackers/ExportAllCode.csx'
+          ./utmtcli/UndertaleModCli load data.win --scripts 'scripts/ExportCodeFormatted.csx'
           mv Export_Code decompiled-undertaleyellow
       - name: Build
         run: ./build.sh undertaleyellow

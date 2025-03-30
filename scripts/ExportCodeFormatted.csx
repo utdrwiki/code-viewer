@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using Underanalyzer.Decompiler;
 
 EnsureDataLoaded();
 
@@ -12,7 +13,8 @@ string codeFolder = Path.Combine(Path.GetDirectoryName(FilePath), "Export_Code")
 Directory.CreateDirectory(codeFolder);
 
 GlobalDecompileContext globalDecompileContext = new(Data);
-Underanalyzer.Decompiler.DecompileSettings decompilerSettings = Data.ToolInfo.DecompilerSettings;
+// Cast for setters
+DecompileSettings decompilerSettings = new();
 decompilerSettings.RemoveSingleLineBlockBraces = true;
 decompilerSettings.OpenBlockBraceOnSameLine = false;
 decompilerSettings.EmptyLineAroundBranchStatements = false;
@@ -36,7 +38,7 @@ void DumpCode(UndertaleCode code)
         try
         {
             File.WriteAllText(path, (code != null 
-                ? new Underanalyzer.Decompiler.DecompileContext(globalDecompileContext, code, decompilerSettings).DecompileToString() 
+                ? new DecompileContext(globalDecompileContext, code, decompilerSettings).DecompileToString() 
                 : ""));
         }
         catch (Exception e)

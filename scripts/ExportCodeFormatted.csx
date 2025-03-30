@@ -34,7 +34,7 @@ void DumpCode(UndertaleCode code)
 {
     if (code is not null)
     {
-        string path = Path.Combine(codeFolder, code.Name.Content + ".txt");
+        string path = Path.Combine(codeFolder, code.Name.Content + ".gml");
         try
         {
             File.WriteAllText(path, (code != null 

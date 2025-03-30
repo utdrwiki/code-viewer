@@ -23,7 +23,7 @@ List<UndertaleCode> toDump = Data.Code.Where(c => c.ParentEntry is null).ToList(
 
 await DumpCode();
 
-ScriptMessage("Export Complete.\n\nLocation: " + codeFolder);
+ScriptMessage($"Export Complete.\n\nDumped {toDump.Count}/{Data.Code.Count} entries.\nLocation: {codeFolder}");
 
 async Task DumpCode()
 {

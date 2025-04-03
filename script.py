@@ -135,6 +135,8 @@ def highlight_function(
 ) -> str:
     function_name = matches[2]
     script_name = f'gml_GlobalScript_{function_name}'
+    if data.game == 'undertale':
+        script_name = f'gml_Script_{function_name}'
     if script_name not in text:
         # This might be a local function
         return matches[0]
@@ -211,7 +213,7 @@ def process_line(
         flags=re.IGNORECASE
     )
     line = re.sub(
-        r'(scr_84_get_lang_string(?:_ch1)?\(")([a-zA-Z0-9_-]+)("\))',
+        r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-zA-Z0-9_-]+)("\))',
         lambda matches: highlight_text_ch1(matches, data),
         line,
         flags=re.IGNORECASE

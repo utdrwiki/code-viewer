@@ -113,7 +113,9 @@ class Data:
 
     def get_localized_string_ch1(self, key: str) -> str:
         if self.lang is None:
+            print('Initializing lang')
             self.lang = self.load_lang()
+        print(len(self.lang), 'localization entries available in', self.game)
         return self.lang[key]
 
     def get_game_name(self) -> str:

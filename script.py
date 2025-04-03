@@ -69,9 +69,9 @@ def parse_text(text: str) -> str:
 
 def highlight_text(matches: re.Match[str]) -> str:
     return env.get_template('highlight/text.html').render(
-        before_var="",
+        before_var='',
         variable=matches[1],
-        after_var=matches[3],
+        after_var=matches[2],
         parsed_text=parse_text(matches[1])
     )
 

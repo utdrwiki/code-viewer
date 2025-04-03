@@ -213,7 +213,7 @@ def process_line(
         flags=re.IGNORECASE
     )
     line = re.sub(
-        r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-zA-Z0-9_-]+)("\))',
+        r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-zA-Z0-9_-]+)("\))',  # noqa: E501
         lambda matches: highlight_text_ch1(matches, data),
         line,
         flags=re.IGNORECASE

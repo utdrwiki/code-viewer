@@ -31,7 +31,7 @@ class Data:
         self.lang: Optional[Dict[str, str]] = None
         self.config: Optional[Config] = None
 
-    def load_json(self, filename: str) -> Dict[str, str]:
+    def load_json(self, filename: str) -> Any:
         script_dir = get_script_path()
         json_file = script_dir / 'data' / self.game / f'{filename}.json'
         with open(json_file, 'r') as file:
@@ -42,8 +42,8 @@ class Data:
         lang_file = script_dir / 'out' / 'raw' / f'{scriptname}.gml'
         ret = {}
         textdata_regex = re.compile(
-            r"ds_map_add\(global\.text_data_[a-z]+, "
-          + r"\"([a-zA-Z0-9_]+)\", ([\"'])(.*)\2\)"
+            r'ds_map_add\(global\.text_data_[a-z]+, '
+            + r'"([a-zA-Z0-9_]+)", (["\'])(.*)\2\)'
         )
         with open(lang_file, 'r') as file:
             for line in file.readlines():
@@ -111,7 +111,8 @@ class Data:
     def get_localized_string_ch1(self, key: str) -> str:
         if self.lang is None:
             self.lang = self.load_lang()
-        if key not in self.lang: # Fail safe
+        # Fail safe
+        if key not in self.lang:
             return key
         return self.lang[key]
 

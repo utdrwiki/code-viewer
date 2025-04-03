@@ -31,13 +31,13 @@ class Data:
         self.lang: Optional[Dict[str, str]] = None
         self.config: Optional[Config] = None
 
-    def load_json(self, filename: str) -> Any:
+    def load_json(self, filename: str) -> Dict[str, str]:
         script_dir = get_script_path()
         json_file = script_dir / 'data' / self.game / f'{filename}.json'
         with open(json_file, 'r') as file:
             return json.load(file)
 
-    def load_textdata(self, scriptname: str) -> Any:
+    def load_textdata(self, scriptname: str) -> Dict[str, str]:
         script_dir = get_script_path()
         lang_file = script_dir / 'out' / 'raw' / f'{scriptname}.gml'
         ret = {}
@@ -54,6 +54,8 @@ class Data:
                 matches = textdata_regex.match(line)
                 if matches is not None:
                     ret[matches[1]] = matches[3]
+                else:
+                    print('Match failed for line:', line)
         print('Got %d lines' % len(ret))
         return ret
 

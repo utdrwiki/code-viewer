@@ -43,12 +43,14 @@ class Data:
         ret = {}
         textdata_regex = re.compile(r"ds_map_add\(global\.text_data_[a-z]+, \"([a-zA-Z0-9_]+)\", ([\"'])(.*)\2\)")
         with open(lang_file, 'r') as file:
+            print("Successfully opened", lang_file)
             for line in file.readlines():
                 if not line.startswith("ds_map_add"):
                     continue
                 line = line.replace("' + \"'\" + '", "'").replace('" + \'"\' + "', '"')
                 matches = textdata_regex.match(line)
-                ret[matches[1]] = matches[3]
+                if matches is not None:
+                    ret[matches[1]] = matches[3]
         return ret
 
     def load_enemies(self) -> List[str]:
@@ -66,6 +68,7 @@ class Data:
         return self.load_json('sums')
 
     def load_lang(self) -> Dict[str, str]:
+        print("Game:", self.game)
         if self.game == 'undertale':
             return self.load_textdata('gml_Script_textdata_en')
         return self.load_json('lang_en')

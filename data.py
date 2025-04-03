@@ -1,5 +1,6 @@
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -36,6 +37,20 @@ class Data:
         with open(json_file, 'r') as file:
             return json.load(file)
 
+    def load_textdata(self, scriptname: str) -> Any:
+        script_dir = get_script_path()
+        lang_file = script_dir / 'out' / 'raw' / f'{scriptname}.gml'
+        ret = {}
+        textdata_regex = re.compile(r"ds_map_add\(global\.text_data_[a-z]+, \"([a-zA-Z0-9_]+)\", ([\"'])(.*)\2\)")
+        with open(lang_file, 'r') as file:
+            for line in file.readlines():
+                if not line.startswith("ds_map_add"):
+                    continue
+                line = line.replace("' + \"'\" + '", "'").replace('" + \'"\' + "', '"')
+                matches = textdata_regex.match(line)
+                ret[matches[1]] = matches[3]
+        return ret
+
     def load_enemies(self) -> List[str]:
         return self.load_json('enemies')
 
@@ -51,6 +66,8 @@ class Data:
         return self.load_json('sums')
 
     def load_lang(self) -> Dict[str, str]:
+        if self.game == 'undertale':
+            return self.load_textdata('gml_Script_textdata_en')
         return self.load_json('lang_en')
 
     def load_config(self) -> Config:

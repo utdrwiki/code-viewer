@@ -51,7 +51,7 @@ def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
                 ))
         else:
             chapter = chapters[chapter_indices[0]]
-            redirects[f'/{script}.html'] = f'/{chapter}/{script}.html'
+            redirects[f'/{script}*'] = f'/{chapter}/{script}.html'
     with open(output_dir / '_redirects', 'w') as redirects_file:
         for old_path, new_path in redirects.items():
             redirects_file.write(f'{old_path} {new_path}\n')

@@ -17,20 +17,23 @@ jobs:
         run: |
           mkdir -p ~/.local/share/Steam/config
           echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
-          steamcmd +@ShutdownOnFailedCommand +@sSteamCmdForcePlatformType windows +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 1690940 validate +quit
+          steamcmd +@ShutdownOnFailedCommand +@sSteamCmdForcePlatformType windows +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 1671210 validate +quit
         env:
           STEAM_VDF: ${{ secrets.STEAM_VDF }}
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
       - name: Extract Deltarune's code
         run: |
-          ./utmtcli/UndertaleModCli load game/data.win --scripts 'scripts/ExportCodeFormatted.csx'
-          mv game/Export_Code decompiled-deltarune
+          ./utmtcli/UndertaleModCli load game/chapter1_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
+          ./utmtcli/UndertaleModCli load game/chapter2_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
+          mkdir decompiled-deltarune
+          mv game/chapter1_windows/Export_Code decompiled-deltarune/ch1
+          mv game/chapter2_windows/Export_Code decompiled-deltarune/ch2
       - name: Build
         run: ./build.sh deltarune
       - name: Publish
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=out --prod
+          args: deploy --prod --dir=out --message="GitHub Actions"
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DR }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

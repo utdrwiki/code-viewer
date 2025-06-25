@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{{ game }} script viewer</title>
+    {% include 'partials/head.html' %}
+    <link rel="stylesheet" href="/static/index.css" />
+</head>
+<body>
+<h1>{{ game }} script viewer</h1>
+
+<h2>{{ script_name }}</h2>
+<p>This script exists in multiple chapters:</p>
+<ul>
+{% for chapter in chapters %}
+    <li><a href="{{ chapter }}/{{ script_name }}.html">Chapter {{ loop.index }}</a></li>
+{% endfor %}
+</ul>
+
+</body>
+</html>

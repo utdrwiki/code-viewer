@@ -19,6 +19,7 @@ class Config:
     game: str
     links: Dict[str, str]
     cache: int
+    chapters: Optional[List[str]] = None
 
 
 class Data:
@@ -30,6 +31,7 @@ class Data:
         self.sums: Optional[Dict[str, str]] = None
         self.lang: Optional[Dict[str, str]] = None
         self.config: Optional[Config] = None
+        self.chapter: int = -1
 
     def load_json(self, filename: str) -> Any:
         script_dir = get_script_path()
@@ -119,6 +121,8 @@ class Data:
     def get_game_name(self) -> str:
         if self.config is None:
             self.config = self.load_config()
+        if self.chapter >= 0:
+            return f'{self.config.game} (Chapter {self.chapter + 1})'
         return self.config.game
 
     def get_game_links(self) -> Dict[str, str]:
@@ -130,3 +134,11 @@ class Data:
         if self.config is None:
             self.config = self.load_config()
         return self.config.cache
+
+    def get_chapters(self) -> Optional[List[str]]:
+        if self.config is None:
+            self.config = self.load_config()
+        return self.config.chapters
+
+    def select_chapter(self, chapter_idx: int):
+        self.chapter = chapter_idx

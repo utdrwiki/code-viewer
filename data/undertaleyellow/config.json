@@ -6,5 +6,6 @@
         "TCRF": "https://tcrf.net/Undertale_Yellow",
         "Wiki": "https://undertaleyellow.wiki.gg/"
     },
-    "cache": 2
+    "cache": 2,
+    "footer": "This website is not affiliated with the Undertale Yellow team. If you are a member of the development team and wish to have the site taken down, please send an email to admin@undertale.wiki."
 }

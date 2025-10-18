@@ -106,7 +106,8 @@ def write_index(index: ScriptIndex, data: Data, output_dir: Path) -> None:
             sections=index.sections,
             game=data.get_game_name(),
             links=data.get_game_links(),
-            cache_version=data.get_cache_version()
+            cache_version=data.get_cache_version(),
+            footer=data.get_game_footer(),
         ))
     with open(output_dir / 'index.json', 'w', encoding='utf-8') as f:
         json.dump(index.text, f, separators=(',', ':'))

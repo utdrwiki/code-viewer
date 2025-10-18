@@ -276,6 +276,7 @@ def render_script(
         lines=lines,
         game=data.get_game_name(),
         links=data.get_game_links(),
+        footer=data.get_game_footer(),
     )
 
 

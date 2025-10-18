@@ -1,10 +1,10 @@
 :root {
 	--background: #111;
-    --secondary-background: #080808;
+	--secondary-background: #080808;
 	--text-color: #CCC;
 	--link-color: #8AD;
 	--link-hover-color: #ADF;
-    --border-color: #999;
+	--border-color: #999;
 	--junk-text-color: #666;
 
 	--selected-line-background-color: #333;
@@ -116,4 +116,11 @@ h2 {
 	table:not(.code) td {
 		min-width: 200px;
 	}
+}
+
+footer {
+	background-color: var(--secondary-background);
+	clear: both;
+	margin-top: 20px;
+	padding: 20px;
 }

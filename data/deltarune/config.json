@@ -7,5 +7,6 @@
         "TCRF": "https://tcrf.net/Deltarune",
         "Wiki": "https://deltarune.wiki/"
     },
-    "cache": 1
+    "cache": 1,
+    "footer": "This website is not affiliated with Toby Fox or the Deltarune team. If you are a representative of Toby Fox or Fangamer and wish to have the site taken down, please send an email to admin@undertale.wiki."
 }

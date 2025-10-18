@@ -48,6 +48,7 @@ def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
                     chapters=[chapters[idx] for idx in chapter_indices],
                     game=data.get_game_name(),
                     links=data.get_game_links(),
+                    footer=data.get_game_footer(),
                 ))
         else:
             chapter = chapters[chapter_indices[0]]
@@ -64,6 +65,7 @@ def write_chapter_index(data: Data, output_dir: Path):
             chapters=chapters,
             game=data.get_game_name(),
             links=data.get_game_links(),
+            footer=data.get_game_footer(),
         ))
 
 

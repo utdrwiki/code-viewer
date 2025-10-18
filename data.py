@@ -20,6 +20,7 @@ class Config:
     links: Dict[str, str]
     cache: int
     chapters: Optional[List[str]] = None
+    footer: Optional[str] = None
 
 
 class Data:
@@ -129,6 +130,11 @@ class Data:
         if self.config is None:
             self.config = self.load_config()
         return self.config.links
+
+    def get_game_footer(self) -> Optional[str]:
+        if self.config is None:
+            self.config = self.load_config()
+        return self.config.footer
 
     def get_cache_version(self) -> int:
         if self.config is None:

@@ -15,6 +15,16 @@ from typing import Optional
 DIR = dirname(__file__)
 STATIC = join(DIR, "static")
 
+def download(url: str, file: str):
+    data = requests.get(url).content
+    parent = dirname(file)
+
+    if not exists(parent):
+        os.makedirs(parent)
+    
+    with open(file, "wb") as f:
+        f.write(data)
+
 def build(game: str, chapter: Optional[str]):
     OUT = join(DIR, "out", game)
 
@@ -94,6 +104,23 @@ def run(game: str):
 
     with zipfile.ZipFile(BytesIO(data), "r") as zip:
         zip.extractall(STATIC_OUT)
+
+    logger.info("Downloading highlight.js...")
+
+    download(
+        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js",
+        join(STATIC_OUT, "highlight", "highlight.min.js")
+    )
+
+    download(
+        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/gml.min.js",
+        join(STATIC_OUT, "highlight", "gml.min.js")
+    )
+
+    download(
+        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css",
+        join(STATIC_OUT, "highlight", "github-dark.min.css")
+    )
 
     logger.info("Generating website...")
 

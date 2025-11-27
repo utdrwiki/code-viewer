@@ -56,7 +56,6 @@ html, body {
 
 body {
 	background: var(--background);
-	/* padding: 1em 2em; */
 }
 
 body, pre {
@@ -147,10 +146,6 @@ fieldset p {
 
 .content {
 	padding: 2rem;
-}
-
-input {
-	font-family: JetBrains Mono, monospace !important;
 }
 
 input[type=submit] {

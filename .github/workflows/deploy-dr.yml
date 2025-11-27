@@ -1,4 +1,4 @@
-name: Deploy to Netlify (Deltarune)
+name: Deploy to Netlify (Undertale)
 on:
   push:
     branches:
@@ -6,40 +6,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-deltarune:
+  build-undertale:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Steam and UTMT
         uses: ./.github/actions/steam-utmt-setup
-      - name: Download Deltarune
+      - name: Download Undertale
         run: |
           mkdir -p ~/.local/share/Steam/config
           echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
-          steamcmd +@ShutdownOnFailedCommand +@sSteamCmdForcePlatformType windows +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 1671210 validate +quit
+          steamcmd +@ShutdownOnFailedCommand +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 391540 validate +quit
         env:
           STEAM_VDF: ${{ secrets.STEAM_VDF }}
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-      - name: Extract Deltarune's code
+      - name: Extract Undertale's code
         run: |
-          ./utmtcli/UndertaleModCli load game/data.win --scripts 'scripts/ExportCodeFormatted.csx'
-          ./utmtcli/UndertaleModCli load game/chapter1_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
-          ./utmtcli/UndertaleModCli load game/chapter2_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
-          ./utmtcli/UndertaleModCli load game/chapter3_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
-          ./utmtcli/UndertaleModCli load game/chapter4_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
-          mkdir decompiled-deltarune
-          mv game/Export_Code decompiled-deltarune/init
-          mv game/chapter1_windows/Export_Code decompiled-deltarune/ch1
-          mv game/chapter2_windows/Export_Code decompiled-deltarune/ch2
-          mv game/chapter3_windows/Export_Code decompiled-deltarune/ch3
-          mv game/chapter4_windows/Export_Code decompiled-deltarune/ch4
+          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts 'scripts/ExportCodeFormatted.csx'
+          mv game/assets/Export_Code decompiled-undertale
       - name: Build
-        run: ./build.sh deltarune
+        run: ./build.sh undertale
       - name: Publish
         uses: netlify/actions/cli@master
         with:
-          args: deploy --prod --dir=out/deltarune --message="GitHub Actions" --timeout=3600
+          args: deploy --dir=out/undertale --prod
         env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DR }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_UT }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

@@ -84,8 +84,7 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
         section, segment = classify(filename, data)
         if segment not in index.sections[section].entries:
             index.sections[section].entries[segment] = []
-        chapters = data.get_chapters()
-        if chapters is None:
+        if data.chapter_id is None:
             chapter_segment = ''
         else:
             chapter_segment = f'/{data.chapter_id}'

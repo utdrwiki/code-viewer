@@ -267,8 +267,7 @@ def render_script(
         process_line(line, script_name, text, data)
         for line in text[script_name]
     ]
-    chapters = data.get_chapters()
-    if chapters is None:
+    if data.chapter_id is None:
         chapter_segment = ''
     else:
         chapter_segment = f'/{data.chapter_id}'

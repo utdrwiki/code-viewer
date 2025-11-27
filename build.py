@@ -1,6 +1,9 @@
 import os
+import zipfile
 import argparse
+import requests
 
+from io import BytesIO
 from loguru import logger
 from os.path import dirname, join, exists, relpath
 from shutil import rmtree, copyfile
@@ -81,6 +84,14 @@ def run(game: str):
         copyfile(join(STATIC, file), out_path)
 
     copyfile(join(DIR, "_headers"), join(OUT, "_headers"))
+
+    logger.info("Downloading font...")
+
+    font_url = "https://download-cdn.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+    data = requests.get(font_url).content
+
+    with zipfile.ZipFile(BytesIO(data), "r") as zip:
+        zip.extractall(STATIC_OUT)
 
     logger.info("Generating website...")
 

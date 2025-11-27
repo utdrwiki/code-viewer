@@ -11,3 +11,4 @@ pep8-naming
 pyright
 loguru
 tqdm
+requests

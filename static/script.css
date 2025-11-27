@@ -1,3 +1,15 @@
+pre:not(.funcCode), code, .hljs {
+	font-family: "JetBrains Mono";
+}
+
+.code .selected {
+	background-color: var(--selected-line-background-color);
+}
+
+.inline-code {
+	display: inline-block;
+}
+
 .langvar {
 	color: var(--lang-var-text-color);
 	font-style: italic;
@@ -263,19 +275,4 @@
 }
 .code tr td:first-child {
 	user-select: none;
-}
-
-pre:not(.funcCode), code, .hljs {
-	padding: 0 !important;
-	background-color: transparent !important;
-	margin: 0 !important;
-	font-family: "JetBrains Mono" !important;
-}
-
-.code .selected {
-	background-color: var(--selected-line-background-color) !important;
-}
-
-.inline-code {
-	display: inline-block;
 }

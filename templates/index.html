@@ -1,46 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>{{ game }} script viewer</title>
-    {% include 'partials/head.html' %}
-    <link rel="stylesheet" href="/static/index.css" />
-    <script src="/static/search.js"></script>
-</head>
-<body>
-<h1>{{ game }} script viewer</h1>
+    <head>
+        <title>{{ game }} script viewer</title>
+        {% include 'partials/head.html' %}
+        <link rel="stylesheet" href="/static/index.css" />
+        <script src="/static/search.js"></script>
+    </head>
+    <body>
+        <main>
+            <h1>{{ game }} script viewer</h1>
+        
+            {% include 'partials/search.html' %}
+        
+            {% for section_type, section in sections.items() %}
+                <h2>{{ section.name }}</h2>
 
-{% include 'partials/info.html' %}
+                <table class="{{ section_type }}">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Lines</th>
+                            <th>Raw script</th>
+                        </tr>
+                    </thead>
 
-{% include 'partials/search.html' %}
+                    <tbody>
+                        {% for segment, entries in section.entries.items() %}
+                            <tr class="table-subsection-header">
+                                <td colspan="3">{{ segment }}</td>
+                            </tr>
 
-{% for section_type, section in sections.items() %}
-    <h2>{{ section.name }}</h2>
-    <table class="{{ section_type }}">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Lines</th>
-                <th>Raw script</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for segment, entries in section.entries.items() %}
-                <tr class="table-subsection-header">
-                    <td colspan="3">{{ segment }}</td>
-                </tr>
-                {% for entry in entries %}
-                <tr class="table-subsection-content">
-                    <td><a href="{{ entry.url }}">{{ entry.name }}</a></td>
-                    <td>{{ entry.lines }}</td>
-                    <td><a href="{{ entry.raw_url }}">raw</a></td>
-                </tr>
-                {% endfor %}
+                            {% for entry in entries %}
+                                <tr class="table-subsection-content">
+                                    <td><a href="{{ entry.url }}">{{ entry.name }}</a></td>
+                                    <td>{{ entry.lines }}</td>
+                                    <td><a href="{{ entry.raw_url }}">raw</a></td>
+                                </tr>
+                                {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
             {% endfor %}
-        </tbody>
-    </table>
-{% endfor %}
-{% if footer %}
-<footer>{{ footer }}</footer>
-{% endif %}
-</body>
+        </main>
+
+        <footer>
+            {% include 'partials/info.html' %}
+
+            {% if footer %}
+                <p>{{ footer }}</p>
+            {% endif %}
+        </footer>
+    </body>
 </html>

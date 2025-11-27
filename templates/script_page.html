@@ -1,33 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>{{ game }} script viewer - {{ script_name }}</title>
-    {% include 'partials/head.html' %}
-    <link rel="stylesheet" href="/static/script.css" />
-    <script src="/static/script.js"></script>
-</head>
-<body>
-<h1>{{ game }} script viewer</h1>
+    <head>
+        <title>{{ game }} script viewer - {{ script_name }}</title>
+        {% include 'partials/head.html' %}
+        <link rel="stylesheet" href="/static/script.css" />
+        <script src="/static/script.js"></script>
+    </head>
+    <body>
+        <main>
+            <h1>{{ game }} script viewer</h1>
 
-{% include 'partials/info.html' %}
+            <strong><a href="index.html">&larr; back to main script listing</a></strong><br>
 
-<strong><a href="index.html">&larr; back to main script listing</a></strong><br>
+            <h2>{{ script_name }}</h2>
+            <small>(<a href="{{ raw_url }}">view raw script w/o annotations or w/e</a>)</small>
 
-<h2>{{ script_name }}</h2>
-<small>(<a href="{{ raw_url }}">view raw script w/o annotations or w/e</a>)</small>
+            <table class="code">
+                {% for line in lines %}
+                    <tr>
+                        <td id="L{{ loop.index }}">
+                            <a href="#L{{ loop.index }}">{{ loop.index }}</a>
+                        </td>
 
-<table class="code">
-    {% for line in lines %}
-    <tr>
-        <td id="L{{ loop.index }}"><a href="#L{{ loop.index }}">{{ loop.index }}</a></td>
-        <td><pre>{{ line | safe }}</pre></td>
-    </tr>
-    {% endfor %}
-</table>
+                        <td>
+                            <pre class="code-line language-gml">{{ line | safe }}</pre>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </main>
 
-{% if footer %}
-<footer>{{ footer }}</footer>
-{% endif %}
-<script src="/static/script.js"></script>
-</body>
+        <footer>
+            {% include 'partials/info.html' %}
+
+            {% if footer %}
+                <p>{{ footer }}</p>
+            {% endif %}
+        </footer>
+        
+        <script src="/static/script.js"></script>
+    </body>
 </html>

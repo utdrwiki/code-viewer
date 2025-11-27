@@ -1,6 +1,12 @@
 {
     "game": "Deltarune",
-    "chapters": ["ch1", "ch2", "ch3", "ch4"],
+    "chapters": {
+        "init": "Chapter Select",
+        "ch1": "Chapter 1",
+        "ch2": "Chapter 2",
+        "ch3": "Chapter 3",
+        "ch4": "Chapter 4"
+    },
     "links": {
         "Source code": "https://github.com/utdrwiki/code-viewer",
         "r/Underminers": "https://www.reddit.com/r/Underminers/",

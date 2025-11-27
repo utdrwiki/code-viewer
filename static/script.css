@@ -1,3 +1,15 @@
+pre:not(.funcCode), code, .hljs {
+	font-family: "JetBrains Mono";
+}
+
+.code .selected {
+	background-color: var(--selected-line-background-color);
+}
+
+.inline-code {
+	display: inline-block;
+}
+
 .langvar {
 	color: var(--lang-var-text-color);
 	font-style: italic;
@@ -263,8 +275,4 @@
 }
 .code tr td:first-child {
 	user-select: none;
-}
-
-.code .selected {
-	background-color: var(--selected-line-background-color);
 }

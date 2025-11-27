@@ -1,23 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>{{ game }} script viewer</title>
-    {% include 'partials/head.html' %}
-    <link rel="stylesheet" href="/static/index.css" />
-</head>
-<body>
-<h1>{{ game }} script viewer</h1>
+    <head>
+        <title>{{ game }} script viewer</title>
+        {% include 'partials/head.html' %}
+        <link rel="stylesheet" href="/static/index.css" />
+    </head>
+    <body>
+        <main>
+            <h1>{{ game }} script viewer</h1>
+            <h2>{{ script_name }}</h2>
+            <p>This script exists in multiple chapters:</p>
 
-<h2>{{ script_name }}</h2>
-<p>This script exists in multiple chapters:</p>
-<ul>
-{% for chapter in chapters %}
-    <li><a href="{{ chapter }}/{{ script_name }}.html">Chapter {{ loop.index }}</a></li>
-{% endfor %}
-</ul>
+            <ul>
+                {% for chapter in chapters %}
+                    <li><a href="/{{ chapter }}/{{ script_name }}.html">Chapter {{ loop.index }}</a></li>
+                {% endfor %}
+            </ul>
+        </main>
 
-{% if footer %}
-<footer>{{ footer }}</footer>
-{% endif %}
-</body>
+        <footer>
+            {% include 'partials/info.html' %}
+
+            {% if footer %}
+                <p>{{ footer }}</p>
+            {% endif %}
+        </footer>
+    </body>
 </html>

@@ -9,3 +9,6 @@ flake8-tidy-imports
 isort
 pep8-naming
 pyright
+loguru
+tqdm
+requests

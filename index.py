@@ -47,15 +47,14 @@ def classify(path: Path, data: Data) -> Tuple[SectionType, str]:
     if filename.startswith('gml_Object_'):
         obj_name_match = re.match(
             r'gml_Object_(.*)_((\w+)_(\d+)|Collision_(.*))\.gml',
-            filename
+            filename,
         )
         if obj_name_match is None:
             raise ValueError(f'Failed to find object name: {filename}')
         return 'object', obj_name_match.group(1)
     if filename.startswith('gml_RoomCC_'):
         room_name_match = re.match(
-            r'gml_RoomCC_(.+)_(\d+)_(\w+)\.gml',
-            filename
+            r'gml_RoomCC_(.+)_(\d+)_(\w+)\.gml', filename
         )
         if room_name_match is None:
             raise ValueError(f'Failed to find room name: {filename}')
@@ -69,13 +68,16 @@ def classify(path: Path, data: Data) -> Tuple[SectionType, str]:
 
 
 def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
-    index = ScriptIndex({
-        'script': Section('Scripts'),
-        'object': Section('Objects'),
-        'roomcc': Section('Room Creation Codes'),
-        'room': Section('Rooms'),
-        'junk': Section('Duplicated or common scripts'),
-    }, {})
+    index = ScriptIndex(
+        {
+            'script': Section('Scripts'),
+            'object': Section('Objects'),
+            'roomcc': Section('Room Creation Codes'),
+            'room': Section('Rooms'),
+            'junk': Section('Duplicated or common scripts'),
+        },
+        {},
+    )
     files = sorted(f for f in os.listdir(decompiled_dir) if f.endswith('.gml'))
     for file in files:
         filename = decompiled_dir / file
@@ -84,17 +86,19 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
         section, segment = classify(filename, data)
         if segment not in index.sections[section].entries:
             index.sections[section].entries[segment] = []
-        chapters = data.get_chapters()
-        if chapters is None:
+        if data.chapter_id is None:
             chapter_segment = ''
         else:
-            chapter_segment = f'/{chapters[data.chapter]}'
-        index.sections[section].entries[segment].append(Entry(
-            url=file.replace('.gml', '.html'),
-            raw_url=f"/raw{chapter_segment}/{file.replace('.gml', '.txt')}",
-            name=name,
-            lines=len(lines)
-        ))
+            chapter_segment = f'/{data.chapter_id}'
+        entry_name = file.replace('.gml', '.txt')
+        index.sections[section].entries[segment].append(
+            Entry(
+                url=file.replace('.gml', '.html'),
+                raw_url=f'/raw{chapter_segment}/{entry_name}',
+                name=name,
+                lines=len(lines),
+            )
+        )
         index.text[name] = lines
     return index
 
@@ -102,13 +106,15 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
 def write_index(index: ScriptIndex, data: Data, output_dir: Path) -> None:
     with open(output_dir / 'index.html', 'w', encoding='utf-8') as f:
         env = Environment(loader=FileSystemLoader('templates'))
-        f.write(env.get_template('index.html').render(
-            sections=index.sections,
-            game=data.get_game_name(),
-            links=data.get_game_links(),
-            cache_version=data.get_cache_version(),
-            footer=data.get_game_footer(),
-        ))
+        f.write(
+            env.get_template('index.html').render(
+                sections=index.sections,
+                game=data.get_game_name(),
+                links=data.get_game_links(),
+                cache_version=data.get_cache_version(),
+                footer=data.get_game_footer(),
+            )
+        )
     with open(output_dir / 'index.json', 'w', encoding='utf-8') as f:
         json.dump(index.text, f, separators=(',', ':'))
 
@@ -120,7 +126,7 @@ if __name__ == '__main__':
     parser.add_argument(
         'game',
         type=str,
-        help='game for which to generate the website'
+        help='game for which to generate the website',
     )
     args = parser.parse_args()
     data = Data(args.game)

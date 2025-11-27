@@ -1,3 +1,3 @@
 #!/bin/bash
 cd "${0%/*}"
-python -m http.server -d out
+python -m http.server -d out/"$1"

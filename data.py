@@ -19,7 +19,7 @@ class Config:
     game: str
     links: Dict[str, str]
     cache: int
-    chapters: Optional[List[str]] = None
+    chapters: Optional[Dict[str, str]] = None
     footer: Optional[str] = None
 
 
@@ -32,7 +32,8 @@ class Data:
         self.sums: Optional[Dict[str, str]] = None
         self.lang: Optional[Dict[str, str]] = None
         self.config: Optional[Config] = None
-        self.chapter: int = -1
+        self.chapter: Optional[str] = None
+        self.chapter_id: Optional[str] = None
 
     def load_json(self, filename: str) -> Any:
         script_dir = get_script_path()
@@ -42,7 +43,9 @@ class Data:
 
     def load_textdata(self, scriptname: str) -> Dict[str, str]:
         script_dir = get_script_path()
-        lang_file = script_dir / 'out' / 'raw' / f'{scriptname}.gml'
+        lang_file = (
+            script_dir / 'out' / self.game / 'raw' / f'{scriptname}.gml'
+        )
         ret = {}
         textdata_regex = re.compile(
             r'ds_map_add\(global\.text_data_[a-z]+, '
@@ -100,7 +103,10 @@ class Data:
         if self.rooms is None:
             self.rooms = self.load_rooms()
         for room in self.rooms:
-            if room.name == room_name:
+            if room.name == room_name or (
+                self.chapter is not None
+                and room.name == f'{room_name}_{self.chapter_id}'
+            ):
                 return room
         return None
 
@@ -122,8 +128,8 @@ class Data:
     def get_game_name(self) -> str:
         if self.config is None:
             self.config = self.load_config()
-        if self.chapter >= 0:
-            return f'{self.config.game} (Chapter {self.chapter + 1})'
+        if self.chapter_id is not None and self.chapter_id != '':
+            return f'{self.config.game} ({self.chapter})'
         return self.config.game
 
     def get_game_links(self) -> Dict[str, str]:
@@ -141,10 +147,13 @@ class Data:
             self.config = self.load_config()
         return self.config.cache
 
-    def get_chapters(self) -> Optional[List[str]]:
+    def get_chapters(self) -> Optional[Dict[str, str]]:
         if self.config is None:
             self.config = self.load_config()
         return self.config.chapters
 
-    def select_chapter(self, chapter_idx: int):
-        self.chapter = chapter_idx
+    def select_chapter(
+        self, chapter_id: Optional[str], chapter: Optional[str]
+    ):
+        self.chapter_id = chapter_id
+        self.chapter = chapter

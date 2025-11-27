@@ -1,1 +1,0 @@
-thrash.headangle = 0;

@@ -1,1 +1,0 @@
-rideEnd = false;

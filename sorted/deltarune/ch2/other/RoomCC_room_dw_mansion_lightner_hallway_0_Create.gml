@@ -1,1 +1,0 @@
-lightner_door = "berdly";

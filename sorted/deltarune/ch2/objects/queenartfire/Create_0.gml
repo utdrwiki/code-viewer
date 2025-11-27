@@ -1,9 +1,0 @@
-destroyoffscreen = true;
-tolerance = 32;
-growamt = 0;
-fadespeed = 0;
-active = 1;
-target = 3;
-damage = 12;
-hit = 0;
-depth = 80;

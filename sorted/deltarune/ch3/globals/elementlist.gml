@@ -1,3 +1,0 @@
-function scr_elementlist()
-{
-}

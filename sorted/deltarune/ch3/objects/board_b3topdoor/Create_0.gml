@@ -1,9 +1,0 @@
-myinteract = 0;
-image_speed = 0;
-active = false;
-buffer = 0;
-image_alpha = 0;
-doormarker = 0;
-q1 = 0;
-q2 = 0;
-laugh = 0;

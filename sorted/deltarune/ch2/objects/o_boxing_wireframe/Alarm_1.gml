@@ -1,1 +1,0 @@
-introtalk = 0;

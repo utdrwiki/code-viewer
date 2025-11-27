@@ -1,1 +1,0 @@
-alertcon += 1;

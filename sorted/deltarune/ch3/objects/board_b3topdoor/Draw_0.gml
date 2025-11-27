@@ -1,3 +1,0 @@
-if (myinteract > 0)
-{
-}

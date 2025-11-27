@@ -1,3 +1,0 @@
-if (scr_debug())
-{
-}

@@ -1,9 +1,0 @@
-fake = true;
-dsprite = spr_ch3_dw_shutta_lancer_dt_notongue_fake;
-lsprite = spr_ch3_dw_shutta_lancer_lt_notongue_fake;
-rsprite = spr_ch3_dw_shutta_lancer_rt_notongue_fake;
-usprite = spr_lancer_ut;
-spinsprite[0] = dsprite;
-spinsprite[1] = lsprite;
-spinsprite[2] = usprite;
-spinsprite[3] = rsprite;

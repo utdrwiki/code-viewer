@@ -1,2 +1,0 @@
-active = true;
-timer = lifetime;

@@ -1,2 +1,0 @@
-myString = "E";
-jaString = "S";

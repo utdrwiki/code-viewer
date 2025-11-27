@@ -1,2 +1,0 @@
-doorRoom = room_dw_puzzlecloset_1;
-doorEntrance = "E";

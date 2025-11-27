@@ -1,9 +1,0 @@
-con = 0;
-initframe = -1;
-endframe = -1;
-target = -1;
-sprite = -1;
-fake_image_speed = 0.25;
-fake_image_index = 0;
-fake_image_index_max = 0;
-timer = 0;

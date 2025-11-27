@@ -1,9 +1,0 @@
-mystring = "-1";
-width = 80;
-looppause = 0;
-timer = 0;
-rate = 1;
-inc = 2;
-xpos = 0;
-clip_surface = -1;
-init = 0;

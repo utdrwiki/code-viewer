@@ -1,1 +1,0 @@
-showval(camerax(), cameray(), "trigger");

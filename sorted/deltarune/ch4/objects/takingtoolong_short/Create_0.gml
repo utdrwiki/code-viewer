@@ -1,8 +1,0 @@
-timer = 0;
-tutu = 0;
-small = false;
-pause = false;
-doom = false;
-fade = 1;
-bright = false;
-polite = false;

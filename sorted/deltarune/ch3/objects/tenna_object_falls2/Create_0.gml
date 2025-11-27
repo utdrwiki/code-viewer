@@ -1,9 +1,0 @@
-sprite_index = spr_darkbulb_spotlight;
-image_speed = 0;
-y -= 300;
-gravity = 1.6;
-con = 0;
-timer = 0;
-sprite_index = spr_chefs_fire;
-image_xscale = 5;
-image_yscale = 5;

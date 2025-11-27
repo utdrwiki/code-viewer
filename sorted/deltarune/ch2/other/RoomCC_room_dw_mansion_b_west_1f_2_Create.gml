@@ -1,1 +1,0 @@
-showArea = 0;

@@ -1,9 +1,0 @@
-depth = -100;
-image_speed = 0;
-image_alpha = 0;
-bg = scr_marker(0, 0, global.screenshot);
-bg.depth = -90;
-timer = 0;
-Z_COUNT = 0;
-drawbg = 0;
-special = 0;

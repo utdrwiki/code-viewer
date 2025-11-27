@@ -1,2 +1,0 @@
-menu_list = [new vending_menu_option(stringsetloc("Buy", "obj_shop_vending_slash_Other_11_gml_5_0"), 1), new vending_menu_option(stringsetloc("Sell", "obj_shop_vending_slash_Other_11_gml_6_0"), 4, "sell", 1), new vending_menu_option(stringsetloc("Talk", "obj_shop_vending_slash_Other_11_gml_7_0"), 4, "talk"), new vending_menu_option(stringsetloc("Exit", "obj_shop_vending_slash_Other_11_gml_8_0"), 99)];
-item_list = [new vending_item(34, "item", 60), new vending_item(39, "item", 120), new vending_item(24, "armor", 60), new vending_item(25, "armor", 111)];

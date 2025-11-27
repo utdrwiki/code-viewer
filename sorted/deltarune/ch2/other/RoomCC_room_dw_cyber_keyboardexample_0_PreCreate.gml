@@ -1,1 +1,0 @@
-myString = "P";

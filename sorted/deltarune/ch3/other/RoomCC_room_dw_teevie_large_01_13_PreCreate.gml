@@ -1,1 +1,0 @@
-front_facing = true;

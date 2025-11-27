@@ -1,1 +1,0 @@
-waittime = 2;

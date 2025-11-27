@@ -1,1 +1,0 @@
-encounterno = 136;

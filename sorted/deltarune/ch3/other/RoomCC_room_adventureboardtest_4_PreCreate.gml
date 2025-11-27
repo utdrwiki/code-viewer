@@ -1,2 +1,0 @@
-shift = "down";
-extflag = "loop";

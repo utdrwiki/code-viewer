@@ -1,1 +1,0 @@
-palettemode = true;

@@ -1,2 +1,0 @@
-soundName = [];
-global.interact = remstate;

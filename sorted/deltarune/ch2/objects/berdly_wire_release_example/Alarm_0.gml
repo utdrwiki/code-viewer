@@ -1,1 +1,0 @@
-shakecon = 1;

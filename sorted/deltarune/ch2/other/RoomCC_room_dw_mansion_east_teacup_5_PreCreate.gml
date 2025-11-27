@@ -1,1 +1,0 @@
-partyMember = 2;

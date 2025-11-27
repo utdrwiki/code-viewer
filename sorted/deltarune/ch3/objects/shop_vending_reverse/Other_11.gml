@@ -1,3 +1,0 @@
-default_text = string_hash_to_newline(stringsetloc("* (It's a reverse#vending machine.)&* (Put items in^1, DARK#DOLLARS come out.)", "obj_shop_vending_reverse_slash_Other_11_gml_4_0"));
-menu_list = [new vending_menu_option(stringsetloc("Sell", "obj_shop_vending_reverse_slash_Other_11_gml_7_0"), 10), new vending_menu_option(stringsetloc("Sell", "obj_shop_vending_reverse_slash_Other_11_gml_8_0"), 10), new vending_menu_option(stringsetloc("Swell", "obj_shop_vending_reverse_slash_Other_11_gml_9_0"), 4, "swell"), new vending_menu_option(stringsetloc("Exit", "obj_shop_vending_reverse_slash_Other_11_gml_10_0"), 99)];
-item_list = [];

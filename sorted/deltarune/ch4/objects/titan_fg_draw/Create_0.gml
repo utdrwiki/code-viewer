@@ -1,9 +1,0 @@
-depth = 205;
-image_alpha = 0;
-timer = 0;
-con = 0;
-headsprite = 0;
-headindex = 0;
-headx = 0;
-heady = 0;
-alpha2 = 0;

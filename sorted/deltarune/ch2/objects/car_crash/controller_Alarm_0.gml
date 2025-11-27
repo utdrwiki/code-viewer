@@ -1,1 +1,0 @@
-release_car = true;

@@ -1,9 +1,0 @@
-tilecon = 0;
-tilechoice = 0;
-turnender = 1;
-turnended = 0;
-active = 1;
-timer = 0;
-timesdrunk = 0;
-timestodrink = 7;
-depth = 850000;

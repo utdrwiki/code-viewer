@@ -1,1 +1,0 @@
-deleteCars = 1;

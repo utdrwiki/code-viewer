@@ -1,1 +1,0 @@
-animsiner = 0;

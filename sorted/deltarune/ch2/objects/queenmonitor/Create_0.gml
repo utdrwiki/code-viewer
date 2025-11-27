@@ -1,9 +1,0 @@
-siner = 0;
-talking = 0;
-talkframe = 0;
-con = 0;
-timer = 0;
-turnon = 0;
-turnoff = 0;
-xscale = 0;
-yscale = 0;

@@ -1,1 +1,0 @@
-doorPreset = 2;

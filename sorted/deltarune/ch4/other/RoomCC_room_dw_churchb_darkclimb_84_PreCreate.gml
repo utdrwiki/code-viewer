@@ -1,1 +1,0 @@
-extflag = "krclimb_pointofnoreturn";

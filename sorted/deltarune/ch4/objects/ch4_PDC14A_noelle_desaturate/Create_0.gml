@@ -1,9 +1,0 @@
-con = -1;
-marker_objects = [];
-marker_sprites = [];
-marker_exceptions = [3595, 5116, 2241, 1415];
-snowflakes = [];
-snowflakes_start = false;
-snowflakes_stop = false;
-snowflakes_stop_fast = false;
-vent_tiles = layer_tilemap_get_id(layer_get_id("TILES_Vents"));

@@ -1,1 +1,0 @@
-global.mnfight = 1;

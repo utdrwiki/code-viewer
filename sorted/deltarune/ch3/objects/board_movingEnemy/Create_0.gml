@@ -1,9 +1,0 @@
-anchor = instance_create(x, y, obj_board_anchor);
-remmoving = 0;
-remphase = 0;
-event = 0;
-dir = 0;
-moving = 0;
-type = 0;
-tiledone = 0;
-tilecon = 0;

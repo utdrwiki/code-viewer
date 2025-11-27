@@ -1,3 +1,0 @@
-if (shelfinit == 0)
-{
-}

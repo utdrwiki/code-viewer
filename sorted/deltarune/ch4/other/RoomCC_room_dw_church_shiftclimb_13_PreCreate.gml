@@ -1,1 +1,0 @@
-doreset = true;

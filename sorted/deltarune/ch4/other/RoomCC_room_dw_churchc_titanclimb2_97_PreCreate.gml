@@ -1,1 +1,0 @@
-tower2 = true;

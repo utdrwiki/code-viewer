@@ -1,1 +1,0 @@
-extflag = "TRIGGER_BLACKOUT";

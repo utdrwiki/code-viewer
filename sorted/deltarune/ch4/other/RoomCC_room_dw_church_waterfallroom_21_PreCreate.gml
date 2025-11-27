@@ -1,2 +1,0 @@
-extflag = "endswitch";
-pushonce = true;

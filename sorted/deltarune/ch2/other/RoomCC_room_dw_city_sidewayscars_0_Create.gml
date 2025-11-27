@@ -1,1 +1,0 @@
-cartype = "right";

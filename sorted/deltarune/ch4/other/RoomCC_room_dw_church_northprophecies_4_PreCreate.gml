@@ -1,1 +1,0 @@
-extflag = "knight1temp";

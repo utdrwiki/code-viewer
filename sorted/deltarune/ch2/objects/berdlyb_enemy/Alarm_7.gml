@@ -1,1 +1,0 @@
-bumpwait = 0;

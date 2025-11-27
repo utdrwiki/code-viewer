@@ -1,2 +1,0 @@
-lastx = camerax();
-lasty = cameray();

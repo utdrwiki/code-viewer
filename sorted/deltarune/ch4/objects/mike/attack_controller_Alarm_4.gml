@@ -1,1 +1,0 @@
-hits[action] += 1;

@@ -1,2 +1,0 @@
-open = false;
-photo = true;

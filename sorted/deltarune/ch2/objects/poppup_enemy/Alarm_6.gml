@@ -1,1 +1,0 @@
-animspeed = 0;

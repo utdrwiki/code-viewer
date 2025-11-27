@@ -7,7 +7,7 @@
         <script src="/static/search.js"></script>
     </head>
     <body>
-        <div class="content">
+        <main>
             <h1>{{ game }} script viewer</h1>
         
             {% include 'partials/search.html' %}
@@ -41,7 +41,7 @@
                     </tbody>
                 </table>
             {% endfor %}
-        </div>
+        </main>
 
         <footer>
             {% include 'partials/info.html' %}

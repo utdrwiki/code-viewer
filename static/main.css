@@ -144,7 +144,11 @@ fieldset p {
 	column-gap: 0.5rem;
 }
 
-.content {
+fieldset legend {
+    padding: 0 1rem;
+}
+
+main {
 	padding: 2rem;
 }
 

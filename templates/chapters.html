@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/static/index.css" />
     </head>
     <body>
-        <div class="content">
+        <main>
             <h1>{{ game }} script viewer</h1>
 
             <ul>
@@ -14,7 +14,7 @@
                     <li><a href="/{{ chapter_id }}/">{{ chapter }}</a></li>
                 {% endfor %}
             </ul>
-        </div>
+        </main>
 
         <footer>
             {% include 'partials/info.html' %}

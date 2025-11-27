@@ -1,0 +1,17 @@
+event_inherited();
+slowing = 30;
+owner = -4;
+timer = 0;
+con = 0;
+targex = 0;
+targey = 0;
+type = 0;
+siner = 0;
+count = 0;
+fade = 0;
+image_xscale = 0.5;
+image_yscale = 0.5;
+image_blend = c_gray;
+image_speed = 0;
+damage = 55;
+grazepoints = 5;

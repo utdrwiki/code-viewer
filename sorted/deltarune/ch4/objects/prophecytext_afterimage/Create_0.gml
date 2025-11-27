@@ -1,0 +1,9 @@
+mystring = "BUT LO, ON HOPES AND#DREAMS THEY SEND.";
+scale = 2;
+alpha = 1;
+xoff = 0;
+yoff = 0;
+color = c_white;
+color2 = 16776960;
+font = 7;
+daddy = 0;

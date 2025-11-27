@@ -1,0 +1,15 @@
+var cx = camerax();
+var cy = cameray();
+var camwidth = camerawidth();
+var camheight = cameraheight();
+var width = sprite_get_width(spr_titan_background_spotlight);
+var xscale = 2;
+var xoff = 60;
+var xoff2 = xoff + (width * xscale);
+draw_set_color(c_black);
+draw_set_alpha(background_spotlight_alpha);
+ossafe_fill_rectangle(cx, cy, (cx + xoff) - 1, cy + camheight, 0);
+ossafe_fill_rectangle(cx + xoff2, cy, cx + camwidth, cy + camheight, 0);
+draw_sprite_ext(spr_titan_background_spotlight, 0, cx + xoff, cy, xscale, 2, 0, c_black, background_spotlight_alpha);
+draw_set_color(c_white);
+draw_set_alpha(1);

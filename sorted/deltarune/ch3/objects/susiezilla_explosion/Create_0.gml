@@ -1,0 +1,9 @@
+height = 0;
+hitboxA = 0;
+hitboxB = 0;
+reflected = 0;
+init = 0;
+silent = false;
+image_xscale = 2;
+image_yscale = 2;
+image_speed = 0.5;

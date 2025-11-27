@@ -1,0 +1,9 @@
+image_xscale = 2;
+image_yscale = 2;
+image_index = 2;
+sprite_index = spr_kris_ride_2;
+flash = -4;
+timer = 0;
+siner = 0;
+con = 0;
+shootcon = 0;

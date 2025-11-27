@@ -1,0 +1,10 @@
+canceltimer = 0;
+canceltime = 15;
+instructionLerp = 0;
+appear = true;
+selection = 0;
+retrytime = 45;
+replayversion = true;
+timer = 0;
+con = 0;
+quit = false;

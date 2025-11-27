@@ -1,0 +1,11 @@
+event_inherited();
+wheeloptions = 3;
+quizno1 = 0;
+quizno2 = 0;
+quizno3 = 0;
+quizno4 = 0;
+quizno5 = 0;
+quizno6 = 0;
+quizno7 = 0;
+quizno8 = 0;
+quizno9 = 0;

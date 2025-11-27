@@ -1,0 +1,10 @@
+surf_textured = -1;
+tile_object = 364;
+base_texture = 88;
+scroll_texture = 991;
+fade_time_seconds = 4;
+fade_from = 0;
+fade_to = 1;
+scroll_speed = 1;
+tick = 0;
+intro_mode = false;

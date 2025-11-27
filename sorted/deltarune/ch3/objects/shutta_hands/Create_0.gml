@@ -1,0 +1,2 @@
+open = false;
+photo = true;

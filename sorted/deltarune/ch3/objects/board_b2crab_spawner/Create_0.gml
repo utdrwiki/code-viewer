@@ -1,0 +1,11 @@
+timer = 0;
+siner = 0;
+crab = 0;
+con = 0;
+image_speed = 0;
+scale = 2;
+special = 0;
+depth = 999990;
+donetimer = 0;
+done = 0;
+image_alpha = 0;

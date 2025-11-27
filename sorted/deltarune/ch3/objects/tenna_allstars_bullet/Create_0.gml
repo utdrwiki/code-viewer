@@ -1,0 +1,13 @@
+scr_bullet_init();
+element = 5;
+destroyonhit = true;
+active = false;
+timer = 0;
+laugh_timer = 0;
+state = 0;
+mydir = 0;
+size = 0;
+grazepoints = 5;
+image_xscale = 0;
+image_yscale = 0;
+image_alpha = 0;

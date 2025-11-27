@@ -1,0 +1,12 @@
+scr_darksize();
+image_speed = 0;
+scr_board_depth();
+legregion = instance_create(x, y, obj_board_trigger);
+legged = true;
+con = 0;
+timer = 0;
+fakey = 0;
+runtimer = 0;
+run = 0;
+triga = 0;
+trigb = 0;

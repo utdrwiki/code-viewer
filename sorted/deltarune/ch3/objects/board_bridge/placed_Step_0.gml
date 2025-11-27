@@ -1,0 +1,2 @@
+if (permaactive)
+    active = true;

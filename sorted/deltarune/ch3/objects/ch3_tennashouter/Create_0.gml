@@ -1,0 +1,12 @@
+mystring = stringsetloc("* HERE'S JUST ONE LINE!!", "obj_ch3_tennashouter_slash_Create_0_gml_4_0");
+d = 0;
+timer = 0;
+init = 0;
+depth = -10;
+animindex = 0;
+boxwid = 570;
+boxheight = 72;
+boxlife = string_length(mystring) * 3;
+customlife = -1;
+myboxsize = 1;
+side = 1;

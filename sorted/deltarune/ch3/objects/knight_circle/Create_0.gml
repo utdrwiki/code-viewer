@@ -1,0 +1,14 @@
+circle_size = 0;
+r = 128;
+g = 0;
+b = 0;
+r_goal = 0;
+g_goal = 0;
+b_goal = 0;
+fade_time = 28;
+size_goal = 960;
+growth = 40;
+my_surface = -4;
+color_1 = 0;
+color_2 = 255;
+draw_in_box = true;

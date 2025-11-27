@@ -1,0 +1,12 @@
+myinteract = 0;
+roomtarg = 270;
+entrance = 0;
+siner = 0;
+timer = 0;
+scr_darksize(id);
+image_speed = 0.125;
+scr_depth();
+depth += 4000;
+musfade = false;
+color = "pink";
+colinit = 0;

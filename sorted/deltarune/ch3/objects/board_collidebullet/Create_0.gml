@@ -1,0 +1,13 @@
+active = 1;
+destroyonhit = 1;
+damage = 3;
+grazed = 0;
+grazepoints = 1;
+timepoints = 0;
+inv = 120;
+target = 0;
+grazetimer = 0;
+element = 0;
+fadetime = -1;
+lifetimer = 0;
+updateangle = 0;

@@ -1,0 +1,14 @@
+event_inherited();
+element = 5;
+con = 0;
+timer = 0;
+topindex = irandom(12);
+botindex = irandom(12);
+shakeme = false;
+play_passing_sfx = true;
+image_speed = 0;
+fake = false;
+do_afterimage = false;
+r = 255;
+g = 255;
+b = 255;

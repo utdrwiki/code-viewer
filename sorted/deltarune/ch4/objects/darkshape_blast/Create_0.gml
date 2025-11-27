@@ -1,0 +1,10 @@
+my_surface = -4;
+hx = x;
+hy = y;
+tracking_val = 0;
+sparksize = 0;
+spd = 30;
+individuality = irandom(360);
+coolsize = 5;
+grazed = 1;
+grazepoints = 0;

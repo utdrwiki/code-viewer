@@ -1,0 +1,11 @@
+x4 = x3;
+y4 = y3;
+x3 = x2;
+y3 = y2;
+x2 = x1;
+y2 = y1;
+x1 = xprevious;
+y1 = yprevious;
+draw_sprite_ext(sprite_index, image_index, x4, y4, image_xscale, image_yscale, image_angle, image_blend, 0.33);
+draw_sprite_ext(sprite_index, image_index, x2, y2, image_xscale, image_yscale, image_angle, image_blend, 0.66);
+draw_self();

@@ -1,0 +1,15 @@
+depth = 999990;
+track = [];
+con = 2;
+timer = 0;
+transitiontime = 10;
+canflasherror = true;
+image_angle = (image_angle + 360) % 360;
+track_angle = image_angle;
+track_angle_target = track_angle;
+track_sprite = -1;
+trigger = -4;
+do_switch = false;
+center_x = x;
+center_y = y;
+image_speed = 0;

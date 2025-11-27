@@ -1,0 +1,13 @@
+display_set_gui_size(640, 480);
+vRatio = 1;
+var shader = 20;
+var u_vRatio = shader_get_uniform(shader, "u_vRatio");
+var u_amplitude = shader_get_uniform(shader, "u_amplitude");
+var u_angle = shader_get_uniform(shader, "u_angle");
+var angle = 3.14159265359;
+shader_set(shader);
+shader_set_uniform_f(u_vRatio, vRatio);
+shader_set_uniform_f(u_amplitude, amplitude);
+shader_set_uniform_f(u_angle, angle);
+draw_surface(application_surface, 0, 0);
+shader_reset();

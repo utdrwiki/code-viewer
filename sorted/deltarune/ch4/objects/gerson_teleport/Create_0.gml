@@ -1,0 +1,12 @@
+sprite_index = spr_gerson_teleport;
+alarm[0] = 4;
+image_xscale = 2;
+image_yscale = 2;
+depth = -999999;
+snd_stop(motor_swing_down);
+snd_play_pitch(motor_swing_down, 1.4);
+type = 0;
+first = 0;
+dir = 1;
+swingdowntype = 0;
+special = 0;

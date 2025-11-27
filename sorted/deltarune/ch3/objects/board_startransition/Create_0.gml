@@ -1,0 +1,10 @@
+image_speed = 0;
+distance = 120;
+rotation = 0;
+con = 0;
+targx = 0;
+targy = 0;
+starcount = 6;
+transitiontime = 20;
+randim = false;
+depth = 100000;

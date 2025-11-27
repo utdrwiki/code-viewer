@@ -1,0 +1,11 @@
+depth = 600000;
+light_type = 0;
+target = -4;
+tenna_active = false;
+ralsei_active = false;
+susie_active = false;
+susie_target = -4;
+tenna_base_x = -1;
+tenna_base_x_offset = 60;
+small_base_x = -1;
+tenna_y_offset = 315;

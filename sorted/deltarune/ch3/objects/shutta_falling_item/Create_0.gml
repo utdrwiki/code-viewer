@@ -1,0 +1,10 @@
+start_y = cameray() - sprite_height;
+final_y = y;
+y = start_y;
+fall_duration = 20;
+fall_time = 0;
+image_speed = 0;
+image_xscale = 2;
+image_yscale = 2;
+depth = obj_herosusie.depth + 1;
+falling = true;

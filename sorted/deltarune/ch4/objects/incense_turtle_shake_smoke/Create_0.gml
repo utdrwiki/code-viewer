@@ -1,0 +1,12 @@
+image_xscale = 1;
+image_yscale = 1;
+friction = 0.2;
+gravity_direction = 90;
+gravity = 0.3;
+image_speed = 0;
+image_angle = -50 + random(50);
+image_blend = make_color_rgb(241, 110, 170);
+timer = 0;
+h_speed = 0;
+image_index = 1;
+mode = 0;

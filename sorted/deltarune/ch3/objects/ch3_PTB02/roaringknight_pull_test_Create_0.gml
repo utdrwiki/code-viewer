@@ -1,0 +1,17 @@
+timer = 0;
+con = 0;
+init = 0;
+triheight = 0;
+handframe = 0;
+image_xscale = 2;
+image_yscale = 2;
+image_speed = 0;
+arm_sprite = 81;
+hand_x_pos = 0;
+hand_y_pos = 0;
+base_sprite = spr_roaringknight_reach_base;
+susie_active = false;
+susie_display = false;
+susie_grab_x = 0;
+susie_grab_y = 0;
+susie_grab_sfx = false;

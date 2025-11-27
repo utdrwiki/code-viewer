@@ -1,0 +1,16 @@
+drawaura = false;
+auraalph = 0;
+drawsiner = 0;
+waitsiner = 0;
+drawaura = false;
+autodepth = false;
+timer = 0;
+con = 0;
+encounterflag = 0;
+encounterno = 0;
+image_speed = 0;
+myspeed = 0;
+makeexcl = true;
+donebattle = false;
+remspeed = 0;
+remdir = 0;

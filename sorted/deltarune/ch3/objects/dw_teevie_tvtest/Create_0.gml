@@ -1,0 +1,9 @@
+x = 100;
+y = 100;
+width = 4;
+height = 3;
+timer = 0;
+init = 0;
+tvbasecolor = c_navy;
+tvbasesprite = spr_dw_teevie_tv_base_thin;
+mode = 0;

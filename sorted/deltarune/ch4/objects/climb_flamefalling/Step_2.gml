@@ -1,0 +1,1 @@
+setxy(x, y, mylight);

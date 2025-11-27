@@ -1,0 +1,10 @@
+scr_darksize();
+open = true;
+depth = 999999;
+timer = 0;
+rising = false;
+finishrising = false;
+drawlight = false;
+barcount = 0;
+myspeed = 10;
+doomtime = 92;

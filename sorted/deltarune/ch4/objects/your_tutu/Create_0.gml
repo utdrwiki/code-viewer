@@ -1,0 +1,2 @@
+attached = true;
+vanished = false;

@@ -1,0 +1,11 @@
+timer = 0;
+con = 0;
+darkenalpha = 1;
+index = 0;
+_xprevious = 0;
+_yprevious = 0;
+draw_y = 8438;
+climbfaster = false;
+introtimer = 0;
+fallingoff = false;
+depth = obj_rotating_tower_controller_new.depth + 40;

@@ -1,0 +1,11 @@
+event_inherited();
+slowing = 30;
+owner = -4;
+timer = random(10);
+base = random(1) - 0.5;
+vspeed = 1.5;
+drift = 2;
+driftrate = 11;
+image_xscale = 2;
+image_yscale = 2;
+destroyonhit = false;

@@ -1,0 +1,10 @@
+event_inherited();
+slowing = 30;
+owner = -4;
+grazepoints = 6;
+timer = 0;
+tilt = random(pi);
+image_angle = sin(tilt) * 12;
+interval = -1;
+base = random(360);
+overpower = 0;

@@ -1,0 +1,10 @@
+timer = 0;
+siner = 0;
+con = 0;
+chaser = 0;
+width = 880;
+margin = 80;
+l_region = 0;
+r_region = l_region + width + (margin * 2);
+makeindex = -1;
+trig = "";

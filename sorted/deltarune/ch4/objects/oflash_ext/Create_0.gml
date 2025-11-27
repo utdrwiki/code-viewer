@@ -1,0 +1,9 @@
+flashspeed = 1;
+siner = 0;
+target = -4;
+image_speed = 0;
+image_alpha = 1;
+fadetimer = 0;
+fadetime = 15;
+myblend = 0;
+killtimer = 30;

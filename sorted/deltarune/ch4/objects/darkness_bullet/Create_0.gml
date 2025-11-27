@@ -1,0 +1,17 @@
+destroyoffscreen = true;
+tolerance = 0;
+active = 1;
+image_alpha = 0;
+timer = 0;
+damage = 18;
+target = 0;
+lightBullet = false;
+dark_sprite = 1086;
+image_speed = 1/3;
+init = false;
+depth = obj_darkness_overlay.depth + 10;
+do_mask = true;
+despawning = false;
+startspeed = 0;
+destroytimer = 0;
+special = 0;

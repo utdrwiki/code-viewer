@@ -1,0 +1,12 @@
+image_alpha = 0;
+active = false;
+init = 0;
+con = 0;
+timer = 0;
+kris = 0;
+kr_real = 0;
+visit = 0;
+made = false;
+musinit = 0;
+campancon = 0;
+draw_static = 0;

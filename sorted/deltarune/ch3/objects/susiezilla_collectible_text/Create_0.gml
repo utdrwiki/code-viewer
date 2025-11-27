@@ -1,0 +1,10 @@
+timer = 0;
+con = 0;
+score_text = 0;
+color_change = 0;
+init = 0;
+image_xscale = 1;
+image_yscale = 1;
+image_alpha = 1.3;
+depth = obj_susiezilla.depth - 99999;
+stringtimer = 0;

@@ -1,0 +1,10 @@
+timer = 0;
+timer2 = 0;
+con = 0;
+con2 = 0;
+armypos = 0;
+armxpos = 0;
+drawpos = 0;
+playsnapsnd = true;
+snapped = 0;
+animindex = 0;

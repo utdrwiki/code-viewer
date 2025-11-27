@@ -1,0 +1,4 @@
+instance_deactivate_all(true);
+instance_activate_object(obj_border_controller);
+instance_activate_object(obj_gamecontroller);
+instance_activate_object(obj_time);

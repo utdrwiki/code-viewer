@@ -1,0 +1,16 @@
+timer = 0;
+con = 0;
+dir = 0;
+image_alpha = 0;
+scr_bullet_init();
+destroyonhit = 0;
+damage = 10;
+grazepoints = 2;
+timepoints = 1;
+spinspeed = 4;
+speedtowardscenter = 0.4;
+len = 70;
+sinpower = 65;
+sinspeed = 24;
+shrinkrate = 0;
+lenstart = len;

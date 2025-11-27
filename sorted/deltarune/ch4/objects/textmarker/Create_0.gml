@@ -1,0 +1,10 @@
+mystring = "string";
+font = scr_84_get_font("main");
+outline = false;
+outlinecol = 0;
+textcol = 16777215;
+hjustify = 1;
+vjustify = 1;
+clampeven = false;
+alpha = 1;
+scale = 1;

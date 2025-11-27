@@ -1,0 +1,13 @@
+fun = 0;
+functionalfun = 0;
+funspeed = 0.1;
+scr_darksize(id);
+scr_depth();
+empty = 0.35;
+half = 0.65;
+full = 0.95;
+maxed = true;
+siner = 0;
+hope = false;
+shaking = false;
+shakecon = 0;

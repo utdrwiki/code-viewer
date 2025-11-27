@@ -1,0 +1,1 @@
+maxwalkspeed = 4;

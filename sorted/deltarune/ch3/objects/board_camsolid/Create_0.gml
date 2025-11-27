@@ -1,0 +1,14 @@
+mysolid = 0;
+init = 0;
+active = false;
+scr_darksize();
+amsolid = true;
+image_speed = 0;
+mysolid[0] = 0;
+mysolid[1] = 0;
+mysolid[2] = 0;
+mysolid[3] = 0;
+s_active[0] = true;
+s_active[1] = true;
+s_active[2] = true;
+s_active[3] = true;

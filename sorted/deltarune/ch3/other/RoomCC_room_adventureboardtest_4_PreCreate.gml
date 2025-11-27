@@ -1,0 +1,2 @@
+shift = "down";
+extflag = "loop";

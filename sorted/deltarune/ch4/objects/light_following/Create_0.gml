@@ -1,0 +1,9 @@
+size = 80;
+siner = 0;
+target = -4;
+preset = -1;
+followtype = 1;
+lerpstrength = 0.2;
+xoff = 0;
+yoff = 0;
+lightalpha = 1;

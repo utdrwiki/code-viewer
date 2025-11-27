@@ -1,0 +1,17 @@
+scr_bullet_init();
+damage = 40;
+timer = 0;
+con = 0;
+type = 2;
+dir = 0;
+image_xscale = 1;
+image_yscale = 1;
+image_angle = 180;
+image_alpha = 0;
+depth = -99999;
+fakex = 0;
+fakehspeed = -10;
+fakealpha = 0;
+fadecon = 0;
+breakcon = 0;
+fadealpha = 0;

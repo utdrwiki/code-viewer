@@ -1,0 +1,9 @@
+con = 0;
+max_radius = 20;
+radius = 10;
+rim = 4;
+siner = 0;
+sin_size = 3;
+sin_speed = 10;
+gravity = -0.5;
+friction = 0.1;

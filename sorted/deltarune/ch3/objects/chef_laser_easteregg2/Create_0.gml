@@ -1,0 +1,10 @@
+timer = 0;
+timermax = 150;
+con = 0;
+giant = 0;
+image_alpha2 = 0;
+hspeed = 6;
+image_xscale = 2;
+image_yscale = 2;
+snd_stop(snd_heartshot_dr_b);
+snd_play_x(snd_heartshot_dr_b, 0.7, 0.8);

@@ -1,0 +1,11 @@
+con = 0;
+customcon = 0;
+depth = 6000;
+kris_marker = scr_dark_marker(280, 316, spr_kris_rock_2);
+susie_marker = scr_dark_marker(56, 281, spr_susie_drum);
+ralsei_marker = scr_dark_marker(486, 304, spr_ralsei_rock_1);
+audience_cheer = instance_create(0, 0, obj_ch3_audience);
+audience_cheer.audience_active = true;
+audience_cheer.blend_mode = 13788985;
+audience_cheer.base_y_pos = cameray() + view_hport[0] + 300;
+audience_cheer.rose_throw_full_width = true;

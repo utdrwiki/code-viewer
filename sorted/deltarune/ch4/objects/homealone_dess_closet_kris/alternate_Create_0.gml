@@ -1,0 +1,10 @@
+kris_idle = true;
+kris_swing = false;
+kris_ready = false;
+image_speed = 0;
+animate_timer = 0;
+pickup_stick = false;
+stick_marker = scr_marker(170, 117, spr_noellehouse_dess_hockey_stick);
+stick_marker.depth = 98800;
+stick_marker.image_angle = 90;
+press_santa = false;

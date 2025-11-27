@@ -1,0 +1,10 @@
+event_inherited();
+con = 0;
+timer = 0;
+anim_index = 0;
+fakehspeed = 0;
+fakevspeed = 0;
+fakegravity = 0;
+gigahammer = false;
+drop = false;
+true_drop = false;

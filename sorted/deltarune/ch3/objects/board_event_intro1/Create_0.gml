@@ -1,0 +1,15 @@
+depth = 100010;
+active = false;
+con = 0;
+timer = 0;
+siner = 0;
+init = 0;
+tenna = 0;
+susie = 0;
+kris = 0;
+ralsei = 0;
+krboard = 0;
+triggercount = 0;
+suwalk = 0;
+suwalktimer = 0;
+raboard = 0;

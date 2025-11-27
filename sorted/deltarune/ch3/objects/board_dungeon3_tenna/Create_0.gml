@@ -1,0 +1,10 @@
+active = false;
+con = 0;
+kris = 0;
+dist = 100000000000000000000000000;
+scr_depth_board();
+scr_darksize();
+debug_quickwarp = 0;
+mus_stop = 0;
+stopperblock = 0;
+blocker = 0;

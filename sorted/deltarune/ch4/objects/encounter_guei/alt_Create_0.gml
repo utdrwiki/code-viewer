@@ -1,0 +1,12 @@
+timer = 0;
+made = 0;
+depth = 500;
+activealpha = 1;
+active = true;
+timer = 0;
+siner = 0;
+con = 0;
+chaser = 0;
+encounterno = 150;
+encounterflag = 600;
+btimer = 0;

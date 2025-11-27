@@ -1,0 +1,10 @@
+alpha = 1.5;
+lifetime = 180;
+maxsize = 600;
+cursize = 0;
+init = -1;
+depth = 1999000;
+color = c_lime;
+ripplecount = 1;
+ripplethicc = 6;
+grow_speed = 1;

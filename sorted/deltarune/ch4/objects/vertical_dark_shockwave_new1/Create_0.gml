@@ -1,0 +1,17 @@
+event_inherited();
+damage = 18;
+target = 3;
+spd = 0;
+yoffset = 0;
+_xoffset = 0;
+_yoffset = 0;
+timer = 0;
+siner = 0;
+con = 1;
+position = "above";
+hitboxcreated = false;
+image_speed = 0;
+image_xscale = 0;
+image_yscale = 0;
+image_index = 1;
+snd_play(snd_spearrise);

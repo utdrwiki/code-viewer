@@ -1,0 +1,11 @@
+animsiner = 0;
+animsinerb = 0;
+animtimer = 0;
+flash = 0;
+fsiner = 0;
+armshake = 1;
+armshakesiner = 0;
+image_xscale = 2;
+image_yscale = 2;
+image_speed = 0;
+image_index = 0;

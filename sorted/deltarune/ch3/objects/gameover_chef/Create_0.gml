@@ -1,0 +1,9 @@
+con = -1;
+gameover_parent = instance_find(obj_gameover_minigame, 0);
+tenna = -4;
+init = false;
+gameover_sequence = 1;
+make_writer = false;
+times_lost = scr_flag_get(1089);
+bg_colorize = false;
+is_replay_gameover = false;

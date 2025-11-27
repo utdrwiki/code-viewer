@@ -1,0 +1,2 @@
+myString = "L";
+jaString = "S";

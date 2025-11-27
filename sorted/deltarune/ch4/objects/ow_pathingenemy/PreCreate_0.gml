@@ -1,0 +1,11 @@
+event_inherited();
+r_movetype = -1;
+r_movevistype = -1;
+r_dir = -1;
+r_waittime = -1;
+r_waittimer = -1;
+r_movetime = -1;
+r_movetimer = -1;
+r_prefdir = "none";
+r_influenceable = -1;
+r_homedistance = -1;

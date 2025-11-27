@@ -1,0 +1,1 @@
+menu_list = [new vending_menu_option(stringsetloc("Exchange", "obj_shop_vending_ranking_slash_Other_11_gml_7_0"), 4, "exchange", 1), new vending_menu_option(stringsetloc("Exit", "obj_shop_vending_ranking_slash_Other_11_gml_8_0"), 99)];

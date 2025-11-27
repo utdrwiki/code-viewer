@@ -1,0 +1,11 @@
+direction = 90;
+timer = 10;
+image_blend = c_red;
+destroyoffscreen = false;
+light_mode = false;
+double_mode = false;
+double_flip = false;
+init = 0;
+shot_angle = 0;
+true_angle = 0;
+image_speed = 0;

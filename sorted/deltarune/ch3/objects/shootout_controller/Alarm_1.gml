@@ -1,0 +1,1 @@
+kris_invincible = false;

@@ -1,0 +1,13 @@
+size = 80;
+littlesize = 80;
+bigsize = 180;
+timer = 0;
+maxtimer = 80;
+timebuffer = 20;
+con = 0;
+siner = 0;
+growtime = 0;
+timetogrow = 15;
+lightalpha = 1;
+depth = 0;
+init = 0;

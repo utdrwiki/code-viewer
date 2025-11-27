@@ -1,0 +1,13 @@
+smallerLight = 0;
+biggerLight = 0;
+siner = irandom(120);
+radius = 220;
+image_speed = 0.16666666666666666;
+image_xscale = 0.25;
+image_xscale = 0.25;
+grow = true;
+timer = 0;
+follow_x_target = obj_mainchara.x + 18;
+light_con = 0;
+edge_right = 32;
+edge_left = 60;

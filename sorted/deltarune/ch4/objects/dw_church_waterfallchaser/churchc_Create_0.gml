@@ -1,0 +1,13 @@
+timer = 0;
+con = 0;
+siner = round(x / y) + x + y;
+target = 0;
+sinertarg = 30;
+image_speed = 0.25;
+scr_darksize();
+init = 0;
+targx = 0;
+targy = 0;
+startx = x;
+starty = y;
+sprite_index = spr_dw_church_enemy_spawn_nooutline;

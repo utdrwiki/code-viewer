@@ -1,0 +1,12 @@
+randx = -8 + irandom(16);
+randy = -8 + irandom(16);
+grazepoints = 2;
+event_inherited();
+element = 3;
+spent = 0;
+owner = -4;
+strong = false;
+updateimageangle = false;
+timer = 0;
+slowdown = false;
+gotopointer = false;

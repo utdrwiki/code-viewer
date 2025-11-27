@@ -1,0 +1,11 @@
+event_inherited();
+x1 = -1;
+y1 = -1;
+x2 = 40;
+y2 = 40;
+r_traveltime = -1;
+r_travelstyle = -1;
+extflag = "1";
+extflag2 = "2";
+oneway = false;
+exitmarkerflag = "none";

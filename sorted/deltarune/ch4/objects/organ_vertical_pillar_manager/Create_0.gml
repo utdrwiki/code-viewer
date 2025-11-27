@@ -1,0 +1,11 @@
+interval = 35;
+start_time = 40;
+segment = irandom(5);
+first_segment = segment;
+second_segment = segment;
+creatorid = -1;
+difficulty = 0;
+pop = 1;
+bar_surface = -1;
+onlybars = false;
+depth = obj_growtangle.depth - 1;

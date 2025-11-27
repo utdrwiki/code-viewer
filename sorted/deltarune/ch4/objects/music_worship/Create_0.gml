@@ -1,0 +1,16 @@
+music = 0;
+track1 = 0;
+track2 = 0;
+init = 0;
+con = 0;
+timer = 0;
+targtime = 30;
+changecount = 0;
+song = "church_hymn.ogg";
+astream = 0;
+fade = 0;
+tracklength = 34;
+pause = 0;
+resume = 0;
+memval1 = 0;
+memval2 = 0;

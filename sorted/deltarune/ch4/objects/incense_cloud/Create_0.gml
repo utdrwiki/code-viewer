@@ -1,0 +1,17 @@
+scr_bullet_init();
+image_speed = 1;
+image_xscale = choose(1, -1);
+image_yscale = choose(1, -1);
+current_angle = 0;
+rotate_ratio = 1;
+distance_goal = 120;
+distance = 120;
+individual_value = irandom(13);
+timer = 0;
+dietimer = 0;
+con = 0;
+type = 1;
+alpha1 = 0;
+alpha2 = 0;
+grazetimer = 0;
+grazepoints = 1.5;

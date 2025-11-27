@@ -1,0 +1,10 @@
+curx = x;
+cury = y;
+targx = x;
+targy = y;
+timer = 0;
+con = 0;
+sprite_index = spr_npc_burgerpants_stand_rain;
+blursprite = 2226;
+init = 0;
+cookie_timer = 0;

@@ -1,0 +1,1 @@
+specialtalkcon = 10;

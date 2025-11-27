@@ -1,0 +1,9 @@
+image_speed = 0;
+image_index = 0;
+delay = 15;
+timer = 0;
+fastmode = 0;
+i = 0;
+_y = 0;
+_yspeed = 0;
+_ygrav = 0;

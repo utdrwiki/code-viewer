@@ -1,0 +1,13 @@
+scr_board_enemy_init();
+dashcon = 0;
+dashtimer = 0;
+angle = 0;
+show_outline = false;
+silverfish = false;
+silverfishcon = 0;
+invincibility_frames = 0;
+test = -1;
+damage_hitbox.image_xscale = 1;
+damage_hitbox.image_yscale = 1;
+sword_immunity_lv = 2;
+board_1_type = 0;

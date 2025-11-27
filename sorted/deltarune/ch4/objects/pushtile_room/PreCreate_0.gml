@@ -1,0 +1,10 @@
+event_inherited();
+bossObject = obj_room_dw_city_postbaseball;
+pushVariableName = "switch1con";
+pushVariableDown = 1;
+pushVariableUp = 0;
+pushType = 0;
+self.pushChar[0] = obj_mainchara;
+self.pushChar[1] = obj_caterpillarchara;
+self.pushChar[2] = obj_actor;
+pushSound = snd_noise;

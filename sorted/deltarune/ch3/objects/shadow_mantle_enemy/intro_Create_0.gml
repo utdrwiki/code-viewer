@@ -1,0 +1,10 @@
+timer = 0;
+con = 0;
+len = 200;
+snd_play(snd_ghostappear);
+siner = 0;
+image_speed = 0.25;
+depth = 800000;
+live = 0;
+laugh = 0;
+love = 0;

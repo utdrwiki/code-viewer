@@ -1,0 +1,11 @@
+image_index = irandom(sprite_get_number(sprite_index) - 1);
+image_speed = 0;
+direction = 0;
+speed = random_range(1, 3);
+image_angle = random(360);
+image_xscale = random_range(2, 3) * (1 - (irandom(1) * 2));
+image_yscale = image_xscale * (1 - (irandom(1) * 2));
+rot = 0;
+life = irandom_range(60, 120);
+lifeD = life;
+speed *= image_xscale;

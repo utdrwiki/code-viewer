@@ -1,0 +1,17 @@
+is_animated = true;
+sign_x_pos = 160;
+sign_y_pos = -174;
+sign_anim = 0;
+sign_drop = false;
+sign_alpha = 1;
+sign_gray_alpha = 0;
+banner_x_pos = 160;
+banner_y_pos = -82;
+banner_drop = false;
+banner_alpha = 1;
+banner_gray_alpha = 0;
+banner_dark_alpha = 0;
+normal_mode = true;
+gray_mode = false;
+recovery_mode = false;
+killed_alpha = 0;

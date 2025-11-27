@@ -1,0 +1,15 @@
+siner = 0;
+animsiner = 0;
+fsiner = 0;
+eyetimer = 0;
+eyetimer = 0;
+eyex = 0;
+eyey = 0;
+targetEyeX = 0;
+targetEyeY = 0;
+scr_darksize(id);
+init = 0;
+talked = 0;
+timer = 0;
+trig = -4;
+con = 0;

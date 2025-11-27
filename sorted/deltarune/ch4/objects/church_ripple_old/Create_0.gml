@@ -1,0 +1,10 @@
+alpha = 1.5;
+lifetime = 30;
+maxsize = 240;
+cursize = 0;
+init = 0;
+depth = 1999000;
+color = c_aqua;
+ripplecount = 3;
+ripplethicc = 4;
+dodraw = true;

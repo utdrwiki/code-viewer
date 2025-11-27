@@ -1,0 +1,13 @@
+event_inherited();
+damage = 18;
+target = 3;
+timer = 0;
+siner = 0;
+con = 0;
+laser_xscale = 0;
+position = "above";
+hitboxcreated = false;
+image_speed = 0;
+image_xscale = 0;
+image_yscale = 0;
+image_index = 1;

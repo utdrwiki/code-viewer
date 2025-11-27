@@ -1,0 +1,12 @@
+settinga = 0;
+settingb = 0;
+typingstyle = 0;
+typingspeed = 3;
+typingnoise = 190;
+charshake = 1;
+init = 0;
+chartimer = -1;
+charmax = 1;
+typingfinished = 0;
+writerfinished = 0;
+image_speed = 0;

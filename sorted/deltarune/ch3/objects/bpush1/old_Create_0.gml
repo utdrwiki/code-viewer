@@ -1,0 +1,13 @@
+image_alpha = 0;
+active = false;
+init = 0;
+con = 0;
+timer = 0;
+kr_mem = 0;
+su_mem = 0;
+ra_mem = 0;
+kr = 0;
+su = 0;
+ra = 0;
+bubbletimer = 0;
+depth = 5000;

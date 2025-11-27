@@ -1,0 +1,13 @@
+event_inherited();
+scr_darksize();
+myhealth = 3;
+hitbuff = 0;
+open = 0;
+myinteract = 0;
+timer = 0;
+messagecount = 1;
+mymessage = stringsetloc("* FOUND THE SECRET OF \"MICHAEL.\"&* ALL MICHAELS NOW ADDED TO INVENTORY./%%", "obj_board_treasure_slash_Create_0_gml_18_0");
+drawblack = 0;
+boxy = 0;
+buffer = 0;
+depth = 999980;

@@ -1,0 +1,16 @@
+image_xscale = 2;
+image_yscale = 2;
+idle = spr_kris_rock_2;
+low = spr_kris_guitar;
+mid = spr_kris_guitar_high;
+high = spr_kris_guitar_high_hold;
+loop = false;
+rhythmer = -4;
+animspeed = 1;
+main_speed = 0;
+silhouette = false;
+shakeamt = 0;
+shakereduct = 2;
+on = 1;
+name = "kris";
+marker = -4;

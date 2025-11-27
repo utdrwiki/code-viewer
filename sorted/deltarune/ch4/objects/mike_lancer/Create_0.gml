@@ -1,0 +1,10 @@
+act = 0;
+gravity = 1;
+xscale = [1, 1, 1, 1];
+yscale = [1, 1, 1, 1];
+wobble = 0;
+image_speed = 0.5;
+hits = 0;
+max_hits = 5;
+image_xscale = 2;
+image_yscale = 2;

@@ -1,0 +1,1 @@
+talktimer = 0;

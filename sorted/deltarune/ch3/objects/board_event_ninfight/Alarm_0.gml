@@ -1,0 +1,3 @@
+with (obj_astream)
+{
+}

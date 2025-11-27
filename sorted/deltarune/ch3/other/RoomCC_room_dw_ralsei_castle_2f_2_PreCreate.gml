@@ -1,0 +1,1 @@
+doorSound = snd_splat;

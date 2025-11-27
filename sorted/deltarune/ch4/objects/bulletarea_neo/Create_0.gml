@@ -1,0 +1,10 @@
+depth = 777777;
+active = 0;
+cancel = 0;
+onlyActiveIfBulletsExist = 0;
+onlyActiveIfSpecialObjectExists = 0;
+specialObject = 0;
+timer = 0;
+ignorebuffer = 0;
+battlemode = 0;
+init = 0;

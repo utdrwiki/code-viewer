@@ -1,0 +1,15 @@
+ss = 0.5;
+ssy = 0.5;
+auto += 2;
+autoy += 2;
+xoff = ((camerax() + auto) * ss) + xstart;
+yoff = ((cameray() + autoy) * ssy) + ystart;
+draw_set_blend_mode(bm_add);
+mytransparency = 0.1;
+var finalxoff = xoff % sprwidth;
+var finalyoff = yoff % sprheight;
+draw_sprite_ext(mysprite, 0, camerax() - finalxoff, cameray() - finalyoff, 2, 2, 0, c_white, mytransparency);
+draw_sprite_ext(mysprite, 0, (camerax() - finalxoff) + sprwidth, cameray() - finalyoff, 2, 2, 0, c_white, mytransparency);
+draw_sprite_ext(mysprite, 0, camerax() - finalxoff, (cameray() - finalyoff) + sprheight, 2, 2, 0, c_white, mytransparency);
+draw_sprite_ext(mysprite, 0, (camerax() - finalxoff) + sprwidth, (cameray() - finalyoff) + sprheight, 2, 2, 0, c_white, mytransparency);
+draw_set_blend_mode(bm_normal);

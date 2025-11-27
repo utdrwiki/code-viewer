@@ -1,0 +1,13 @@
+con = 0;
+parentid = -4;
+timer = 0;
+siner = random(100);
+mercy = 0;
+loudringing = 0;
+image_alpha = 0;
+image_xscale = 0;
+image_yscale = 0.5;
+image_alpha2 = 0;
+image_alpha3 = 0;
+perfecthits = 0;
+bar_x = 0;

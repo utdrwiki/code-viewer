@@ -1,0 +1,18 @@
+scr_bullet_init();
+scr_darksize();
+image_speed = 0;
+swordcount = 1;
+countdowner = 29;
+countdown = 45;
+turn_type = "full";
+turn_segment = -1;
+next_up = -1;
+next_next_up = -1;
+turn_time = 160;
+local_turntimer = 0;
+anchor_x = x;
+anchor_y = y;
+dip = 2;
+difficulty = 0;
+forcexfix = false;
+_siner = 0;

@@ -1,0 +1,10 @@
+timer = 0;
+con = 0;
+scr_depth();
+siner = 0;
+mylight = 0;
+bulletcounter = 0;
+init = 0;
+fakey = -15;
+lanterntype = 0;
+rand = irandom(100);

@@ -1,0 +1,11 @@
+myinteract = 0;
+talked = 0;
+image_speed = 0;
+close = 0;
+extratext = 0;
+extraevent = 0;
+scr_darksize();
+scr_depth();
+init = 0;
+flag = false;
+makepoints = false;

@@ -1,0 +1,15 @@
+active = 0;
+con = 0;
+timer = 0;
+image_xscale = 1;
+image_yscale = 1;
+move_towards_point(obj_susiezilla.x, obj_susiezilla.y - 30, 4);
+height = 10;
+y += 10;
+damage = 100;
+give_invincibility = 18;
+give_hurt = 12;
+hit_direction = -1;
+knockback = 0;
+destroy_on_hit = 1;
+depth = 100000 - (((y - 20) * 10) + ((sprite_height - sprite_yoffset) * 10));

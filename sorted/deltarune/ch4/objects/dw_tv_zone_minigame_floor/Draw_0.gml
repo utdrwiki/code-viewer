@@ -1,0 +1,11 @@
+draw_set_color(c_black);
+ossafe_fill_rectangle(0, 0, room_width, 199);
+ossafe_fill_rectangle(0, 199, 39, room_height);
+ossafe_fill_rectangle(600, 199, room_width, room_height);
+ossafe_fill_rectangle(39, 440, 279, room_height);
+ossafe_fill_rectangle(360, 440, room_width, room_height);
+ossafe_fill_rectangle(-40, -40, 0, room_height);
+ossafe_fill_rectangle(room_width + 40, -40, room_width, room_height);
+ossafe_fill_rectangle(-40, -40, room_width, 0);
+ossafe_fill_rectangle(-40, room_height + 40, room_width, room_height);
+draw_set_color(c_white);

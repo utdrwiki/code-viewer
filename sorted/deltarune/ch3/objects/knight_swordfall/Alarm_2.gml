@@ -1,0 +1,17 @@
+scr_lerpvar("y", obj_knight_enemy.y + 120, obj_knight_enemy.y - 20, 30, 1, "out");
+scr_script_delayed(scr_lerpvar, 30, "y", obj_knight_enemy.y - 20, obj_knight_enemy.y + 10, 20, 2, "inout");
+scr_script_delayed(scr_lerpvar, 50, "y", obj_knight_enemy.y + 10, obj_knight_enemy.y, 10, 2, "inout");
+dip = 0;
+x = obj_knight_enemy.x + 10;
+image_xscale = 2;
+sprite_index = spr_roaringknight_sword_ol;
+image_angle = -90;
+scr_lerpvar("image_yscale", 0, -2, 4, 1, "in");
+scr_script_delayed(scr_lerpvar, 4, "image_yscale", -2, 0, 5, 1, "in");
+scr_script_delayed(scr_var, 9, "sprite_index", spr_roaringknight_attack_ol_center);
+scr_script_delayed(scr_var, 9, "image_angle", 0);
+scr_script_delayed(scr_var, 9, "image_xscale", 0);
+scr_script_delayed(scr_var, 9, "image_yscale", 2);
+scr_script_delayed(scr_lerpvar, 9, "image_xscale", 0, 2, 6, 1, "out");
+forcexfix = true;
+alarm[4] = 26;

@@ -1,0 +1,10 @@
+image_xscale = 2;
+image_yscale = 2;
+timer = 0;
+con = 0;
+damage = 2;
+mysolid = 0;
+active_hitbox = true;
+parentid = -1;
+destroyonhit = false;
+krisonly = false;

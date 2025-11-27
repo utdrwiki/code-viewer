@@ -1,0 +1,11 @@
+kris = 1185;
+kris.x = 300;
+kris.y = 298;
+kris.facing = 2;
+global.facing = 2;
+global.interact = 0;
+subcon = 0;
+subtimer = 0;
+con = 0;
+krisandsusie = 0;
+init = 0;

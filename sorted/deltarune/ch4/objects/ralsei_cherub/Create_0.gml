@@ -1,0 +1,17 @@
+timer = 0;
+xspawn = x;
+yspawn = cameray() - 5;
+offset = 2.141592653589793;
+healer = false;
+heal_state = 0;
+target_char = obj_herokris;
+image_xscale = 2;
+image_yscale = 2;
+image_speed = 0.5;
+xoff = 0;
+yoff = 0;
+target = 0;
+image_alpha = 1;
+light_surf = surface_create(128, 400);
+silhouette_surf = surface_create(128, 400);
+init = false;

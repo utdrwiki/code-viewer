@@ -1,0 +1,16 @@
+image_speed = 0;
+siner = 0;
+siner2 = 0;
+aetimer = 0;
+state = 0;
+image_xscale = 2;
+image_yscale = 2;
+after_image_dir = 1;
+move_speed = 4;
+after_image_rate = 2;
+beam_shoot = false;
+beam_shoot_timer = 0;
+beam_counter = 0;
+sword_fall = false;
+sword_fall_timer = 0;
+sword_fall_counter = 0;

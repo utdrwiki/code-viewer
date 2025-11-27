@@ -1,0 +1,9 @@
+myinteract = 0;
+talked = 0;
+image_speed = 0;
+itemflag = 104;
+itemtype = "armor";
+itemidchest = 4;
+close = 0;
+extratext = 0;
+extraevent = 0;

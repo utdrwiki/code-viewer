@@ -1,0 +1,13 @@
+event_inherited();
+timer = 0;
+dir = 1;
+speed = 20;
+image_xscale = 1;
+image_yscale = 1;
+pos = 0;
+siner = irandom(200);
+ypos[0] = obj_growtangle.y - 60;
+ypos[1] = obj_growtangle.y - 30;
+ypos[2] = obj_growtangle.y;
+ypos[3] = obj_growtangle.y + 30;
+ypos[4] = obj_growtangle.y + 60;

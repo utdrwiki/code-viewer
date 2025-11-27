@@ -1,0 +1,1 @@
+doorFadeMusic = 1;

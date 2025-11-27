@@ -1,0 +1,17 @@
+timer = 0;
+con = 0;
+con2 = 0;
+place = 0;
+count = 0;
+dir = 1;
+_type = choose(0, 1);
+offset = irandom(60);
+fireballtimer = 0;
+fireballcount = 0;
+totalcount = 0;
+spin_a = 0;
+spin_sin = 0;
+spin_speed = 3;
+spin_con = 0;
+spin_timer = 0;
+angle = 19;

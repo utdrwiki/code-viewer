@@ -1,0 +1,14 @@
+event_inherited();
+destroyonhit = 0;
+regrazetimer = 0;
+size = 1;
+timer = 0;
+threshold = 3;
+count = 0;
+regrazetimer = 0;
+bulletsprite = 1761;
+siner = 0;
+scr_turntimer(300);
+side = choose(-1, 1);
+special = 0;
+amount = 1;

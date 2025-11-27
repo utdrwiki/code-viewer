@@ -1,0 +1,17 @@
+sprite_index = choose(spr_shutta_frown, spr_shutta_banana);
+facing = 0;
+timer = 0;
+turnspeed = 1;
+con = 0;
+facingdelay = 0;
+waittime = 20;
+spintime = 10;
+mysprite = choose(4462, 860);
+goodshot = false;
+tutorial = false;
+tutorialtimer = -35;
+image_xscale = -2;
+image_yscale = 2;
+image_speed = 0;
+image_alpha = 0;
+depth = (obj_shutta_photo_controller.depth + 100) - 10 - y;

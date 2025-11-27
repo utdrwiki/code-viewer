@@ -1,0 +1,11 @@
+event_inherited();
+image_xscale = 2;
+image_yscale = 2;
+reflected = 0;
+timer = 0;
+px = -6;
+con = -1;
+image_speed = 0;
+sprite_timer = 0;
+hurtbox = instance_create(x, y, obj_susiezilla_roller_hurtbox);
+hurtbox.parent_id = id;

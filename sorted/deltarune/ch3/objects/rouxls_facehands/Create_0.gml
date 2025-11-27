@@ -1,0 +1,10 @@
+lhx = 640;
+lhy = 480;
+lspr = 0;
+rhx = 640;
+rhy = 480;
+rspr = 3;
+con = 0;
+timer = 0;
+init = 0;
+clip_surface = -1;

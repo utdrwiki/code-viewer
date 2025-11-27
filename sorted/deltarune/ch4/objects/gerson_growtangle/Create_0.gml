@@ -1,0 +1,11 @@
+x1 = ceil(obj_growtangle.x - (obj_growtangle.sprite_width / 2));
+x2 = ceil(obj_growtangle.x + (obj_growtangle.sprite_width / 2));
+y1 = ceil(obj_growtangle.y - (obj_growtangle.sprite_height / 2));
+y2 = ceil(obj_growtangle.y + (obj_growtangle.sprite_height / 2));
+col = merge_color(c_green, c_lime, 0.5);
+depth = obj_growtangle.depth - 1;
+obj_growtangle.x = -99999;
+timer = 0;
+con = 0;
+xxprev = 0;
+maxx = 0;

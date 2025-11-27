@@ -1,0 +1,9 @@
+timer = 0;
+siner = 0;
+active = 0;
+alpha = 0;
+trigmark = 0;
+dotrig = false;
+preinit = 0;
+init = 0;
+hintcol = #698DE6;

@@ -1,0 +1,12 @@
+start_delay = 5;
+loop_type = 0;
+start_amount = 1;
+shot_count = 30;
+fire_rate = 90;
+range = 360;
+spread_angle = 360;
+child_bullet = 252;
+angle_bullet = false;
+special = 1;
+rotation = 6;
+child_speed = 12;

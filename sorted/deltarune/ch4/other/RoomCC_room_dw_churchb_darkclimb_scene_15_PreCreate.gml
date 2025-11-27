@@ -1,0 +1,1 @@
+extflag = "GIRLPROP_STAY";

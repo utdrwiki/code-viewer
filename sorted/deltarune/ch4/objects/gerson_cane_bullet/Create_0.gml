@@ -1,0 +1,14 @@
+timer = 0;
+con = 0;
+init = 0;
+hitcount = 1;
+bulletcount = 0;
+anglespeed = 30;
+angledirection = 1;
+xtarget = 0;
+ytarget = 0;
+image_angle = 80;
+image_xscale = 2;
+image_yscale = 2;
+scr_jump_to_point(camerax() + 350, cameray() + 128, 10, 45);
+snd_play_pitch(snd_slidewhistle, 1.3);

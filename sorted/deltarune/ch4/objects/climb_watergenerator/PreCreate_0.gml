@@ -1,0 +1,12 @@
+event_inherited();
+timer = 0;
+waittime = 60;
+activetime = 12;
+spawnrate = 4;
+watermovetimer = 0;
+watermoverate = 4;
+watertilelimit = 12;
+waterfallingtimer = 10;
+waterbad = false;
+waterdmg = 0;
+waterdir = 0;

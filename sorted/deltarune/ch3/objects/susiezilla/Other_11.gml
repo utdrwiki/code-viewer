@@ -1,0 +1,13 @@
+sprite_index = spr_susiezilla_idle;
+image_index = 0;
+turncon = 0;
+hurtcon = 0;
+hurttimer = 0;
+tailattackcon = 0;
+tailattacktimer = 0;
+dashCon = 0;
+dashTimer = 0;
+slide = false;
+dashDir = 0;
+suplexCon = 0;
+timer = 0;

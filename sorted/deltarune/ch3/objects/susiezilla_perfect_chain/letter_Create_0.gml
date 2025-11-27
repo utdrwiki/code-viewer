@@ -1,0 +1,11 @@
+image_yscale = 0;
+letter = "A";
+yanchor = y;
+val = 0;
+color_e1 = 255;
+color_e2 = 128;
+color = c_yellow;
+alarm[0] = 64;
+display_x = x - camerax();
+display_y = y - cameray();
+v_off = 0;

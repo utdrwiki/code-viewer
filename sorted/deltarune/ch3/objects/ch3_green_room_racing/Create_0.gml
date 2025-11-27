@@ -1,0 +1,10 @@
+con = -1;
+customcon = 0;
+pause_caterpillar = false;
+pause_caterpillar_con = 0;
+racing_active = false;
+racing_timer = 0;
+racing_kris_moved = 0;
+race_won = false;
+kris_move_buffer = 0;
+racing_game = -4;

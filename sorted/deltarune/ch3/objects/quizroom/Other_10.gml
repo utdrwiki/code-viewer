@@ -1,0 +1,15 @@
+su_podium = 0;
+kr_podium = 0;
+ra_podium = 0;
+su_press = 0;
+ra_press = 0;
+kr_press = 0;
+su_pose = false;
+ra_pose = false;
+kr_pose = false;
+su_index = 0;
+kr_index = 0;
+ra_index = 0;
+su_sprite = spr_susie_quiz_down;
+kr_sprite = spr_kris_quiz_down;
+ra_sprite = spr_ralsei_quiz_down;

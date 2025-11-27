@@ -1,0 +1,14 @@
+depth = -1000;
+screen_alpha = 1;
+screenwidth = view_wport[0] * 2;
+screenheight = view_hport[0];
+crttimer = 0;
+crt_glitch = 0;
+chromStrength = 0.5;
+con = -1;
+target_scale = 2;
+screen_scale = 2;
+anim = 0;
+warp_timer = 0;
+type = 1;
+siner = 0;

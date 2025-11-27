@@ -1,0 +1,10 @@
+event_inherited();
+slowing = 30;
+owner = -4;
+damage = 55;
+timer = 0;
+grazepoints = 4;
+interval = -1;
+level = 1;
+overpower = false;
+destroyonhit = 0;

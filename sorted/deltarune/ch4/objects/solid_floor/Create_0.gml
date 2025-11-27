@@ -1,0 +1,10 @@
+visible = true;
+active = true;
+remx = x;
+remy = y;
+remsizex = image_xscale;
+remsizey = image_yscale;
+init = 0;
+image_speed = 0;
+myfloor = image_index;
+image_alpha = 0;

@@ -1,0 +1,13 @@
+encounterno = 151;
+encounterflag = 605;
+con = 0;
+timer = 0;
+scr_darksize();
+image_speed = 0;
+sprite_index = spr_incense_turtle_body_centered;
+dir = 0;
+hsp = 0;
+vsp = 0;
+marker = 0;
+depth = 501;
+snd_play(snd_wing);

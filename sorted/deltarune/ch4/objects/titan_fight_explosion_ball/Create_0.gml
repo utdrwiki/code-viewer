@@ -1,0 +1,13 @@
+size = 0;
+friction = 0.1;
+hspeed = 5 + random(2);
+vspeed = 0.5 + random(-1);
+image_xscale = 0.5;
+image_yscale = 0.5;
+gravity = 0.06 + random(0.02);
+gravity_direction = 85 + random(10);
+back = 0;
+depth = 1000102;
+image_blend = c_black;
+init = -1;
+front = -4;

@@ -1,0 +1,18 @@
+event_inherited();
+slowing = 30;
+master = noone;
+metadisttarg = 100;
+disttarg = 0;
+turnrate = 3;
+grazepoints = 5;
+timepoints = 0.25;
+nummod = 1 - (2 * (instance_number(object_index) % 2));
+mynum = 0;
+mydir = random(360);
+rotspd = choose(2, -2);
+slow_factor = 0;
+slowed = 1;
+push = 0;
+touched_water = false;
+slowdown = false;
+gotopointer = false;

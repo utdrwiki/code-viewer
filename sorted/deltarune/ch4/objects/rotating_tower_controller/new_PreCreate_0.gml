@@ -1,0 +1,14 @@
+event_inherited();
+tower_width = 280;
+appearance = 0;
+use_tilesets = false;
+tileset_name = "TOWERTILES";
+tileset_count = 2;
+collision_name = "TOWERCOLLISION";
+background_name = "TOWERBG";
+verticaltilecount = 500;
+tower_angle = 130.91;
+tower_angle_fine_tune = 0;
+use_collision_map = false;
+use_background_map = false;
+yoffset = 0;

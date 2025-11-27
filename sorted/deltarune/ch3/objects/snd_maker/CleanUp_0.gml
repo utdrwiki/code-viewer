@@ -1,0 +1,2 @@
+soundName = [];
+global.interact = remstate;

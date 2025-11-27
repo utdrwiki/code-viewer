@@ -1,0 +1,11 @@
+event_inherited();
+doorRoom = room_gms_debug_failsafe;
+doorEntrance = -1;
+doorFadeMusic = -1;
+doorFadeMusicTime = 14;
+doorDelay = -1;
+doorPostDelay = -1;
+doorSound = -1;
+doorSound2 = -1;
+extflag = "";
+doorPreset = -1;

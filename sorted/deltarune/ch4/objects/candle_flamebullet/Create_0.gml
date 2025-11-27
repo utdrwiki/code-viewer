@@ -1,0 +1,9 @@
+timer = 0;
+damage = 18;
+target = 3;
+destroyoffscreen = false;
+tolerance = 32;
+active = 1;
+depth = 5000;
+mylight = instance_create(x, y, obj_lightsource);
+mylight.image_alpha = 0;

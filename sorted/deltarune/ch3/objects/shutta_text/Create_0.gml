@@ -1,0 +1,9 @@
+index = instance_number(obj_shutta_text) - 1;
+timer = 15 + (index * 6);
+con = 0;
+text = "";
+color = c_white;
+image_xscale = 1;
+image_yscale = 1;
+image_alpha = 0;
+depth = obj_herokris.depth - 99999;

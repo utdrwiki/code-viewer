@@ -1,0 +1,12 @@
+event_inherited();
+sinerx = 0;
+sinery = 0;
+amplitudex = 0;
+amplitudey = 20;
+timefactorx = 1;
+timefactory = 1;
+basehspeed = 0;
+basevspeed = 0;
+updateangle = true;
+image_angle = 180;
+_afterimages = false;

@@ -1,0 +1,9 @@
+image_speed = 0;
+target = 0;
+init = 0;
+mycolor = c_white;
+con = 0;
+remamount = 0;
+curamount = 0;
+depth = 90000;
+index = 0;

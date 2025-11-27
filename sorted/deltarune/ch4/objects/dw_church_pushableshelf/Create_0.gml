@@ -1,0 +1,15 @@
+scr_darksize(id);
+myinteract = 0;
+image_speed = 0;
+scr_depth();
+extflag = 0;
+init = 0;
+myblock[0] = 0;
+marker[0] = 0;
+upstairs[0] = 0;
+con = 0;
+mydir = -1;
+timer = 0;
+maxDistance = 16;
+moveamount = 0;
+timeend = 30;

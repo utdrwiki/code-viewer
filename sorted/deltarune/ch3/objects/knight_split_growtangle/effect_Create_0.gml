@@ -1,0 +1,10 @@
+timer = 0;
+image_blend = obj_growtangle.image_blend;
+image_xscale = obj_growtangle.image_xscale;
+image_yscale = obj_growtangle.image_yscale;
+surf = -4;
+vertical = false;
+angle = 0;
+xmul = 1;
+ymul = 1;
+diagonal = false;

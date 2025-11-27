@@ -1,0 +1,13 @@
+event_inherited();
+image_xscale = 2;
+image_yscale = 2;
+start_xscale = image_xscale;
+start_yscale = image_yscale;
+damage = 18;
+target = 3;
+grav = 0;
+afterimage_timer = 0;
+startx = x;
+starty = y;
+depth = 30050;
+enabled = false;

@@ -1,0 +1,15 @@
+scr_enemy_object_init();
+recruitcount = 5;
+talkmax = 90;
+image_speed = 0;
+idlesprite = spr_bell_enemy;
+hurtsprite = spr_bell_enemy;
+sparedsprite = spr_bell_spare;
+custom_draw_example = 1;
+animsiner = 0;
+tuningactsuccess = 0;
+mercygained = 0;
+spinattacktimer = 0;
+spinattackcon = 0;
+talksoundtimer = 7;
+talksoundcon = 0;

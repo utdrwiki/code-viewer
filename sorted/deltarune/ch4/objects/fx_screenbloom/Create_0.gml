@@ -1,0 +1,10 @@
+siner = 0;
+style = 3;
+mysurface = 8394839;
+bloomdist = 5;
+amplitude = 3;
+period = 20;
+bloomstrength = 1;
+brightbloom = 0;
+xoff = 0;
+yoff = 0;

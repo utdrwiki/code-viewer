@@ -1,0 +1,10 @@
+active = false;
+scr_darksize();
+grabbed = 0;
+throwdist = 2;
+snap = true;
+image_speed = 0;
+pose = 0;
+killme = false;
+killed = false;
+corpse = -4;

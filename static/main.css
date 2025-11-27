@@ -166,3 +166,7 @@ input[type=submit]:hover {
 	color: var(--background);
 	background-color: var(--text-color);
 }
+
+.search-menu {
+    padding-bottom: 1rem;
+}

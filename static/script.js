@@ -1,19 +1,25 @@
 (function () {
-    "use strict";
+    'use strict';
     function highlightHash() {
-        const selectedRow = document.querySelector(".code .selected");
+        const selectedRow = document.querySelector('.code .selected');
 
-        if (selectedRow) selectedRow.classList.remove("selected");
+        if (selectedRow) {
+            selectedRow.classList.remove("selected");
+        }
 
         const hash = window.location.hash;
 
-        if (!hash || !hash.startsWith("#L")) return;
+        if (!hash || !hash.startsWith('#L')) {
+            return;
+        }
 
         const elem = document.getElementById(hash.substring(1));
 
-        if (!elem) return;
+        if (!elem) {
+            return;
+        }
 
-        elem.parentElement.classList.add("selected");
+        elem.parentElement.classList.add('selected');
     }
 
     highlightHash();

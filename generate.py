@@ -54,10 +54,10 @@ def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
 
     for script, chapter_indices in tqdm(aggregate.items()):
         if len(chapter_indices) > 1:
-            if not os.path.exists(output_dir / '_disambig'):
-                os.makedirs(output_dir / '_disambig')
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
 
-            with open(output_dir / '_disambig' / f'{script}.html', 'w') as disambig_file:
+            with open(output_dir / f'{script}.html', 'w') as disambig_file:
                 disambig_file.write(env.get_template('disambig.html').render(
                     script_name=script,
                     chapters=[chapters[idx] for idx in chapter_indices],

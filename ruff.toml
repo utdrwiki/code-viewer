@@ -1,0 +1,6 @@
+line-length = 79
+
+[format]
+quote-style = "single"
+indent-style = "space"
+docstring-code-format = true

@@ -1,19 +1,21 @@
+import argparse
 import os
 import zipfile
-import argparse
-import requests
-
 from io import BytesIO
-from loguru import logger
-from os.path import dirname, join, exists, relpath
-from shutil import rmtree, copyfile
-from tqdm import tqdm
-from generate import generate
-from data import Data
+from os.path import dirname, exists, join, relpath
+from shutil import copyfile, rmtree
 from typing import Optional
 
+import requests
+from loguru import logger
+from tqdm import tqdm
+
+from data import Data
+from generate import generate
+
 DIR = dirname(__file__)
-STATIC = join(DIR, "static")
+STATIC = join(DIR, 'static')
+
 
 def download(url: str, file: str):
     data = requests.get(url).content
@@ -21,32 +23,40 @@ def download(url: str, file: str):
 
     if not exists(parent):
         os.makedirs(parent)
-    
-    with open(file, "wb") as f:
+
+    with open(file, 'wb') as f:
         f.write(data)
 
+
 def build(game: str, chapter: Optional[str]):
-    OUT = join(DIR, "out", game)
+    out = join(DIR, 'out', game)
 
-    RAW = join(OUT, "raw", chapter) if chapter is not None else join(OUT, "raw")
-    INPUT = join(DIR, f"decompiled-{game}", chapter) if chapter is not None else join(DIR, f"decompiled-{game}")
+    raw = (
+        join(out, 'raw', chapter) if chapter is not None else join(out, 'raw')
+    )
 
-    logger.info(f"Building chapter: {chapter}")
-    logger.info("Finding script files...")
+    input_dir = (
+        join(DIR, f'decompiled-{game}', chapter)
+        if chapter is not None
+        else join(DIR, f'decompiled-{game}')
+    )
+
+    logger.info(f'Building chapter: {chapter}')
+    logger.info('Finding script files...')
 
     scripts: list[str] = []
 
-    for root, _, files in os.walk(INPUT):
+    for root, _, files in os.walk(input_dir):
         for name in files:
-            if name.lower().endswith(".gml"):
+            if name.lower().endswith('.gml'):
                 scripts.append(join(root, name))
 
-    logger.info("Copying script files...")
+    logger.info('Copying script files...')
 
     for file in tqdm(scripts):
-        rel = relpath(file, INPUT)
-        target = join(RAW, rel)
-        txt = join(RAW, ".".join(rel.split(".")[:-1]) + ".txt")
+        rel = relpath(file, input_dir)
+        target = join(raw, rel)
+        txt = join(raw, '.'.join(rel.split('.')[:-1]) + '.txt')
         parent = dirname(target)
 
         if not exists(parent):
@@ -55,28 +65,29 @@ def build(game: str, chapter: Optional[str]):
         copyfile(file, target)
         copyfile(file, txt)
 
+
 def run(game: str):
-    DATA = Data(game)
-    OUT = join(DIR, "out", game)
-    STATIC_OUT = join(OUT, "static")
+    data = Data(game)
+    out = join(DIR, 'out', game)
+    static_out = join(out, 'static')
 
-    if exists(OUT):
-        logger.info("Clearing existing output...")
-        rmtree(OUT)
+    if exists(out):
+        logger.info('Clearing existing output...')
+        rmtree(out)
 
-    os.makedirs(OUT)
+    os.makedirs(out)
 
-    chapters = DATA.get_chapters()
+    chapters = data.get_chapters()
 
     if chapters is not None and len(chapters) > 0:
-        logger.info("Building chapters...")
+        logger.info('Building chapters...')
 
         for chapter in chapters.keys():
             build(game, chapter)
     else:
         build(game, None)
 
-    logger.info("Copying static files...")
+    logger.info('Copying static files...')
 
     static_files: list[str] = []
 
@@ -84,10 +95,10 @@ def run(game: str):
         for file in files:
             static_files.append(relpath(join(root, file), STATIC))
 
-    os.makedirs(STATIC_OUT)
+    os.makedirs(static_out)
 
     for file in tqdm(static_files):
-        out_path = join(STATIC_OUT, file)
+        out_path = join(static_out, file)
         parent = dirname(out_path)
 
         if not exists(parent):
@@ -95,38 +106,43 @@ def run(game: str):
 
         copyfile(join(STATIC, file), out_path)
 
-    copyfile(join(DIR, "_headers"), join(OUT, "_headers"))
+    copyfile(join(DIR, '_headers'), join(out, '_headers'))
 
-    logger.info("Downloading font...")
+    logger.info('Downloading font...')
 
-    font_url = "https://download-cdn.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+    font_url = (
+        'https://download-cdn.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
+    )
     data = requests.get(font_url).content
 
-    with zipfile.ZipFile(BytesIO(data), "r") as zip:
-        zip.extractall(STATIC_OUT)
+    with zipfile.ZipFile(BytesIO(data), 'r') as z:
+        z.extractall(static_out)
 
-    logger.info("Downloading highlight.js...")
+    logger.info('Downloading highlight.js...')
+
+    hjs_base = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1'
 
     download(
-        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js",
-        join(STATIC_OUT, "highlight", "highlight.min.js")
+        f'{hjs_base}/highlight.min.js',
+        join(static_out, 'highlight', 'highlight.min.js'),
     )
 
     download(
-        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/gml.min.js",
-        join(STATIC_OUT, "highlight", "gml.min.js")
+        f'{hjs_base}/languages/gml.min.js',
+        join(static_out, 'highlight', 'gml.min.js'),
     )
 
     download(
-        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css",
-        join(STATIC_OUT, "highlight", "github-dark.min.css")
+        f'{hjs_base}/styles/github-dark.min.css',
+        join(static_out, 'highlight', 'github-dark.min.css'),
     )
 
-    logger.info("Generating website...")
+    logger.info('Generating website...')
 
     generate(game)
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Generates the code viewer website.'
     )
@@ -134,9 +150,9 @@ if __name__ == "__main__":
     parser.add_argument(
         'game',
         type=str,
-        help='game for which to generate the website'
+        help='game for which to generate the website',
     )
-    
+
     args = parser.parse_args()
 
     run(args.game)

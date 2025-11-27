@@ -43,7 +43,9 @@ class Data:
 
     def load_textdata(self, scriptname: str) -> Dict[str, str]:
         script_dir = get_script_path()
-        lang_file = script_dir / 'out' / self.game / 'raw' / f'{scriptname}.gml'
+        lang_file = (
+            script_dir / 'out' / self.game / 'raw' / f'{scriptname}.gml'
+        )
         ret = {}
         textdata_regex = re.compile(
             r'ds_map_add\(global\.text_data_[a-z]+, '
@@ -101,7 +103,10 @@ class Data:
         if self.rooms is None:
             self.rooms = self.load_rooms()
         for room in self.rooms:
-            if room.name == room_name or (self.chapter is not None and room.name == f"{room_name}_{self.chapter_id}"):
+            if room.name == room_name or (
+                self.chapter is not None
+                and room.name == f'{room_name}_{self.chapter_id}'
+            ):
                 return room
         return None
 
@@ -123,7 +128,7 @@ class Data:
     def get_game_name(self) -> str:
         if self.config is None:
             self.config = self.load_config()
-        if self.chapter_id is not None and self.chapter_id != "":
+        if self.chapter_id is not None and self.chapter_id != '':
             return f'{self.config.game} ({self.chapter})'
         return self.config.game
 
@@ -147,6 +152,8 @@ class Data:
             self.config = self.load_config()
         return self.config.chapters
 
-    def select_chapter(self, chapter_id: Optional[str], chapter: Optional[str]):
+    def select_chapter(
+        self, chapter_id: Optional[str], chapter: Optional[str]
+    ):
         self.chapter_id = chapter_id
         self.chapter = chapter

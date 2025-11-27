@@ -14,7 +14,7 @@ from util import get_script_path
 
 env = Environment(
     loader=FileSystemLoader('templates'),
-    autoescape=select_autoescape(['html'])
+    autoescape=select_autoescape(['html']),
 )
 
 
@@ -22,45 +22,43 @@ def parse_text(text: str) -> str:
     text = re.sub(
         r'(?<!`)/',
         '<span class="cc cc-wait">Wait for input</span>',
-        text
+        text,
     )
     text = re.sub(
         r'\^([1-9])(.)',
         r'\2<span class="cc cc-delay">Delay \1<span>\1</span></span>',
-        text
+        text,
     )
     text = re.sub(r'(?<!`)&\s*', '<br>', text)
     text = re.sub(
         r'(?<!`)%',
         '<span class="cc cc-close">Close Message</span>',
-        text
+        text,
     )
     text = re.sub(
-        r'\\\\[EM](.)',
-        r'<span class="cc-face">Face \1</span>',
-        text
+        r'\\\\[EM](.)', r'<span class="cc-face">Face \1</span>', text
     )
     text = re.sub(
         r'\\\\m(.)\*?',
         r'<span class="cc-face">Mini face \1</span> ',
-        text
+        text,
     )
     text = re.sub(
         r'\\\\f(.)\*?',
         r'<span class="cc-face">Mini text \1</span> ',
-        text
+        text,
     )
     text = re.sub(
         r'\\\\c(.)(.*?)(?=\\\\c|$)',
         r'<span class="cc-color cc-\1">\2</span>',
-        text
+        text,
     )
     text = re.sub(r'\\\\T(.)', r'<span class="cc-face">Sound \1</span>', text)
     text = re.sub(r'\\\\F(.)', r'<span class="cc-face">Char \1</span>', text)
     text = re.sub(
         r'\\\\C(.)',
         r'<span class="cc-face">Choice type \1</span>',
-        text
+        text,
     )
     text = re.sub(r'\\"', '"', text)
     text = re.sub(r'`(.)', r'\1', text)
@@ -72,7 +70,7 @@ def highlight_text(matches: re.Match[str]) -> str:
         before_var='"',
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(matches[2])
+        parsed_text=parse_text(matches[2]),
     )
 
 
@@ -81,7 +79,7 @@ def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
         before_var=matches[1],
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(data.get_localized_string_ch1(matches[2]))
+        parsed_text=parse_text(data.get_localized_string_ch1(matches[2])),
     )
 
 
@@ -95,7 +93,7 @@ def highlight_room(matches: re.Match[str], data: Data) -> str:
     return env.get_template('highlight/room.html').render(
         before_room=matches[1],
         room_name=room.name,
-        room_description=room.description
+        room_description=room.description,
     )
 
 
@@ -104,7 +102,7 @@ def highlight_enemy(matches: re.Match[str], data: Data) -> str:
     return env.get_template('highlight/enemy.html').render(
         before_enemy=matches[1],
         enemy_id=enemy_id,
-        enemy_name=data.get_enemy(enemy_id)
+        enemy_name=data.get_enemy(enemy_id),
     )
 
 
@@ -115,14 +113,14 @@ def highlight_flag(matches: re.Match[str], data: Data) -> str:
         return env.get_template('highlight/flag_not_found.html').render(
             before_flag=matches[1],
             flag_id=flag_id,
-            after_flag=matches[3]
+            after_flag=matches[3],
         )
     else:
         return env.get_template('highlight/flag_found.html').render(
             before_flag=matches[1],
             flag_id=flag_id,
             flag_description=flag_description,
-            after_flag=matches[3]
+            after_flag=matches[3],
         )
 
 
@@ -131,7 +129,7 @@ def highlight_function(
     script_name: str,
     text: Dict[str, List[str]],
     data: Data,
-    resolve_references: bool
+    resolve_references: bool,
 ) -> str:
     function_name = matches[2]
     script_name = f'gml_GlobalScript_{function_name}'
@@ -156,7 +154,7 @@ def highlight_function(
         before_function=matches[1],
         script_name=script_name,
         function_name=function_name,
-        script_content=script_content
+        script_content=script_content,
     )
 
 
@@ -165,7 +163,7 @@ def highlight_alarm(
     script_name: str,
     text: Dict[str, List[str]],
     data: Data,
-    resolve_references: bool
+    resolve_references: bool,
 ) -> str:
     before_alarm = matches[1]
     alarm_content = matches[2]
@@ -194,7 +192,7 @@ def highlight_alarm(
         alarm_content=alarm_content,
         script_name=script_name,
         script_content=script_content,
-        content_rest=content_rest
+        content_rest=content_rest,
     )
 
 
@@ -203,54 +201,56 @@ def process_line(
     script_name: str,
     text: Dict[str, List[str]],
     data: Data,
-    resolve_references: bool = True
+    resolve_references: bool = True,
 ) -> str:
     # Highlight localized strings
     line = re.sub(
         r'([A-Za-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", "[a-z0-9_-]+")\)',  # noqa: E501
         lambda matches: matches[1] + highlight_text(matches) + ')',
         line,
-        flags=re.IGNORECASE
+        flags=re.IGNORECASE,
     )
     line = re.sub(
         r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-zA-Z0-9_-]+)("\))',  # noqa: E501
         lambda matches: highlight_text_ch1(matches, data),
         line,
-        flags=re.IGNORECASE
+        flags=re.IGNORECASE,
     )
     # Highlight flags, rooms and enemies
     line = re.sub(
         r'(global\.flag\[)(\d+)(\])',
         lambda matches: highlight_flag(matches, data),
         line,
-        flags=re.IGNORECASE
+        flags=re.IGNORECASE,
     )
     line = re.sub(
         r'(room_goto\()([A-Za-z0-9_]+)',
         lambda matches: highlight_room(matches, data),
         line,
-        flags=re.IGNORECASE
+        flags=re.IGNORECASE,
     )
     line = re.sub(
         r'(global\.monstertype\b.*[!=]+\s*)(\d+)',
         lambda matches: highlight_enemy(matches, data),
         line,
-        flags=re.IGNORECASE
+        flags=re.IGNORECASE,
     )
     # Link to functions and alarms
     line = re.sub(
         r'(\b)(s?cr?_[a-zA-Z0-9_]+)\(',
-        lambda matches: highlight_function(matches, script_name, text, data,
-                                           resolve_references),
+        lambda matches: highlight_function(
+            matches, script_name, text, data, resolve_references
+        ),
         line,
-        flags=re.IGNORECASE
+        flags=re.IGNORECASE,
     )
     line = re.sub(
         r'(^|\s+)(alarm\[(\d+)\])(.*)',
-        lambda matches: highlight_alarm(matches, script_name, text, data,
-                                        resolve_references),
+        lambda matches: highlight_alarm(
+            matches, script_name, text, data, resolve_references
+        ),
         line,
-        flags=re.IGNORECASE
+        flags=re.IGNORECASE,
     )
 
     line = f"<code class='code-line language-gml'>{line}</code>"
@@ -259,9 +259,7 @@ def process_line(
 
 
 def render_script(
-    script_name: str,
-    text: Dict[str, List[str]],
-    data: Data
+    script_name: str, text: Dict[str, List[str]], data: Data
 ) -> str:
     lines = [
         process_line(line, script_name, text, data)
@@ -294,7 +292,7 @@ if __name__ == '__main__':
     parser.add_argument(
         'game',
         type=str,
-        help='game for which to generate the website'
+        help='game for which to generate the website',
     )
     args = parser.parse_args()
     data = Data(args.game)

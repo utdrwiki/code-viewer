@@ -88,7 +88,7 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
         if chapters is None:
             chapter_segment = ''
         else:
-            chapter_segment = f'/{chapters[data.chapter]}'
+            chapter_segment = f'/{data.chapter_id}'
         index.sections[section].entries[segment].append(Entry(
             url=file.replace('.gml', '.html'),
             raw_url=f"/raw{chapter_segment}/{file.replace('.gml', '.txt')}",

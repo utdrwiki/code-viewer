@@ -1,0 +1,11 @@
+[project]
+name = "code-viewer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "jinja2>=3.1.6",
+    "loguru>=0.7.3",
+    "tqdm>=4.67.1",
+]

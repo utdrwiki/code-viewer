@@ -2,35 +2,36 @@ name: Deploy to Netlify (Undertale)
 on:
   push:
     branches:
-      - master
+    - master
   workflow_dispatch:
+
 
 jobs:
   build-undertale:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Steam and UTMT
-        uses: ./.github/actions/steam-utmt-setup
-      - name: Download Undertale
-        run: |
-          mkdir -p ~/.local/share/Steam/config
-          echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
-          steamcmd +@ShutdownOnFailedCommand +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 391540 validate +quit
-        env:
-          STEAM_VDF: ${{ secrets.STEAM_VDF }}
-          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-      - name: Extract Undertale's code
-        run: |
-          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts 'scripts/ExportCodeFormatted.csx'
-          mv game/assets/Export_Code decompiled-undertale
-      - name: Build
-        run: ./build.sh undertale
-      - name: Publish
-        uses: netlify/actions/cli@master
-        with:
-          args: deploy --dir=out --prod
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_UT }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install Steam and UTMT
+      uses: ./.github/actions/steam-utmt-setup
+    - name: Download Undertale
+      run: |
+        mkdir -p ~/.local/share/Steam/config
+        echo "$STEAM_VDF" | base64 -d > ~/.local/share/Steam/config/config.vdf
+        steamcmd +@ShutdownOnFailedCommand +force_install_dir $(pwd)/game +login $STEAM_USERNAME +app_update 391540 validate +quit
+      env:
+        STEAM_VDF: ${{ secrets.STEAM_VDF }}
+        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+    - name: Extract Undertale's code
+      run: |
+        ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts 'scripts/ExportCodeFormatted.csx'
+        mv game/assets/Export_Code decompiled-undertale
+    - name: Build
+      run: ./build.sh undertale
+    - name: Publish
+      uses: netlify/actions/cli@master
+      with:
+        args: deploy --dir=out/undertale --prod
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_UT }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

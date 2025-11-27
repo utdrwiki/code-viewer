@@ -253,6 +253,8 @@ def process_line(
         flags=re.IGNORECASE
     )
 
+    line = f"<code class='code-line language-gml'>{line}</code>"
+
     return line
 
 
@@ -269,7 +271,7 @@ def render_script(
     if chapters is None:
         chapter_segment = ''
     else:
-        chapter_segment = f'/{chapters[data.chapter]}'
+        chapter_segment = f'/{data.chapter_id}'
     return env.get_template('script_page.html').render(
         script_name=script_name,
         raw_url=f'/raw{chapter_segment}/{script_name}.txt',

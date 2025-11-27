@@ -112,7 +112,7 @@
                     hitLineLink.textContent = `${line.index}:`;
                     hitLineNumber.appendChild(hitLineLink);
                     hitRow.appendChild(hitLineNumber);
-                    hitLine.textContent = line.content;
+                    hitLine.innerHTML = hljs.highlight(line.content, { language: "gml" }).value;
                     hitRow.appendChild(hitLine);
                     searchHits.appendChild(hitRow);
                     hitRow.classList.add('table-subsection-content');

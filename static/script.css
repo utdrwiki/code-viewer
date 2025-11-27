@@ -265,6 +265,17 @@
 	user-select: none;
 }
 
+pre:not(.funcCode), code, .hljs {
+	padding: 0 !important;
+	background-color: transparent !important;
+	margin: 0 !important;
+	font-family: "JetBrains Mono" !important;
+}
+
 .code .selected {
-	background-color: var(--selected-line-background-color);
+	background-color: var(--selected-line-background-color) !important;
+}
+
+.inline-code {
+	display: inline-block;
 }

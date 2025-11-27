@@ -23,6 +23,7 @@ jobs:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
       - name: Extract Deltarune's code
         run: |
+          ./utmtcli/UndertaleModCli load game/data.win --scripts 'scripts/ExportCodeFormatted.csx'
           ./utmtcli/UndertaleModCli load game/chapter1_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
           ./utmtcli/UndertaleModCli load game/chapter2_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
           ./utmtcli/UndertaleModCli load game/chapter3_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'

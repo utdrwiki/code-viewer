@@ -36,9 +36,13 @@ def process_indices(indices: List[ScriptIndex], data: Data) -> AggregateIndex:
 
             fulltext_bytes = '\n'.join(text).encode('utf-8')
             checksum = hashlib.md5(fulltext_bytes).hexdigest()
+            chapters = data.get_chapters()
+
+            if chapters is None:
+                raise Exception("No chapters list found!")
 
             if checksum not in checksums[script]:
-                chapter = list(data.get_chapters().keys())[chapter_idx]
+                chapter = list(chapters.keys())[chapter_idx]
 
                 checksums[script].add(checksum)
                 aggregate[script].append(chapter)
@@ -48,7 +52,7 @@ def process_indices(indices: List[ScriptIndex], data: Data) -> AggregateIndex:
 
 def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
     redirects: Dict[str, str] = {}
-    chapters = data.get_chapters() or []
+    chapters = data.get_chapters() or {}
 
     logger.info("Writing redirects...")
 
@@ -75,7 +79,7 @@ def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
 
 
 def write_chapter_index(data: Data, output_dir: Path):
-    chapters = data.get_chapters().items() or []
+    chapters = (data.get_chapters() or {}).items()
 
     logger.info("Rendering chapter index...")
 

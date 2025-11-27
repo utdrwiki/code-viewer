@@ -10,16 +10,16 @@ from shutil import rmtree, copyfile
 from tqdm import tqdm
 from generate import generate
 from data import Data
+from typing import Optional
 
 DIR = dirname(__file__)
 STATIC = join(DIR, "static")
 
-def build(game: str, chapter: str):
+def build(game: str, chapter: Optional[str]):
     OUT = join(DIR, "out", game)
 
-    HAS_CHAPTER = chapter is not None and chapter != ""
-    RAW = join(OUT, "raw", chapter) if HAS_CHAPTER else join(OUT, "raw")
-    INPUT = join(DIR, f"decompiled-{game}", chapter) if HAS_CHAPTER else join(DIR, f"decompiled-{game}")
+    RAW = join(OUT, "raw", chapter) if chapter is not None else join(OUT, "raw")
+    INPUT = join(DIR, f"decompiled-{game}", chapter) if chapter is not None else join(DIR, f"decompiled-{game}")
 
     logger.info(f"Building chapter: {chapter}")
     logger.info("Finding script files...")
@@ -56,10 +56,12 @@ def run(game: str):
 
     os.makedirs(OUT)
 
-    if DATA.get_chapters() is not None and len(DATA.get_chapters()) > 0:
+    chapters = DATA.get_chapters()
+
+    if chapters is not None and len(chapters) > 0:
         logger.info("Building chapters...")
 
-        for chapter in DATA.get_chapters().keys():
+        for chapter in chapters.keys():
             build(game, chapter)
     else:
         build(game, None)

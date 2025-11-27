@@ -147,6 +147,6 @@ class Data:
             self.config = self.load_config()
         return self.config.chapters
 
-    def select_chapter(self, chapter_id: str, chapter: str):
+    def select_chapter(self, chapter_id: Optional[str], chapter: Optional[str]):
         self.chapter_id = chapter_id
         self.chapter = chapter

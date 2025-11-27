@@ -1,10 +1,10 @@
-(function () {
+(function() {
     'use strict';
     function highlightHash() {
         const selectedRow = document.querySelector('.code .selected');
 
         if (selectedRow) {
-            selectedRow.classList.remove("selected");
+            selectedRow.classList.remove('selected');
         }
 
         const hash = window.location.hash;

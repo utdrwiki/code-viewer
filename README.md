@@ -15,9 +15,9 @@ While this may not be suited for personal use, contributions that make it easier
 
 ## Building
 
-Download either Undertale, Deltarune, or Undertale Yellow and extract their scripts using [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool)'s `ExportAllCode.csx` script. The scripts need to be located in `decompiled-{undertale,deltarune,undertaleyellow}` directories.
+Download either Undertale, Deltarune, or Undertale Yellow and extract their scripts using [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool)'s `ExportAllCode.csx` script. The scripts need to be located in `decompiled-{undertale,deltarune,undertaleyellow}` directories. For multi-chapter games (deltarune), use subdirectories for individual chapters' scripts (e.g. `decompiled-deltarune/{ch1,ch2,ch3,ch4,init}`).
 
-After installing prerequisites, first install required dependencies of the project using `pip install -r requirements.txt`, then build the site using `./build.sh [game]`. The site is placed by default in the `out` directory. To view the site after building, (if you have Python installed), run `./dev.sh`. A Bash (or any Linux shell) environment is assumed when running the mentioned commands.
+After installing prerequisites, first install required dependencies of the project using `pip install -r requirements.txt`, then build the site using `python3 build.py [game]`. The site is placed by default in the `out/[game]` directory. To view the site after building, (if you have Python installed), run `./dev.sh [game]`. A Bash (or any Linux shell) environment is assumed when running the mentioned commands.
 
 ## Disclaimer
 

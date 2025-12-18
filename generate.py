@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import os
+import re
 from pathlib import Path
 from typing import Dict, List, Set
 
@@ -21,6 +22,8 @@ env = Environment(
     loader=FileSystemLoader('templates'),
     autoescape=select_autoescape(['html']),
 )
+
+UNDERSCORE_NORMALIZATION_REGEX = re.compile(r'_{2,}')
 
 
 def process_indices(indices: List[ScriptIndex], data: Data) -> AggregateIndex:
@@ -66,15 +69,19 @@ def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
                 disambig_file.write(
                     env.get_template('disambig.html').render(
                         script_name=script,
-                        chapters=[chapters[idx] for idx in chapter_indices],
+                        chapters=[(i, chapters[i]) for i in chapter_indices],
                         game=data.get_game_name(),
                         links=data.get_game_links(),
                         footer=data.get_game_footer(),
                     )
                 )
         else:
-            chapter = chapters[chapter_indices[0]]
-            redirects[f'/{script}*'] = f'/{chapter}/{script}.html'
+            redirects[f'/{script}*'] = f'/{chapter_indices[0]}/{script}.html'
+
+        normalized = UNDERSCORE_NORMALIZATION_REGEX.sub('_', script)
+        if script != normalized and normalized not in aggregate:
+            for idx in chapter_indices:
+                redirects[f'/{idx}/{normalized}*'] = f'/{idx}/{script}.html'
 
     with open(output_dir / '_redirects', 'w') as redirects_file:
         for old_path, new_path in redirects.items():

@@ -12,8 +12,8 @@
             <p>This script exists in multiple chapters:</p>
 
             <ul>
-                {% for chapter in chapters %}
-                    <li><a href="/{{ chapter }}/{{ script_name }}.html">Chapter {{ loop.index }}</a></li>
+                {% for chapter_idx, chapter_name in chapters %}
+                    <li><a href="/{{ chapter_idx }}/{{ script_name }}.html">{{ chapter_name }}</a></li>
                 {% endfor %}
             </ul>
         </main>

@@ -32,7 +32,7 @@ def process_indices(indices: List[ScriptIndex], data: Data) -> AggregateIndex:
 
     logger.info('Processing indices...')
 
-    for chapter_idx, index in tqdm(enumerate(indices)):
+    for chapter_idx, index in tqdm(enumerate(indices), disable=None):
         for script, text in index.text.items():
             if script not in aggregate:
                 aggregate[script] = []
@@ -60,7 +60,7 @@ def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
 
     logger.info('Writing redirects...')
 
-    for script, chapter_indices in tqdm(aggregate.items()):
+    for script, chapter_indices in tqdm(aggregate.items(), disable=None):
         if len(chapter_indices) > 1:
             if not os.path.exists(output_dir):
                 os.makedirs(output_dir)
@@ -134,7 +134,7 @@ def generate(game: str):
 
             logger.info(f"['{chapter}'] Rendering scripts' pages...")
 
-            for script in tqdm(index.text.keys()):
+            for script in tqdm(index.text.keys(), disable=None):
                 rendered = render_script(script, index.text, data)
 
                 write_script(rendered, script, output_dir_ch)
@@ -157,7 +157,7 @@ def generate(game: str):
 
         logger.info("Rendering scripts' pages...")
 
-        for script in tqdm(index.text.keys()):
+        for script in tqdm(index.text.keys(), disable=None):
             rendered = render_script(script, index.text, data)
 
             write_script(rendered, script, output_dir)

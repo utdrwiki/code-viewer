@@ -53,7 +53,7 @@ def build(game: str, chapter: Optional[str]):
 
     logger.info('Copying script files...')
 
-    for file in tqdm(scripts):
+    for file in tqdm(scripts, disable=None):
         rel = relpath(file, input_dir)
         target = join(raw, rel)
         txt = join(raw, '.'.join(rel.split('.')[:-1]) + '.txt')
@@ -97,7 +97,7 @@ def run(game: str):
 
     os.makedirs(static_out)
 
-    for file in tqdm(static_files):
+    for file in tqdm(static_files, disable=None):
         out_path = join(static_out, file)
         parent = dirname(out_path)
 

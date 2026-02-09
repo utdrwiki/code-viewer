@@ -78,6 +78,12 @@ def write_redirects(aggregate: AggregateIndex, data: Data, output_dir: Path):
         else:
             redirects[f'/{script}*'] = f'/{chapter_indices[0]}/{script}.html'
 
+        # MediaWiki legacy parser requires titles to be in a
+        # MediaWiki-normalized form in order to be able to link to them using
+        # interwiki links. Therefore, multiple underscores are normalized to a
+        # single one upon linking, which creates a problem. To address this, we
+        # create redirects from the normalized forms to the actual script names
+        # until we can switch to Parsoid.
         normalized = UNDERSCORE_NORMALIZATION_REGEX.sub('_', script)
         if script != normalized and normalized not in aggregate:
             for idx in chapter_indices:

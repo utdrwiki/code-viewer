@@ -60,13 +60,13 @@ def parse_text(text: str) -> str:
     )
     # '\c[x]': color, accepts RBYGPMOASV, W white, X black, 0 reset
     text = re.sub(
-        r'\\c(.)(.*?)(?=\\\\c|$)',
+        r'\\c(.)(.*?)(?=\\c|$)',
         r'<span class="cc-color cc-\1">\2</span>',
         text,
     )
     # '\[x]': Undertale color, accepts RGYBOLPp, same W and X
     text = re.sub(
-        r'\\([RGYBOLPpWX])(.*?)(?=\\\\c|$)',
+        r'\\([RGYBOLPpWX])(.*?)(?=\\[RGYBOLPpWX]|$)',
         r'<span class="cc-color cc-\1">\2</span>',
         text,
     )

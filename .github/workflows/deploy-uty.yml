@@ -15,7 +15,15 @@ jobs:
         uses: ./.github/actions/steam-utmt-setup
       - name: Download Undertale Yellow
         run: |
-          wget $(curl -s https://www.indiedb.com/downloads/start/293713 -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" | grep 'Click to' | sed -re 's|.*<a href="(/downloads/mirror/293713/[^"]+)".*|https://www.indiedb.com\1|') -qO game.zip
+          curl -s https://www.indiedb.com/downloads/start/293713 -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" > indiedb.html
+          download_link=$(cat indiedb.html | grep 'click the link to' | sed -re 's|.*<a href="(/downloads/mirror/293713/[^"]+)".*|https://www.indiedb.com\1|')
+          if [ -z "$download_link" ]
+          then
+            echo 'Failed to locate download link!'
+            cat indiedb.html
+            exit 1
+          fi
+          wget $download_link -qO game.zip
           unzip -p game.zip "Undertale Yellow v1_2_1/data.win" > data.win
       - name: Extract Undertale Yellow's code
         run: |

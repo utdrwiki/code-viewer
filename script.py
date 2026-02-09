@@ -19,47 +19,74 @@ env = Environment(
 
 
 def parse_text(text: str) -> str:
+    # Parse Undertale codes the same as Deltarune
+    text = re.sub(r'\\\\', r'\\', text)
+    # General text codes
+    # '/': wait
     text = re.sub(
         r'(?<!`)/',
         '<span class="cc cc-wait">Wait for input</span>',
         text,
     )
+    # '^[x]': delay
     text = re.sub(
         r'\^([1-9])(.)',
         r'\2<span class="cc cc-delay">Delay \1<span>\1</span></span>',
         text,
     )
+    # '&': newline
     text = re.sub(r'(?<!`)&\s*', '<br>', text)
+    # '%': close message ('%%' to close whole writer)
     text = re.sub(
         r'(?<!`)%',
         '<span class="cc cc-close">Close Message</span>',
         text,
     )
+    # '\E[x]': emotion
+    # '\M[x]': special, typically emotion on overworld sprite
     text = re.sub(
-        r'\\\\[EM](.)', r'<span class="cc-face">Face \1</span>', text
+        r'\\[EM](.)', r'<span class="cc-face">Face \1</span>', text
     )
+    # '\m[x]': mini face
     text = re.sub(
-        r'\\\\m(.)\*?',
+        r'\\m(.)\*?',
         r'<span class="cc-face">Mini face \1</span> ',
         text,
     )
     text = re.sub(
-        r'\\\\f(.)\*?',
+        r'\\f(.)\*?',
         r'<span class="cc-face">Mini text \1</span> ',
         text,
     )
+    # '\c[x]': color, accepts RBYGPMOASV, W white, X black, 0 reset
     text = re.sub(
-        r'\\\\c(.)(.*?)(?=\\\\c|$)',
+        r'\\c(.)(.*?)(?=\\\\c|$)',
         r'<span class="cc-color cc-\1">\2</span>',
         text,
     )
-    text = re.sub(r'\\\\T(.)', r'<span class="cc-face">Sound \1</span>', text)
-    text = re.sub(r'\\\\F(.)', r'<span class="cc-face">Char \1</span>', text)
+    # '\[x]': Undertale color, accepts RGYBOLPp, same W and X
     text = re.sub(
-        r'\\\\C(.)',
+        r'\\([RGYBOLPpWX])(.*?)(?=\\\\c|$)',
+        r'<span class="cc-color cc-\1">\2</span>',
+        text,
+    )
+    # '\T[x]': typer, aka voice and font
+    text = re.sub(r'\\T(.)', r'<span class="cc-face">Sound \1</span>', text)
+    # '\F[x]': face, changes the whole set to a given character
+    text = re.sub(r'\\F(.)', r'<span class="cc-face">Char \1</span>', text)
+    # '\C[x]': choicer, accepts 1-4
+    text = re.sub(
+        r'\\C(.)',
         r'<span class="cc-face">Choice type \1</span>',
         text,
     )
+    # '\C': Undertale choicer, same as Deltarune type 1
+    text = re.sub(
+        r'\\C',
+        r'<span class="cc-face">Choice</span>',
+        text,
+    )
+    # Clean up escape characters
     text = re.sub(r'\\"', '"', text)
     text = re.sub(r'`(.)', r'\1', text)
     return text

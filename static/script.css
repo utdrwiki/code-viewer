@@ -128,6 +128,7 @@ pre:not(.funcCode), code, .hljs {
 	color: black;
 }
 
+/* Text colors */
 .cc-Y {
 	color: yellow;
 }
@@ -140,17 +141,18 @@ pre:not(.funcCode), code, .hljs {
 	color: #8bf;
 }
 
-.cc-W {
-	color: unset;
-}
-
-.cc-0 {
-	color: unset;
-}
-
 .cc-G {
 	color: #7f7;
 }
+
+.cc-W, .cc-X, .cc-0 {
+	color: unset;
+}
+
+/* TODO: Select colors for:
+   UT: L (light blue), p (pink)
+   DR: M (maroon), A (aqua blue), S (Susie pink), V (Ralsei green)
+   Both: O (orange), P (purple) */
 
 .flag {
 	color: var(--flag-not-found-text-color);

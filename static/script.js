@@ -1,4 +1,4 @@
-(function() {
+window.addEventListener('DOMContentLoaded', function() {
     'use strict';
     function highlightHash() {
         const selectedRow = document.querySelector('.code .selected');
@@ -23,6 +23,8 @@
     }
 
     highlightHash();
+
+    window.addEventListener("hashchange", highlightHash);
 
     const elements = [
         ...document.getElementsByClassName("code-line"),
@@ -66,6 +68,4 @@
             node.replaceWith(replacement);
         }
     }
-
-    window.addEventListener("hashchange", highlightHash);
-})();
+});

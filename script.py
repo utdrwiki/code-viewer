@@ -35,7 +35,7 @@ def parse_text(text: str) -> str:
         text,
     )
     # '&': newline
-    text = re.sub(r'(?<!`)&\s*', '<br>', text)
+    text = re.sub(r'(?<!`)&amp;\s*', '<br>', text)
     # '%': close message ('%%' to close whole writer)
     text = re.sub(
         r'(?<!`)%',
@@ -230,6 +230,14 @@ def process_line(
     data: Data,
     resolve_references: bool = True,
 ) -> str:
+    # Escape dangerous HTML characters.
+    # This preserves strings like "THE LEGEND OF THIS WORLD.#<DELTARUNE.>"
+    line = re.sub(
+        r'(&|<)',
+        lambda matches: {'&': '&amp;', '<': '&lt;'}[matches[1]],
+        line,
+    )
+
     # Highlight localized strings
     line = re.sub(
         r'([A-Za-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", "[a-z0-9_-]+")\)',  # noqa: E501

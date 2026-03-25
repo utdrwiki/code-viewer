@@ -2,7 +2,7 @@ pre:not(.funcCode), code, .hljs {
 	font-family: "JetBrains Mono";
 }
 
-.code .selected {
+.code .selected, .code tr:has(:target) {
 	background-color: var(--selected-line-background-color);
 }
 

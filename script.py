@@ -288,7 +288,7 @@ def process_line(
         flags=re.IGNORECASE,
     )
 
-    line = f"<code class='code-line language-gml'>{line}</code>"
+    line = f'<code>{line}</code>'
 
     return line
 

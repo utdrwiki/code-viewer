@@ -103,6 +103,26 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
     return index
 
 
+def annotate_line(line: str, data: Data) -> str:
+    def quote(string: str) -> str:
+        if data.game == 'undertale':
+            # Undertale's decompiled GML doesn't use backslash escapes.
+            # But for nested quotes this is easier/more readable.
+            return '"' + string.replace('"', '\\"') + '"'
+        return json.dumps(string, ensure_ascii=False)
+
+    keys: list[str] = re.findall(
+        r'scr_(?:84_get_lang_string(?:_ch1)?|gettext)\("([a-zA-Z0-9_-]+)"\)',
+        line,
+        flags=re.IGNORECASE,
+    )
+    if keys:
+        line += ' // ' + ', '.join(
+            quote(data.get_localized_string_ch1(key)) for key in keys
+        )
+    return line
+
+
 def write_index(index: ScriptIndex, data: Data, output_dir: Path) -> None:
     with open(output_dir / 'index.html', 'w', encoding='utf-8') as f:
         env = Environment(loader=FileSystemLoader('templates'))
@@ -116,7 +136,14 @@ def write_index(index: ScriptIndex, data: Data, output_dir: Path) -> None:
             )
         )
     with open(output_dir / 'index.json', 'w', encoding='utf-8') as f:
-        json.dump(index.text, f, separators=(',', ':'))
+        json.dump(
+            {
+                filename: [annotate_line(line, data) for line in lines]
+                for filename, lines in index.text.items()
+            },
+            f,
+            separators=(',', ':'),
+        )
 
 
 if __name__ == '__main__':

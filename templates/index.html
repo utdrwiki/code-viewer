@@ -34,7 +34,9 @@
 
                             {% for entry in entries %}
                                 <tr class="table-subsection-content">
-                                    <td><a href="{{ entry.url }}">{{ entry.name }}</a></td>
+                                    <td><a href="{{ entry.url }}">
+                                        <span class="prefix">{{ entry.prefix }}</span>{{ entry.suffix }}
+                                    </a></td>
                                     <td>{{ entry.lines }}</td>
                                     <td><a href="{{ entry.raw_url }}">raw</a></td>
                                 </tr>

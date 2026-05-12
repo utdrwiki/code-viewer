@@ -31,3 +31,8 @@ table th {
 .junk .table-subsection-content td, .junk .table-subsection-content td a {
 	color: var(--junk-text-color);
 }
+
+.prefix {
+	color: var(--junk-text-color);
+	font-size: small;
+}

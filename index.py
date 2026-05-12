@@ -19,6 +19,8 @@ class Entry:
     raw_url: str
     name: str
     lines: int
+    prefix: str
+    suffix: str
 
 
 @dataclass
@@ -36,14 +38,14 @@ class ScriptIndex:
     text: Dict[str, List[str]]
 
 
-def classify(path: Path, data: Data) -> Tuple[SectionType, str]:
+def classify(path: Path, data: Data) -> Tuple[SectionType, str, str]:
     filename = os.path.basename(path)
     if (junk_section := data.classify_junk(path)) is not None:
-        return 'junk', junk_section
+        return 'junk', junk_section, ''
     if filename.startswith('gml_GlobalScript_'):
-        return 'script', 'Global Scripts'
+        return 'script', 'Global Scripts', 'gml_GlobalScript_'
     if filename.startswith('gml_Script_'):
-        return 'script', 'Scripts'
+        return 'script', 'Scripts', 'gml_Script_'
     if filename.startswith('gml_Object_'):
         obj_name_match = re.match(
             r'gml_Object_(.*)_((\w+)_(\d+)|Collision_(.*))\.gml',
@@ -51,19 +53,22 @@ def classify(path: Path, data: Data) -> Tuple[SectionType, str]:
         )
         if obj_name_match is None:
             raise ValueError(f'Failed to find object name: {filename}')
-        return 'object', obj_name_match.group(1)
+        obj_name = obj_name_match.group(1)
+        return 'object', obj_name, f'gml_Object_{obj_name}_'
     if filename.startswith('gml_RoomCC_'):
         room_name_match = re.match(
             r'gml_RoomCC_(.+)_(\d+)_(\w+)\.gml', filename
         )
         if room_name_match is None:
             raise ValueError(f'Failed to find room name: {filename}')
-        return 'roomcc', room_name_match.group(1)
+        room_name = room_name_match.group(1)
+        return 'roomcc', room_name, f'gml_RoomCC_{room_name}_'
     if filename.startswith('gml_Room_'):
         room_name_match = re.match(r'gml_Room_(.+)_(\w+)\.gml', filename)
         if room_name_match is None:
             raise ValueError(f'Failed to find room name: {filename}')
-        return 'room', room_name_match.group(1)
+        room_name = room_name_match.group(1)
+        return 'room', room_name, f'gml_Room_{room_name}_'
     raise ValueError(f'Failed to classify: {filename}')
 
 
@@ -83,7 +88,8 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
         filename = decompiled_dir / file
         name = file.replace('.gml', '')
         lines = get_lines(filename)
-        section, segment = classify(filename, data)
+        section, segment, prefix = classify(filename, data)
+        suffix = name.replace(prefix, '', 1)
         if segment not in index.sections[section].entries:
             index.sections[section].entries[segment] = []
         if data.chapter_id is None:
@@ -97,6 +103,8 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
                 raw_url=f'/raw{chapter_segment}/{entry_name}',
                 name=name,
                 lines=len(lines),
+                prefix=prefix,
+                suffix=suffix,
             )
         )
         index.text[name] = lines

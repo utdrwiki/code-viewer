@@ -60,7 +60,6 @@ body {
 
 body, pre {
 	font-family: Consolas, JetBrains Mono, monospace;
-	font-size: 12pt;
 	color: var(--text-color);
 	margin: 0;
 }

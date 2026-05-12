@@ -87,6 +87,10 @@ h2 {
 	word-break: break-all;
 }
 
+main {
+	padding: 2rem;
+}
+
 .hidden {
 	display: none;
 }
@@ -123,6 +127,9 @@ h2 {
 	table:not(.code) td {
 		min-width: 200px;
 	}
+	main {
+		padding: 1rem;
+	}
 }
 
 footer {
@@ -146,10 +153,6 @@ fieldset p {
 
 fieldset legend {
     padding: 0 1rem;
-}
-
-main {
-	padding: 2rem;
 }
 
 input[type=submit] {

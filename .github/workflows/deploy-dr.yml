@@ -28,12 +28,14 @@ jobs:
           ./utmtcli/UndertaleModCli load game/chapter2_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
           ./utmtcli/UndertaleModCli load game/chapter3_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
           ./utmtcli/UndertaleModCli load game/chapter4_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
+          ./utmtcli/UndertaleModCli load game/chapter5_windows/data.win --scripts 'scripts/ExportCodeFormatted.csx'
           mkdir decompiled-deltarune
           mv game/Export_Code decompiled-deltarune/init
           mv game/chapter1_windows/Export_Code decompiled-deltarune/ch1
           mv game/chapter2_windows/Export_Code decompiled-deltarune/ch2
           mv game/chapter3_windows/Export_Code decompiled-deltarune/ch3
           mv game/chapter4_windows/Export_Code decompiled-deltarune/ch4
+          mv game/chapter5_windows/Export_Code decompiled-deltarune/ch5
       - name: Build
         run: python3 build.py deltarune
       - name: Publish

@@ -253,7 +253,7 @@ def process_line(
     )
     # Highlight flags, rooms and enemies
     line = re.sub(
-        r'(global\.flag\[)(\d+)(\])',
+        r'(global\.flag\[|scr_flag_get\()(\d+)(\]|\))',
         lambda matches: highlight_flag(matches, data),
         line,
         flags=re.IGNORECASE,

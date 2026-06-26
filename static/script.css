@@ -72,11 +72,13 @@ pre:not(.funcCode), code, .hljs {
 .cc-wait {
 	background: var(--wait-background-color);
 	color: var(--wait-text-color);
+	user-select: none;
 }
 
 .cc-delay {
 	background: var(--delay-background-color);
 	color: var(--delay-text-color);
+	user-select: none;
 }
 
 .cc-delay > span {
@@ -97,6 +99,7 @@ pre:not(.funcCode), code, .hljs {
 .cc-close {
 	background: var(--close-background-color);
 	color: var(--close-text-color);
+	user-select: none;
 }
 
 .cc-face {
@@ -105,6 +108,7 @@ pre:not(.funcCode), code, .hljs {
 	font-size: 80%;
 	color: var(--face-text-color);
 	padding: 0 0.2em;
+	user-select: none;
 }
 
 .cc-delay:before {
@@ -166,6 +170,7 @@ pre:not(.funcCode), code, .hljs {
 .flagd {
 	color: var(--flag-description-text-color);
 	font-style: italic;
+	user-select: none;
 }
 
 .room {
@@ -248,6 +253,7 @@ pre:not(.funcCode), code, .hljs {
 
 .funcC .funcCode {
 	display: none;
+	user-select: none;
 }
 
 .funcC:hover .func {

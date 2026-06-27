@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 import argparse
+import html
 import os
 import re
 import sys
 from pathlib import Path
 from typing import Dict, List
-from html import escape
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -114,7 +114,9 @@ def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
         before_var=matches[1],
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(data.get_localized_string_ch1(matches[2]), False),
+        parsed_text=parse_text(
+            data.get_localized_string_ch1(matches[2]),
+            False),
     )
 
 
@@ -240,7 +242,7 @@ def process_line(
 ) -> str:
     # Escape dangerous HTML characters.
     # This preserves strings like "THE LEGEND OF THIS WORLD.#<DELTARUNE.>"
-    line = escape(line, quote=False)
+    line = html.escape(line, quote=False)
 
     # Highlight localized strings
     line = re.sub(

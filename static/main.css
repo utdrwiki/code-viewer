@@ -23,6 +23,9 @@
 	--close-text-color: #fff;
 	--face-background-color: #252;
 	--face-text-color: #8c8;
+	--arg-background-color: #707;
+	--arg-text-color: #fff;
+	--arg-collapsed-text-color: #aaa;
 	--flag-not-found-text-color: #ec6;
 	--flag-found-text-color: #fd8;
 	--flag-found-background-color: black;

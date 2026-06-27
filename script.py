@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import argparse
+import html
 import os
 import re
 import sys
@@ -18,7 +19,7 @@ env = Environment(
 )
 
 
-def parse_text(text: str) -> str:
+def parse_text(text: str, is_format: bool) -> str:
     # Parse Undertale codes the same as Deltarune
     text = re.sub(r'\\\\', r'\\', text)
     # General text codes
@@ -42,6 +43,13 @@ def parse_text(text: str) -> str:
         '<span class="cc cc-close">Close Message</span>',
         text,
     )
+    if is_format:
+        # '~[x]': interpolated argument
+        text = re.sub(
+            r'~([1-9])',
+            r'<span class="cc cc-arg">Argument №\1<span>\1</span></span>',
+            text,
+        )
     # '\E[x]': emotion
     # '\M[x]': special, typically emotion on overworld sprite
     text = re.sub(
@@ -97,7 +105,7 @@ def highlight_text(matches: re.Match[str]) -> str:
         before_var='"',
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(matches[2]),
+        parsed_text=parse_text(matches[2], 'subloc' in matches[1]),
     )
 
 
@@ -106,7 +114,9 @@ def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
         before_var=matches[1],
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(data.get_localized_string_ch1(matches[2])),
+        parsed_text=parse_text(
+            data.get_localized_string_ch1(matches[2]),
+            False),
     )
 
 
@@ -232,21 +242,17 @@ def process_line(
 ) -> str:
     # Escape dangerous HTML characters.
     # This preserves strings like "THE LEGEND OF THIS WORLD.#<DELTARUNE.>"
-    line = re.sub(
-        r'(&|<)',
-        lambda matches: {'&': '&amp;', '<': '&lt;'}[matches[1]],
-        line,
-    )
+    line = html.escape(line, quote=False)
 
     # Highlight localized strings
     line = re.sub(
-        r'([A-Za-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", "[a-z0-9_-]+")\)',  # noqa: E501
+        r'([a-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", (?:.+, )?"[a-z0-9_-]+")\)',  # noqa: E501
         lambda matches: matches[1] + highlight_text(matches) + ')',
         line,
         flags=re.IGNORECASE,
     )
     line = re.sub(
-        r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-zA-Z0-9_-]+)("\))',  # noqa: E501
+        r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-z0-9_-]+)("\))',  # noqa: E501
         lambda matches: highlight_text_ch1(matches, data),
         line,
         flags=re.IGNORECASE,
@@ -259,7 +265,7 @@ def process_line(
         flags=re.IGNORECASE,
     )
     line = re.sub(
-        r'(room_goto\()([A-Za-z0-9_]+)',
+        r'(room_goto\()([a-z0-9_]+)',
         lambda matches: highlight_room(matches, data),
         line,
         flags=re.IGNORECASE,
@@ -272,7 +278,7 @@ def process_line(
     )
     # Link to functions and alarms
     line = re.sub(
-        r'(\b)(s?cr?_[a-zA-Z0-9_]+)\(',
+        r'(\b)(s?cr?_[a-z0-9_]+)\(',
         lambda matches: highlight_function(
             matches, script_name, text, data, resolve_references
         ),

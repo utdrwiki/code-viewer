@@ -111,6 +111,27 @@ pre:not(.funcCode), code, .hljs {
 	user-select: none;
 }
 
+.cc-arg {
+	background: var(--arg-background-color);
+	color: var(--arg-text-color);
+	user-select: none;
+}
+
+.cc-arg > span {
+	position: absolute;
+	right: 0;
+	bottom: 0.1em;
+	display: inline-block;
+	font-size: 70%;
+	color: var(--arg-collapsed-text-color);
+	text-indent: 0;
+	font-style: italic;
+}
+
+.cc-arg:hover > span {
+	display: none;
+}
+
 .cc-delay:before {
 	content: '\231b';
 	margin-right: 0.2em;
@@ -122,6 +143,10 @@ pre:not(.funcCode), code, .hljs {
 
 .cc-close:before {
 	content: '\239a';
+}
+
+.cc-arg:before {
+	content: '\2386';
 }
 
 .cc-color {

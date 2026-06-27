@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build the Deltarune site",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "build.py",
+            "console": "integratedTerminal",
+            "args": "deltarune"
+        }
+    ]
+}

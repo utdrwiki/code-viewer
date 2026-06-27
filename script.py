@@ -244,7 +244,7 @@ def process_line(
 
     # Highlight localized strings
     line = re.sub(
-        r'([a-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", (?:.+?, )?"[a-z0-9_-]+")\)',  # noqa: E501
+        r'([a-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", (?:.+, )?"[a-z0-9_-]+")\)',  # noqa: E501
         lambda matches: matches[1] + highlight_text(matches) + ')',
         line,
         flags=re.IGNORECASE,

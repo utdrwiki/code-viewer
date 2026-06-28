@@ -10,7 +10,7 @@ from typing import Dict, List, Optional
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from data import Data
-from index import process_scripts
+from index import Entry, process_scripts
 from util import get_script_path
 
 env = Environment(
@@ -309,7 +309,7 @@ def render_script(
     script_name: str,
     text: Dict[str, List[str]],
     data: Data,
-    related_scripts: Optional[List[str]] = []
+    related_scripts: Optional[List[Entry]] = []
 ) -> str:
     lines = [
         process_line(line, script_name, text, data)

@@ -12,7 +12,7 @@ from loguru import logger
 from tqdm import tqdm
 
 from data import Data
-from index import ScriptIndex, process_scripts, write_index
+from index import Entry, ScriptIndex, process_scripts, write_index
 from script import render_script, write_script
 from util import get_script_path
 
@@ -110,6 +110,20 @@ def write_chapter_index(data: Data, output_dir: Path):
         )
 
 
+def get_related_scripts(index: ScriptIndex) -> Dict[str, List[Entry]]:
+    related: Dict[str, List[Entry]] = {}
+
+    for section in index.sections.values():
+        if section.name == 'Scripts':
+            continue
+
+        for entries in section.entries.values():
+            for entry in entries:
+                related[entry.name] = entries
+
+    return related
+
+
 def generate(game: str):
     data = Data(game)
     chapters = data.get_chapters()
@@ -133,17 +147,7 @@ def generate(game: str):
             logger.info(f"['{chapter}'] Creating index...")
 
             index = process_scripts(data, decompiled_dir_ch)
-
-            related = {}
-
-            for section in index.sections.values():
-                if section.name == 'Scripts':
-                    continue
-
-                for entries in section.entries.values():
-                    names = [entry.name for entry in entries]
-                    for entry in entries:
-                        related[entry.name] = names
+            related = get_related_scripts(index)
 
             logger.info(f"['{chapter}'] Rendering index...")
 
@@ -172,17 +176,7 @@ def generate(game: str):
         logger.info('Creating index...')
 
         index = process_scripts(data, decompiled_dir)
-
-        related = {}
-
-        for section in index.sections.values():
-            if section.name == 'Scripts':
-                continue
-
-            for entries in section.entries.values():
-                rel_entries = [entry for entry in entries]
-                for entry in entries:
-                    related[entry.name] = rel_entries
+        related = get_related_scripts(index)
 
         logger.info('Rendering index...')
 

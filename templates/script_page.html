@@ -13,6 +13,22 @@
             <strong><a href="index.html">&larr; back to main script listing</a></strong><br>
 
             <h2>{{ script_name }}</h2>
+
+            {% if related_scripts is defined and related_scripts|length > 0 %}
+                <div>
+                    <strong>related scripts:</strong>
+                    {% for script in related_scripts %}
+                        {% if (script.prefix + script.suffix) == script_name %}
+                            <strong>{{ script.suffix }} </strong>
+                        {% else %}
+                            <a href="{{ script.url }}">{{ script.suffix }}</a>
+                        {% endif %}
+                        {% if not loop.last %} &bull; {% endif %}
+                    {% endfor %}
+                </div>
+                <br />
+            {% endif %}
+
             <small>(<a href="{{ raw_url }}">view raw script w/o annotations or w/e</a>)</small>
 
             <table class="code">

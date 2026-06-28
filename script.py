@@ -306,7 +306,7 @@ def process_line(
 
 
 def render_script(
-    script_name: str, text: Dict[str, List[str]], data: Data
+    script_name: str, text: Dict[str, List[str]], data: Data, related_scripts: Optional[List[str]] = []
 ) -> str:
     lines = [
         process_line(line, script_name, text, data)
@@ -320,9 +320,10 @@ def render_script(
         script_name=script_name,
         raw_url=f'/raw{chapter_segment}/{script_name}.txt',
         lines=lines,
+        related_scripts=related_scripts,
         game=data.get_game_name(),
         links=data.get_game_links(),
-        footer=data.get_game_footer(),
+        footer=data.get_game_footer()
     )
 
 

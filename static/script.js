@@ -7,14 +7,14 @@ window.addEventListener('DOMContentLoaded', function() {
             row.classList.remove('selected');
         }
 
-        const match = window.location.hash.match(/^#L(\d+)(?:-(\d+))?$/);
+        const match = window.location.hash.match(/^#L(\d+)(?:-(\d*))?$/);
 
         if (!match) {
             return;
         }
 
         const startRange = match[1];
-        const endRange = match[2] ?? startRange;
+        const endRange = match[2] || startRange;
 
         const startElem = document.getElementById(`L${startRange}`);
 

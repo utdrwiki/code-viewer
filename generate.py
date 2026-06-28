@@ -141,7 +141,7 @@ def generate(game: str):
                     continue
 
                 for entries in section.entries.values():
-                    names = [entry.name for entry in entries]
+                    names = [entry for entry in entries]
                     for entry in entries:
                         related[entry.name] = names
 

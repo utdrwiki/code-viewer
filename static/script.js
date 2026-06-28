@@ -1,25 +1,38 @@
 window.addEventListener('DOMContentLoaded', function() {
     'use strict';
     function highlightHash() {
-        const selectedRow = document.querySelector('.code .selected');
+        const selectedRows = document.querySelectorAll('.code .selected');
 
-        if (selectedRow) {
-            selectedRow.classList.remove('selected');
+        for (const row of selectedRows) {
+            row.classList.remove('selected');
         }
 
-        const hash = window.location.hash;
+        const match = window.location.hash.match(/^#L(\d+)(?:-(\d*))?$/);
 
-        if (!hash || !hash.startsWith('#L')) {
+        if (!match) {
             return;
         }
 
-        const elem = document.getElementById(hash.substring(1));
+        const startRange = match[1];
+        const endRange = match[2] || startRange;
 
-        if (!elem) {
+        const startElem = document.getElementById(`L${startRange}`);
+
+        if (!startElem) {
             return;
         }
 
-        elem.parentElement.classList.add('selected');
+        startElem.scrollIntoView();
+
+        let current = startElem;
+        while (current) {
+            current.parentElement.classList.add('selected');
+
+            const line = Number(current.id.substring(1));
+            if (line >= endRange) break;
+
+            current = current.parentElement.nextElementSibling.children[0]
+        }
     }
 
     highlightHash();

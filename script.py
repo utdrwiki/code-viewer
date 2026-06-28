@@ -306,7 +306,10 @@ def process_line(
 
 
 def render_script(
-    script_name: str, text: Dict[str, List[str]], data: Data, related_scripts: Optional[List[str]] = []
+    script_name: str,
+    text: Dict[str, List[str]],
+    data: Data,
+    related_scripts: Optional[List[str]] = []
 ) -> str:
     lines = [
         process_line(line, script_name, text, data)

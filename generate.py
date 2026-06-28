@@ -137,12 +137,13 @@ def generate(game: str):
             related = {}
 
             for section in index.sections.values():
-                if section.name == "Scripts": continue
+                if section.name == 'Scripts':
+                    continue
 
                 for entries in section.entries.values():
                     names = [entry.name for entry in entries]
                     for entry in entries:
-                        related[entry.name] = names            
+                        related[entry.name] = names
 
             logger.info(f"['{chapter}'] Rendering index...")
 
@@ -151,7 +152,12 @@ def generate(game: str):
             logger.info(f"['{chapter}'] Rendering scripts' pages...")
 
             for script in tqdm(index.text.keys(), disable=None):
-                rendered = render_script(script, index.text, data, related.get(script, []))
+                rendered = render_script(
+                    script,
+                    index.text,
+                    data,
+                    related.get(script, [])
+                )
 
                 write_script(rendered, script, output_dir_ch)
 
@@ -170,7 +176,8 @@ def generate(game: str):
         related = {}
 
         for section in index.sections.values():
-            if section.name == "Scripts": continue
+            if section.name == 'Scripts':
+                continue
 
             for entries in section.entries.values():
                 rel_entries = [entry for entry in entries]
@@ -184,7 +191,12 @@ def generate(game: str):
         logger.info("Rendering scripts' pages...")
 
         for script in tqdm(index.text.keys(), disable=None):
-            rendered = render_script(script, index.text, data, related.get(script, []))
+            rendered = render_script(
+                script,
+                index.text,
+                data,
+                related.get(script, [])
+            )
 
             write_script(rendered, script, output_dir)
 

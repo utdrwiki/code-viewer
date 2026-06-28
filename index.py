@@ -29,7 +29,7 @@ class Section:
     entries: Dict[str, List[Entry]] = field(default_factory=lambda: {})
 
 
-SectionType = Literal['script', 'object', 'roomcc', 'room', 'junk']
+SectionType = Literal['script', 'object', 'roomcc', 'room']
 
 
 @dataclass
@@ -40,8 +40,6 @@ class ScriptIndex:
 
 def classify(path: Path, data: Data) -> Tuple[SectionType, str, str]:
     filename = os.path.basename(path)
-    if (junk_section := data.classify_junk(path)) is not None:
-        return 'junk', junk_section, ''
     if filename.startswith('gml_GlobalScript_'):
         return 'script', 'Global Scripts', 'gml_GlobalScript_'
     if filename.startswith('gml_Script_'):
@@ -79,7 +77,6 @@ def process_scripts(data: Data, decompiled_dir: Path) -> ScriptIndex:
             'object': Section('Objects'),
             'roomcc': Section('Room Creation Codes'),
             'room': Section('Rooms'),
-            'junk': Section('Duplicated or common scripts'),
         },
         {},
     )

@@ -1,8 +1,6 @@
-import hashlib
 import json
 import re
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from util import get_script_path
@@ -29,7 +27,6 @@ class Data:
         self.enemies: Optional[List[str]] = None
         self.flags: Optional[Dict[int, str]] = None
         self.rooms: Optional[List[Room]] = None
-        self.sums: Optional[Dict[str, str]] = None
         self.lang: Optional[Dict[str, str]] = None
         self.config: Optional[Config] = None
         self.chapter: Optional[str] = None
@@ -73,9 +70,6 @@ class Data:
         rooms: List[Dict[str, str]] = self.load_json('rooms')
         return [Room(**room) for room in rooms]
 
-    def load_sums(self) -> Dict[str, str]:
-        return self.load_json('sums')
-
     def load_lang(self) -> Dict[str, str]:
         if self.game == 'undertale':
             return self.load_textdata('gml_Script_textdata_en')
@@ -109,13 +103,6 @@ class Data:
             ):
                 return room
         return None
-
-    def classify_junk(self, filename: Path) -> Optional[str]:
-        if self.sums is None:
-            self.sums = self.load_sums()
-        with open(filename, 'rb') as file:
-            hash_sum = hashlib.sha256(file.read()).hexdigest()
-            return self.sums.get(hash_sum, None)
 
     def get_localized_string_ch1(self, key: str) -> str:
         if self.lang is None:

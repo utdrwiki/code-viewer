@@ -3,7 +3,6 @@ import argparse
 import html
 import os
 import re
-import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -345,13 +344,17 @@ if __name__ == '__main__':
         type=str,
         help='game for which to generate the website',
     )
+    parser.add_argument(
+        'script_name',
+        type=str,
+        help='name of the script to generate the page for',
+    )
     args = parser.parse_args()
     data = Data(args.game)
-    script_name = sys.argv[1]
     script_dir = get_script_path()
     decompiled_dir = script_dir / f'decompiled-{args.game}'
-    output_dir = script_dir / 'out'
+    output_dir = script_dir / 'out' / args.game
     os.makedirs(output_dir, exist_ok=True)
     index = process_scripts(data, decompiled_dir)
-    rendered = render_script(script_name, index.text, data)
-    write_script(rendered, script_name, output_dir)
+    rendered = render_script(args.script_name, index.text, data)
+    write_script(rendered, args.script_name, output_dir)

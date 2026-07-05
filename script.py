@@ -210,7 +210,7 @@ def highlight_alarm(
     script_name = f'{script_prefix}_Alarm_{alarm_number}'
     if script_name not in text:
         # We might be in a with block
-        return alarm_content
+        return matches.string
     # TODO: Deduplicate with above
     if resolve_references:
         script_lines = []

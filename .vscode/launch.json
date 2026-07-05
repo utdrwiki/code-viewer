@@ -2,12 +2,28 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Build the Undertale site",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "build.py",
+            "console": "integratedTerminal",
+            "args": "undertale"
+        },
+        {
             "name": "Build the Deltarune site",
             "type": "debugpy",
             "request": "launch",
             "program": "build.py",
             "console": "integratedTerminal",
             "args": "deltarune"
-        }
+        },
+        {
+            "name": "Build the Undertale Yellow site",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "build.py",
+            "console": "integratedTerminal",
+            "args": "undertaleyellow"
+        },
     ]
 }

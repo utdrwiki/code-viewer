@@ -17,11 +17,7 @@ runs:
       with:
         repository: UnderminersTeam/UndertaleModTool
         path: utmt
-    - name: Checkout Underanalyzer
-      uses: actions/checkout@v6
-      with:
-        repository: UnderminersTeam/Underanalyzer
-        path: utmt/Underanalyzer
+        submodules: recursive
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:

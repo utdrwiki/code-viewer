@@ -23,6 +23,8 @@ After installing prerequisites, first install required dependencies of the proje
 
 While this repository no longer contains Undertale, Deltarune, or Undertale Yellow code directly, the websites that build out of this repository contain content by Toby Fox, 8-4, Fangamer, Team Undertale Yellow, etc. If you have copyright concerns about this repository, please email [admin@undertale.wiki](mailto:admin@undertale.wiki).
 
+Code of the code viewer itself is licensed under the [MIT license](./LICENSE).
+
 ## Credits
 
 - Toby Fox, et al: Created [Undertale](https://undertale.com/), [Deltarune](https://deltarune.com/) and all the scripts displayed on their respective sites

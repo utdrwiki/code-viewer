@@ -22,18 +22,17 @@ def parse_text(text: str, game: str, is_simple: bool) -> str:
     return func(text, game)
 
 def parse_text_simple(text: str, game: str) -> str:
-    if is_format:
-        # '~[x]': interpolated argument
-        text = re.sub(
-            r'~([1-9])',
-            r'<span class="cc cc-arg">Argument №\1<span>\1</span></span>',
-            text,
-        )
+    # '~[x]': interpolated argument
+    text = re.sub(
+        r'~([1-9])',
+        r'<span class="cc cc-arg">Argument №\1<span>\1</span></span>',
+        text,
+    )
     # '#' or '\n': newline
     text = re.sub(r'(?:#|\\n)\s*', '<br>', text)
     # Clean up escape characters
     text = re.sub(r'\\"', '"', text)
-    return None
+    return text
 
 def parse_text_full(text: str, game: str) -> str:
     # Parse Undertale codes the same as Deltarune

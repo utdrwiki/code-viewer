@@ -17,9 +17,11 @@ env = Environment(
     autoescape=select_autoescape(['html']),
 )
 
+
 def parse_text(text: str, game: str, is_simple: bool) -> str:
     func = parse_text_simple if is_simple else parse_text_full
     return func(text, game)
+
 
 def parse_text_simple(text: str, game: str) -> str:
     # '~[x]': interpolated argument
@@ -33,6 +35,7 @@ def parse_text_simple(text: str, game: str) -> str:
     # Clean up escape characters
     text = re.sub(r'\\"', '"', text)
     return text
+
 
 def parse_text_full(text: str, game: str) -> str:
     # Parse Undertale codes the same as Deltarune
@@ -131,15 +134,21 @@ def parse_text_full(text: str, game: str) -> str:
     text = re.sub(r'`(.)', r'\1', text)
     return text
 
+
 def use_simple_text_parsing(prefix: str, script_name: str) -> bool:
     if re.match(r'msg(?:next|set)|global\.(?:battle)?msg', prefix):
         return False
     return re.match(r'global\.choicemsg', prefix) or re.match(
-        r'gml_GlobalScript_scr_(?:credit|monstersetup|(?:armor|item|spell|weapon|fusion_)info|quiztext|ascii_input_names|itemdesc_single)',
+        r'gml_GlobalScript_scr_(?:credit|monstersetup|(?:armor|item|spell|weapon|fusion_)info|quiztext|ascii_input_names|itemdesc_single)',  # noqa: E501
         script_name
     )
 
-def highlight_text(matches: re.Match[str], script_name: text, data: Data) -> str:
+
+def highlight_text(
+    matches: re.Match[str],
+    data: Data,
+    script_name: str
+) -> str:
     return env.get_template('highlight/text.html').render(
         before_var='"',
         variable=matches[2],
@@ -155,7 +164,7 @@ def highlight_text(matches: re.Match[str], script_name: text, data: Data) -> str
 def highlight_text_ch1(
     matches: re.Match[str],
     data: Data,
-    script_name: text
+    script_name: str
 ) -> str:
     return env.get_template('highlight/text.html').render(
         before_var=matches[1],
@@ -298,7 +307,8 @@ def process_line(
     # Highlight localized strings
     line = re.sub(
         r'([a-z0-9_]+loc\((?:[a-z0-9_]+?, )?)"((?:[^"\\]|\\.)+)(", (?:.+, )?"[a-z0-9_-]+")\)',  # noqa: E501
-        lambda matches: matches[1] + highlight_text(matches, script_name, data) + ')',
+        lambda matches:
+            matches[1] + highlight_text(matches, data, script_name) + ')',
         line,
         flags=re.IGNORECASE,
     )

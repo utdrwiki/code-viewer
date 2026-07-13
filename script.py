@@ -138,10 +138,10 @@ def parse_text_full(text: str, game: str) -> str:
 def use_simple_text_parsing(prefix: str, script_name: str) -> bool:
     if re.match(r'msg(?:next|set)|global\.(?:battle)?msg', prefix):
         return False
-    return re.match(r'global\.choicemsg', prefix) or re.match(
+    return re.match(r'global\.choicemsg', prefix) is not None or re.match(
         r'gml_GlobalScript_scr_(?:credit|monstersetup|(?:armor|item|spell|weapon|fusion_)info|quiztext|ascii_input_names|itemdesc_single)',  # noqa: E501
         script_name
-    )
+    ) is not None
 
 
 def highlight_text(

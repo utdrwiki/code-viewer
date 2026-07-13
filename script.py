@@ -306,7 +306,7 @@ def process_line(
 
     # Highlight localized strings
     line = re.sub(
-        r'([a-z0-9_]+loc\((?:[a-z0-9_]+?, )?)"((?:[^"\\]|\\.)+)(", (?:.+, )?"[a-z0-9_-]+")\)',  # noqa: E501
+        r'((?:(?:c_)?msg(?:next|set)|stringset)(?:sub)?(?:loc)?\((?:[a-z0-9_]+?, )?)"((?:[^"\\]|\\.)+)(", .+)\)',  # noqa: E501
         lambda matches:
             matches[1] + highlight_text(matches, data, script_name) + ')',
         line,

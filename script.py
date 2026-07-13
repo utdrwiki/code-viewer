@@ -163,7 +163,9 @@ def highlight_text_ch1(
         variable=matches[2],
         after_var=matches[3],
         parsed_text=parse_text(
-            data.get_localized_string_ch1(matches[2]),
+            html.escape(
+                data.get_localized_string_ch1(matches[2]), quote=False
+            ),
             data.game,
             use_simple_text_parsing(matches[1], script_name),
         ),

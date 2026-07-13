@@ -17,8 +17,25 @@ env = Environment(
     autoescape=select_autoescape(['html']),
 )
 
+def parse_text(text: str, is_format: bool, is_simple: bool) -> str:
+    func = parse_text_simple if is_simple else parse_text_full
+    return func(text, is_format)
 
-def parse_text(text: str, is_format: bool) -> str:
+def parse_text_simple(text: str, is_format: bool) -> str:
+    if is_format:
+        # '~[x]': interpolated argument
+        text = re.sub(
+            r'~([1-9])',
+            r'<span class="cc cc-arg">Argument №\1<span>\1</span></span>',
+            text,
+        )
+    # '#' or '\n': newline
+    text = re.sub(r'(?:#|\\n)\s*', '<br>', text)
+    # Clean up escape characters
+    text = re.sub(r'\\"', '"', text)
+    return None
+
+def parse_text_full(text: str, is_format: bool) -> str:
     # Parse Undertale codes the same as Deltarune
     text = re.sub(r'\\\\', r'\\', text)
     # General text codes
@@ -34,8 +51,8 @@ def parse_text(text: str, is_format: bool) -> str:
         r'\2<span class="cc cc-delay">Delay \1<span>\1</span></span>',
         text,
     )
-    # '&': newline
-    text = re.sub(r'(?<!`)&amp;\s*', '<br>', text)
+    # '&' or '#' or '\n': newline
+    text = re.sub(r'(?<!`)(?:&amp;|#|\\n)\s*', '<br>', text)
     # '%': close message ('%%' to close whole writer)
     text = re.sub(
         r'(?<!`)%',
@@ -98,24 +115,41 @@ def parse_text(text: str, is_format: bool) -> str:
     text = re.sub(r'`(.)', r'\1', text)
     return text
 
+def use_simple_text_parsing(prefix: str, script_name: str) -> bool:
+    if re.match(r'msg(?:next|set)|global\.(?:battle)?msg', prefix):
+        return False
+    return re.match(r'global\.choicemsg', prefix) or re.match(
+        r'gml_GlobalScript_scr_(?:credit|monstersetup|(?:armor|item|spell|weapon|fusion_)info|quiztext|ascii_input_names|itemdesc_single)',
+        script_name
+    )
 
-def highlight_text(matches: re.Match[str]) -> str:
+def highlight_text(matches: re.Match[str], script_name: text) -> str:
     return env.get_template('highlight/text.html').render(
         before_var='"',
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(matches[2], 'subloc' in matches[1]),
+        parsed_text=parse_text(
+            matches[2],
+            'subloc' in matches[1],
+            use_simple_text_parsing(matches[1], script_name),
+        ),
     )
 
 
-def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
+def highlight_text_ch1(
+    matches: re.Match[str],
+    data: Data,
+    script_name: text
+) -> str:
     return env.get_template('highlight/text.html').render(
         before_var=matches[1],
         variable=matches[2],
         after_var=matches[3],
         parsed_text=parse_text(
             data.get_localized_string_ch1(matches[2]),
-            False),
+            False,
+            use_simple_text_parsing(matches[1], script_name),
+        ),
     )
 
 
@@ -246,19 +280,19 @@ def process_line(
     # Highlight localized strings
     line = re.sub(
         r'([a-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", "[a-z0-9_-]+")\)',
-        lambda matches: matches[1] + highlight_text(matches) + ')',
+        lambda matches: matches[1] + highlight_text(matches, script_name) + ')',
         line,
         flags=re.IGNORECASE,
     )
     line = re.sub(
         r'([a-z0-9_]+subloc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", (?:.+, )?"[a-z0-9_-]+")\)',  # noqa: E501
-        lambda matches: matches[1] + highlight_text(matches) + ')',
+        lambda matches: matches[1] + highlight_text(matches, script_name) + ')',
         line,
         flags=re.IGNORECASE,
     )
     line = re.sub(
         r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-z0-9_-]+)("\))',
-        lambda matches: highlight_text_ch1(matches, data),
+        lambda matches: highlight_text_ch1(matches, data, script_name),
         line,
         flags=re.IGNORECASE,
     )

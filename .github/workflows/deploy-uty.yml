@@ -15,7 +15,7 @@ jobs:
         uses: ./.github/actions/steam-utmt-setup
       - name: Download Undertale Yellow
         run: |
-          curl -X POST 'https://gamejolt.com/site-api/web/discover/games/builds/get-download-url/1857285' -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" > gamejolt.html
+          curl -X POST 'https://gamejolt.com/site-api/web/discover/games/builds/get-download-url/2001139' -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" > gamejolt.html
           download_link=$(cat gamejolt.html | jq -r '.payload.url') || true
           if [ -z "$download_link" ]
           then
@@ -24,7 +24,7 @@ jobs:
             exit 1
           fi
           wget $download_link -qO game.zip
-          unzip -p game.zip "Undertale Yellow v1_2_2/data.win" > data.win
+          unzip -p game.zip "Undertale Yellow v-1-3-0/data.win" > data.win
       - name: Extract Undertale Yellow's code
         run: |
           ./utmtcli/UndertaleModCli load data.win --scripts 'scripts/ExportCodeFormatted.csx'

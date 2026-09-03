@@ -23,8 +23,9 @@ jobs:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
       - name: Extract Undertale's code
         run: |
-          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts 'scripts/ExportCodeFormatted.csx'
+          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts scripts/ExportCodeFormatted.csx
           mv game/assets/Export_Code decompiled-undertale
+          ./utmtcli/UndertaleModCli load game/assets/game.unx --scripts scripts/ExportNames.csx 2> decompiled-undertale/names.json
       - name: Build
         run: python3 build.py undertale
       - name: Publish

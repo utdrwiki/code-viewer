@@ -2,6 +2,7 @@
 
 import argparse
 import hashlib
+import json
 import os
 import re
 from pathlib import Path
@@ -13,6 +14,7 @@ from tqdm import tqdm
 
 from data import Data
 from index import Entry, ScriptIndex, process_scripts, write_index
+from names import collect_names, write_names
 from script import render_script, write_script
 from util import get_script_path
 
@@ -130,6 +132,7 @@ def generate(game: str):
     script_dir = get_script_path()
     decompiled_dir = script_dir / f'decompiled-{game}'
     output_dir = script_dir / 'out' / game
+    collected_names: Dict[str, Set[str]] = {}
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -152,6 +155,12 @@ def generate(game: str):
             logger.info(f"['{chapter}'] Rendering index...")
 
             write_index(index, data, output_dir_ch)
+
+            if os.path.exists(decompiled_dir_ch / 'names.json'):
+                logger.info(f"['{chapter}'] Rendering names page...")
+                with open(decompiled_dir_ch / 'names.json', 'r') as names_file:
+                    names = json.load(names_file)
+                    collected_names = collect_names(collected_names, names)
 
             logger.info(f"['{chapter}'] Rendering scripts' pages...")
 
@@ -182,6 +191,11 @@ def generate(game: str):
 
         write_index(index, data, output_dir)
 
+        if os.path.exists(decompiled_dir / 'names.json'):
+            with open(decompiled_dir / 'names.json', 'r') as names_file:
+                names = json.load(names_file)
+                collected_names = collect_names(collected_names, names)
+
         logger.info("Rendering scripts' pages...")
 
         for script in tqdm(index.text.keys(), disable=None):
@@ -193,6 +207,10 @@ def generate(game: str):
             )
 
             write_script(rendered, script, output_dir)
+
+    if collected_names:
+        logger.info('Rendering names page...')
+        write_names(collected_names, data, output_dir)
 
 
 if __name__ == '__main__':

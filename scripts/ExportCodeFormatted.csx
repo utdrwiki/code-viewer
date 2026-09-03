@@ -14,36 +14,28 @@ Directory.CreateDirectory(codeFolder);
 
 GlobalDecompileContext globalDecompileContext = new(Data);
 // Cast for setters
-DecompileSettings decompilerSettings = new();
-decompilerSettings.RemoveSingleLineBlockBraces = true;
-decompilerSettings.OpenBlockBraceOnSameLine = false;
-decompilerSettings.EmptyLineAroundBranchStatements = false;
+DecompileSettings settings = new();
+settings.RemoveSingleLineBlockBraces = true;
+settings.OpenBlockBraceOnSameLine = false;
+settings.EmptyLineAroundBranchStatements = false;
 
-List<UndertaleCode> toDump = Data.Code.Where(c => c.ParentEntry is null).ToList();
-
-await DumpCode();
-
-ScriptMessage($"Export Complete.\n\nDumped {toDump.Count}/{Data.Code.Count} entries.\nLocation: {codeFolder}");
-
-async Task DumpCode()
-{
-    await Task.Run(() => Parallel.ForEach(toDump, DumpCode));
-}
+await Task.Run(() => Parallel.ForEach(
+    Data.Code.Where(c => c.ParentEntry is null).ToList(),
+    DumpCode
+));
 
 void DumpCode(UndertaleCode code)
 {
-    if (code is not null)
+    string path = Path.Combine(codeFolder, $"{code.Name.Content}.gml");
+    string decompiled;
+    try
     {
-        string path = Path.Combine(codeFolder, code.Name.Content + ".gml");
-        try
-        {
-            File.WriteAllText(path, (code != null 
-                ? new DecompileContext(globalDecompileContext, code, decompilerSettings).DecompileToString() 
-                : ""));
-        }
-        catch (Exception e)
-        {
-            File.WriteAllText(path, "/*\nDECOMPILER FAILED!\n\n" + e.ToString() + "\n*/");
-        }
+        decompiled = new DecompileContext(globalDecompileContext, code, settings)
+            .DecompileToString();
     }
+    catch (Exception e)
+    {
+        decompiled = $"/*\nDECOMPILER FAILED!\n\n{e.ToString()}\n*/";
+    }
+    File.WriteAllText(path, decompiled);
 }

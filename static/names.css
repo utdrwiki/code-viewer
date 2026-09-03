@@ -1,0 +1,12 @@
+input {
+	background: var(--secondary-background);
+	padding: 0.1em 0.5em;
+	font-family: JetBrains Mono, monospace;
+	color: var(--text-color);
+	border: 1px solid var(--border-color);
+	font-size: inherit;
+}
+
+li {
+	overflow-wrap: anywhere;
+}

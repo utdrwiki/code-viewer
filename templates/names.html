@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{ game }} names viewer</title>
+        {% include 'partials/head.html' %}
+        <link rel="stylesheet" href="/static/names.css" />
+        <script src="/static/names.js"></script>
+    </head>
+    <body>
+        <main>
+            <h1>{{ game }} names viewer</h1>
+
+            <p id="loading">Loading name list...</p>
+            <form type="GET" id="search-form" class="hidden">
+                <input type="text" name="search" placeholder="Search for names (case sensitive)">
+                <input type="submit" value="Search">
+            </form>
+
+            {% for section_name, name_set in names | dictsort %}
+                <section class="name-section">
+                    <h2>{{ section_name }}</h2>
+                    <ul>
+                        {% for name in name_set | sort %}
+                            <li>{{ name }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endfor %}
+        </main>
+
+        <footer>
+            {% include 'partials/info.html' %}
+
+            {% if footer %}
+                <p>{{ footer }}</p>
+            {% endif %}
+        </footer>
+    </body>
+</html>

@@ -18,7 +18,26 @@ env = Environment(
 )
 
 
-def parse_text(text: str, is_format: bool) -> str:
+def parse_text(text: str, game: str, is_simple: bool) -> str:
+    func = parse_text_simple if is_simple else parse_text_full
+    return func(text, game)
+
+
+def parse_text_simple(text: str, game: str) -> str:
+    # '~[x]': interpolated argument
+    text = re.sub(
+        r'~([1-9])',
+        r'<span class="cc cc-arg">Argument №\1<span>\1</span></span>',
+        text,
+    )
+    # '#' or '\n': newline
+    text = re.sub(r'(?:#|\\n)\s*', '<br>', text)
+    # Clean up escape characters
+    text = re.sub(r'\\"', '"', text)
+    return text
+
+
+def parse_text_full(text: str, game: str) -> str:
     # Parse Undertale codes the same as Deltarune
     text = re.sub(r'\\\\', r'\\', text)
     # General text codes
@@ -30,67 +49,84 @@ def parse_text(text: str, is_format: bool) -> str:
     )
     # '^[x]': delay
     text = re.sub(
-        r'\^([1-9])(.)',
+        r'\^([1-9])(&amp;|.)',
         r'\2<span class="cc cc-delay">Delay \1<span>\1</span></span>',
         text,
     )
-    # '&': newline
-    text = re.sub(r'(?<!`)&amp;\s*', '<br>', text)
+    # '&' or '#' or '\n': newline
+    text = re.sub(r'(?<!`)(?:&amp;|#|\\n)\s*', '<br>', text)
     # '%': close message ('%%' to close whole writer)
     text = re.sub(
         r'(?<!`)%',
         '<span class="cc cc-close">Close Message</span>',
         text,
     )
-    if is_format:
-        # '~[x]': interpolated argument
-        text = re.sub(
-            r'~([1-9])',
-            r'<span class="cc cc-arg">Argument №\1<span>\1</span></span>',
-            text,
-        )
     # '\E[x]': emotion
     # '\M[x]': special, typically emotion on overworld sprite
     text = re.sub(
-        r'\\[EM](.)', r'<span class="cc-face">Face \1</span>', text
+        r'\\[EM](\w|~\d)', r'<span class="cc-face">Face \1</span>', text
     )
     # '\m[x]': mini face
     text = re.sub(
-        r'\\m(.)\*?',
+        r'\\m(\w)\*?',
         r'<span class="cc-face">Mini face \1</span> ',
         text,
     )
     text = re.sub(
-        r'\\f(.)\*?',
+        r'\\f(\w)\*?',
         r'<span class="cc-face">Mini text \1</span> ',
         text,
     )
     # '\c[x]': color, accepts RBYGPMOASV, W white, X black, 0 reset
     text = re.sub(
-        r'\\c(.)(.*?)(?=\\c|$)',
+        r'\\c(\w)(.*?)(?=\\c|$)',
         r'<span class="cc-color cc-\1">\2</span>',
         text,
     )
-    # '\[x]': Undertale color, accepts RGYBOLPp, same W and X
-    text = re.sub(
-        r'\\([RGYBOLPpWX])(.*?)(?=\\[RGYBOLPpWX]|$)',
-        r'<span class="cc-color cc-\1">\2</span>',
-        text,
-    )
+    if game == 'undertale':
+        # '\[x]': Undertale color, accepts RGYBOLPp, same W and X
+        text = re.sub(
+            r'\\([RGYBOLPpWX])(.*?)(?=\\[RGYBOLPpWX]|$)',
+            r'<span class="cc-color cc-\1">\2</span>',
+            text,
+        )
     # '\T[x]': typer, aka voice and font
-    text = re.sub(r'\\T(.)', r'<span class="cc-face">Sound \1</span>', text)
+    text = re.sub(r'\\T(\w)', r'<span class="cc-face">Style \1</span>', text)
     # '\F[x]': face, changes the whole set to a given character
-    text = re.sub(r'\\F(.)', r'<span class="cc-face">Char \1</span>', text)
+    text = re.sub(r'\\F(\w)', r'<span class="cc-face">Char \1</span>', text)
     # '\C[x]': choicer, accepts 1-4
     text = re.sub(
-        r'\\C(.)',
+        r'\\C([1-4])',
         r'<span class="cc-face">Choice type \1</span>',
         text,
     )
     # '\C': Undertale choicer, same as Deltarune type 1
     text = re.sub(
-        r'\\C',
+        r'\\C ?$',
         r'<span class="cc-face">Choice</span>',
+        text,
+    )
+    # '\O[x]': writer object (e.g. Tenna animated text)
+    text = re.sub(r'\\O(\d)', r'<span class="cc-face">Object \1</span>', text)
+    # '\I[x]': image
+    text = re.sub(r'\\I(\d)', r'<span class="cc-face">Image \1</span>', text)
+    # '\S[x]': play sound
+    text = re.sub(r'\\S(\d)', r'<span class="cc-face">Sound \1</span>', text)
+    # '\s[x]': toggle skipping
+    text = re.sub(
+        r'\\s0', r'<span class="cc-face">Disable skipping</span>', text
+    )
+    text = re.sub(
+        r'\\s1', r'<span class="cc-face">Enable skipping</span>', text
+    )
+    # '\V[x]': voice clip
+    text = re.sub(
+        r'\\V(\w)', r'<span class="cc-face">Voice clip \1</span>', text
+    )
+    # '~[x]': interpolated argument
+    text = re.sub(
+        r'~([1-9])',
+        r'<span class="cc cc-arg">Argument №\1<span>\1</span></span>',
         text,
     )
     # Clean up escape characters
@@ -99,23 +135,48 @@ def parse_text(text: str, is_format: bool) -> str:
     return text
 
 
-def highlight_text(matches: re.Match[str]) -> str:
+def use_simple_text_parsing(prefix: str, script_name: str) -> bool:
+    if re.match(r'msg(?:next|set)|global\.(?:battle)?msg', prefix):
+        return False
+    return re.match(r'global\.choicemsg', prefix) is not None or re.match(
+        r'gml_GlobalScript_scr_(?:credit|monstersetup|(?:armor|item|spell|weapon|fusion_)info|quiztext|ascii_input_names|itemdesc_single)',  # noqa: E501
+        script_name
+    ) is not None
+
+
+def highlight_text(
+    matches: re.Match[str],
+    data: Data,
+    script_name: str
+) -> str:
     return env.get_template('highlight/text.html').render(
         before_var='"',
         variable=matches[2],
         after_var=matches[3],
-        parsed_text=parse_text(matches[2], 'subloc' in matches[1]),
+        parsed_text=parse_text(
+            matches[2],
+            data.game,
+            use_simple_text_parsing(matches[1], script_name),
+        ),
     )
 
 
-def highlight_text_ch1(matches: re.Match[str], data: Data) -> str:
+def highlight_text_ch1(
+    matches: re.Match[str],
+    data: Data,
+    script_name: str
+) -> str:
     return env.get_template('highlight/text.html').render(
         before_var=matches[1],
         variable=matches[2],
         after_var=matches[3],
         parsed_text=parse_text(
-            data.get_localized_string_ch1(matches[2]),
-            False),
+            html.escape(
+                data.get_localized_string_ch1(matches[2]), quote=False
+            ),
+            data.game,
+            use_simple_text_parsing(matches[1], script_name),
+        ),
     )
 
 
@@ -245,20 +306,15 @@ def process_line(
 
     # Highlight localized strings
     line = re.sub(
-        r'([a-z0-9_]+loc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", "[a-z0-9_-]+")\)',
-        lambda matches: matches[1] + highlight_text(matches) + ')',
-        line,
-        flags=re.IGNORECASE,
-    )
-    line = re.sub(
-        r'([a-z0-9_]+subloc\((?:\d+, )?)"((?:[^"\\]|\\.)+)(", (?:.+, )?"[a-z0-9_-]+")\)',  # noqa: E501
-        lambda matches: matches[1] + highlight_text(matches) + ')',
+        r'((?:(?:c_)?msg(?:next|set)|stringset)(?:sub)?(?:loc)?\((?:[a-z0-9_]+?, )?)"((?:[^"\\]|\\.)+)(", .+)\)',  # noqa: E501
+        lambda matches:
+            matches[1] + highlight_text(matches, data, script_name) + ')',
         line,
         flags=re.IGNORECASE,
     )
     line = re.sub(
         r'(scr_(?:84_get_lang_string(?:_ch1)?|gettext)\(")([a-z0-9_-]+)("\))',
-        lambda matches: highlight_text_ch1(matches, data),
+        lambda matches: highlight_text_ch1(matches, data, script_name),
         line,
         flags=re.IGNORECASE,
     )

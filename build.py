@@ -111,7 +111,7 @@ def run(game: str):
     logger.info('Downloading font...')
 
     font_url = (
-        'https://download-cdn.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
+        'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
     )
     data = requests.get(font_url).content
 
